@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sayfa 1</title>
+  <script>
+    // Iframe'den gelen mesajı dinle
+    window.addEventListener("message", function(event) {
+      if (event.data === "quizCompleted") {
+        // TEST1 düğmesini deaktif yap
+        const test1Button = document.getElementById("test1Button");
+        if (test1Button) {
+          test1Button.disabled = true;
+          test1Button.textContent = "Tamamlandı"; // Görsel geri bildirim
+        }
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>Sayfa 1</h1>
+  <iframe src="test1.html" width="600" height="200" style="border:1px solid black;"></iframe>
+</body>
+</html>
