@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test 1</title>
+</head>
+<body>
+  <h1>Test 1 Sayfası</h1>
+  <button id="completeQuiz">Quiz Tamamla</button>
+  <script>
+    // Quiz tamamlandığında dışarıya mesaj gönder
+    document.getElementById("completeQuiz").addEventListener("click", function() {
+      parent.postMessage("quizCompleted", "*");
+    });
+  </script>
+</body>
+</html>
