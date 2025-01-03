@@ -1,34 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sayfa 1</title>
-  <script>
-    // Iframe'den gelen mesajı dinle
-    window.addEventListener("message", function(event) {
-      if (event.data === "quizCompleted") {
-        // TEST1 düğmesini deaktif yap
-        const test1Button = document.getElementById("test1Button");
-        if (test1Button) {
-          test1Button.disabled = true;
-          test1Button.textContent = "Tamamlandı"; // Görsel geri bildirim
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayfa 1</title>
+    <style>
+        #quizButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
         }
-      }
-    });
-
-    // Sayfa 2'ye (test1.html) yönlendirme
-    function redirectToTest1() {
-      window.open("https://distantedutv.wixstudio.com/my-site-3/bolum1-1/code-of-conduct", "_blank");
-    }
-  </script>
+        #quizButton:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
-  <h1>Sayfa 1</h1>
-  <!-- TEST1 butonu -->
-  <button id="test1Button" onclick="redirectToTest1()">TEST1</button>
+    <h1>Sayfa 1</h1>
+    <button id="quizButton" onclick="window.open('https://distantedutv.wixstudio.com/my-site-3/bolum1-1/code-of-conduct', '_blank')">Quizi Başlat</button>
+
+    <script>
+        // Butonun devre dışı bırakılması için kontrol
+        window.addEventListener('message', function(event) {
+            if (event.data === 'quizCompleted') {
+                document.getElementById('quizButton').disabled = true;
+            }
+        });
+    </script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 
