@@ -4,15 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Test 1</title>
+  <script>
+    // Buton tıklaması ile dışarıya mesaj gönderecek fonksiyon
+    function completeQuiz() {
+      window.parent.postMessage('quizCompleted', '*');  // Sayfa 1'e mesaj gönderir
+    }
+  </script>
 </head>
 <body>
-  <h1>Test 1 Sayfası</h1>
-  <button id="completeQuiz">Quiz Tamamla</button>
-  <script>
-    // Quiz tamamlandığında dışarıya mesaj gönder
-    document.getElementById("completeQuiz").addEventListener("click", function() {
-      parent.postMessage("quizCompleted", "*");
-    });
-  </script>
+  <h2>Test 1</h2>
+  <!-- TEST1 butonu -->
+  <button id="test1Button" onclick="completeQuiz()">TEST1</button>
+  <br><br>
+  <button id="viewResultButton" onclick="alert('Quiz completed!')">View My Result</button>
 </body>
 </html>
