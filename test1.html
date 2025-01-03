@@ -26,8 +26,8 @@
     <script>
         // "View My Result" butonuna tıklandığında
         document.getElementById('viewResultButton').addEventListener('click', function() {
-            // Ana sayfaya mesaj gönder
-            window.opener.postMessage('quizCompleted', '*');
+            // localStorage'a quiz tamamlandı bilgisini kaydet
+            localStorage.setItem('quizCompleted', 'true');
             alert('Quiz tamamlandı! Sonuçlar görüntüleniyor.');
         });
     </script>
