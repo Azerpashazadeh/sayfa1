@@ -4,9 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Test 1</title>
+  <script>
+    // Buton tıklaması ile dışarıya mesaj gönderecek fonksiyon
+    function completeQuiz() {
+      window.parent.postMessage('quizCompleted', '*');  // Sayfa 1'e mesaj gönderir
+    }
+  </script>
 </head>
 <body>
-  <h2>Test 1</h2>
-  <p>Test içeriği buraya gelecek...</p>
+  <h2>Test 1 - Sayfa 2</h2>
+  
+  <!-- Iframe içinde test1.html'i göster -->
+  <iframe src="https://azerpashazadeh.github.io/sayfa1/test1.html" width="600" height="200" style="border:1px solid black;"></iframe>
+  
+  <br><br>
+  
+  <!-- View My Result butonu -->
+  <button id="viewResultButton" onclick="completeQuiz()">View My Result</button>
 </body>
 </html>
