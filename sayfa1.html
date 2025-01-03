@@ -5,10 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sayfa 1</title>
   <script>
-    // Iframe'den gelen mesajı dinle
+    // TEST1 düğmesine tıklandığında Sayfa 2'ye yönlendirilecek
+    function redirectToPage2() {
+      window.location.href = "https://distantedutv.wixstudio.com/my-site-3/bolum1-1/code-of-conduct";  // Sayfa 2'nin URL'sini buraya ekleyin
+    }
+
+    // Sayfa 2'den gelen mesajı dinle
     window.addEventListener("message", function(event) {
       if (event.data === "quizCompleted") {
-        // TEST1 düğmesini deaktif yap
+        // Sayfa 1'deki TEST1 düğmesini deaktif yap
         const test1Button = document.getElementById("test1Button");
         if (test1Button) {
           test1Button.disabled = true;
@@ -20,10 +25,13 @@
 </head>
 <body>
   <h1>Sayfa 1</h1>
-  <!-- İframe içinde test1.html sayfasını gösteriyoruz -->
-  <iframe src="https://azerpashazadeh.github.io/sayfa1/test1.html" width="600" height="200" style="border:1px solid black;"></iframe>
-  <br>
-  <!-- TEST1 butonu burada yer alacak -->
-  <button id="test1Button">TEST1</button>
+  
+  <!-- TEST1 butonu -->
+  <button id="test1Button" onclick="redirectToPage2()">TEST1</button>
 </body>
 </html>
+
+
+
+
+
