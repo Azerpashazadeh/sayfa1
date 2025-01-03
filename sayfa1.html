@@ -21,15 +21,30 @@
     <button id="quizButton" onclick="window.open('https://distantedutv.wixstudio.com/my-site-3/bolum1-1/code-of-conduct', '_blank')">Quizi Başlat</button>
 
     <script>
-        // Butonun devre dışı bırakılması için kontrol
-        window.addEventListener('message', function(event) {
-            if (event.data === 'quizCompleted') {
+        // localStorage'dan durumu kontrol et
+        function checkQuizStatus() {
+            if (localStorage.getItem('quizCompleted') === 'true') {
                 document.getElementById('quizButton').disabled = true;
             }
-        });
+        }
+
+        // Sayfa yüklendiğinde ve her saniyede bir kontrol et
+        checkQuizStatus();
+        setInterval(checkQuizStatus, 1000);
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
