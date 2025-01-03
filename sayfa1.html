@@ -3,28 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sayfa 1</title>
+    <title>Ana Sayfa</title>
     <style>
-        #quizButton {
+        .testButton {
             padding: 10px 20px;
             font-size: 16px;
+            margin: 5px;
             cursor: pointer;
         }
-        #quizButton:disabled {
+        .testButton:disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
     </style>
 </head>
 <body>
-    <h1>Sayfa 1</h1>
-    <button id="quizButton" onclick="window.open('https://distantedutv.wixstudio.com/my-site-3/bolum1-1/code-of-conduct', '_blank')">Quizi Başlat</button>
+    <h1>Ana Sayfa</h1>
+    <div id="buttonsContainer">
+        <!-- Butonlar burada dinamik olarak oluşturulacak -->
+    </div>
 
     <script>
+        // Butonları oluştur
+        const buttonsContainer = document.getElementById('buttonsContainer');
+        for (let i = 1; i <= 50; i++) {
+            const button = document.createElement('button');
+            button.id = `testButton${i}`;
+            button.className = 'testButton';
+            button.textContent = `TEST${i}`;
+            button.disabled = i !== 1; // Sadece TEST1 aktif olsun
+            button.onclick = () => window.open(`https://kullaniciadi.wixsite.com/siteadı/test${i}`, '_blank');
+            buttonsContainer.appendChild(button);
+        }
+
+        // Buton durumlarını güncelle
+        function updateButtons(completedTestNumber) {
+            const currentButton = document.getElementById(`testButton${completedTestNumber}`);
+            const nextButton = document.getElementById(`testButton${completedTestNumber + 1}`);
+
+            if (currentButton) {
+                currentButton.disabled = true; // Mevcut butonu devre dışı bırak
+            }
+            if (nextButton) {
+                nextButton.disabled = false; // Bir sonraki butonu aktif hale getir
+            }
+        }
+
         // localStorage'dan durumu kontrol et
         function checkQuizStatus() {
-            if (localStorage.getItem('quizCompleted') === 'true') {
-                document.getElementById('quizButton').disabled = true;
+            const completedTestNumber = localStorage.getItem('completedTestNumber');
+            if (completedTestNumber) {
+                updateButtons(Number(completedTestNumber));
+                localStorage.removeItem('completedTestNumber'); // Bilgiyi temizle
             }
         }
 
@@ -34,40 +64,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
