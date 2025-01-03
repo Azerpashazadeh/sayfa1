@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test 1</title>
+  <title>Sayfa 2</title>
   <script>
     // Buton tıklaması ile dışarıya mesaj gönderecek fonksiyon
     function completeQuiz() {
@@ -12,10 +12,14 @@
   </script>
 </head>
 <body>
-  <h2>Test 1</h2>
-  <!-- TEST1 butonu -->
-  <button id="test1Button" onclick="completeQuiz()">TEST1</button>
+  <h2>Test 1 - Sayfa 2</h2>
+  
+  <!-- Iframe içinde test1.html'i göster -->
+  <iframe src="https://azerpashazadeh.github.io/sayfa1/test1.html" width="600" height="200" style="border:1px solid black;"></iframe>
+  
   <br><br>
-  <button id="viewResultButton" onclick="alert('Quiz completed!')">View My Result</button>
+  
+  <!-- View My Result butonu -->
+  <button id="viewResultButton" onclick="completeQuiz()">View My Result</button>
 </body>
 </html>
