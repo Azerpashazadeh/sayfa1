@@ -10,10 +10,29 @@
             font-size: 16px;
             margin: 5px;
             cursor: pointer;
+            border: 1px solid #007BFF;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s, opacity 0.3s;
+            width: 120px; /* Sabit genişlik */
+            height: 50px; /* Sabit yükseklik */
+            text-align: center; /* Metni ortala */
         }
         .testButton:disabled {
-            background-color: #ccc;
+            background-color: #007BFF; /* TEST1'in rengi */
+            border-color: #007BFF;
+            opacity: 1; /* Soldurma efekti olmasın */
             cursor: not-allowed;
+        }
+        .testButton.deactivated {
+            background-color: #6c757d; /* Deaktif butonların rengi */
+            border-color: #6c757d;
+            opacity: 0.6; /* Soldurma efekti */
+        }
+        .testButton:not(:disabled):hover {
+            background-color: #0056b3; /* Hover efekti */
+            border-color: #0056b3;
         }
     </style>
 </head>
@@ -26,13 +45,18 @@
     <script>
         // Butonları oluştur
         const buttonsContainer = document.getElementById('buttonsContainer');
+        const baseUrl = "https://www.examtheorie.nl/eng/test"; // Temel URL
+
         for (let i = 1; i <= 50; i++) {
             const button = document.createElement('button');
             button.id = `testButton${i}`;
             button.className = 'testButton';
             button.textContent = `TEST${i}`;
             button.disabled = i !== 1; // Sadece TEST1 aktif olsun
-            button.onclick = () => window.open(`https://kullaniciadi.wixsite.com/siteadı/test${i}`, '_blank');
+            if (i !== 1) {
+                button.classList.add('deactivated'); // TEST2-TEST50'ye deaktif stili ekle
+            }
+            button.onclick = () => window.open(`${baseUrl}${i}`, '_blank'); // Dinamik URL
             buttonsContainer.appendChild(button);
         }
 
@@ -43,9 +67,11 @@
 
             if (currentButton) {
                 currentButton.disabled = true; // Mevcut butonu devre dışı bırak
+                currentButton.classList.add('deactivated'); // Deaktif stili ekle
             }
             if (nextButton) {
                 nextButton.disabled = false; // Bir sonraki butonu aktif hale getir
+                nextButton.classList.remove('deactivated'); // Deaktif stilini kaldır
             }
         }
 
