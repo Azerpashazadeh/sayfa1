@@ -60,6 +60,9 @@
             button.className = 'testButton'; // Tüm butonlar için genel stil
             button.textContent = `TEST${i}`;
             button.disabled = i !== 1; // Sadece TEST1 aktif olsun
+            if (i !== 1) {
+                button.classList.add('deactivated'); // TEST2-TEST50'ye deaktif stili ekle
+            }
             button.onclick = () => window.open(`${baseUrl}${i}`, '_blank'); // Dinamik URL
             buttonsContainer.appendChild(button);
         }
@@ -84,11 +87,30 @@
             const completedTestNumber = localStorage.getItem('completedTestNumber');
             if (completedTestNumber) {
                 updateButtons(Number(completedTestNumber));
-                localStorage.removeItem('completedTestNumber'); // Bilgiyi temizle
+            }
+        }
+
+        // Sayfa yüklendiğinde buton durumlarını kontrol et
+        function initializeButtons() {
+            const completedTestNumber = localStorage.getItem('completedTestNumber');
+            if (completedTestNumber) {
+                for (let i = 1; i <= Number(completedTestNumber); i++) {
+                    const button = document.getElementById(`testButton${i}`);
+                    if (button) {
+                        button.disabled = true;
+                        button.classList.add('deactivated');
+                    }
+                }
+                const nextButton = document.getElementById(`testButton${Number(completedTestNumber) + 1}`);
+                if (nextButton) {
+                    nextButton.disabled = false;
+                    nextButton.classList.remove('deactivated');
+                }
             }
         }
 
         // Sayfa yüklendiğinde ve her saniyede bir kontrol et
+        initializeButtons();
         checkQuizStatus();
         setInterval(checkQuizStatus, 1000);
     </script>
