@@ -10,7 +10,7 @@
             padding: 10px 20px;
             font-size: 16px;
             margin: 5px;
-            cursor: pointer;
+            cursor: not-allowed; /* Tıklanamaz varsayılan */
             border: 1px solid #007BFF; /* Mavi kenarlık */
             background-color: #007BFF; /* Mavi arka plan */
             color: white; /* Beyaz yazı rengi */
@@ -21,25 +21,27 @@
             text-align: center; /* Metni ortala */
         }
 
-        /* Tıklanamaz butonların stili */
+        /* Tıklanamaz butonların stili (başlangıçta tıklanamaz ama mavi olacak) */
         .testButton:disabled {
-            background-color: #007BFF; /* Mavi arka plan (tıklanamaz) */
+            background-color: #007BFF; /* Mavi arka plan */
             border-color: #007BFF;
-            opacity: 1; /* Soldurma efekti olmasın */
             cursor: not-allowed; /* Tıklanamaz imleç */
+            opacity: 1; /* Başlangıçta soldurma yok */
         }
 
-        /* Deaktif butonların stili */
+        /* Deaktif butonların stili (Quiz tamamlanınca gri olacak) */
         .deactivated {
             background-color: #6c757d; /* Gri arka plan */
             border-color: #6c757d;
             opacity: 0.6; /* Soldurma efekti */
+            cursor: not-allowed;
         }
 
         /* Aktif butonların hover efekti */
         .testButton:not(:disabled):hover {
             background-color: #0056b3; /* Hover efekti (daha koyu mavi) */
             border-color: #0056b3;
+            cursor: pointer; /* Tıklanabilir imleç */
         }
     </style>
 </head>
