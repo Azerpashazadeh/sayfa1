@@ -60,10 +60,11 @@
             button.className = 'testButton'; // Tüm butonlar için genel stil
             button.textContent = `TEST${i}`;
             button.disabled = i !== 1; // Sadece TEST1 aktif olsun
-            if (i !== 1) {
-                button.classList.add('deactivated'); // TEST2-TEST50'ye deaktif stili ekle
-            }
-            button.onclick = () => window.open(`${baseUrl}${i}`, '_blank'); // Dinamik URL
+            button.onclick = () => {
+                if (!button.disabled) {
+                    window.open(`${baseUrl}${i}`, '_blank');
+                }
+            };
             buttonsContainer.appendChild(button);
         }
 
