@@ -5,33 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ana Sayfa</title>
     <style>
+        /* Tüm butonların genel stili */
         .testButton {
             padding: 10px 20px;
             font-size: 16px;
             margin: 5px;
             cursor: pointer;
-            border: 1px solid #007BFF;
-            background-color: #007BFF;
-            color: white;
+            border: 1px solid #007BFF; /* Mavi kenarlık */
+            background-color: #007BFF; /* Mavi arka plan */
+            color: white; /* Beyaz yazı rengi */
             border-radius: 5px;
             transition: background-color 0.3s, opacity 0.3s;
             width: 120px; /* Sabit genişlik */
             height: 50px; /* Sabit yükseklik */
             text-align: center; /* Metni ortala */
         }
+
+        /* Tıklanamaz butonların stili */
         .testButton:disabled {
-            background-color: #007BFF; /* TEST1'in rengi */
+            background-color: #007BFF; /* Mavi arka plan (tıklanamaz) */
             border-color: #007BFF;
             opacity: 1; /* Soldurma efekti olmasın */
-            cursor: not-allowed;
+            cursor: not-allowed; /* Tıklanamaz imleç */
         }
-        .testButton.deactivated {
-            background-color: #6c757d; /* Deaktif butonların rengi */
+
+        /* Deaktif butonların stili */
+        .deactivated {
+            background-color: #6c757d; /* Gri arka plan */
             border-color: #6c757d;
             opacity: 0.6; /* Soldurma efekti */
         }
+
+        /* Aktif butonların hover efekti */
         .testButton:not(:disabled):hover {
-            background-color: #0056b3; /* Hover efekti */
+            background-color: #0056b3; /* Hover efekti (daha koyu mavi) */
             border-color: #0056b3;
         }
     </style>
@@ -50,12 +57,9 @@
         for (let i = 1; i <= 50; i++) {
             const button = document.createElement('button');
             button.id = `testButton${i}`;
-            button.className = 'testButton';
+            button.className = 'testButton'; // Tüm butonlar için genel stil
             button.textContent = `TEST${i}`;
             button.disabled = i !== 1; // Sadece TEST1 aktif olsun
-            if (i !== 1) {
-                button.classList.add('deactivated'); // TEST2-TEST50'ye deaktif stili ekle
-            }
             button.onclick = () => window.open(`${baseUrl}${i}`, '_blank'); // Dinamik URL
             buttonsContainer.appendChild(button);
         }
