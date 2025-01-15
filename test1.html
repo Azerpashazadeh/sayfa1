@@ -24,15 +24,16 @@
     <button id="viewResultButton">View My Result</button>
 
     <script>
-        // "View My Result" butonuna tıklandığında
-        document.getElementById('viewResultButton').addEventListener('click', function() {
-            // Hangi testin tamamlandığını belirle (URL'den veya başka bir yöntemle)
-            const testNumber = 1; // Bu örnekte TEST1 tamamlandı
+        document.getElementById('viewResultButton').addEventListener('click', function () {
+            const testNumber = 1; // TEST1 tamamlandı
 
-            // Ana sayfaya bilgi gönder
+            // Veriyi localStorage'a kaydet
             localStorage.setItem('completedTestNumber', testNumber);
 
-            // Quiz sonuçlarını göster (bu kısmı kendi quizinize göre özelleştirin)
+            // Ana sayfaya bilgi gönder
+            window.parent.postMessage({ action: 'testCompleted', testNumber }, '*');
+
+            // Quiz sonuçlarını göster
             alert(`TEST${testNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
 
             // İsteğe bağlı: Sayfayı kapat
