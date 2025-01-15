@@ -24,20 +24,17 @@
     <button id="viewResultButton">View My Result</button>
 
     <script>
-        document.getElementById('viewResultButton').addEventListener('click', function () {
-            const testNumber = 1; // TEST1 tamamlandı
-
-            // Veriyi localStorage'a kaydet
+        // "View My Result" butonuna tıklandığında
+        document.getElementById('viewResultButton').addEventListener('click', function() {
+            // B kodunun mevcut işlevselliği
+            const testNumber = 1; // Bu örnekte TEST1 tamamlandı
             localStorage.setItem('completedTestNumber', testNumber);
-
-            // Ana sayfaya bilgi gönder
-            window.parent.postMessage({ action: 'testCompleted', testNumber }, '*');
-
-            // Quiz sonuçlarını göster
             alert(`TEST${testNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
+            window.close(); // İsteğe bağlı: Sayfayı kapat
 
-            // İsteğe bağlı: Sayfayı kapat
-            window.close();
+            // A kodundaki işlevselliği tetikle
+            window.parent.postMessage('triggerWixCode', 'https://www.examtheorie.nl');
+            console.log("A kodundaki işlevsellik tetiklendi: Mesaj gönderildi.");
         });
     </script>
 </body>
