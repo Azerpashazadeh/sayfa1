@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -30,11 +30,14 @@
             const testNumber = 1; // Bu örnekte TEST1 tamamlandı
             localStorage.setItem('completedTestNumber', testNumber);
             alert(`TEST${testNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
-            window.close(); // İsteğe bağlı: Sayfayı kapat
 
-            // A kodundaki işlevselliği tetikle
-            window.parent.postMessage('triggerWixCode', 'https://www.examtheorie.nl');
-            console.log("A kodundaki işlevsellik tetiklendi: Mesaj gönderildi.");
+            // Sayfanın altındakı Frontend kodunu tetikle
+            const wixOrigin = 'https://www.examtheorie.nl'; // Wix uygulamasının kök URL'si
+            window.parent.postMessage('triggerWixCode', wixOrigin);
+            console.log("Sayfanın altındakı Frontend kodu tetiklendi: Mesaj gönderildi.");
+
+            // İsteğe bağlı: Sayfayı kapat
+            // window.close(); // Bu fonksiyon tarayıcı izinlerine bağlı olarak çalışmayabilir
         });
     </script>
 </body>
