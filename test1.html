@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -19,25 +19,28 @@
     </style>
 </head>
 <body>
-    <h1>Test Sayfasıııı</h1>
+    <h1>Test Sayfasıvvvv</h1>
     <iframe id="quizFrame" src="https://example.com/quiz" frameborder="0"></iframe>
     <button id="viewResultButton">View My Result</button>
 
     <script>
-        // "View My Result" butonuna tıklandığında
+        // "View My Result" Butonuna Tıklandığında
         document.getElementById('viewResultButton').addEventListener('click', function() {
-            // B kodunun mevcut işlevselliği
-            const testNumber = 1; // Bu örnekte TEST1 tamamlandı
-            localStorage.setItem('completedTestNumber', testNumber);
-            alert(`TEST${testNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
+            // Tamamlanan test numarasını localStorage'a kaydet
+            const completedTestNumber = 1; // TEST1 tamamlandı
+            localStorage.setItem('completedTestNumber', completedTestNumber);
 
-            // A kodundaki işlevselliği tetikle
-            const wixOrigin = 'https://www.examtheorie.nl'; // Wix uygulamasının kök URL'si
-            window.parent.postMessage('triggerWixCode', wixOrigin);
-            console.log("A kodundaki işlevsellik tetiklendi: Mesaj gönderildi.");
+            // Frontend'e mesaj gönderme işlemi
+            const wixOrigin = 'https://www.examtheorie.nl';
+            try {
+                window.parent.postMessage('triggerWixCode', wixOrigin);
+                console.log("Frontend'e mesaj gönderildi.");
+            } catch (error) {
+                console.error("Mesaj gönderilirken hata oluştu:", error);
+            }
 
-            // İsteğe bağlı: Sayfayı kapat
-            // window.close(); // Bu fonksiyon tarayıcı izinlerine bağlı olarak çalışmayabilir
+            // TEST1 tamamlandı bilgisini göster
+            alert(`TEST${completedTestNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
         });
     </script>
 </body>
