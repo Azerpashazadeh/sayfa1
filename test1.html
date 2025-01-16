@@ -31,10 +31,10 @@
             localStorage.setItem('completedTestNumber', testNumber);
             alert(`TEST${testNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
 
-            // Sayfanın altındakı Frontend kodunu tetikle
+            // A kodundaki işlevselliği tetikle
             const wixOrigin = 'https://www.examtheorie.nl'; // Wix uygulamasının kök URL'si
             window.parent.postMessage('triggerWixCode', wixOrigin);
-            console.log("Sayfanın altındakı Frontend kodu tetiklendi: Mesaj gönderildi.");
+            console.log("A kodundaki işlevsellik tetiklendi: Mesaj gönderildi.");
 
             // İsteğe bağlı: Sayfayı kapat
             // window.close(); // Bu fonksiyon tarayıcı izinlerine bağlı olarak çalışmayabilir
