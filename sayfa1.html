@@ -46,76 +46,80 @@
     </style>
 </head>
 <body>
-    <h1>Ana Sayfaaaa</h1>
+    <h1>Anaaaaaa Sayfa</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
 
     <script>
-        // Butonları oluştur
         const buttonsContainer = document.getElementById('buttonsContainer');
         const baseUrl = "https://www.examtheorie.nl/eng/test"; // Temel URL
 
-        for (let i = 1; i <= 50; i++) {
-            const button = document.createElement('button');
-            button.id = `testButton${i}`;
-            button.className = 'testButton'; // Tüm butonlar için genel stil
-            button.textContent = `TEST${i}`;
-            button.disabled = i !== 1; // Sadece TEST1 aktif olsun
-            button.onclick = () => {
-                if (!button.disabled) {
-                    window.open(`${baseUrl}${i}`, '_blank');
+        // Kullanıcı progress bilgisini API'den al (örnek yapı: [1, 2, 3])
+        async function fetchUserProgress() {
+            try {
+                const response = await fetch('/api/getUserProgress'); // API URL'sini uygun şekilde değiştir
+                if (!response.ok) throw new Error('Veri alınamadı.');
+                const data = await response.json();
+                return data.progress || [];
+            } catch (error) {
+                console.error('Hata:', error);
+                return [];
+            }
+        }
+
+        // Kullanıcı progress bilgisine göre butonları güncelle
+        async function initializeButtons() {
+            const userProgress = await fetchUserProgress();
+
+            for (let i = 1; i <= 50; i++) {
+                const button = document.createElement('button');
+                button.id = `testButton${i}`;
+                button.className = 'testButton';
+                button.textContent = `TEST${i}`;
+
+                // Eğer progress'de varsa deaktif yap
+                if (userProgress.includes(i)) {
+                    button.disabled = true;
+                    button.classList.add('deactivated');
+                } else if (i === Math.max(...userProgress, 0) + 1 || userProgress.length === 0 && i === 1) {
+                    // Bir sonraki aktif buton
+                    button.disabled = false;
+                } else {
+                    // Diğer butonlar tıklanamaz
+                    button.disabled = true;
                 }
-            };
-            buttonsContainer.appendChild(button);
-        }
 
-        // Buton durumlarını güncelle
-        function updateButtons(completedTestNumber) {
-            const currentButton = document.getElementById(`testButton${completedTestNumber}`);
-            const nextButton = document.getElementById(`testButton${completedTestNumber + 1}`);
-
-            if (currentButton) {
-                currentButton.disabled = true; // Mevcut butonu devre dışı bırak
-                currentButton.classList.add('deactivated'); // Deaktif stili ekle
-            }
-            if (nextButton) {
-                nextButton.disabled = false; // Bir sonraki butonu aktif hale getir
-                nextButton.classList.remove('deactivated'); // Deaktif stilini kaldır
-            }
-        }
-
-        // localStorage'dan durumu kontrol et
-        function checkQuizStatus() {
-            const completedTestNumber = localStorage.getItem('completedTestNumber');
-            if (completedTestNumber) {
-                updateButtons(Number(completedTestNumber));
-            }
-        }
-
-        // Sayfa yüklendiğinde buton durumlarını kontrol et
-        function initializeButtons() {
-            const completedTestNumber = localStorage.getItem('completedTestNumber');
-            if (completedTestNumber) {
-                for (let i = 1; i <= Number(completedTestNumber); i++) {
-                    const button = document.getElementById(`testButton${i}`);
-                    if (button) {
-                        button.disabled = true;
-                        button.classList.add('deactivated');
+                button.onclick = () => {
+                    if (!button.disabled) {
+                        window.open(`${baseUrl}${i}`, '_blank');
                     }
-                }
-                const nextButton = document.getElementById(`testButton${Number(completedTestNumber) + 1}`);
-                if (nextButton) {
-                    nextButton.disabled = false;
-                    nextButton.classList.remove('deactivated');
-                }
+                };
+
+                buttonsContainer.appendChild(button);
             }
         }
 
-        // Sayfa yüklendiğinde ve her saniyede bir kontrol et
+        // Kullanıcı progress bilgisini güncelle (örnek: TEST1 tamamlandı)
+        async function updateUserProgress(testNumber) {
+            try {
+                const response = await fetch('/api/updateUserProgress', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ testNumber })
+                });
+
+                if (!response.ok) throw new Error('Progress güncellenemedi.');
+                console.log(`TEST${testNumber} güncellendi.`);
+            } catch (error) {
+                console.error('Hata:', error);
+            }
+        }
+
+        // Başlatma işlemi
         initializeButtons();
-        checkQuizStatus();
-        setInterval(checkQuizStatus, 1000);
     </script>
 </body>
 </html>
