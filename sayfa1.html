@@ -46,80 +46,71 @@
     </style>
 </head>
 <body>
-    <h1>Anaaaaaa Sayfa</h1>
+    <h1>Ana Sayfa(YENI)</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
 
     <script>
+        // Butonları oluştur
         const buttonsContainer = document.getElementById('buttonsContainer');
         const baseUrl = "https://www.examtheorie.nl/eng/test"; // Temel URL
 
-        // Kullanıcı progress bilgisini API'den al (örnek yapı: [1, 2, 3])
-        async function fetchUserProgress() {
-            try {
-                const response = await fetch('/api/getUserProgress'); // API URL'sini uygun şekilde değiştir
-                if (!response.ok) throw new Error('Veri alınamadı.');
-                const data = await response.json();
-                return data.progress || [];
-            } catch (error) {
-                console.error('Hata:', error);
-                return [];
-            }
+        for (let i = 1; i <= 50; i++) {
+            const button = document.createElement('button');
+            button.id = `testButton${i}`;
+            button.className = 'testButton'; // Tüm butonlar için genel stil
+            button.textContent = `TEST${i}`;
+            button.disabled = i !== 1; // Sadece TEST1 aktif olsun
+            button.onclick = () => {
+                if (!button.disabled) {
+                    window.open(`${baseUrl}${i}`, '_blank');
+                }
+            };
+            buttonsContainer.appendChild(button);
         }
 
-        // Kullanıcı progress bilgisine göre butonları güncelle
-        async function initializeButtons() {
-            const userProgress = await fetchUserProgress();
-
-            for (let i = 1; i <= 50; i++) {
-                const button = document.createElement('button');
-                button.id = `testButton${i}`;
-                button.className = 'testButton';
-                button.textContent = `TEST${i}`;
-
-                // Eğer progress'de varsa deaktif yap
-                if (userProgress.includes(i)) {
+        // Kullanıcı oturum açtığında düğmeleri güncelle
+        function updateButtons(completedTests) {
+            completedTests.forEach(testNumber => {
+                const button = document.getElementById(`testButton${testNumber}`);
+                if (button) {
                     button.disabled = true;
                     button.classList.add('deactivated');
-                } else if (i === Math.max(...userProgress, 0) + 1 || userProgress.length === 0 && i === 1) {
-                    // Bir sonraki aktif buton
-                    button.disabled = false;
-                } else {
-                    // Diğer butonlar tıklanamaz
-                    button.disabled = true;
                 }
+            });
 
-                button.onclick = () => {
-                    if (!button.disabled) {
-                        window.open(`${baseUrl}${i}`, '_blank');
-                    }
-                };
-
-                buttonsContainer.appendChild(button);
+            // Bir sonraki aktif düğmeyi etkinleştir
+            const nextTestNumber = completedTests.length + 1;
+            const nextButton = document.getElementById(`testButton${nextTestNumber}`);
+            if (nextButton) {
+                nextButton.disabled = false;
+                nextButton.classList.remove('deactivated');
             }
         }
 
-        // Kullanıcı progress bilgisini güncelle (örnek: TEST1 tamamlandı)
-        async function updateUserProgress(testNumber) {
-            try {
-                const response = await fetch('/api/updateUserProgress', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ testNumber })
-                });
-
-                if (!response.ok) throw new Error('Progress güncellenemedi.');
-                console.log(`TEST${testNumber} güncellendi.`);
-            } catch (error) {
-                console.error('Hata:', error);
-            }
+        // Kullanıcı oturum açtığında UserProgress koleksiyonunu sorgula
+        function fetchUserProgress() {
+            // Wix backend fonksiyonunu çağırarak kullanıcının progress bilgisini al
+            fetch('/_functions-dev/getUserProgress', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.progress) {
+                    updateButtons(data.progress);
+                }
+            })
+            .catch(error => {
+                console.error("Progress bilgisi alınırken hata oluştu:", error);
+            });
         }
 
-        // Başlatma işlemi
-        initializeButtons();
+        // Sayfa yüklendiğinde kullanıcı oturumunu kontrol et ve düğmeleri güncelle
+        fetchUserProgress();
     </script>
 </body>
 </html>
