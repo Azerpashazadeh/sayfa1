@@ -3,15 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Sayfası</title>
+    <title>Quiz Sayfası</title>
     <style>
-        #quizFrame {
-            width: 100%;
-            height: 500px;
-            border: 1px solid #ccc;
-        }
         #viewResultButton {
-            margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
@@ -19,34 +13,19 @@
     </style>
 </head>
 <body>
-    <h1>Test Sayfası(YENI)</h1>
-    <iframe id="quizFrame" src="https://example.com/quiz" frameborder="0"></iframe>
+    <h1>Quiz SayfasıAAAA</h1>
     <button id="viewResultButton">View My Result</button>
 
     <script>
-        // "View My Result" Butonuna Tıklandığında
+        // "View My Result" düğmesine tıklama olayını ekle
         document.getElementById('viewResultButton').addEventListener('click', function() {
             const completedTestNumber = 1; // TEST1 tamamlandı (bu değer dinamik olarak ayarlanabilir)
 
-            // Wix backend fonksiyonunu çağırarak progress bilgisini güncelle
-            fetch('/_functions-dev/updateUserProgress', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ testNumber: completedTestNumber })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert(`TEST${completedTestNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
-                    // Ana sayfaya mesaj göndererek düğmeleri güncelle
-                    window.parent.postMessage('updateButtons', '*');
-                }
-            })
-            .catch(error => {
-                console.error("Progress güncellenirken hata oluştu:", error);
-            });
+            // Ana sayfaya mesaj gönder
+            window.parent.postMessage({
+                action: 'updateProgress',
+                testNumber: completedTestNumber
+            }, '*');
         });
     </script>
 </body>
