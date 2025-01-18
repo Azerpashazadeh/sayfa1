@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Sayfası</title>
     <style>
+        #quizFrame {
+            width: 100%;
+            height: 500px;
+            border: 1px solid #ccc;
+        }
         #viewResultButton {
+            margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
@@ -13,19 +19,26 @@
     </style>
 </head>
 <body>
-    <h1>Quiz SayfasıAAAA</h1>
+    <h1>Quiz Sayfası11111111</h1>
+    <iframe id="quizFrame" src="https://example.com/quiz" frameborder="0"></iframe>
     <button id="viewResultButton">View My Result</button>
 
     <script>
-        // "View My Result" düğmesine tıklama olayını ekle
+        // "View My Result" Butonuna Tıklandığında
         document.getElementById('viewResultButton').addEventListener('click', function() {
-            const completedTestNumber = 1; // TEST1 tamamlandı (bu değer dinamik olarak ayarlanabilir)
+            const completedTestNumber = 1; // TEST1 tamamlandı
 
-            // Ana sayfaya mesaj gönder
-            window.parent.postMessage({
-                action: 'updateProgress',
-                testNumber: completedTestNumber
-            }, '*');
+            // Frontend'e mesaj gönderme işlemi
+            const wixOrigin = 'https://www.examtheorie.nl';
+            try {
+                window.parent.postMessage({ action: 'updateProgress', testNumber: completedTestNumber }, wixOrigin);
+                console.log("Frontend'e mesaj gönderildi.");
+            } catch (error) {
+                console.error("Mesaj gönderilirken hata oluştu:", error);
+            }
+
+            // TEST1 tamamlandı bilgisini göster
+            alert(`TEST${completedTestNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
         });
     </script>
 </body>
