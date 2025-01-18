@@ -10,10 +10,10 @@
             padding: 10px 20px;
             font-size: 16px;
             margin: 5px;
-            cursor: not-allowed; /* Tıklanamaz varsayılan */
-            border: 1px solid #007BFF; /* Mavi kenarlık */
-            background-color: #007BFF; /* Mavi arka plan */
-            color: white; /* Beyaz yazı rengi */
+            cursor: pointer;
+            border: 1px solid #007BFF;
+            background-color: #007BFF;
+            color: white;
             border-radius: 5px;
             transition: background-color 0.3s, opacity 0.3s;
             width: 120px; /* Sabit genişlik */
@@ -46,18 +46,18 @@
     </style>
 </head>
 <body>
-    <h1>Ana Sayfa(YENI)</h1>
+    <h1>Ana Sayfaaaa111</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
 
     <script>
         // Butonları oluştur
-        const buttonsContainer = document.getElementById('buttonsContainer');
+        const buttonsContainer = document.getElementById("buttonsContainer");
         const baseUrl = "https://www.examtheorie.nl/eng/test"; // Temel URL
 
         for (let i = 1; i <= 50; i++) {
-            const button = document.createElement('button');
+            const button = document.createElement("button");
             button.id = `testButton${i}`;
             button.className = 'testButton'; // Tüm butonlar için genel stil
             button.textContent = `TEST${i}`;
@@ -70,47 +70,43 @@
             buttonsContainer.appendChild(button);
         }
 
-        // Kullanıcı oturum açtığında düğmeleri güncelle
-        function updateButtons(completedTests) {
-            completedTests.forEach(testNumber => {
-                const button = document.getElementById(`testButton${testNumber}`);
-                if (button) {
-                    button.disabled = true;
-                    button.classList.add('deactivated');
-                }
-            });
+        // Mesaj dinleme ve butonları güncelleme
+        window.addEventListener("message", function (event) {
+            // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
+            if (event.origin !== "https://www.examtheorie.nl") return;
 
-            // Bir sonraki aktif düğmeyi etkinleştir
-            const nextTestNumber = completedTests.length + 1;
-            const nextButton = document.getElementById(`testButton${nextTestNumber}`);
-            if (nextButton) {
-                nextButton.disabled = false;
-                nextButton.classList.remove('deactivated');
+            const message = event.data;
+
+            if (message.action === "updateButtons") {
+                const progress = message.progress; // Kullanıcının progress bilgileri
+                updateButtons(progress); // Butonları güncelle
+            }
+        });
+
+        // Butonları güncelleme fonksiyonu
+        function updateButtons(completedTests) {
+            for (let i = 1; i <= 50; i++) {
+                const button = document.getElementById(`testButton${i}`); // Butonun ID'si
+                if (button) {
+                    if (completedTests.includes(i)) {
+                        // Test tamamlandıysa butonu devre dışı bırak
+                        button.disabled = true;
+                        button.textContent = `TEST${i} (Tamamlandı)`;
+                        button.classList.add("deactivated");
+                    } else if (i === 1 || completedTests.includes(i - 1)) {
+                        // Bir önceki test tamamlandıysa butonu aktif hale getir
+                        button.disabled = false;
+                        button.textContent = `TEST${i}`;
+                        button.classList.remove("deactivated");
+                    } else {
+                        // Diğer durumlarda butonu devre dışı bırak
+                        button.disabled = true;
+                        button.textContent = `TEST${i}`;
+                        button.classList.add("deactivated");
+                    }
+                }
             }
         }
-
-        // Kullanıcı oturum açtığında UserProgress koleksiyonunu sorgula
-        function fetchUserProgress() {
-            // Wix backend fonksiyonunu çağırarak kullanıcının progress bilgisini al
-            fetch('/_functions-dev/getUserProgress', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.progress) {
-                    updateButtons(data.progress);
-                }
-            })
-            .catch(error => {
-                console.error("Progress bilgisi alınırken hata oluştu:", error);
-            });
-        }
-
-        // Sayfa yüklendiğinde kullanıcı oturumunu kontrol et ve düğmeleri güncelle
-        fetchUserProgress();
     </script>
 </body>
 </html>
