@@ -70,45 +70,45 @@
             buttonsContainer.appendChild(button);
         }
 
-        // Butonları güncelleme fonksiyonu
-        function updateButtons(completedTests) {
-            for (let i = 1; i <= 50; i++) {
-                const button = document.getElementById(`testButton${i}`);
-                if (button) {
-                    if (completedTests.includes(i)) {
-                        // Test tamamlandıysa butonu devre dışı bırak
-                        button.disabled = true;
-                        button.textContent = `TEST${i} (Tamamlandı)`;
-                        button.classList.add("deactivated");
-                    } else if (i === 1 || completedTests.includes(i - 1)) {
-                        // Bir önceki test tamamlandıysa butonu aktif hale getir
-                        button.disabled = false;
-                        button.textContent = `TEST${i}`;
-                        button.classList.remove("deactivated");
-                    } else {
-                        // Diğer durumlarda butonu devre dışı bırak
-                        button.disabled = true;
-                        button.textContent = `TEST${i}`;
-                        button.classList.add("deactivated");
-                    }
-                }
+       // Butonları güncelleme fonksiyonu
+function updateButtons(completedTests) {
+    for (let i = 1; i <= 50; i++) {
+        const button = document.getElementById(`testButton${i}`);
+        if (button) {
+            if (completedTests.includes(i)) {
+                // Test tamamlandıysa butonu devre dışı bırak
+                button.disabled = true;
+                button.textContent = `TEST${i} (Tamamlandı)`;
+                button.classList.add("deactivated");
+            } else if (i === 1 || completedTests.includes(i - 1)) {
+                // Bir önceki test tamamlandıysa butonu aktif hale getir
+                button.disabled = false;
+                button.textContent = `TEST${i}`;
+                button.classList.remove("deactivated");
+            } else {
+                // Diğer durumlarda butonu devre dışı bırak
+                button.disabled = true;
+                button.textContent = `TEST${i}`;
+                button.classList.add("deactivated");
             }
         }
+    }
+}
 
-        // Mesaj dinleme ve butonları güncelleme
-        window.addEventListener("message", function (event) {
-            // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
-            if (event.origin !== "https://www.examtheorie.nl") return;
+// Mesaj dinleme ve butonları güncelleme
+window.addEventListener("message", function (event) {
+    // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
+    if (event.origin !== "https://www.examtheorie.nl") return;
 
-            const message = event.data;
-            console.log("Iframe'den mesaj alındı:", message);
+    const message = event.data;
+    console.log("Iframe'den mesaj alındı:", message);
 
-            if (message.action === "updateButtons") {
-                const progress = message.progress; // Kullanıcının progress bilgileri
-                console.log("Butonlar güncelleniyor. Progress:", progress);
-                updateButtons(progress); // Butonları güncelle
-            }
-        });
+    if (message.action === "updateButtons") {
+        const progress = message.progress; // Kullanıcının progress bilgileri
+        console.log("Butonlar güncelleniyor. Progress:", progress);
+        updateButtons(progress); // Butonları güncelle
+    }
+});
     </script>
 </body>
 </html>
