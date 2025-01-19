@@ -46,7 +46,7 @@
     </style>
 </head>
 <body>
-    <h1>Ana Sayfaaaa111a</h1>
+    <h1>Ana SayfaXXXXX</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
@@ -70,25 +70,10 @@
             buttonsContainer.appendChild(button);
         }
 
-        // Mesaj dinleme ve butonları güncelleme
-       window.addEventListener("message", function (event) {
-    // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
-    if (event.origin !== "https://www.examtheorie.nl") return;
-
-    const message = event.data;
-    console.log("Iframe'den mesaj alındı:", message);
-
-    if (message.action === "updateButtons") {
-        const progress = message.progress; // Kullanıcının progress bilgileri
-        console.log("Butonlar güncelleniyor. Progress:", progress);
-        updateButtons(progress); // Butonları güncelle
-    }
-});
-
         // Butonları güncelleme fonksiyonu
         function updateButtons(completedTests) {
             for (let i = 1; i <= 50; i++) {
-                const button = document.getElementById(`testButton${i}`); // Butonun ID'si
+                const button = document.getElementById(`testButton${i}`);
                 if (button) {
                     if (completedTests.includes(i)) {
                         // Test tamamlandıysa butonu devre dışı bırak
@@ -109,6 +94,21 @@
                 }
             }
         }
+
+        // Mesaj dinleme ve butonları güncelleme
+        window.addEventListener("message", function (event) {
+            // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
+            if (event.origin !== "https://www.examtheorie.nl") return;
+
+            const message = event.data;
+            console.log("Iframe'den mesaj alındı:", message);
+
+            if (message.action === "updateButtons") {
+                const progress = message.progress; // Kullanıcının progress bilgileri
+                console.log("Butonlar güncelleniyor. Progress:", progress);
+                updateButtons(progress); // Butonları güncelle
+            }
+        });
     </script>
 </body>
 </html>
