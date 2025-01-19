@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <h1>Quiz Sayfası11111111</h1>
+    <h1>Quiz SayfasıXXXXX</h1>
     <iframe id="quizFrame" src="https://example.com/quiz" frameborder="0"></iframe>
     <button id="viewResultButton">View My Result</button>
 
@@ -28,11 +28,35 @@
         document.getElementById('viewResultButton').addEventListener('click', function() {
             const completedTestNumber = 1; // TEST1 tamamlandı
 
-            // Frontend'e mesaj gönderme işlemi
+            // Wix'e mesaj gönderme işlemi
             const wixOrigin = 'https://www.examtheorie.nl';
             try {
-                window.parent.postMessage({ action: 'updateProgress', testNumber: completedTestNumber }, wixOrigin);
-                console.log("Frontend'e mesaj gönderildi.");
+                // Wix'e progress güncelleme mesajı gönder
+                window.parent.postMessage({ 
+                    action: 'updateProgress', 
+                    testNumber: completedTestNumber 
+                }, wixOrigin);
+
+                console.log("Wix'e mesaj gönderildi:", { 
+                    action: 'updateProgress', 
+                    testNumber: completedTestNumber 
+                });
+
+                // Butonları anında güncellemek için iframe'e mesaj gönder
+                const iframe = window.parent.document.getElementById('buttonsIframe');
+                if (iframe) {
+                    iframe.contentWindow.postMessage({ 
+                        action: 'updateButtons', 
+                        progress: [completedTestNumber] 
+                    }, '*');
+                    console.log("Iframe'e mesaj gönderildi:", { 
+                        action: 'updateButtons', 
+                        progress: [completedTestNumber] 
+                    });
+                } else {
+                    console.error("Iframe bulunamadı.");
+                }
+
             } catch (error) {
                 console.error("Mesaj gönderilirken hata oluştu:", error);
             }
