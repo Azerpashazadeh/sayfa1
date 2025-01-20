@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <h1>Quiz SayfasıMMM</h1>
+    <h1>Quiz SayfasıCCCC</h1>
     <iframe id="quizFrame" src="https://example.com/quiz" frameborder="0"></iframe>
     <button id="viewResultButton">View My Result</button>
 
@@ -35,7 +35,7 @@
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ testNumber: completedTestNumber })
+                body: JSON.stringify({ userId: "current-user-id", testNumber: completedTestNumber }) // userId ve testNumber gönder
             })
             .then(response => response.json())
             .then(data => {
