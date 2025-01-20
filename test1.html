@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <h1>Quiz SayfasıKAYANZİ-2</h1>
+    <h1>Quiz SayfasıAdolf</h1>
     <iframe id="quizFrame" src="https://example.com/quiz" frameborder="0"></iframe>
     <button id="viewResultButton">View My Result</button>
 
@@ -29,9 +29,9 @@
             const completedTestNumber = 1; // TEST1 tamamlandı
 
             // Frontend'e mesaj gönderme işlemi
-            const wixOrigin = 'https://www.examtheorie.nl'; // Wix sitenizin URL'sini buraya yazın
+            const wixOrigin = 'https://www.examtheorie.nl';
             try {
-                parent.postMessage({ action: 'viewResultButtonClicked', testNumber: completedTestNumber }, wixOrigin);
+                window.parent.postMessage({ action: 'updateProgress', testNumber: completedTestNumber }, wixOrigin);
                 console.log("Frontend'e mesaj gönderildi.");
             } catch (error) {
                 console.error("Mesaj gönderilirken hata oluştu:", error);
