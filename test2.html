@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Sayfası</title>
+    <title>Quiz Sayfası</title>
     <style>
         #quizFrame {
             width: 100%;
@@ -19,24 +19,26 @@
     </style>
 </head>
 <body>
-    <h1>Test Sayfası2</h1>
+    <h1>Quiz SayfasıAdolf2</h1>
     <iframe id="quizFrame" src="https://example.com/quiz" frameborder="0"></iframe>
     <button id="viewResultButton">View My Result</button>
 
     <script>
-        // "View My Result" butonuna tıklandığında
+        // "View My Result" Butonuna Tıklandığında
         document.getElementById('viewResultButton').addEventListener('click', function() {
-            // Hangi testin tamamlandığını belirle (URL'den veya başka bir yöntemle)
-            const testNumber = 2; // Bu örnekte TEST2 tamamlandı
+            const completedTestNumber = 2; // TEST1 tamamlandı
 
-            // Ana sayfaya bilgi gönder
-            localStorage.setItem('completedTestNumber', testNumber);
+            // Frontend'e mesaj gönderme işlemi
+            const wixOrigin = 'https://www.examtheorie.nl';
+            try {
+                window.parent.postMessage({ action: 'updateProgress', testNumber: completedTestNumber }, wixOrigin);
+                console.log("Frontend'e mesaj gönderildi.");
+            } catch (error) {
+                console.error("Mesaj gönderilirken hata oluştu:", error);
+            }
 
-            // Quiz sonuçlarını göster (bu kısmı kendi quizinize göre özelleştirin)
-            alert(`TEST${testNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
-
-            // İsteğe bağlı: Sayfayı kapat
-            window.close();
+            // TEST1 tamamlandı bilgisini göster
+            alert(`TEST${completedTestNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
         });
     </script>
 </body>
