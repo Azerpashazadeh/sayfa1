@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <h1>Quiz SayfasıAdolf</h1>
+    <h1>Quiz SayfasıHHH</h1>
     <iframe id="quizFrame" src="https://example.com/quiz" frameborder="0"></iframe>
     <button id="viewResultButton">View My Result</button>
 
@@ -27,12 +27,20 @@
         // "View My Result" Butonuna Tıklandığında
         document.getElementById('viewResultButton').addEventListener('click', function() {
             const completedTestNumber = 1; // TEST1 tamamlandı
+            const wixOrigin = 'https://www.examtheorie.nl'; // Wix sayfasının origin'i
 
-            // Frontend'e mesaj gönderme işlemi
-            const wixOrigin = 'https://www.examtheorie.nl';
+            // 1. Frontend'e "updateProgress" mesajını gönder
             try {
                 window.parent.postMessage({ action: 'updateProgress', testNumber: completedTestNumber }, wixOrigin);
-                console.log("Frontend'e mesaj gönderildi.");
+                console.log("Frontend'e mesaj gönderildi: updateProgress");
+            } catch (error) {
+                console.error("Mesaj gönderilirken hata oluştu:", error);
+            }
+
+            // 2. Frontend'e "triggerUpdateButtonState" mesajını gönder (updateButtonState fonksiyonunu tetikle)
+            try {
+                window.parent.postMessage({ action: 'triggerUpdateButtonState' }, wixOrigin);
+                console.log("Frontend'e mesaj gönderildi: triggerUpdateButtonState");
             } catch (error) {
                 console.error("Mesaj gönderilirken hata oluştu:", error);
             }
