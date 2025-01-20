@@ -19,43 +19,43 @@
     </style>
 </head>
 <body>
-    <h1>Quiz SayfasıCCCC</h1>
+    <h1>Quiz SayfasıOOO</h1>
     <iframe id="quizFrame" src="https://example.com/quiz" frameborder="0"></iframe>
     <button id="viewResultButton">View My Result</button>
 
     <script>
         // "View My Result" Butonuna Tıklandığında
         document.getElementById('viewResultButton').addEventListener('click', function() {
-            const completedTestNumber = 1; // TEST1 tamamlandı
-            const wixOrigin = 'https://www.examtheorie.nl'; // Wix sayfasının origin'i
+    const completedTestNumber = 1; // TEST1 tamamlandı
+    const wixOrigin = 'https://www.examtheorie.nl'; // Wix sayfasının origin'i
 
-            // 1. Backend'e "updateProgress" isteği gönder
-            fetch("/_functions/updateUserProgress", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ userId: "current-user-id", testNumber: completedTestNumber }) // userId ve testNumber gönder
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Backend'e istek gönderildi: updateProgress", data);
+    // 1. Backend'e "updateProgress" isteği gönder
+    fetch("/_functions/updateUserProgress", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ userId: "current-user-id", testNumber: completedTestNumber }) // userId ve testNumber gönder
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Backend'e istek gönderildi: updateProgress", data);
 
-                // 2. Frontend'e "triggerUpdateButtonState" mesajını gönder (düğmeleri güncelle)
-                try {
-                    window.parent.postMessage({ action: 'triggerUpdateButtonState' }, wixOrigin);
-                    console.log("Frontend'e mesaj gönderildi: triggerUpdateButtonState");
-                } catch (error) {
-                    console.error("Mesaj gönderilirken hata oluştu:", error);
-                }
-            })
-            .catch(error => {
-                console.error("Backend'e istek gönderilirken hata oluştu:", error);
-            });
+        // 2. Frontend'e "triggerUpdateButtonState" mesajını gönder (düğmeleri güncelle)
+        try {
+            window.parent.postMessage({ action: 'triggerUpdateButtonState' }, wixOrigin);
+            console.log("Frontend'e mesaj gönderildi: triggerUpdateButtonState");
+        } catch (error) {
+            console.error("Mesaj gönderilirken hata oluştu:", error);
+        }
+    })
+    .catch(error => {
+        console.error("Backend'e istek gönderilirken hata oluştu:", error);
+    });
 
-            // TEST1 tamamlandı bilgisini göster
-            alert(`TEST${completedTestNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
-        });
+    // TEST1 tamamlandı bilgisini göster
+    alert(`TEST${completedTestNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
+});
     </script>
 </body>
 </html>
