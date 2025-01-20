@@ -19,52 +19,27 @@
     </style>
 </head>
 <body>
-    <h1>Quiz SayfasıY</h1>
+    <h1>Quiz SayfasıKAYANZİ</h1>
     <iframe id="quizFrame" src="https://example.com/quiz" frameborder="0"></iframe>
     <button id="viewResultButton">View My Result</button>
 
     <script>
-       // "View My Result" Butonuna Tıklandığında
-document.getElementById('viewResultButton').addEventListener('click', function() {
-    const completedTestNumber = 1; // TEST1 tamamlandı
+        // "View My Result" Butonuna Tıklandığında
+        document.getElementById('viewResultButton').addEventListener('click', function() {
+            const completedTestNumber = 1; // TEST1 tamamlandı
 
-    // Wix'e progress güncelleme mesajı gönder
-    const wixOrigin = 'https://www.examtheorie.nl';
-    try {
-        // Wix'e mesaj gönder
-        window.parent.postMessage({ 
-            action: 'updateProgress', 
-            testNumber: completedTestNumber 
-        }, wixOrigin);
+            // Frontend'e mesaj gönderme işlemi
+            const wixOrigin = 'https://www.examtheorie.nl';
+            try {
+                window.parent.postMessage({ action: 'updateProgress', testNumber: completedTestNumber }, wixOrigin);
+                console.log("Frontend'e mesaj gönderildi.");
+            } catch (error) {
+                console.error("Mesaj gönderilirken hata oluştu:", error);
+            }
 
-        console.log("Wix'e mesaj gönderildi:", { 
-            action: 'updateProgress', 
-            testNumber: completedTestNumber 
+            // TEST1 tamamlandı bilgisini göster
+            alert(`TEST${completedTestNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
         });
-
-        // Iframe'e mesaj gönder (TEST1 deaktif, TEST2 aktif)
-        const iframe = window.parent.document.getElementById('buttonsIframe');
-        if (iframe) {
-            iframe.contentWindow.postMessage({ 
-                action: 'updateButtons', 
-                progress: [completedTestNumber] // TEST1 tamamlandı
-            }, '*');
-
-            console.log("Iframe'e mesaj gönderildi:", { 
-                action: 'updateButtons', 
-                progress: [completedTestNumber] 
-            });
-        } else {
-            console.error("Iframe bulunamadı.");
-        }
-
-    } catch (error) {
-        console.error("Mesaj gönderilirken hata oluştu:", error);
-    }
-
-    // TEST1 tamamlandı bilgisini göster
-    alert(`TEST${completedTestNumber} tamamlandı! Sonuçlar görüntüleniyor.`);
-});
     </script>
 </body>
 </html>
