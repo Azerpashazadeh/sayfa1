@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <h1>Quiz SayfasıHHH</h1>
+    <h1>Quiz SayfasıTTT</h1>
     <iframe id="quizFrame" src="https://example.com/quiz" frameborder="0"></iframe>
     <button id="viewResultButton">View My Result</button>
 
@@ -37,10 +37,10 @@
                 console.error("Mesaj gönderilirken hata oluştu:", error);
             }
 
-            // 2. Frontend'e "triggerUpdateButtonState" mesajını gönder (updateButtonState fonksiyonunu tetikle)
+            // 2. Frontend'e "refreshPage" mesajını gönder (sayfayı yenile)
             try {
-                window.parent.postMessage({ action: 'triggerUpdateButtonState' }, wixOrigin);
-                console.log("Frontend'e mesaj gönderildi: triggerUpdateButtonState");
+                window.parent.postMessage({ action: 'refreshPage' }, wixOrigin);
+                console.log("Frontend'e mesaj gönderildi: refreshPage");
             } catch (error) {
                 console.error("Mesaj gönderilirken hata oluştu:", error);
             }
