@@ -34,7 +34,7 @@
     </style>
 </head>
 <body>
-    <h1>Ana Sayfa Amsterdam</h1>
+    <h1>Ana Sayfaaaa111Adolf</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
@@ -82,14 +82,20 @@
                         // Test tamamlandıysa butonu devre dışı bırak
                         button.disabled = true;
                         button.textContent = `TEST${i} (Tamamlandı)`;
+                        button.style.backgroundColor = "#6c757d"; // Gri renk
+                        button.style.cursor = "not-allowed"; // Tıklanamaz imleç
                     } else if (i === 1 || completedTests.includes(i - 1)) {
                         // Bir önceki test tamamlandıysa butonu aktif hale getir
                         button.disabled = false;
                         button.textContent = `TEST${i}`;
+                        button.style.backgroundColor = "#007BFF"; // Mavi renk
+                        button.style.cursor = "pointer"; // Tıklanabilir imleç
                     } else {
                         // Diğer durumlarda butonu devre dışı bırak
                         button.disabled = true;
                         button.textContent = `TEST${i}`;
+                        button.style.backgroundColor = "#6c757d"; // Gri renk
+                        button.style.cursor = "not-allowed"; // Tıklanamaz imleç
                     }
                 }
             }
