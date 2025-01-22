@@ -20,21 +20,21 @@
             text-align: center;
         }
 
-        .testButton:disabled {
+        .testButton.disabled {
             background-color: #6c757d; /* Gri renk (deaktif durumu) */
             border-color: #6c757d;
             cursor: not-allowed; /* Tıklanamaz imleç */
             opacity: 0.6; /* Soldurma efekti */
         }
 
-        .testButton:not(:disabled):hover {
+        .testButton.active:hover {
             background-color: #0056b3; /* Hover efekti (daha koyu mavi) */
             border-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <h1>Ana SayfaRRRR</h1>
+    <h1>Ana SayfaSSSS</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
@@ -47,15 +47,23 @@
         for (let i = 1; i <= 50; i++) {
             const button = document.createElement("button");
             button.id = `testButton${i}`;
-            button.className = 'testButton'; // Tüm butonlar için genel stil
+            button.className = 'testButton disabled'; // Varsayılan olarak tüm butonlar devre dışı
             button.textContent = `TEST${i}`;
-            button.disabled = i !== 1; // Sadece TEST1 aktif olsun
+            button.disabled = true; // Varsayılan olarak butonlar tıklanamaz
             button.onclick = () => {
                 if (!button.disabled) {
                     window.open(`${baseUrl}${i}`, '_blank');
                 }
             };
             buttonsContainer.appendChild(button);
+        }
+
+        // İlk butonu aktif yap
+        const firstButton = document.getElementById('testButton1');
+        if (firstButton) {
+            firstButton.disabled = false;
+            firstButton.classList.remove('disabled');
+            firstButton.classList.add('active');
         }
 
         // Mesaj dinleme ve butonları güncelleme
@@ -76,26 +84,26 @@
         // Butonları güncelleme fonksiyonu
         function updateButtons(completedTests) {
             for (let i = 1; i <= 50; i++) {
-                const button = document.getElementById(`testButton${i}`); // Butonun ID'si
+                const button = document.getElementById(`testButton${i}`);
                 if (button) {
                     if (completedTests.includes(i)) {
                         // Test tamamlandıysa butonu devre dışı bırak
                         button.disabled = true;
+                        button.classList.remove('active');
+                        button.classList.add('disabled');
                         button.textContent = `TEST${i} (Tamamlandı)`;
-                        button.style.backgroundColor = "#6c757d"; // Gri renk
-                        button.style.cursor = "not-allowed"; // Tıklanamaz imleç
                     } else if (i === 1 || completedTests.includes(i - 1)) {
                         // Bir önceki test tamamlandıysa butonu aktif hale getir
                         button.disabled = false;
+                        button.classList.add('active');
+                        button.classList.remove('disabled');
                         button.textContent = `TEST${i}`;
-                        button.style.backgroundColor = "#007BFF"; // Mavi renk
-                        button.style.cursor = "pointer"; // Tıklanabilir imleç
                     } else {
                         // Diğer durumlarda butonu devre dışı bırak
                         button.disabled = true;
+                        button.classList.remove('active');
+                        button.classList.add('disabled');
                         button.textContent = `TEST${i}`;
-                        button.style.backgroundColor = "#6c757d"; // Gri renk
-                        button.style.cursor = "not-allowed"; // Tıklanamaz imleç
                     }
                 }
             }
