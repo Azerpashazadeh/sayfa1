@@ -46,7 +46,7 @@
     </style>
 </head>
 <body>
-    <h1>Ana Sayfa777</h1>
+    <h1>Ana Sayfa333</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
@@ -82,9 +82,14 @@
                 const progress = message.progress; // Kullanıcının progress bilgileri
                 console.log("Butonlar güncelleniyor. Progress:", progress);
                 updateButtons(progress); // Butonları güncelle
+            }
+        });
 
-                // İframe'i yeniden yükle
-                reloadIframe();
+        // localStorage değişikliklerini dinle
+        window.addEventListener("storage", (event) => {
+            if (event.key === "userProgress") {
+                const progress = JSON.parse(event.newValue); // Yeni progress bilgilerini al
+                updateButtons(progress); // Butonları güncelle
             }
         });
 
@@ -113,17 +118,9 @@
             }
         }
 
-        // İframe'i yeniden yükleme fonksiyonu
-        function reloadIframe() {
-            const iframe = window.frameElement; // Mevcut iframe'i al
-            if (iframe) {
-                const src = iframe.src; // Mevcut src değerini al
-                iframe.src = ""; // src'yi boşalt
-                setTimeout(() => {
-                    iframe.src = src; // src'yi yeniden ayarla
-                }, 100); // 100ms sonra yeniden yükle
-            }
-        }
+        // Sayfa yüklendiğinde localStorage'dan buton durumlarını yükle
+        const initialProgress = JSON.parse(localStorage.getItem("userProgress") || "[]");
+        updateButtons(initialProgress);
     </script>
 </body>
 </html>
