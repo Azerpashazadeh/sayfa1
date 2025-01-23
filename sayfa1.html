@@ -46,7 +46,7 @@
     </style>
 </head>
 <body>
-    <h1>Ana Sayfa333</h1>
+    <h1>Ana Sayfa444</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
@@ -85,14 +85,6 @@
             }
         });
 
-        // localStorage değişikliklerini dinle
-        window.addEventListener("storage", (event) => {
-            if (event.key === "userProgress") {
-                const progress = JSON.parse(event.newValue); // Yeni progress bilgilerini al
-                updateButtons(progress); // Butonları güncelle
-            }
-        });
-
         // Butonları güncelleme fonksiyonu
         function updateButtons(completedTests) {
             for (let i = 1; i <= 50; i++) {
@@ -118,8 +110,8 @@
             }
         }
 
-        // Sayfa yüklendiğinde localStorage'dan buton durumlarını yükle
-        const initialProgress = JSON.parse(localStorage.getItem("userProgress") || "[]");
+        // Sayfa yüklendiğinde Wix storage'dan buton durumlarını yükle
+        const initialProgress = JSON.parse(wixStorage.session.getItem("userProgress") || "[]");
         updateButtons(initialProgress);
     </script>
 </body>
