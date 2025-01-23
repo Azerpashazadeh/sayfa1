@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ana Sayfa</title>
     <style>
-        /* Genel buton stili */
+        /* Tüm butonların genel stili */
         .testButton {
             padding: 10px 20px;
             font-size: 16px;
@@ -18,50 +18,50 @@
             transition: background-color 0.3s, opacity 0.3s;
             width: 120px; /* Sabit genişlik */
             height: 50px; /* Sabit yükseklik */
-            text-align: center;
+            text-align: center; /* Metni ortala */
         }
 
-        /* Tıklanamaz butonlar */
+        /* Tıklanamaz butonların stili (başlangıçta tıklanamaz ama mavi olacak) */
         .testButton:disabled {
-            background-color: #007BFF; 
+            background-color: #007BFF; /* Mavi arka plan */
             border-color: #007BFF;
-            cursor: not-allowed;
-            opacity: 1;
+            cursor: not-allowed; /* Tıklanamaz imleç */
+            opacity: 1; /* Başlangıçta soldurma yok */
         }
 
-        /* Deaktif butonlar (Tamamlananlar) */
+        /* Deaktif butonların stili (Quiz tamamlanınca gri olacak) */
         .deactivated {
-            background-color: #6c757d;
+            background-color: #6c757d; /* Gri arka plan */
             border-color: #6c757d;
-            opacity: 0.6;
+            opacity: 0.6; /* Soldurma efekti */
             cursor: not-allowed;
         }
 
-        /* Aktif buton hover efekti */
+        /* Aktif butonların hover efekti */
         .testButton:not(:disabled):hover {
-            background-color: #0056b3;
+            background-color: #0056b3; /* Hover efekti (daha koyu mavi) */
             border-color: #0056b3;
-            cursor: pointer;
+            cursor: pointer; /* Tıklanabilir imleç */
         }
     </style>
 </head>
 <body>
-    <h1>Ana SayfaYYYY</h1>
+    <h1>Ana SayfaOOO</h1>
     <div id="buttonsContainer">
-        <!-- Dinamik butonlar buraya gelecek -->
+        <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
 
     <script>
+        // Butonları oluştur
         const buttonsContainer = document.getElementById("buttonsContainer");
-        const baseUrl = "https://www.examtheorie.nl/eng/test";
+        const baseUrl = "https://www.examtheorie.nl/eng/test"; // Temel URL
 
-        // Dinamik buton oluşturma
         for (let i = 1; i <= 50; i++) {
             const button = document.createElement("button");
             button.id = `testButton${i}`;
-            button.className = 'testButton';
+            button.className = 'testButton'; // Tüm butonlar için genel stil
             button.textContent = `TEST${i}`;
-            button.disabled = i !== 1; // Sadece ilk buton aktif
+            button.disabled = i !== 1; // Sadece TEST1 aktif olsun
             button.onclick = () => {
                 if (!button.disabled) {
                     window.open(`${baseUrl}${i}`, '_blank');
@@ -70,40 +70,38 @@
             buttonsContainer.appendChild(button);
         }
 
-        // Mesaj dinleme
-        window.addEventListener("message", function (event) {
-            if (event.origin !== "https://www.examtheorie.nl") return;
+        // Mesaj dinleme ve butonları güncelleme
+       window.addEventListener("message", function (event) {
+    // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
+    if (event.origin !== "https://www.examtheorie.nl") return;
 
-            const message = event.data;
-            console.log("Iframe'den mesaj alındı:", message);
+    const message = event.data;
+    console.log("Iframe'den mesaj alındı:", message);
 
-            if (message.action === "updateButtons") {
-                const progress = message.progress; 
-                console.log("Butonlar güncelleniyor. Progress:", progress);
-                updateButtons(progress);
+    if (message.action === "updateButtons") {
+        const progress = message.progress; // Kullanıcının progress bilgileri
+        console.log("Butonlar güncelleniyor. Progress:", progress);
+        updateButtons(progress); // Butonları güncelle
+    }
+});
 
-                // Güncellemeden sonra sayfayı yenile
-                setTimeout(() => {
-                    location.reload();
-                }, 500); // Güncelleme tamamlandıktan sonra yenile
-            }
-        });
-
-        // Buton güncelleme fonksiyonu
+        // Butonları güncelleme fonksiyonu
         function updateButtons(completedTests) {
             for (let i = 1; i <= 50; i++) {
-                const button = document.getElementById(`testButton${i}`);
+                const button = document.getElementById(`testButton${i}`); // Butonun ID'si
                 if (button) {
                     if (completedTests.includes(i)) {
+                        // Test tamamlandıysa butonu devre dışı bırak
                         button.disabled = true;
                         button.textContent = `TEST${i} (Tamamlandı)`;
                         button.classList.add("deactivated");
-                        button.classList.remove("testButton");
                     } else if (i === 1 || completedTests.includes(i - 1)) {
+                        // Bir önceki test tamamlandıysa butonu aktif hale getir
                         button.disabled = false;
                         button.textContent = `TEST${i}`;
                         button.classList.remove("deactivated");
                     } else {
+                        // Diğer durumlarda butonu devre dışı bırak
                         button.disabled = true;
                         button.textContent = `TEST${i}`;
                         button.classList.add("deactivated");
