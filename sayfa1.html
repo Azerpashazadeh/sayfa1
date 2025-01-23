@@ -46,7 +46,7 @@
     </style>
 </head>
 <body>
-    <h1>Ana Sayfa888</h1>
+    <h1>Ana Sayfa999</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
@@ -106,18 +106,17 @@
                         button.textContent = `TEST${i}`;
                         button.classList.add("deactivated");
                     }
+
+                    // Tarayıcının render işlemini tetikle
+                    void button.offsetHeight; // offsetHeight'e erişerek render işlemini tetikle
                 }
             }
-        }
 
-        // BroadcastChannel üzerinden mesaj dinleme
-        const channel = new BroadcastChannel("refreshChannel");
-        channel.onmessage = function (event) {
-            if (event.data.action === "refreshA") {
-                console.log("A sayfası yenileniyor...");
-                window.location.reload(); // Sayfayı yenile
-            }
-        };
+            // Alternatif olarak requestAnimationFrame kullanılabilir
+            requestAnimationFrame(() => {
+                console.log("Butonlar güncellendi ve render işlemi tetiklendi.");
+            });
+        }
     </script>
 </body>
 </html>
