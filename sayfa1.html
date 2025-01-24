@@ -46,7 +46,7 @@
     </style>
 </head>
 <body>
-    <h1>Ana Sayfa333</h1>
+    <h1>Ana Sayfaaaa111Adolf</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
@@ -71,23 +71,22 @@
         }
 
         // Mesaj dinleme ve butonları güncelleme
-        window.addEventListener("message", function (event) {
-            // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
-            if (event.origin !== "https://www.examtheorie.nl") return;
+       window.addEventListener("message", function (event) {
+    // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
+    if (event.origin !== "https://www.examtheorie.nl") return;
 
-            const message = event.data;
-            console.log("Iframe'den mesaj alındı:", message);
+    const message = event.data;
+    console.log("Iframe'den mesaj alındı:", message);
 
-            if (message.action === "updateButtons") {
-                const progress = message.progress; // Kullanıcının progress bilgileri
-                console.log("Butonlar güncelleniyor. Progress:", progress);
-                updateButtons(progress); // Butonları güncelle
-            }
-        });
+    if (message.action === "updateButtons") {
+        const progress = message.progress; // Kullanıcının progress bilgileri
+        console.log("Butonlar güncelleniyor. Progress:", progress);
+        updateButtons(progress); // Butonları güncelle
+    }
+});
 
         // Butonları güncelleme fonksiyonu
         function updateButtons(completedTests) {
-            const container = document.getElementById("buttonsContainer");
             for (let i = 1; i <= 50; i++) {
                 const button = document.getElementById(`testButton${i}`); // Butonun ID'si
                 if (button) {
@@ -109,11 +108,6 @@
                     }
                 }
             }
-
-            // DOM'u zorlamak için yeniden çizimi tetikle
-            container.style.display = "none"; // Görünürlüğü kapat
-            container.offsetHeight; // DOM yeniden işleniyor (zorlama)
-            container.style.display = "block"; // Görünürlüğü aç
         }
     </script>
 </body>
