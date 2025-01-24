@@ -46,7 +46,7 @@
     </style>
 </head>
 <body>
-    <h1>Ana Sayfa222Adolf</h1>
+    <h1>Ana SayfaNL</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
@@ -71,19 +71,19 @@
         }
 
         // Mesaj dinleme ve butonları güncelleme
-       window.addEventListener("message", function (event) {
-    // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
-    if (event.origin !== "https://www.examtheorie.nl") return;
+        window.addEventListener("message", function (event) {
+            // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
+            if (event.origin !== "https://www.examtheorie.nl") return;
 
-    const message = event.data;
-    console.log("Iframe'den mesaj alındı:", message);
+            const message = event.data;
+            console.log("Iframe'den mesaj alındı:", message);
 
-    if (message.action === "updateButtons") {
-        const progress = message.progress; // Kullanıcının progress bilgileri
-        console.log("Butonlar güncelleniyor. Progress:", progress);
-        updateButtons(progress); // Butonları güncelle
-    }
-});
+            if (message.action === "updateButtons") {
+                const progress = message.progress; // Kullanıcının progress bilgileri
+                console.log("Butonlar güncelleniyor. Progress:", progress);
+                updateButtons(progress); // Butonları güncelle
+            }
+        });
 
         // Butonları güncelleme fonksiyonu
         function updateButtons(completedTests) {
@@ -109,6 +109,20 @@
                 }
             }
         }
+
+        // X kodunu entegre et (Sayfanın görünürlük durumu)
+        document.addEventListener('visibilitychange', function () {
+            const state = document.visibilityState; // 'visible' veya 'hidden'
+            console.log("Sayfa görünürlük durumu değişti:", state);
+
+            if (state === 'visible') {
+                console.log("Sayfa görünür hale geldi. Butonlar güncelleniyor...");
+                // Görünür hale geldiğinde updateButtons fonksiyonunu çağır
+                // Örneğin, sunucudan yeniden progress bilgilerini çekebilirsin
+                const sampleProgress = [1, 2, 3]; // Örnek progress bilgisi
+                updateButtons(sampleProgress);
+            }
+        });
     </script>
 </body>
 </html>
