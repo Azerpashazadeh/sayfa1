@@ -46,51 +46,81 @@
     </style>
 </head>
 <body>
-    <h1>Ana Sayfa5555</h1>
+    <h1>Ana Sayfa</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
 
-    <script>      
-    window.addEventListener("message", function (event) {
-        if (event.origin !== "https://www.examtheorie.nl") return;
+    <script>
+        const buttonsContainer = document.getElementById("buttonsContainer");
+        const totalTests = 50;
 
-        const message = event.data;
-        console.log("Iframe'den mesaj alındı:", message);
+        // Sayfa yüklendiğinde butonları oluştur
+        createButtons();
 
-        if (message.action === "updateButtons") {
-            const progress = message.progress;
-            console.log("Butonlar güncelleniyor:", progress);
-            updateButtons(progress); // Butonları güncelle
+        // Dinamik buton oluşturma
+        function createButtons() {
+            const fragment = document.createDocumentFragment();
+
+            for (let i = 1; i <= totalTests; i++) {
+                const button = document.createElement("button");
+                button.id = `testButton${i}`;
+                button.className = 'testButton';
+                button.textContent = `TEST${i}`;
+                button.disabled = true; // Başlangıçta hepsi devre dışı
+                fragment.appendChild(button);
+            }
+
+            buttonsContainer.appendChild(fragment);
         }
-    });
 
-    function updateButtons(completedTests) {
-        const container = document.getElementById("buttonsContainer");
-        for (let i = 1; i <= 50; i++) {
-            const button = document.getElementById(`testButton${i}`);
-            if (button) {
-                if (completedTests.includes(i)) {
-                    button.disabled = true;
-                    button.textContent = `TEST${i} (Tamamlandı)`;
-                    button.classList.add("deactivated");
-                } else if (i === 1 || completedTests.includes(i - 1)) {
-                    button.disabled = false;
-                    button.textContent = `TEST${i}`;
-                    button.classList.remove("deactivated");
-                } else {
-                    button.disabled = true;
-                    button.textContent = `TEST${i}`;
-                    button.classList.add("deactivated");
+        // PostMessage Dinleme
+        window.addEventListener("message", function (event) {
+            if (event.origin !== "https://www.examtheorie.nl") {
+                console.warn("Bilinmeyen bir kaynaktan gelen mesaj:", event.origin);
+                return;
+            }
+
+            const message = event.data;
+            console.log("Iframe'den mesaj alındı:", message);
+
+            if (message.action === "updateButtons") {
+                const progress = message.progress;
+                console.log("Butonlar güncelleniyor:", progress);
+                updateButtons(progress);
+            }
+        });
+
+        // Butonları güncelleme
+        function updateButtons(completedTests) {
+            for (let i = 1; i <= totalTests; i++) {
+                const button = document.getElementById(`testButton${i}`);
+                if (button) {
+                    const isCompleted = completedTests.includes(i);
+                    const canActivate = i === 1 || completedTests.includes(i - 1);
+
+                    if (isCompleted) {
+                        if (!button.classList.contains("deactivated")) {
+                            button.disabled = true;
+                            button.textContent = `TEST${i} (Tamamlandı)`;
+                            button.classList.add("deactivated");
+                        }
+                    } else if (canActivate) {
+                        if (button.disabled || button.classList.contains("deactivated")) {
+                            button.disabled = false;
+                            button.textContent = `TEST${i}`;
+                            button.classList.remove("deactivated");
+                        }
+                    } else {
+                        if (!button.disabled || !button.classList.contains("deactivated")) {
+                            button.disabled = true;
+                            button.textContent = `TEST${i}`;
+                            button.classList.add("deactivated");
+                        }
+                    }
                 }
             }
         }
-
-        // DOM'un yeniden çizilmesini zorla
-        container.style.display = "none";
-        container.offsetHeight; // Tarayıcıya DOM'u yeniden akıtmasını söyler
-        container.style.display = "block";
-    }
     </script>
 </body>
 </html>
