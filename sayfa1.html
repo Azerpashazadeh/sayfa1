@@ -46,7 +46,7 @@
     </style>
 </head>
 <body>
-    <h1>Ana SayfaNL</h1>
+    <h1>Ana SayfaAZ</h1>
     <div id="buttonsContainer">
         <!-- Butonlar burada dinamik olarak oluşturulacak -->
     </div>
@@ -110,17 +110,15 @@
             }
         }
 
-        // X kodunu entegre et (Sayfanın görünürlük durumu)
+        // Sayfanın görünürlük durumu değiştiğinde butonları güncelle
         document.addEventListener('visibilitychange', function () {
             const state = document.visibilityState; // 'visible' veya 'hidden'
             console.log("Sayfa görünürlük durumu değişti:", state);
 
             if (state === 'visible') {
                 console.log("Sayfa görünür hale geldi. Butonlar güncelleniyor...");
-                // Görünür hale geldiğinde updateButtons fonksiyonunu çağır
-                // Örneğin, sunucudan yeniden progress bilgilerini çekebilirsin
-                const sampleProgress = [1, 2, 3]; // Örnek progress bilgisi
-                updateButtons(sampleProgress);
+                // Görünür hale geldiğinde N koduna mesaj gönder
+                window.parent.postMessage({ action: "visibilityChange", state: state }, "https://www.examtheorie.nl");
             }
         });
     </script>
