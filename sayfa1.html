@@ -66,8 +66,17 @@
                 const button = document.createElement("button");
                 button.id = `testButton${i}`;
                 button.className = 'testButton';
-                button.textContent = `TEST${i}`;
-                button.disabled = true; // Başlangıçta hepsi devre dışı
+
+                // TEST1 aktif, diğerleri devre dışı
+                if (i === 1) {
+                    button.disabled = false;
+                    button.textContent = `TEST${i}`;
+                } else {
+                    button.disabled = true;
+                    button.textContent = `TEST${i}`;
+                    button.classList.add("deactivated");
+                }
+
                 fragment.appendChild(button);
             }
 
