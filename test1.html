@@ -5081,42 +5081,43 @@
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
 
 
-        // Mesaj dinleyicisi
-        window.addEventListener("message", function (event) {
-            // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
-            if (event.origin !== "https://www.examtheorie.nl") return;
+       // Mesaj dinleyicisi
+window.addEventListener("message", function (event) {
+    // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
+    if (event.origin !== "https://www.examtheorie.nl") return;
 
-            const message = event.data;
-            console.log("Iframe'e mesaj alındı:", message);
+    const message = event.data;
+    console.log("Iframe'e mesaj alındı:", message);
 
-            if (Array.isArray(message)) {
-                // Mesaj bir dizi ise (örneğin [1, 2, 3, ..., 50])
-                console.log("Progress bilgileri alındı:", message);
+    // Mesaj bir nesne ise ve action özelliği "updateButtons" ise
+    if (typeof message === "object" && message.action === "updateButtons") {
+        const progress = message.progress; // Tamamlanan testlerin listesi
+        console.log("Progress bilgileri alındı:", progress);
 
-                // QUIZ-1 butonunu kontrol et ve güncelle
-                updateQuiz1Button(message);
-            }
-        });
+        // QUIZ-1 butonunu kontrol et ve güncelle
+        updateQuiz1Button(progress);
+    }
+});
 
-        // QUIZ-1 butonunu güncelleme fonksiyonu
-        function updateQuiz1Button(progress) {
-            // QUIZ-1 butonunu seç
-            const quiz1Button = document.getElementById("quizButton1");
+// QUIZ-1 butonunu güncelleme fonksiyonu
+function updateQuiz1Button(progress) {
+    // QUIZ-1 butonunu seç
+    const quiz1Button = document.getElementById("quizButton1");
 
-            if (quiz1Button) {
-                // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
-                if (progress.includes(1)) {
-                    quiz1Button.disabled = true;
-                    quiz1Button.textContent = "QUIZ-1 (Tamamlandı)";
-                    quiz1Button.classList.add("deactivated");
-                } else {
-                    // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
-                    quiz1Button.disabled = false;
-                    quiz1Button.textContent = "QUIZ-1";
-                    quiz1Button.classList.remove("deactivated");
-                }
-            }
+    if (quiz1Button) {
+        // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
+        if (progress.includes(1)) {
+            quiz1Button.disabled = true;
+            quiz1Button.textContent = "QUIZ-1 (Tamamlandı)";
+            quiz1Button.classList.add("deactivated");
+        } else {
+            // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
+            quiz1Button.disabled = false;
+            quiz1Button.textContent = "QUIZ-1";
+            quiz1Button.classList.remove("deactivated");
         }
+    }
+}
 
 
 
