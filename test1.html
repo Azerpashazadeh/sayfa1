@@ -1822,7 +1822,10 @@
 
         /*================================================01234====================================================*/
 
-
+        .deactivated {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
 
 
         #countdown {
@@ -1905,7 +1908,7 @@
 
 
     <!-- SECTION-1 ve teste başla düğmeleri -->
-    <button id="test1Button" onclick="showMessage()">TEST-1</button>
+    <button id="quizButton1" onclick="showMessage()">QUIZ-1</button>
 
     <!-- Mesaj alanı -->
     <div id="messageArea">
@@ -2179,7 +2182,7 @@
             document.getElementById("messageArea").style.display = "block";
             document.getElementById("startButton").style.display = "block";
 
-            document.getElementById("test1Button").style.display = "none"; //SECTION-1 düğmesini gizle
+            document.getElementById("quizButton1").style.display = "none"; //SECTION-1 düğmesini gizle
         }
 
         // "START THE THEORY EXAM" butonuna tıklandığında "PROCEED" butonunu göster ve mesajı görüntüle
@@ -2227,37 +2230,40 @@
             }
         }
 
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////
 
-// Mevcut onclick olayını saklayın
-const oldOnClick = document.getElementById('viewResult').onclick;
+        // Mevcut onclick olayını saklayın
+        const oldOnClick = document.getElementById('viewResult').onclick;
 
-// Yeni onclick olayını tanımlayın
-document.getElementById('viewResult').onclick = function(event) {
-    // Mevcut işlevselliği çağırın (finalResultShow fonksiyonu)
-    if (oldOnClick) {
-        oldOnClick(event);
-    }
+        // Yeni onclick olayını tanımlayın
+        document.getElementById('viewResult').onclick = function (event) {
+            // Mevcut işlevselliği çağırın (finalResultShow fonksiyonu)
+            if (oldOnClick) {
+                oldOnClick(event);
+            }
 
-    // Yeni işlevselliği buraya ekleyin
-    const completedTestNumber = 1; // TEST1 tamamlandı
+            // Yeni işlevselliği buraya ekleyin
+            const completedTestNumber = 1; // TEST1 tamamlandı
 
-    // Frontend'e mesaj gönderme işlemi
-    const wixOrigin = 'https://www.examtheorie.nl';
-    try {
-        window.parent.postMessage({ action: 'updateProgress', testNumber: completedTestNumber }, wixOrigin);
-        console.log("Frontend'e mesaj gönderildi.");
-    } catch (error) {
-        console.error("Mesaj gönderilirken hata oluştu:", error);
-    }
-};
+            // Frontend'e mesaj gönderme işlemi
+            const wixOrigin = 'https://www.examtheorie.nl';
+            try {
+                window.parent.postMessage({ action: 'updateProgress', testNumber: completedTestNumber }, wixOrigin);
+                console.log("Frontend'e mesaj gönderildi.");
+            } catch (error) {
+                console.error("Mesaj gönderilirken hata oluştu:", error);
+            }
+        };
 
-////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
         // Zamanlayıcıyı başlatan fonksiyon
         function startTimer() {
@@ -5074,6 +5080,43 @@ document.getElementById('viewResult').onclick = function(event) {
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
 
+
+        // Mesaj dinleyicisi
+        window.addEventListener("message", function (event) {
+            // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
+            if (event.origin !== "https://www.examtheorie.nl") return;
+
+            const message = event.data;
+            console.log("Iframe'e mesaj alındı:", message);
+
+            if (Array.isArray(message)) {
+                // Mesaj bir dizi ise (örneğin [1, 2, 3, ..., 50])
+                console.log("Progress bilgileri alındı:", message);
+
+                // QUIZ-1 butonunu kontrol et ve güncelle
+                updateQuiz1Button(message);
+            }
+        });
+
+        // QUIZ-1 butonunu güncelleme fonksiyonu
+        function updateQuiz1Button(progress) {
+            // QUIZ-1 butonunu seç
+            const quiz1Button = document.getElementById("quizButton1");
+
+            if (quiz1Button) {
+                // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
+                if (progress.includes(1)) {
+                    quiz1Button.disabled = true;
+                    quiz1Button.textContent = "QUIZ-1 (Tamamlandı)";
+                    quiz1Button.classList.add("deactivated");
+                } else {
+                    // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
+                    quiz1Button.disabled = false;
+                    quiz1Button.textContent = "QUIZ-1";
+                    quiz1Button.classList.remove("deactivated");
+                }
+            }
+        }
 
 
 
