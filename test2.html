@@ -907,14 +907,14 @@
         /* Varsayılan (mobil) düzen - üst üste hizalama */
         .question {
             display: grid;
-            grid-template-columns: 2fr;
+            grid-template-columns: 1fr 1fr;
+            /* 2 eşit sütun */
             gap: 1vw;
             max-width: 1500px;
-
             width: 100%;
             margin: 1vw auto;
             position: fixed;
-            left: 49%;
+            left: 50%;
             transform: translateX(-50%);
             border: 1px solid transparent;
             border-radius: 1vw;
@@ -940,15 +940,27 @@
 
         /* T4 tipi sorular için özel stiller */
         .image-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            /* 3 sütun ve esnek hücreler */
+            display: flex;
+            /* Flexbox kullan */
+            flex-wrap: nowrap;
+            /* Yeni satıra geçmesini önle */
             gap: 10px;
             justify-content: center;
-            margin: 15px auto;
-            max-width: 900px;
-            /* 3 sütunun maksimum genişliği */
+            /* Öğeleri ortala */
+            max-width: 100%;
+            overflow-x: auto;
+            /* Yatay kaydırma ekle */
+            padding-bottom: 5px;
+            /* Kaydırma çubuğu içeriğe yapışmasın */
         }
+
+        /* Öğelerin boyutları */
+        .image-container .item {
+            flex: 1 1 auto;
+            /* Genişleyebilir ve küçülebilir */
+            display: flex;
+        }
+
 
 
         .image-container.grid-4 {
@@ -962,6 +974,8 @@
 
         /* Resim kapsayıcısının konumunu ayarlıyoruz */
         .image-wrapper {
+            flex: 1;
+            /* Esnemeye izin ver */
             position: relative;
             display: inline-block;
             margin: 0;
@@ -3836,7 +3850,7 @@
                         const questionParagraph = question.querySelector('p');
                         if (questionParagraph) {
                             feedbackDiv.style.position = 'absolute';
-                            feedbackDiv.style.top = `${questionParagraph.offsetHeight + 551}px`;
+                            feedbackDiv.style.top = `${questionParagraph.offsetHeight + 51}px`;
                             feedbackDiv.style.left = '0';
                             question.style.position = 'relative';
                             question.appendChild(feedbackDiv);
