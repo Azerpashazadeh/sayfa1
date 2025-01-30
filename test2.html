@@ -89,6 +89,36 @@
 
         }
 
+        #soruBasligi {
+            outline: 1px solid rgb(204, 117, 233);
+        }
+
+
+
+
+        /*//GÖRÜNMEYENLER, QUİZİN HEÇ BİR  YERİNDE RENK OLUŞTURMADI//*/
+
+        #quiz-header {
+            outline: 2px solid yellow;
+        }
+
+        .questionContainer {
+            outline: 5px solid purple;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         h4,
         p {
@@ -108,9 +138,15 @@
             margin-top: 25px;
         }
 
-        /*BİRİNCİ BÖLÜM BİRİNCİ BÖLÜM BİRİNCİ BÖLÜM BİRİNCİ BÖLÜM BİRİNCİ BÖLÜM BİRİNCİ BÖLÜM BİRİNCİ BÖLÜM BİRİNCİ BÖLÜM BİRİNCİ BÖLÜM */
-
-
+        /*
+                   ███████████     ███████    █████       █████  █████ ██████   ██████            ████ 
+                  ░░███░░░░░███  ███░░░░░███ ░░███       ░░███  ░░███ ░░██████ ██████            ░░███ 
+                   ░███    ░███ ███     ░░███ ░███        ░███   ░███  ░███░█████░███             ░███ 
+                   ░██████████ ░███      ░███ ░███        ░███   ░███  ░███░░███ ░███  ██████████ ░███ 
+                   ░███░░░░░███░███      ░███ ░███        ░███   ░███  ░███ ░░░  ░███ ░░░░░░░░░░  ░███ 
+                   ░███    ░███░░███     ███  ░███      █ ░███   ░███  ░███      ░███             ░███ 
+                   ███████████  ░░░███████░   ███████████ ░░████████   █████     █████            █████
+                  ░░░░░░░░░░░     ░░░░░░░    ░░░░░░░░░░░   ░░░░░░░░   ░░░░░     ░░░░░            ░░░░░  */
 
 
 
@@ -194,28 +230,6 @@
             }
 
 
-
-            #buttonDiv {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                gap: 10px;
-                position: fixed;
-                bottom: 11%;
-                left: 50%;
-                /* Ekranın tam ortasına hizalan */
-                transform: translateX(-50%);
-                /* Ortalaması için sola doğru yarı genişliği kadar kaydır */
-                width: 100%;
-                /* Genişliği tarayıcının %95'i */
-                padding: 0 2px;
-                z-index: 10;
-                box-sizing: border-box;
-                overflow: hidden;
-                margin: 0;
-                /* margin:0 auto; yerine margin:0 kullanın */
-            }
-
             #soruBasligi {
                 font-size: 14px;
                 color: #fefefe;
@@ -225,9 +239,6 @@
                 /* Yatayda ortalar */
 
             }
-
-
-
 
             #cevaplar {
                 display: flex;
@@ -254,6 +265,32 @@
                 gap: 10px;
             }
 
+            #buttonDiv {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 10px;
+                position: fixed;
+                bottom: 11%;
+                left: 50%;
+                /* Ekranın tam ortasına hizalan */
+                transform: translateX(-50%);
+                /* Ortalaması için sola doğru yarı genişliği kadar kaydır */
+                width: 100%;
+                /* Genişliği tarayıcının %95'i */
+                padding: 0 2px;
+                z-index: 10;
+                box-sizing: border-box;
+                overflow: hidden;
+                margin: 0;
+                /* margin:0 auto; yerine margin:0 kullanın */
+            }
+
+
+
+
+
+
 
         }
 
@@ -266,7 +303,7 @@
                 /* Resim ve cevap seçenekleri arasındaki mesafe */
                 flex-grow: 1;
                 /* Boş alanı kullanmasını sağlar */
-                width: 100vw;
+                width: 10vw;
                 /* Tarayıcı genişliği boyunca uzanır */
                 max-width: none;
                 /* Maksimum genişlik sınırını kaldırır */
@@ -457,7 +494,7 @@
                 align-items: center;
                 gap: 10px;
                 position: fixed;
-                bottom: 1%;
+                bottom: 0.7%;
                 left: 50%;
                 /* Ekranın tam ortasına hizalan */
                 transform: translateX(-50%);
@@ -524,22 +561,49 @@
         }
 
 
+        /*
+
+                   ███████████     ███████    █████       █████  █████ ██████   ██████             ████████ 
+                  ░░███░░░░░███  ███░░░░░███ ░░███       ░░███  ░░███ ░░██████ ██████             ███░░░░███
+                   ░███    ░███ ███     ░░███ ░███        ░███   ░███  ░███░█████░███            ░░░    ░███
+                   ░██████████ ░███      ░███ ░███        ░███   ░███  ░███░░███ ░███  ██████████   ███████ 
+                   ░███░░░░░███░███      ░███ ░███        ░███   ░███  ░███ ░░░  ░███ ░░░░░░░░░░   ███░░░░  
+                   ░███    ░███░░███     ███  ░███      █ ░███   ░███  ░███      ░███             ███      █
+                   ███████████  ░░░███████░   ███████████ ░░████████   █████     █████           ░██████████
+                  ░░░░░░░░░░░     ░░░░░░░    ░░░░░░░░░░░   ░░░░░░░░   ░░░░░     ░░░░░            ░░░░░░░░░░ 
+*/
 
 
+        .question {
+            outline: 4px solid rgb(247, 6, 6);
+            /* Kırmızı renkte 2px kalınlığında outline */
+        }
 
-        /*BİRİNCİ BÖLÜM SONU  BİRİNCİ BÖLÜM SONU BİRİNCİ BÖLÜM SONU BİRİNCİ BÖLÜM SONU BİRİNCİ BÖLÜM SONU BİRİNCİ BÖLÜM SONU BİRİNCİ BÖLÜM SONU */
+        #countdown {
+            outline: 1px solid blue;
+            /* Mavi renkte 2px kalınlığında outline */
+        }
 
+        .question-image {
+            outline: 1px solid rgb(246, 246, 3);
+        }
 
+        .image-container {
+            outline: 6px solid rgb(8, 237, 8);
+        }
 
+        .answers {
+            outline: 3px solid rgb(247, 10, 192);
+        }
 
+        p {
+            outline: 1px solid rgb(7, 252, 179);
+        }
 
+        .image-wrapper {
+            outline: 2px solid rgb(53, 122, 240);
 
-
-
-
-
-
-
+        }
 
 
 
@@ -590,25 +654,11 @@
         }
 
 
-
-
-
-
-
-
-
-
         #soruSayisi {
             text-align: center;
             margin-top: 20px;
             font-size: 18px;
         }
-
-
-
-
-
-
 
         /* Genel stiller */
         .navigateButton {
@@ -623,12 +673,6 @@
             z-index: 1100;
             /* Diğer içeriklerin üzerinde olmak için */
         }
-
-
-
-
-
-
 
 
         img {
@@ -865,7 +909,8 @@
             display: grid;
             grid-template-columns: 2fr;
             gap: 1vw;
-            max-height: 100%;
+            max-width: 1500px;
+
             width: 100%;
             margin: 1vw auto;
             position: fixed;
@@ -874,7 +919,7 @@
             border: 1px solid transparent;
             border-radius: 1vw;
             overflow: hidden;
-            text-align: center;
+            text-align: left;
         }
 
         .question p {
@@ -886,7 +931,7 @@
 
         .question-image {
             width: 100%;
-            max-width: 40vw;
+            max-width: 70vw;
             height: auto;
             justify-self: start;
             border-radius: 0.5vw;
@@ -895,12 +940,16 @@
 
         /* T4 tipi sorular için özel stiller */
         .image-container {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            /* 3 sütun ve esnek hücreler */
             gap: 10px;
             justify-content: center;
             margin: 15px auto;
+            max-width: 900px;
+            /* 3 sütunun maksimum genişliği */
         }
+
 
         .image-container.grid-4 {
             display: grid;
@@ -1013,7 +1062,7 @@
                 display: grid;
                 grid-template-rows: auto 1fr auto;
                 max-width: 80%;
-                grid-template-columns: 53% 45%;
+                grid-template-columns: 60% 40%;
                 gap: 0px;
                 align-items: start;
                 top: 55px;
@@ -1079,7 +1128,7 @@
 
             .question.no-image .question p,
             .question.no-image .answers {
-                width: 100%;
+                width: 60%;
                 text-align: center;
                 margin-left: 0;
             }
@@ -1093,20 +1142,47 @@
         /* Mobil düzen */
         @media (max-width: 767px) {
             .question {
-                grid-template-columns: 1fr;
+                position: absolute;
+                top: 35px;
+                left: 50%;
+                transform: translateX(-50%);
+                /* Yalnızca yatayda ortala */
+                width: 90vw;
+                /* Genişliği ayarla */
+                max-width: 92%;
+                /* Çok geniş olmaması için */
+                height: auto;
+                /* Yükseklik içeriğe göre ayarlansın */
+                min-height: 70vh;
+                /* Minimum olarak ekranı kaplasın */
+                overflow-y: auto;
+                /* İçerik taşarsa kaydırma çubuğu */
+                overflow-x: hidden;
+                /* Yatay taşmayı engelle */
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                position: relative;
-                max-width: 98%;
-                top: 25px;
-                padding-bottom: 200px;
+                justify-content: flex-start;
+                /* İçeriği yukarı hizala */
+                padding: 10px;
+                padding-bottom: calc(11vh + 7vh);
+                /* Ekran yüksekliğinin %11'i + 6vh */
+                background: white;
+                /* Arka planı düzenle */
+                border-radius: 10px;
+                /* Köşeleri yumuşat */
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                /* Hafif gölge ekleyerek daha güzel bir görünüm sağla */
+                z-index: -1;
             }
 
-            .question p,
-            .answers {
+
+
+
+            .answers,
+            .question p {
                 width: 100%;
-                text-align: center;
+                text-align: left;
             }
 
             .answers {
@@ -1114,6 +1190,13 @@
                 flex-direction: column;
                 align-items: center;
                 margin-top: 0;
+            }
+
+            .question.no-image .question p,
+            .question.no-image .answers {
+                width: 98%;
+                text-align: center;
+                margin-left: 0;
             }
 
             .question-image {
@@ -1158,18 +1241,6 @@
                 bottom: 11%;
             }
 
-            #grayRectangle {
-                width: 100%;
-                height: calc(11% + 6vh);
-                background-color: rgb(0, 0, 0);
-                border: none;
-                display: block;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                z-index: 3;
-            }
-
             .show-rectangle {
                 display: block;
             }
@@ -1178,6 +1249,27 @@
         #finalResultContainerId {
             padding-bottom: 200px;
         }
+
+
+
+
+        /*
+                   ███████████     ███████    █████       █████  █████ ██████   ██████             ████████ 
+                  ░░███░░░░░███  ███░░░░░███ ░░███       ░░███  ░░███ ░░██████ ██████             ███░░░░███
+                   ░███    ░███ ███     ░░███ ░███        ░███   ░███  ░███░█████░███            ░░░    ░███
+                   ░██████████ ░███      ░███ ░███        ░███   ░███  ░███░░███ ░███  ██████████   ██████░ 
+                   ░███░░░░░███░███      ░███ ░███        ░███   ░███  ░███ ░░░  ░███ ░░░░░░░░░░   ░░░░░░███
+                   ░███    ░███░░███     ███  ░███      █ ░███   ░███  ░███      ░███             ███   ░███
+                   ███████████  ░░░███████░   ███████████ ░░████████   █████     █████           ░░████████ 
+                  ░░░░░░░░░░░     ░░░░░░░    ░░░░░░░░░░░   ░░░░░░░░   ░░░░░     ░░░░░             ░░░░░░░░  
+                                                                                                            
+                                                                                                            
+                                                                                                            */
+
+
+
+
+
 
 
 
@@ -1491,7 +1583,7 @@
             #grayRectangle {
                 width: 100%;
                 height: calc(11% + 6vh);
-                background-color: rgb(0, 0, 0);
+                background-color: black;
                 border: none;
                 display: block;
                 position: fixed;
@@ -1730,18 +1822,19 @@
 
         #countdown {
             /* margin-top: -86px;
-        margin-bottom: -30px; */
+    margin-bottom: -30px; */
             display: flex;
             justify-content: center;
-            width: 90%;
-            /* position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 30px;
-        margin-top: 0px; 
-        margin-bottom: 0px;*/
+            width: 100px;
+
+            /*İkinci bölümde zamanlayıcının yerini degiştirmek*/
+            position: absolute;
+            top: -30px;
+            /* Elemanı yatayda ortalamak için */
+            left: 50%;
+            transform: translateX(-50%);
         }
+
 
         #quiz-header {
             height: 0px;
@@ -1828,14 +1921,7 @@
         }
 
 
-        #countdown {
-            /*İkinci bölümde zamanlayıcının yerini degiştirmek*/
-            position: absolute;
-            top: -30px;
-            /* Üstten 50px boşluk bırak */
-            left: 10px;
-            /* Soldan 50px boşluk bırak */
-        }
+
 
 
 
@@ -1906,18 +1992,9 @@
     <div class="coordinateDisplay">X: 0, Y: 0</div>
 
 
-    <!-- /////////////////////////////////////////////////////////////////////////////////////////////// -->
-     <!-- /////////////////////////////////////////////////////////////////////////////////////////////// -->
-      <!-- /////////////////////////////////////////////////////////////////////////////////////////////// -->
-       <!-- /////////////////////////////////////////////////////////////////////////////////////////////// -->
 
     <!-- SECTION-1 ve teste başla düğmeleri -->
-    <button id="quizButton1" onclick="showMessage()">QUIZ-2</button>
-
-    <!-- /////////////////////////////////////////////////////////////////////////////////////////////// -->
-     <!-- /////////////////////////////////////////////////////////////////////////////////////////////// -->
-      <!-- /////////////////////////////////////////////////////////////////////////////////////////////// -->
-       <!-- /////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <button id="quizButton1" onclick="showMessage()">QUIZ-1</button>
 
     <!-- Mesaj alanı -->
     <div id="messageArea">
@@ -2254,7 +2331,7 @@
             }
 
             // Yeni işlevselliği buraya ekleyin
-            const completedTestNumber = 2; // TEST2 tamamlandı
+            const completedTestNumber = 1; // TEST1 tamamlandı
 
             // Frontend'e mesaj gönderme işlemi
             const wixOrigin = 'https://www.examtheorie.nl';
@@ -5089,51 +5166,44 @@
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        // Mesaj dinleyicisi
+        window.addEventListener("message", function (event) {
+            // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
+            if (event.origin !== "https://www.examtheorie.nl") return;
 
-       // Mesaj dinleyicisi
-window.addEventListener("message", function (event) {
-    // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
-    if (event.origin !== "https://www.examtheorie.nl") return;
+            const message = event.data;
+            console.log("Iframe'e mesaj alındı:", message);
 
-    const message = event.data;
-    console.log("Iframe'e mesaj alındı:", message);
+            // Mesaj bir nesne ise ve action özelliği "updateButtons" ise
+            if (typeof message === "object" && message.action === "updateButtons") {
+                const progress = message.progress; // Tamamlanan testlerin listesi
+                console.log("Progress bilgileri alındı:", progress);
 
-    // Mesaj bir nesne ise ve action özelliği "updateButtons" ise
-    if (typeof message === "object" && message.action === "updateButtons") {
-        const progress = message.progress; // Tamamlanan testlerin listesi
-        console.log("Progress bilgileri alındı:", progress);
+                // QUIZ-1 butonunu kontrol et ve güncelle
+                updateQuiz1Button(progress);
+            }
+        });
 
-        // QUIZ-2 butonunu kontrol et ve güncelle
-        updateQuiz1Button(progress);
-    }
-});
+        // QUIZ-1 butonunu güncelleme fonksiyonu
+        function updateQuiz1Button(progress) {
+            // QUIZ-1 butonunu seç
+            const quiz1Button = document.getElementById("quizButton1");
 
-// QUIZ-2 butonunu güncelleme fonksiyonu
-function updateQuiz1Button(progress) {
-    // QUIZ-2 butonunu seç
-    const quiz1Button = document.getElementById("quizButton1");
-
-    if (quiz1Button) {
-        // Eğer progress dizisinde 2 varsa, butonu devre dışı bırak
-        if (progress.includes(2)) {
-            quiz1Button.disabled = true;
-            quiz1Button.textContent = "QUIZ-2 (Tamamlandı)";
-            quiz1Button.classList.add("deactivated");
-        } else {
-            // Eğer progress dizisinde 2 yoksa, butonu aktif bırak
-            quiz1Button.disabled = false;
-            quiz1Button.textContent = "QUIZ-2";
-            quiz1Button.classList.remove("deactivated");
+            if (quiz1Button) {
+                // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
+                if (progress.includes(1)) {
+                    quiz1Button.disabled = true;
+                    quiz1Button.textContent = "QUIZ-1 (Tamamlandı)";
+                    quiz1Button.classList.add("deactivated");
+                } else {
+                    // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
+                    quiz1Button.disabled = false;
+                    quiz1Button.textContent = "QUIZ-1";
+                    quiz1Button.classList.remove("deactivated");
+                }
+            }
         }
-    }
-}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
