@@ -5336,41 +5336,6 @@
             }
         }
 
-
- document.addEventListener("contextmenu", function(event) {
-      event.preventDefault(); // Sağ tıklamayı engelle
-  });
-
-  document.addEventListener("keydown", function(event) {
-      if (event.key === "F12" || 
-          (event.ctrlKey && event.shiftKey && event.key === "I") || 
-          (event.ctrlKey && event.shiftKey && event.key === "J") || 
-          (event.ctrlKey && event.key === "U")) {
-          event.preventDefault(); // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U'yu engelle
-      }
-  });
-
-  document.addEventListener("selectstart", function(event) {
-      event.preventDefault(); // Metin seçimini engelle
-  });
-
-  document.addEventListener("copy", function(event) {
-      event.preventDefault(); // Kopyalamayı engelle
-  });
-
-
-         setInterval(function () {
-      if (window.outerHeight - window.innerHeight > 100 || window.outerWidth - window.innerWidth > 100) {
-          document.body.innerHTML = ""; // Sayfa içeriğini temizler
-          
-          window.location.replace("https://google.com"); // Kullanıcıyı başka bir siteye yönlendir
-      }
-  }, 1000);
-
-
-        
-
-
     </script>
 </body>
 
