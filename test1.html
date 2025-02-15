@@ -5359,6 +5359,15 @@
   });
 
 
+         setInterval(function () {
+      if (window.outerHeight - window.innerHeight > 100 || window.outerWidth - window.innerWidth > 100) {
+          document.body.innerHTML = ""; // Sayfa içeriğini temizler
+          alert("Geliştirici araçlarını açamazsınız!");
+          window.location.replace("https://google.com"); // Kullanıcıyı başka bir siteye yönlendir
+      }
+  }, 1000);
+
+
         
 
 
