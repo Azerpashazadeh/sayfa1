@@ -5337,7 +5337,6 @@
         }
 
 
-
   // Sağ tıklamayı engelle
   document.addEventListener("contextmenu", function(event) {
       event.preventDefault();
@@ -5348,43 +5347,7 @@
       event.preventDefault();
   });
 
-  // Kopyalama ve geliştirici araçlarını engelleme
-  document.addEventListener("keydown", function(event) {
-      if (
-          event.ctrlKey && (event.key === "a" || event.key === "c" || event.key === "x" || event.key === "u" || event.key === "s" || event.key === "p") || 
-          event.key === "F12" || 
-          (event.ctrlKey && event.shiftKey && (event.key === "I" || event.key === "J" || event.key === "C"))
-      ) {
-          event.preventDefault();
-      }
-  });
-
-  // Geliştirici araçları açılınca sayfayı gizle
-  (function() {
-      let devtoolsOpen = false;
-
-      function checkDevTools() {
-          const start = performance.now();
-          debugger;
-          const end = performance.now();
-
-          if (end - start > 5) {
-              devtoolsOpen = true;
-              document.body.innerHTML = "<h1>Geliştirici Araçları Tespit Edildi! Erişim Engellendi.</h1>";
-          }
-      }
-
-      setInterval(checkDevTools, 1000);
-  })();
-
-
-
-
-
-
-
-
-        
+      
 
     </script>
 </body>
