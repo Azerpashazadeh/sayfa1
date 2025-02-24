@@ -20,7 +20,133 @@
             /* İçerik merkezi hizalanır */
             margin: 0;
             padding: 0;
+
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        #quizButton1 {
+            top: 120px;
+            /* Butonun üst kenardan mesafesi */
+            left: 50%;
+            transform: translateX(-50%);
+            position: absolute;
+            padding: 10px 40px;
+            display: inline-block;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            cursor: pointer;
+            font: 16px/24px Arial, sans-serif;
+            background-color: #4973ff;
+            border: none;
+            /* Butonun varsayılan kenarlığını kaldırır */
+            color: #fff;
+            /* Metin rengi */
+            letter-spacing: 3px;
+            /* Metin harfleri arası boşluk */
+            transition:
+                box-shadow 0.4s ease,
+                background-color 0.4s ease,
+                color 0.4s ease;
+            box-shadow:
+                0 0 2px 0 rgba(73, 115, 255, .1),
+                0 0 4px 0 rgba(73, 115, 255, .2),
+                0 0 6px 0 rgba(73, 115, 255, .3),
+                0 0 8px 0 rgba(73, 115, 255, .4),
+                0 0 12px 0 rgba(73, 115, 255, .5),
+                0 0 18px 0 rgba(73, 115, 255, .6);
+        }
+
+        #quizButton1:hover {
+            background-color: #ea3c;
+            box-shadow:
+                0 0 2px 0 rgba(238, 170, 51, 0.1),
+                0 0 4px 0 rgba(238, 170, 51, 0.2),
+                0 0 6px 0 rgba(238, 170, 51, 0.3),
+                0 0 8px 0 rgba(238, 170, 51, 0.4),
+                0 0 12px 0 rgba(238, 170, 51, 0.5),
+                0 0 18px 0 rgba(238, 170, 51, 0.6),
+                0 0 4px 0 rgba(238, 170, 51, 0.7);
+        }
+
+        /* Dalga efekti için pseudo-elementler */
+        #quizButton1::before,
+        #quizButton1::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            width: 200%;
+            height: 200%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -75%);
+            background-color: rgba(20, 20, 20, 0.2);
+            border-radius: 46%;
+            animation: animate 5s linear infinite;
+        }
+
+        #quizButton1::after {
+            background-color: rgba(20, 20, 20, 0.5);
+            animation: animate 10s linear infinite;
+        }
+
+        @keyframes animate {
+            0% {
+                transform:
+                    translate(-50%, -75%) rotate(0deg);
+            }
+
+            100% {
+                transform:
+                    translate(-50%, -75%) rotate(360deg);
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            /* İçeriğe tıklamayı engellemez */
+            box-shadow:
+                inset 0 50px 0 0 blue,
+                /* Üst kenar için 50px kalınlık */
+                inset 0 -60px 0 0 blue,
+                /* Alt kenar için 60px kalınlık */
+                inset 10px 0 0 0 blue,
+                /* Sol kenar için 10px kalınlık */
+                inset -10px 0 0 0 blue;
+            /* Sağ kenar için 10px kalınlık */
+            z-index: 1;
+            /* Diğer içeriklerin altında görünmesini sağlar */
+        }
+
+        /* Mobil cihazlar için stil tanımlamaları */
+        @media (max-width: 768px) {
+            .overlay {
+                box-shadow:
+                    inset 0 50px 0 0 blue,
+                    /* Mobilde üst kenar için 20px kalınlık */
+                    inset 0 -145px 0 0 blue,
+                    /* Mobilde alt kenar için 30px kalınlık */
+                    inset 5px 0 0 0 blue,
+                    /* Mobilde sol kenar için 5px kalınlık */
+                    inset -5px 0 0 0 blue;
+                /* Mobilde sağ kenar için 5px kalınlık */
+            }
+        }
+
 
         .coordinateDisplay {
             position: fixed;
@@ -105,19 +231,6 @@
         .questionContainer {
             outline: 5px solid purple;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         h4,
@@ -727,7 +840,8 @@
             /* Yatayda ortalamak için */
         }
 
-        #startSection3Button {
+        #startSection3Button,
+        #proceedToResultDivBtn {
             width: 80%;
             height: 40px;
             background-color: #007bff;
@@ -888,10 +1002,16 @@
 
         .viewResultContainer {
             display: flex;
-            justify-content: center;
             flex-direction: column;
-            gap: 10px;
+            align-items: center;
+            /* Yatayda ortalama */
+            text-align: center;
+            /* Metinleri de ortalar */
+            width: 100%;
+            /* Konteynerin genişliği */
         }
+
+
 
 
         /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -1762,7 +1882,7 @@
             color: black;
         }
 
-        .drag-drop-container {            
+        .drag-drop-container {
             position: relative;
             width: 100%;
             height: auto;
@@ -2025,6 +2145,7 @@
             transform: translateX(-50%);
             /* Yatayda tam ortalamak için */
             margin-bottom: 0px;
+            z-index: 1;
         }
 
         #quiz-header {
@@ -2122,12 +2243,15 @@
 </head>
 
 <body>
+
+    <div class="overlay"></div>
+    <!-- Diğer içerikler burada -->
     <div class="coordinateDisplay">X: 0, Y: 0</div>
 
 
 
     <!-- SECTION-1 ve teste başla düğmeleri -->
-    <button id="quizButton1" onclick="showMessage()">QUIZ-1</button>
+    <button id="quizButton1" onclick="startSection3Questions()">QUIZ-1</button>
 
     <!-- Mesaj alanı -->
     <div id="messageArea">
@@ -2308,12 +2432,23 @@
     </div>
 
     <div id="proceedSection3End" class="center-button hidden" style="flex-direction: column; gap: 10px;">
-        <h2>End Section 3</h2>
+        <div class="button-container">
+            <h2>Final Stage of the Exam</h2>
+        </div>
         <p id="answeredQuestionsS3End"></p>
         <p id="unAnsweredQuestionsS3End"></p>
         <div id="endMessage3-S3" style="display: flex; flex-wrap: wrap;"></div>
-        <button id="proceedToResultDivBtn" onclick="proceedToResultDiv()">PROCEED</button>
+        <div class="button-container">
+            <button id="proceedToResultDivBtn" onclick="proceedToResultDiv()">PROCEED</button>
+        </div>
     </div>
+
+
+
+
+
+
+
 
     <div id="myModal" class="modal">
         <div class="modal-content">
@@ -2349,15 +2484,12 @@
 
     <div id="finalResultContainerId" class="viewResultContainer hidden">
         <h2>REVIEW ANSWERS</h2>
-        <p>Below you find the result of each section, By selecting a box you get an extensive motivation.</p>
+        <p>Below you can find the results of the exam. You can click on a square to go to the relevant question and
+            review your results.</p>
         <hr />
-        <div id="resultS1"></div>
-        <div id="resultS2">
-            <h2>Section 2</h2>
-            <img id="failOrPassEndS2" alt="failOrPassEnd" style="height: 50px" src="" />
-        </div>
+
         <div id="resultS3">
-            <h2>Section 3</h2>
+            <h2>Check Your Answers</h2>
             <img id="failOrPassEndS3" alt="failOrPassEnd" style="height: 50px" src="" />
         </div>
     </div>
@@ -4038,13 +4170,13 @@
 
 
         function startSection3Questions() {
-
-            document.getElementById("myModal").style.display = "block";
             // 3. bölüm başlatılıyor (quiz başlasın)
             console.log("3. bölüm başladı!");  // Bu kısmı kendi quiz başlatma fonksiyonlarınızla değiştirebilirsiniz.
 
             // startMessage'ı gizle
-            document.getElementById("startMessage").style.display = "none";
+            document.getElementById("startMessage").style.display = "block";
+
+            document.getElementById("quizButton1").style.display = "none";
 
             // START 3 SECTION düğmesini gizle
             document.getElementById("startSection3Button").style.display = "block";
@@ -4132,7 +4264,7 @@
                 let scoredMarks = correctAnswerS1 + calculateS2Correct.length + calculateS3Correct.length;
                 document.getElementById('endResult').textContent = scoredMarks;
 
-                if (correctAnswerS1 >= 13 && calculateS2Correct.length >= 10 && calculateS3Correct.length >= 25) {
+                if (calculateS3Correct.length >= 10) {
                     document.getElementById('failOrPass').textContent = 'Successfully Passed';
                     document.getElementById('failOrPassIcon').src = 'https://static.wixstatic.com/media/4b688f_12a1098a791f44f88cd7265a0517b851~mv2.png';
                 } else {
@@ -4149,8 +4281,6 @@
 
         function finalResultShow() {
             viewResult = true;
-            lockQuizQuestions();
-            lockQuizQuestionsS2();
             lockQuizQuestionsS3();
 
             // Sonucu gösterme işlemi
@@ -4158,23 +4288,10 @@
             document.getElementById('finalResultContainerId').classList.remove('hidden');
 
 
-            if (correctAnswerS1 >= 13) {
-                document.getElementById('failOrPassEndS1').src = "https://static.wixstatic.com/media/4b688f_12a1098a791f44f88cd7265a0517b851~mv2.png";
-            } else {
-                document.getElementById('failOrPassEndS1').src = "https://static.wixstatic.com/media/4b688f_149ee4392b034dac89b73aef8268aef9~mv2.png";
-            }
-
-            let calculateS2Correct = correctAnswerS2.questions.filter(x => x.isCorrect === true);
-
-            if (calculateS2Correct.length >= 10) {
-                document.getElementById('failOrPassEndS2').src = "https://static.wixstatic.com/media/4b688f_12a1098a791f44f88cd7265a0517b851~mv2.png";
-            } else {
-                document.getElementById('failOrPassEndS2').src = "https://static.wixstatic.com/media/4b688f_149ee4392b034dac89b73aef8268aef9~mv2.png";
-            }
 
             let calculateS3Correct = correctAnswerS3.questions.filter(x => x.isCorrect === true);
 
-            if (calculateS3Correct.length >= 25) {
+            if (calculateS3Correct.length >= 10) {
                 document.getElementById('failOrPassEndS3').src = "https://static.wixstatic.com/media/4b688f_12a1098a791f44f88cd7265a0517b851~mv2.png";
             } else {
                 document.getElementById('failOrPassEndS3').src = "https://static.wixstatic.com/media/4b688f_149ee4392b034dac89b73aef8268aef9~mv2.png";
@@ -5337,17 +5454,18 @@
         }
 
 
-  // Sağ tıklamayı engelle
-  document.addEventListener("contextmenu", function(event) {
-      event.preventDefault();
-  });
+        // Sağ tıklamayı engelle
+        document.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+        });
 
-  // Metin seçmeyi engelle
-  document.addEventListener("selectstart", function(event) {
-      event.preventDefault();
-  });
+        // Metin seçmeyi engelle
+        document.addEventListener("selectstart", function (event) {
+            event.preventDefault();
+        });
 
-      
+
+
 
     </script>
 </body>
