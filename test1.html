@@ -23,6 +23,8 @@
 
         }
 
+
+
         * {
             margin: 0;
             padding: 0;
@@ -66,17 +68,6 @@
                 0 0 18px 0 rgba(73, 115, 255, .6);
         }
 
-        #quizButton1:hover {
-            background-color: #ea3c;
-            box-shadow:
-                0 0 2px 0 rgba(238, 170, 51, 0.1),
-                0 0 4px 0 rgba(238, 170, 51, 0.2),
-                0 0 6px 0 rgba(238, 170, 51, 0.3),
-                0 0 8px 0 rgba(238, 170, 51, 0.4),
-                0 0 12px 0 rgba(238, 170, 51, 0.5),
-                0 0 18px 0 rgba(238, 170, 51, 0.6),
-                0 0 4px 0 rgba(238, 170, 51, 0.7);
-        }
 
         /* Dalga efekti için pseudo-elementler */
         #quizButton1::before,
@@ -120,13 +111,13 @@
             pointer-events: none;
             /* İçeriğe tıklamayı engellemez */
             box-shadow:
-                inset 0 50px 0 0 blue,
+                inset 0 50px 0 0 rgb(16, 16, 194),
                 /* Üst kenar için 50px kalınlık */
-                inset 0 -60px 0 0 blue,
+                inset 0 -60px 0 0 rgb(16, 16, 194),
                 /* Alt kenar için 60px kalınlık */
-                inset 10px 0 0 0 blue,
+                inset 50px 0 0 0 rgb(16, 16, 194),
                 /* Sol kenar için 10px kalınlık */
-                inset -10px 0 0 0 blue;
+                inset -50px 0 0 0 rgb(16, 16, 194);
             /* Sağ kenar için 10px kalınlık */
             z-index: 1;
             /* Diğer içeriklerin altında görünmesini sağlar */
@@ -136,14 +127,41 @@
         @media (max-width: 768px) {
             .overlay {
                 box-shadow:
-                    inset 0 50px 0 0 blue,
+                    inset 0 50px 0 0 rgb(16, 16, 194),
                     /* Mobilde üst kenar için 20px kalınlık */
-                    inset 0 -145px 0 0 blue,
+                    inset 0 -145px 0 0 rgb(16, 16, 194),
                     /* Mobilde alt kenar için 30px kalınlık */
-                    inset 5px 0 0 0 blue,
+                    inset 5px 0 0 0 rgb(16, 16, 194),
                     /* Mobilde sol kenar için 5px kalınlık */
-                    inset -5px 0 0 0 blue;
+                    inset -5px 0 0 0 rgb(16, 16, 194);
                 /* Mobilde sağ kenar için 5px kalınlık */
+            }
+        }
+
+
+        .overlay-thin-top {
+            box-shadow:
+                inset 0 10px 0 0 rgb(16, 16, 194),
+                /* Üst kenar 5px */
+                inset 0 -60px 0 0 rgb(16, 16, 194),
+                /* Alt kenar */
+                inset 50px 0 0 0 rgb(16, 16, 194),
+                /* Sol kenar */
+                inset -50px 0 0 0 rgb(16, 16, 194);
+            /* Sağ kenar */
+        }
+
+        @media (max-width: 768px) {
+            .overlay-thin-top {
+                box-shadow:
+                    inset 0 10px 0 0 rgb(16, 16, 194),
+                    /* Üst kenar 5px */
+                    inset 0 -145px 0 0 rgb(16, 16, 194),
+                    /* Alt kenar */
+                    inset 5px 0 0 0 rgb(16, 16, 194),
+                    /* Sol kenar */
+                    inset -5px 0 0 0 rgb(16, 16, 194);
+                /* Sağ kenar */
             }
         }
 
@@ -215,9 +233,8 @@
 
         }
 
-        #soruBasligi {
-            outline: 1px solid rgb(204, 117, 233);
-        }
+
+
 
 
 
@@ -343,14 +360,10 @@
             }
 
 
-            #soruBasligi {
-                font-size: 14px;
+            #soruNumarasiS3 {
+                font-size: 18px;
                 color: #fefefe;
                 /* QUESTION 1 OF 25 yazısının boyutu */
-
-
-                /* Yatayda ortalar */
-
             }
 
             #cevaplar {
@@ -426,8 +439,9 @@
                 /* Kenarlara boşluk bırakmak için */
             }
 
-            #soruBasligi {
-                font-size: 14px;
+            #soruNumarasiS3 {
+                font-size: 18px;
+                color: #fefefe;
                 /* QUESTION 1 OF 25 yazısının boyutu */
                 display: flex;
                 justify-content: center;
@@ -891,11 +905,62 @@
             /* İstediğiniz değeri buraya ekleyin */
         }
 
+        #startMessage p,
+        #startMessage h4 {
+            margin-left: 70px;
+            margin-right: 70px;
+        }
+
+        #startMessage .start-insight {
+            margin-left: 70px;
+            margin-right: 70px;
+        }
+
+        /* Mobil versiyon için (maksimum 768px genişlikte) */
+        @media (max-width: 768px) {
+
+            #startMessage p,
+            #startMessage h4 {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+
+            #startMessage .start-insight {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+        }
+
+
+
         .button-container {
             display: flex;
             justify-content: center;
             /* Yatayda ortalamak için */
         }
+
+
+
+
+        .flex-grow {
+            flex-grow: 1;
+            /* h2 elementinin mevcut alanı kaplamasını sağlar */
+            text-align: center;
+            /* Metni ortalar */
+        }
+
+        #button-container button {
+            flex-shrink: 0;
+            /* Butonların boyutunun küçülmesini engeller */
+            padding: 10px 20px;
+            /* Butonların iç boşluğu */
+        }
+
+
+
+
+
+
 
         #endMessage {
             display: flex;
@@ -1368,7 +1433,27 @@
         }
 
         #finalResultContainerId {
+            margin-top: 100px;
             padding-bottom: 200px;
+            margin-left: 80px;
+            margin-right: 80px;
+        }
+
+        #finalResultContainerId h2 {
+            margin-bottom: 20px;
+            /* h2 ile p arasında 20px boşluk bırakır */
+            text-align: center;
+
+        }
+
+        #finalResultContainerId p {
+            font-size: 18px;
+
+            margin-left: 20px;
+            /* Sol kenardan 20px boşluk */
+            margin-right: 20px;
+            /* Sağ kenardan 20px boşluk */
+            margin-bottom: 30px;
         }
 
 
@@ -1422,11 +1507,26 @@
         }
 
         .questionS3 p {
+            font-size: 17px;
+            /* Yazı boyutu */
+            font-weight: bold;
+            /* Kalın yazı */
             margin-bottom: 11px;
             margin-top: 10px;
-            padding-right: 25px;
-            padding-left: 5px;
+            padding: 8px 25px 8px 5px;
+            /* Üst-alt ve yan boşluklar */
+            background-color: rgba(200, 200, 200, 0.3);
+            /* Hafif gri arka plan */
+            border-radius: 5px;
+            /* Köşeleri hafif yuvarlatma */
+            display: inline-block;
+            /* Metin uzunluğuna göre esnek genişlik */
+            max-width: 100%;
+            /* Genişliğin çok büyümemesi için */
+            word-wrap: break-word;
+            /* Uzun kelimeleri kır */
         }
+
 
         .questionS3 .question-image {
             width: 100%;
@@ -1547,19 +1647,7 @@
             margin-right: 10px;
         }
 
-        #previous-button-s3,
-        #next-button-s3 {
-            position: absolute;
-            width: 22vw;
-            height: 6vh;
-            z-index: 999;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-            line-height: 6vh;
-        }
+
 
         .cevapSecenegi-s3 {
             display: block;
@@ -1682,14 +1770,58 @@
             }
 
 
-            #previous-button-s3 {
+            #button-container {
+                position: fixed;
+                /* Konteyneri sabitle */
                 bottom: 1%;
+                /* Sayfanın altından 11% yukarıda */
                 left: 1%;
+                /* Sol kenardan 1% boşluk bırak */
+                right: 1%;
+                /* Sağ kenardan 1% boşluk bırak */
+                display: flex;
+                align-items: center;
+                /* Dikeyde ortala */
+                justify-content: space-between;
+                /* Butonlar ve h2 arasında eşit boşluk bırak */
+                gap: 10px;
+                /* Öğeler arasında boşluk */
+                width: 98%;
+                /* Konteynerin genişliği (100% - 1% sol - 1% sağ) */
+                padding: 0px;
+                /* İç boşluk */
+                z-index: 1000;
+                /* Diğer içeriklerin üzerinde olması için */
             }
 
+            .flex-grow {
+                flex-grow: 1;
+                /* Mevcut alanı kaplar */
+                text-align: center;
+                /* Metni ortalar */
+                min-width: 100px;
+                /* Minimum genişlik (isteğe bağlı) */
+            }
+
+            #previous-button-s3,
             #next-button-s3 {
-                bottom: 1%;
-                right: 1%;
+                position: static;
+                /* fixed yerine static yapın */
+                width: 20%;
+                height: 6vh;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                z-index: 1000;
+
+                /* Metni yatayda ve dikeyde ortala */
+                display: flex;
+                justify-content: center;
+                /* Yatayda ortala */
+                align-items: center;
+                /* Dikeyde ortala */
             }
 
             .questionS3.no-image {
@@ -1773,29 +1905,59 @@
                 /* Metni sola hizalar */
             }
 
+            #button-container {
+                position: fixed;
+                /* Konteyneri sabitle */
+                bottom: 11%;
+                /* Sayfanın altından 11% yukarıda */
+                left: 1%;
+                /* Sol kenardan 1% boşluk bırak */
+                right: 1%;
+                /* Sağ kenardan 1% boşluk bırak */
+                display: flex;
+                align-items: center;
+                /* Dikeyde ortala */
+                justify-content: space-between;
+                /* Butonlar ve h2 arasında eşit boşluk bırak */
+                gap: 10px;
+                /* Öğeler arasında boşluk */
+                width: 98%;
+                /* Konteynerin genişliği (100% - 1% sol - 1% sağ) */
+                padding: 0px;
+                /* İç boşluk */
+                z-index: 1000;
+                /* Diğer içeriklerin üzerinde olması için */
+            }
+
+            .flex-grow {
+                flex-grow: 1;
+                /* Mevcut alanı kaplar */
+                text-align: center;
+                /* Metni ortalar */
+                min-width: 100px;
+                /* Minimum genişlik (isteğe bağlı) */
+            }
+
             #previous-button-s3,
             #next-button-s3 {
-                position: fixed;
+                position: static;
+                /* fixed yerine static yapın */
                 width: 20%;
                 height: 6vh;
                 background-color: #007bff;
                 color: white;
                 border: none;
                 border-radius: 8px;
-                text-align: center;
-                line-height: 5vh;
                 cursor: pointer;
                 z-index: 1000;
-            }
 
-            #previous-button-s3 {
-                left: 1%;
-                bottom: 11%;
-            }
+                /* Metni yatayda ve dikeyde ortala */
+                display: flex;
+                justify-content: center;
+                /* Yatayda ortala */
+                align-items: center;
+                /* Dikeyde ortala */
 
-            #next-button-s3 {
-                right: 1%;
-                bottom: 11%;
             }
 
             #grayRectangle {
@@ -2139,7 +2301,7 @@
 
 
         #app-s3 {
-            position: absolute;
+            position: fixed;
             margin-top: -35px;
             left: 50%;
             transform: translateX(-50%);
@@ -2239,6 +2401,39 @@
         .base-timer__path-remaining_S3.red {
             color: red;
         }
+
+
+
+        #endMessage3-S3 {
+            margin-left: 80px;
+            margin-right: 80px;
+        }
+
+        #proceedSection3End {
+            margin-top: 120px;
+        }
+
+        #proceedSection3End p {
+            margin-left: 80px;
+            margin-right: 80px;
+        }
+
+        #viewResultContainerId {
+            margin-top: 120px;
+        }
+
+        #viewResultContainerId p,
+        h2,
+        h3 {
+            margin-bottom: 15px;
+            font-size: 22px;
+            margin-top: 15px;
+        }
+
+        #failOrPassEndS3 {
+            display: block;
+            margin: 0 auto;
+        }
     </style>
 </head>
 
@@ -2324,6 +2519,7 @@
                 <button id="previousButton" class="navigateButton hidden" onclick="prevQuestion()">
                     Previous
                 </button>
+                <!--Bu kismi kapatiyorum ki Sorubashligi-->
                 <div class="flex-grow">
                     <h2 id="soruBasligi"></h2>
                 </div>
@@ -2414,6 +2610,7 @@
 
 
 
+
     <!-- Section 3 -->
     <!-- <div id="quiz-header"></div> -->
 
@@ -2422,13 +2619,11 @@
     <!-- Zamanlayıcı başlangıçta gizli -->
     <div class="quiz-container-s3"></div>
     <div id="button-container">
-        <!-- <button id="start-button-s3" onclick="startQuizS3()">Section-3</button> -->
-        <button id="previous-button-s3" class="hidden" onclick="previousQuestionS3()">
-            Previous
-        </button>
-        <button id="next-button-s3" class="hidden" onclick="nextQuestionS3()">
-            Next
-        </button>
+        <button id="previous-button-s3" class="hidden" onclick="previousQuestionS3()">Previous</button>
+        <div class="flex-grow">
+            <h2 id="soruNumarasiS3"></h2> <!-- Yeni ID: soruNumarasiS3 -->
+        </div>
+        <button id="next-button-s3" class="hidden" onclick="nextQuestionS3()">Next</button>
     </div>
 
     <div id="proceedSection3End" class="center-button hidden" style="flex-direction: column; gap: 10px;">
@@ -2482,12 +2677,10 @@
     </div>
 
 
-    <div id="finalResultContainerId" class="viewResultContainer hidden">
+    <div id="finalResultContainerId" class="finalResultContainer hidden">
         <h2>REVIEW ANSWERS</h2>
         <p>Below you can find the results of the exam. You can click on a square to go to the relevant question and
             review your results.</p>
-        <hr />
-
         <div id="resultS3">
             <h2>Check Your Answers</h2>
             <img id="failOrPassEndS3" alt="failOrPassEnd" style="height: 50px" src="" />
@@ -4314,6 +4507,7 @@
 
         function updatePreviousButtonS3() {
             const previousButton = document.getElementById("previous-button-s3");
+            // İlk soruda "Previous" butonunu gizle
             previousButton.classList.toggle("hidden", currentQuestionIndexS3 === 0);
         }
 
@@ -4322,13 +4516,36 @@
             nextButton.classList.remove("hidden");
         }
 
+
         function showCurrentQuestionS3() {
+            // Proceed bölümünü gizle
             document.getElementById('proceedSection3End').classList.add('hidden');
-            const questions = document.querySelectorAll(".questionS3");
-            questions.forEach((question, index) => {
+
+            // Soru numarasını güncelle
+            const soruNumarasiS3 = document.getElementById("soruNumarasiS3");
+            if (soruNumarasiS3) {
+                soruNumarasiS3.innerText = `QUESTION ${currentQuestionIndexS3 + 1} OF ${allQuestionsS3.length}`;
+            } else {
+                console.error("soruNumarasiS3 elementi bulunamadı!"); // Hata kontrolü
+            }
+
+            // Soruları göster/gizle
+            document.querySelectorAll(".questionS3").forEach((question, index) => {
                 question.classList.toggle("hidden", index !== currentQuestionIndexS3);
             });
+
+            // Butonları güncelle
+            updatePreviousButtonS3();
+            updateNextButtonS3();
         }
+
+
+
+
+
+
+
+
 
         function previousQuestionS3() {
             if (currentQuestionIndexS3 > 0) {
@@ -4337,14 +4554,15 @@
                 updatePreviousButtonS3();
                 updateNextButtonS3();
                 checkAnswersAndUpdateBlocks();
+
             }
         }
 
         // Next düğmesine tıklama işlevi
         function nextQuestionS3() {
-            const totalQuestions = document.querySelectorAll(".questionS3").length;
-            if (currentQuestionIndexS3 < totalQuestions - 1) {
-                currentQuestionIndexS3++;
+            const totalQuestions = allQuestionsS3.length; // Toplam soru sayısı
+            if (currentQuestionIndexS3 < allQuestionsS3.length - 1) {
+                currentQuestionIndexS3++; // Sonraki soruya geç
                 showCurrentQuestionS3();
                 updatePreviousButtonS3();
                 updateNextButtonS3();
@@ -4422,6 +4640,8 @@
                             // Quiz container'ını göster
                             quizContainer.classList.remove("hidden");
 
+                            document.getElementById("soruNumarasiS3").classList.remove("hidden");
+
                             // endMessage öğesini gizle
                             // endMessage3.classList.add("hidden");
                             endMessage4.classList.add("hidden");
@@ -4460,6 +4680,7 @@
 
                             // Quiz container'ını göster
                             quizContainer.classList.remove("hidden");
+                            document.getElementById("soruNumarasiS3").classList.remove("hidden");
 
                             // endMessage öğesini gizle
                             // endMessage3.classList.add("hidden");
@@ -4469,7 +4690,12 @@
 
                 document.getElementById("previous-button-s3").classList.add("hidden");
                 document.getElementById("next-button-s3").classList.add("hidden");
+
+                // <div class="flex-grow"> içindeki <h2 id="soruNumarasiS3"> başlığını gizle
+                document.getElementById("soruNumarasiS3").classList.add("hidden");
+
                 quizContainer.classList.add("hidden");
+
                 const body = document.querySelector("body");
                 // body.appendChild(endMessage3);
 
@@ -4683,6 +4909,8 @@
                 ...t4Questions,
                 ...t5Questions,
             ].sort(() => Math.random() - 0.5);
+
+            console.log("Toplam soru sayısı:", allQuestionsS3.length); // Test amaçlı
 
             // Soruların doğru cevaplarını ve kullanıcı cevaplarını belirleyin
             quizAnswersS3 = allQuestionsS3.map((question, index) => ({
@@ -5375,6 +5603,11 @@
             soruAlanlari.forEach((soruAlani) => {
                 soruAlani.style.top = "0px";
             });
+
+            const overlay = document.querySelector(".overlay");
+            if (overlay) {
+                overlay.classList.add("overlay-thin-top");
+            }
         }
 
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
