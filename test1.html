@@ -128,15 +128,17 @@
             .overlay {
                 box-shadow:
                     inset 0 50px 0 0 rgb(16, 16, 194),
-                    /* Mobilde üst kenar için 20px kalınlık */
-                    inset 0 -100px 0 0 rgb(16, 16, 194),
-                    /* Mobilde alt kenar için 30px kalınlık */
+                    /* Üst kenar */
                     inset 5px 0 0 0 rgb(16, 16, 194),
-                    /* Mobilde sol kenar için 5px kalınlık */
-                    inset -5px 0 0 0 rgb(16, 16, 194);
-                /* Mobilde sağ kenar için 5px kalınlık */
+                    /* Sol kenar */
+                    inset -5px 0 0 0 rgb(16, 16, 194),
+                    /* Sağ kenar */
+                    inset 0 calc(-11.75vh) 0 0 rgb(16, 16, 194);
+                /* Alt kenar */
             }
         }
+
+
 
 
         .overlay-thin-top {
@@ -1499,7 +1501,7 @@
             position: fixed;
             left: 50%;
             transform: translateX(-50%);
-            border: 3px solid red;
+            border: 1px solid red;
             border-radius: 1vw;
             overflow: hidden;
             text-align: left;
@@ -1865,8 +1867,11 @@
 
             .questionS3 p,
             .questionS3 .answers {
-                width: 100%;
+                width: 95%;
                 text-align: center;
+                align-self: center;
+                margin: 0 auto;
+                /* Yatayda ortala */
             }
 
             .questionS3 .answers {
@@ -1908,7 +1913,8 @@
             #button-container {
                 position: fixed;
                 /* Konteyneri sabitle */
-                bottom: 5.75%;
+                bottom: 0;
+
                 /* Sayfanın altından 11% yukarıda */
                 left: 1%;
                 /* Sol kenardan 1% boşluk bırak */
@@ -1941,12 +1947,13 @@
             #previous-button-s3,
             #next-button-s3 {
                 position: static;
-                /* fixed yerine static yapın */
                 width: 20%;
-                height: 6vh;
-                background-color: #007bff;
+                height: 11.75vh;
+                background-color: rgb(16, 16, 194);
                 color: white;
-                border: none;
+                font-size: 18px;
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                /* Hafif bir border ekleyelim */
                 border-radius: 8px;
                 cursor: pointer;
                 z-index: 1000;
@@ -1954,23 +1961,20 @@
                 /* Metni yatayda ve dikeyde ortala */
                 display: flex;
                 justify-content: center;
-                /* Yatayda ortala */
                 align-items: center;
-                /* Dikeyde ortala */
 
+                /* Kabarık görünüm için box-shadow ekleyelim */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2),
+                    /* Alt gölge */
+                    0 2px 4px rgba(0, 0, 0, 0.1);
+                /* Daha hafif üst gölge */
+
+                /* Butona tıklandığında kabarık etkisini azaltmak için */
+                transition: box-shadow 0.2s ease, transform 0.2s ease;
             }
 
-            #grayRectangle {
-                width: 100%;
-                height: calc(11% + 6vh);
-                background-color: black;
-                border: none;
-                display: block;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                z-index: 3;
-            }
+
+
 
             .show-rectangle {
                 display: block;
