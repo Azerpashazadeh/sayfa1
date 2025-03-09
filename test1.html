@@ -111,13 +111,13 @@
             pointer-events: none;
             /* İçeriğe tıklamayı engellemez */
             box-shadow:
-                inset 0 50px 0 0 rgb(16, 16, 194),
+                inset 0 50px 0 0 blue,
                 /* Üst kenar için 50px kalınlık */
-                inset 0 -60px 0 0 rgb(16, 16, 194),
+                inset 0 -60px 0 0 blue,
                 /* Alt kenar için 60px kalınlık */
-                inset 50px 0 0 0 rgb(16, 16, 194),
+                inset 50px 0 0 0 blue,
                 /* Sol kenar için 10px kalınlık */
-                inset -50px 0 0 0 rgb(16, 16, 194);
+                inset -50px 0 0 0 blue;
             /* Sağ kenar için 10px kalınlık */
             z-index: 1;
             /* Diğer içeriklerin altında görünmesini sağlar */
@@ -127,13 +127,13 @@
         @media (max-width: 768px) {
             .overlay {
                 box-shadow:
-                    inset 0 50px 0 0 rgb(16, 16, 194),
+                    inset 0 50px 0 0 blue,
                     /* Üst kenar */
-                    inset 5px 0 0 0 rgb(16, 16, 194),
+                    inset 5px 0 0 0 blue,
                     /* Sol kenar */
-                    inset -5px 0 0 0 rgb(16, 16, 194),
+                    inset -5px 0 0 0 blue,
                     /* Sağ kenar */
-                    inset 0 calc(-11.75vh) 0 0 rgb(16, 16, 194);
+                    inset 0 calc(-11.75vh) 0 0 blue;
                 /* Alt kenar */
             }
         }
@@ -143,26 +143,26 @@
 
         .overlay-thin-top {
             box-shadow:
-                inset 0 10px 0 0 rgb(16, 16, 194),
+                inset 0 10px 0 0 blue,
                 /* Üst kenar 5px */
-                inset 0 -60px 0 0 rgb(16, 16, 194),
+                inset 0 -60px 0 0 blue,
                 /* Alt kenar */
-                inset 50px 0 0 0 rgb(16, 16, 194),
+                inset 50px 0 0 0 blue,
                 /* Sol kenar */
-                inset -50px 0 0 0 rgb(16, 16, 194);
+                inset -50px 0 0 0 blue;
             /* Sağ kenar */
         }
 
         @media (max-width: 768px) {
             .overlay-thin-top {
                 box-shadow:
-                    inset 0 10px 0 0 rgb(16, 16, 194),
+                    inset 0 10px 0 0 blue,
                     /* Üst kenar 5px */
-                    inset 0 -145px 0 0 rgb(16, 16, 194),
+                    inset 0 -145px 0 0 blue,
                     /* Alt kenar */
-                    inset 5px 0 0 0 rgb(16, 16, 194),
+                    inset 5px 0 0 0 blue,
                     /* Sol kenar */
-                    inset -5px 0 0 0 rgb(16, 16, 194);
+                    inset -5px 0 0 0 blue;
                 /* Sağ kenar */
             }
         }
@@ -363,7 +363,7 @@
 
 
             #soruNumarasiS3 {
-                font-size: 16px;
+                font-size: 14px;
                 color: #fefefe;
                 /* QUESTION 1 OF 25 yazısının boyutu */
             }
@@ -1949,9 +1949,9 @@
                 position: static;
                 width: 20%;
                 height: 11.75vh;
-                background-color: rgb(16, 16, 194);
+                background-color: blue;
                 color: white;
-                font-size: 18px;
+                font-size: 16px;
                 border: 1px solid rgba(0, 0, 0, 0.2);
                 /* Hafif bir border ekleyelim */
                 border-radius: 8px;
@@ -2306,7 +2306,7 @@
 
         #app-s3 {
             position: fixed;
-            margin-top: -35px;
+            margin-top: -23px;
             left: 50%;
             transform: translateX(-50%);
             /* Yatayda tam ortalamak için */
