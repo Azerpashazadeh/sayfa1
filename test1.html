@@ -50,57 +50,15 @@
             font: 16px/24px Arial, sans-serif;
             background-color: #4973ff;
             border: none;
+            border-radius: 5px;
             /* Butonun varsayılan kenarlığını kaldırır */
             color: #fff;
             /* Metin rengi */
             letter-spacing: 3px;
             /* Metin harfleri arası boşluk */
-            transition:
-                box-shadow 0.4s ease,
-                background-color 0.4s ease,
-                color 0.4s ease;
-            box-shadow:
-                0 0 2px 0 rgba(73, 115, 255, .1),
-                0 0 4px 0 rgba(73, 115, 255, .2),
-                0 0 6px 0 rgba(73, 115, 255, .3),
-                0 0 8px 0 rgba(73, 115, 255, .4),
-                0 0 12px 0 rgba(73, 115, 255, .5),
-                0 0 18px 0 rgba(73, 115, 255, .6);
+
         }
 
-
-        /* Dalga efekti için pseudo-elementler */
-        #quizButton1::before,
-        #quizButton1::after {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            width: 200%;
-            height: 200%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -75%);
-            background-color: rgba(20, 20, 20, 0.2);
-            border-radius: 46%;
-            animation: animate 5s linear infinite;
-        }
-
-        #quizButton1::after {
-            background-color: rgba(20, 20, 20, 0.5);
-            animation: animate 10s linear infinite;
-        }
-
-        @keyframes animate {
-            0% {
-                transform:
-                    translate(-50%, -75%) rotate(0deg);
-            }
-
-            100% {
-                transform:
-                    translate(-50%, -75%) rotate(360deg);
-            }
-        }
 
         .overlay {
             position: fixed;
@@ -1432,31 +1390,13 @@
             .show-rectangle {
                 display: block;
             }
-        }
 
-        #finalResultContainerId {
-            margin-top: 100px;
-            padding-bottom: 200px;
-            margin-left: 80px;
-            margin-right: 80px;
-        }
 
-        #finalResultContainerId h2 {
-            margin-bottom: 20px;
-            /* h2 ile p arasında 20px boşluk bırakır */
-            text-align: center;
 
         }
 
-        #finalResultContainerId p {
-            font-size: 18px;
 
-            margin-left: 20px;
-            /* Sol kenardan 20px boşluk */
-            margin-right: 20px;
-            /* Sağ kenardan 20px boşluk */
-            margin-bottom: 30px;
-        }
+
 
 
 
@@ -1511,7 +1451,7 @@
         .questionS3 p {
             font-size: 17px;
             /* Yazı boyutu */
-            font-weight: bold;
+            font-weight: 500;
             /* Kalın yazı */
             margin-bottom: 11px;
             margin-top: 10px;
@@ -1881,6 +1821,11 @@
                 margin-top: 0;
             }
 
+            .questionS3 p {
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
             .questionS3 .question-image {
                 max-width: 100%;
             }
@@ -1994,7 +1939,45 @@
                 width: 12%;
                 height: 14.9%;
             }
+
+
         }
+
+        #finalResultContainerId {
+            width: 70%;
+            /* Masaüstünde ekranın %80'ini kapla */
+            max-width: 70%;
+            margin: 100px auto 0 auto;
+            /* Üstte 100px boşluk bırak, yatayda ortala */
+            padding-bottom: 200px;
+        }
+
+        #finalResultContainerId h2,
+        #finalResultContainerId p {
+            text-align: center;
+            /* İçerikleri ortala */
+        }
+
+        /* Mobil versiyon için özel ayarlar */
+        @media (max-width: 768px) {
+            #finalResultContainerId {
+                width: 90%;
+                /* Mobilde ekranın %95'ini kapla */
+                max-width: 90%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
 
         #demo {
             width: 800px;
