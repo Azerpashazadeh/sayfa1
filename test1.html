@@ -1428,6 +1428,10 @@
             outline: 1px purple;
         }
 
+        #app-s3 {
+            outline: 5px yellow;
+        }
+
 
 
         /*/////////////////////////////////////Bölüm-3///////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -2286,16 +2290,19 @@
         }
 
 
-
+        /* Saatın pozisyonunu ayarlama */
         #app-s3 {
             position: fixed;
-            margin-top: -23px;
+            top: -25px;
+            /* Üst kenardan 25px aşağıda */
             left: 50%;
             transform: translateX(-50%);
             /* Yatayda tam ortalamak için */
-            margin-bottom: 0px;
-            z-index: 1;
+            margin: 0;
+            /* Gereksiz marginleri kaldırdık */
+            z-index: 10;
         }
+
 
         #quiz-header {
             height: 0px;
