@@ -116,7 +116,7 @@
                 box-shadow:
                     inset 0 10px 0 0 blue,
                     /* Üst kenar 5px */
-                    inset 0 -145px 0 0 blue,
+                    inset 0 calc(-11.75vh) 0 0 blue,
                     /* Alt kenar */
                     inset 5px 0 0 0 blue,
                     /* Sol kenar */
@@ -1949,7 +1949,7 @@
             max-width: 70%;
             margin: 100px auto 0 auto;
             /* Üstte 100px boşluk bırak, yatayda ortala */
-            padding-bottom: 200px;
+            padding-bottom: 100px;
         }
 
         #finalResultContainerId h2,
@@ -2392,12 +2392,12 @@
 
 
         #endMessage3-S3 {
-            margin-left: 80px;
-            margin-right: 80px;
+            margin-left: 30px;
+            margin-right: 30px;
         }
 
         #proceedSection3End {
-            margin-top: 120px;
+            margin-top: 50px;
         }
 
         #proceedSection3End p {
@@ -4454,11 +4454,6 @@
             }
         }
 
-
-
-
-
-
         function finalResultShow() {
             viewResult = true;
             lockQuizQuestionsS3();
@@ -4467,8 +4462,6 @@
             document.getElementById('viewResultContainerId').classList.add('hidden');
             document.getElementById('finalResultContainerId').classList.remove('hidden');
 
-
-
             let calculateS3Correct = correctAnswerS3.questions.filter(x => x.isCorrect === true);
 
             if (calculateS3Correct.length >= 10) {
@@ -4476,7 +4469,18 @@
             } else {
                 document.getElementById('failOrPassEndS3').src = "https://static.wixstatic.com/media/4b688f_149ee4392b034dac89b73aef8268aef9~mv2.png";
             }
+
+            // resultS3 içindeki tüm endMessage4-S3 öğelerini al
+            const endMessageElements = document.querySelectorAll('#resultS3 #endMessage4-S3');
+
+            if (endMessageElements.length > 1) {
+                // İlk öğeyi hariç tutarak diğerlerini gizle
+                for (let i = 1; i < endMessageElements.length; i++) {
+                    endMessageElements[i].classList.add('hidden');
+                }
+            }
         }
+
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
@@ -4725,7 +4729,7 @@
             },
         };
 
-        const TIME_LIMIT_S3 = 900;
+        const TIME_LIMIT_S3 = 60;
         let timePassed_S3 = 0;
         let timeLeft_S3 = TIME_LIMIT_S3;
         let timerInterval_S3 = null;
