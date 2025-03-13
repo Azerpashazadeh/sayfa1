@@ -1894,33 +1894,40 @@
             }
 
             #previous-button-s3,
-            #next-button-s3 {
-                position: static;
-                width: 20%;
-                height: 11.75vh;
-                background-color: rgb(11, 11, 185);
-                color: white;
-                font-size: 16px;
-                border: 1px solid rgb(9, 9, 183);
-                /* Hafif bir border ekleyelim */
-                border-radius: 8px;
-                cursor: pointer;
-                z-index: 1000;
+#next-button-s3 {
+    position: static;
+    width: 20%;
+    height: 11.75vh;
+    background-color: #0A369D;
+    color: white;
+    font-size: 16px;
+    border: 1px solid rgb(9, 9, 183);
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000;
 
-                /* Metni yatayda ve dikeyde ortala */
-                display: flex;
-                justify-content: center;
-                align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-                /* Kabarık görünüm için box-shadow ekleyelim */
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 2),
-                    /* Alt gölge */
-                    0 2px 4px rgba(0, 0, 0, 0.1);
-                /* Daha hafif üst gölge */
+    /* Çift katmanlı gölge: koyu + hafif beyaz */
+    box-shadow: 
+        0 6px 12px rgba(118, 115, 115, 0.5),  /* Ana koyu gölge */
+        0 0 10px rgba(255, 255, 255, 0.938); /* Hafif beyaz dış parlama */
 
-                /* Butona tıklandığında kabarık etkisini azaltmak için */
-                transition: box-shadow 0.2s ease, transform 0.2s ease;
-            }
+    transition: box-shadow 1s ease, transform 0.2s ease;
+}
+
+/* Butona basıldığında gölgeyi azaltalım */
+#previous-button-s3:active,
+#next-button-s3:active {
+    box-shadow: 
+        0 3px 6px rgba(0, 0, 0, 0.4),
+        0 0 6px rgba(255, 255, 255, 0.3);
+    transform: translateY(1px);
+}
+
+
 
 
 
