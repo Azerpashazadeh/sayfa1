@@ -1894,38 +1894,40 @@
             }
 
             #previous-button-s3,
-#next-button-s3 {
-    position: static;
-    width: 20%;
-    height: 11.75vh;
-    background-color: #0A369D;
-    color: white;
-    font-size: 16px;
-    border: 1px solid rgb(9, 9, 183);
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 1000;
+            #next-button-s3 {
+                position: static;
+                width: 20%;
+                height: 11.75vh;
+                background-color: #0A369D;
+                color: white;
+                font-size: 14px;
+                border: 1px solid rgb(9, 9, 183);
+                border-radius: 8px;
+                cursor: pointer;
+                z-index: 1000;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
 
-    /* Çift katmanlı gölge: koyu + hafif beyaz */
-    box-shadow: 
-        0 6px 12px rgba(118, 115, 115, 0.5),  /* Ana koyu gölge */
-        0 0 10px rgba(255, 255, 255, 0.938); /* Hafif beyaz dış parlama */
+                /* Çift katmanlı gölge: koyu + hafif beyaz */
+                box-shadow:
+                    0 6px 12px rgba(118, 115, 115, 0.5),
+                    /* Ana koyu gölge */
+                    0 0 10px rgba(255, 255, 255, 0.938);
+                /* Hafif beyaz dış parlama */
 
-    transition: box-shadow 1s ease, transform 0.2s ease;
-}
+                transition: box-shadow 1s ease, transform 0.2s ease;
+            }
 
-/* Butona basıldığında gölgeyi azaltalım */
-#previous-button-s3:active,
-#next-button-s3:active {
-    box-shadow: 
-        0 3px 6px rgba(0, 0, 0, 0.4),
-        0 0 6px rgba(255, 255, 255, 0.3);
-    transform: translateY(1px);
-}
+            /* Butona basıldığında gölgeyi azaltalım */
+            #previous-button-s3:active,
+            #next-button-s3:active {
+                box-shadow:
+                    0 3px 6px rgba(0, 0, 0, 0.4),
+                    0 0 6px rgba(255, 255, 255, 0.3);
+                transform: translateY(1px);
+            }
 
 
 
@@ -1983,13 +1985,6 @@
 
 
 
-
-
-
-
-
-
-
         #demo {
             width: 800px;
             height: 400px;
@@ -2013,6 +2008,31 @@
             box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
             /* Yumuşak gölge efekti */
         }
+
+
+        @media (max-width: 768px) {
+            .box {
+                background-color: white;
+                text-align: center;
+                font-size: 5.2vw;
+                width: 12%;
+                height: 14.9%;
+                color: orange;
+                position: absolute;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+                /* Yumuşak gölge efekti */
+
+                /* 2px turuncu border ekleyelim */
+                border: 4px solid orange;
+            }
+
+        }
+
 
         .target {
             background-color: orange;
@@ -4743,7 +4763,7 @@
             },
         };
 
-        const TIME_LIMIT_S3 = 60;
+        const TIME_LIMIT_S3 = 1800;
         let timePassed_S3 = 0;
         let timeLeft_S3 = TIME_LIMIT_S3;
         let timerInterval_S3 = null;
@@ -5407,10 +5427,14 @@
                             let split2 = box.dataset.target.split('-');
 
                             if (split[split.length - 1] == (split2[split2.length - 1] - checkDrops.length)) {
-                                box.style.backgroundColor = 'green';
+                                box.style.backgroundColor = 'rgb(11, 207, 11)';
+                                box.style.border = '4px solid white';
+                                box.style.color = 'white';
                                 isCorrectArrayDragDrop.push(true);
                             } else {
                                 box.style.backgroundColor = 'red';
+                                box.style.border = '4px solid white';
+                                box.style.color = 'white';
                                 isCorrectArrayDragDrop.push(false);
                             }
                         }
@@ -5418,6 +5442,7 @@
                         box.style.pointerEvents = 'none';
                     });
                 }
+
 
                 // Inputlar ve diğer elementler için işlemler
                 inputs.forEach((input) => {
