@@ -703,7 +703,7 @@
 
         .correctAnswer::after {
             /* content: " ✔️"; */
-            color: green;
+            color: rgb(11, 207, 11);
             font-weight: bold;
         }
 
@@ -714,7 +714,7 @@
         }
 
         .correctAnswer {
-            background-color: green !important;
+            background-color: rgb(11, 207, 11) !important;
             color: white !important;
         }
 
@@ -2160,7 +2160,7 @@
 
         .correct-answer::after {
             content: " ✔️";
-            color: green;
+            color: rgb(11, 207, 11);
             font-weight: bold;
         }
 
@@ -2172,11 +2172,11 @@
 
         .correct {
             background-color: lightgray;
-            color: green;
+            color: rgb(11, 207, 11);
         }
 
         .selected-correct {
-            background-color: green;
+            background-color: rgb(11, 207, 11);
             color: white;
         }
 
@@ -3060,7 +3060,7 @@
                 // Doğru ve yanlış cevapları işaretleme ve renkleri güncelleme
                 if (answer) {
                     markerSpan.textContent = "✔️";
-                    markerSpan.style.color = "green";
+                    markerSpan.style.color = "rgb(11, 207, 11)";
                     if (input.checked) {
                         checkAnswerImage.push('correctAnswer');
                         label.classList.add("correctAnswer");
@@ -4189,7 +4189,7 @@
 
                             if (questionData.dogruCevap.includes(input.value)) {
                                 markerSpan.textContent = "✔️";
-                                input.style.backgroundColor = "green";
+                                input.style.backgroundColor = "rgb(11, 207, 11)";
                             } else {
                                 markerSpan.textContent = "❌";
                                 input.style.backgroundColor = "red";
@@ -4217,7 +4217,7 @@
                                 markerSpan.textContent = "✔️";
                                 if (input.checked) {
                                     label.classList.add("selected-correct");
-                                    label.style.backgroundColor = "green";
+                                    label.style.backgroundColor = "rgb(11, 207, 11)";
                                 } else {
                                     label.style.backgroundColor = "lightgrey";
                                 }
@@ -4669,7 +4669,7 @@
 
                             // endMessage öğesini gizle
                             // endMessage3.classList.add("hidden");
-                            endMessage4.classList.add("hidden");
+
                         });
                     });
 
@@ -5494,7 +5494,7 @@
 
                             if (questionData.dogruCevap.includes(input.value)) {
                                 markerSpan.textContent = "✔️";
-                                input.style.backgroundColor = "green";
+                                input.style.backgroundColor = "rgb(11, 207, 11)";
                             } else {
                                 markerSpan.textContent = "❌";
                                 input.style.backgroundColor = "red";
@@ -5523,7 +5523,7 @@
                                 markerSpan.textContent = "✔️";
                                 if (input.checked) {
                                     label.classList.add("selected-correct");
-                                    label.style.backgroundColor = "green";
+                                    label.style.backgroundColor = "rgb(11, 207, 11)";
                                 } else {
                                     label.style.backgroundColor = "lightgrey";
                                 }
