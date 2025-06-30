@@ -5867,13 +5867,13 @@
             const quiz2Button = document.getElementById("quizButton1");
 
             if (quiz2Button) {
-                // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
+                // Eğer progress dizisinde 2 varsa, butonu devre dışı bırak
                 if (progress.includes(2)) {
                     quiz2Button.disabled = true;
                     quiz2Button.textContent = "QUIZ-2 (Tamamlandı)";
                     quiz2Button.classList.add("deactivated");
                 } else {
-                    // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
+                    // Eğer progress dizisinde 2 yoksa, butonu aktif bırak
                     quiz2Button.disabled = false;
                     quiz2Button.textContent = "QUIZ-2";
                     quiz2Button.classList.remove("deactivated");
