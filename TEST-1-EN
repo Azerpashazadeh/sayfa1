@@ -4974,7 +4974,7 @@
                     .slice(0, count);
                 return selectedQuestions;
             } catch (error) {
-                console.error("Soruları alırken bir hata oluştu:", error);
+                console.error("Soruları alırken bir hata oluştu:", error);  
                 return [];
             }
         }
