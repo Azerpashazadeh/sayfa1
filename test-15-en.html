@@ -2891,7 +2891,7 @@
             }
 
             // Yeni işlevselliği buraya ekleyin
-            const completedTestNumber = 1; // TEST1 tamamlandı
+            const completedTestNumber = 15; // TEST15 tamamlandı
 
             // Frontend'e mesaj gönderme işlemi
             const wixOrigin = 'https://www.examtheorie.nl';
@@ -5867,13 +5867,13 @@
             const quiz15Button = document.getElementById("quizButton15");
 
             if (quiz15Button) {
-                // Eğer progress dizisinde 15 varsa, butonu devre dışı bırak
+                // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
                 if (progress.includes(15)) {
                     quiz15Button.disabled = true;
                     quiz15Button.textContent = "Quiz-15 (Tamamlandı)";
                     quiz15Button.classList.add("deactivated");
                 } else {
-                    // Eğer progress dizisinde 15 yoksa, butonu aktif bırak
+                    // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
                     quiz15Button.disabled = false;
                     quiz15Button.textContent = "Quiz-15";
                     quiz15Button.classList.remove("deactivated");
