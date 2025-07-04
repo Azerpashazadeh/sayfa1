@@ -60,7 +60,7 @@
             const button = document.createElement("button");
             button.id = `testButton${i}`;
             button.className = 'testButton'; // Tüm butonlar için genel stil
-            button.textContent = `TEST${i}`;
+            button.textContent = `SINAV${i}`;
             button.disabled = i !== 1; // Sadece TEST1 aktif olsun
             button.onclick = () => {
                 if (!button.disabled) {
@@ -93,17 +93,17 @@
                     if (completedTests.includes(i)) {
                         // Test tamamlandıysa butonu devre dışı bırak
                         button.disabled = true;
-                        button.textContent = `TEST${i} (Tamamlandı)`;
+                        button.textContent = `SINAV${i} (Tamamlandı)`;
                         button.classList.add("deactivated");
                     } else if (i === 1 || completedTests.includes(i - 1)) {
                         // Bir önceki test tamamlandıysa butonu aktif hale getir
                         button.disabled = false;
-                        button.textContent = `TEST${i}`;
+                        button.textContent = `SINAV${i}`;
                         button.classList.remove("deactivated");
                     } else {
                         // Diğer durumlarda butonu devre dışı bırak
                         button.disabled = true;
-                        button.textContent = `TEST${i}`;
+                        button.textContent = `SINAV${i}`;
                         button.classList.add("deactivated");
                     }
                 }
