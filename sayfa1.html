@@ -54,7 +54,7 @@
     <script>
         // Butonları oluştur
         const buttonsContainer = document.getElementById("buttonsContainer");
-        const baseUrl = "https://www.examtheorie.nl/eng/test"; // Temel URL
+        const baseUrl = "https://www.examtheorie.nl/engtest/test"; // Temel URL
 
         for (let i = 1; i <= 50; i++) {
             const button = document.createElement("button");
@@ -78,20 +78,11 @@
             const message = event.data;
             console.log("Iframe'den mesaj alındı:", message);
 
-            const LANG_OFFSET = 1000; // Bu sayfa Türkçe için
-
-if (message.action === "updateButtons") {
-    const rawProgress = message.progress;
-    console.log("Gelen progress:", rawProgress);
-
-    const filtered = rawProgress
-        .filter(n => n >= LANG_OFFSET && n < LANG_OFFSET + 1000)
-        .map(n => n - LANG_OFFSET);
-
-    console.log("Filtrelenmiş progress:", filtered);
-    updateButtons(filtered);
-}
-
+            if (message.action === "updateButtons") {
+                const progress = message.progress; // Kullanıcının progress bilgileri
+                console.log("Butonlar güncelleniyor. Progress:", progress);
+                updateButtons(progress); // Butonları güncelle
+            }
         });
 
         // Butonları güncelleme fonksiyonu
