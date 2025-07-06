@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ana Sayfa</title>
+    <title>English Tests</title>
     <style>
-        /* Tüm butonların genel stili */
         .testButton {
             padding: 10px 20px;
             font-size: 16px;
@@ -16,52 +15,48 @@
             color: white;
             border-radius: 5px;
             transition: background-color 0.3s, opacity 0.3s;
-            width: 120px; /* Sabit genişlik */
-            height: 50px; /* Sabit yükseklik */
-            text-align: center; /* Metni ortala */
+            width: 120px;
+            height: 50px;
+            text-align: center;
         }
 
-        /* Tıklanamaz butonların stili (başlangıçta tıklanamaz ama mavi olacak) */
         .testButton:disabled {
-            background-color: #007BFF; /* Mavi arka plan */
+            background-color: #007BFF;
             border-color: #007BFF;
-            cursor: not-allowed; /* Tıklanamaz imleç */
-            opacity: 1; /* Başlangıçta soldurma yok */
+            cursor: not-allowed;
+            opacity: 1;
         }
 
-        /* Deaktif butonların stili (Quiz tamamlanınca gri olacak) */
         .deactivated {
-            background-color: #6c757d; /* Gri arka plan */
+            background-color: #6c757d;
             border-color: #6c757d;
-            opacity: 0.6; /* Soldurma efekti */
+            opacity: 0.6;
             cursor: not-allowed;
         }
 
-        /* Aktif butonların hover efekti */
         .testButton:not(:disabled):hover {
-            background-color: #0056b3; /* Hover efekti (daha koyu mavi) */
+            background-color: #0056b3;
             border-color: #0056b3;
-            cursor: pointer; /* Tıklanabilir imleç */
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>Ana SayfaAZ</h1>
-    <div id="buttonsContainer">
-        <!-- Butonlar burada dinamik olarak oluşturulacak -->
-    </div>
+    <h1>English Tests</h1>
+    <div id="buttonsContainer"></div>
 
     <script>
-        // Butonları oluştur
         const buttonsContainer = document.getElementById("buttonsContainer");
-        const baseUrl = "https://www.examtheorie.nl/engtest/test"; // Temel URL
+        const baseUrl = "https://www.examtheorie.nl/engtest/test";
+        const baseOffset = 1000; // İngilizce testler için yeni base
 
+        // Butonları oluştur
         for (let i = 1; i <= 50; i++) {
             const button = document.createElement("button");
             button.id = `testButton${i}`;
-            button.className = 'testButton'; // Tüm butonlar için genel stil
+            button.className = 'testButton';
             button.textContent = `TEST${i}`;
-            button.disabled = i !== 1; // Sadece TEST1 aktif olsun
+            button.disabled = i !== 1;
             button.onclick = () => {
                 if (!button.disabled) {
                     window.open(`${baseUrl}${i}`, '_blank');
@@ -70,38 +65,24 @@
             buttonsContainer.appendChild(button);
         }
 
-        // Mesaj dinleme ve butonları güncelleme
-        window.addEventListener("message", function (event) {
-            // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
-            if (event.origin !== "https://www.examtheorie.nl") return;
-
-            const message = event.data;
-            console.log("Iframe'den mesaj alındı:", message);
-
-            if (message.action === "updateButtons") {
-                const progress = message.progress; // Kullanıcının progress bilgileri
-                console.log("Butonlar güncelleniyor. Progress:", progress);
-                updateButtons(progress); // Butonları güncelle
-            }
-        });
-
         // Butonları güncelleme fonksiyonu
-        function updateButtons(completedTests) {
-            for (let i = 1; i <= 50; i++) {
-                const button = document.getElementById(`testButton${i}`); // Butonun ID'si
+        function updateButtons(completedTests, baseOffset = 1000, rangeLimit = 50) {
+            const normalizedCompleted = completedTests
+                .filter(n => n >= baseOffset + 1 && n <= baseOffset + rangeLimit)
+                .map(n => n - baseOffset);
+
+            for (let i = 1; i <= rangeLimit; i++) {
+                const button = document.getElementById(`testButton${i}`);
                 if (button) {
-                    if (completedTests.includes(i)) {
-                        // Test tamamlandıysa butonu devre dışı bırak
+                    if (normalizedCompleted.includes(i)) {
                         button.disabled = true;
                         button.textContent = `TEST${i} (Tamamlandı)`;
                         button.classList.add("deactivated");
-                    } else if (i === 1 || completedTests.includes(i - 1)) {
-                        // Bir önceki test tamamlandıysa butonu aktif hale getir
+                    } else if (i === 1 || normalizedCompleted.includes(i - 1)) {
                         button.disabled = false;
                         button.textContent = `TEST${i}`;
                         button.classList.remove("deactivated");
                     } else {
-                        // Diğer durumlarda butonu devre dışı bırak
                         button.disabled = true;
                         button.textContent = `TEST${i}`;
                         button.classList.add("deactivated");
@@ -110,15 +91,21 @@
             }
         }
 
-        // Sayfanın görünürlük durumu değiştiğinde butonları güncelle
-        document.addEventListener('visibilitychange', function () {
-            const state = document.visibilityState; // 'visible' veya 'hidden'
-            console.log("Sayfa görünürlük durumu değişti:", state);
+        // Mesaj dinleyici
+        window.addEventListener("message", function (event) {
+            if (event.origin !== "https://www.examtheorie.nl") return;
 
-            if (state === 'visible') {
-                console.log("Sayfa görünür hale geldi. Butonlar güncelleniyor...");
-                // Görünür hale geldiğinde N koduna mesaj gönder
-                window.parent.postMessage({ action: "visibilityChange", state: state }, "https://www.examtheorie.nl");
+            const message = event.data;
+            if (message.action === "updateButtons") {
+                const progress = message.progress || [];
+                updateButtons(progress, baseOffset);
+            }
+        });
+
+        // Sayfa görünür olunca üst pencereye bildirim gönder
+        document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState === 'visible') {
+                window.parent.postMessage({ action: "visibilityChange", state: 'visible' }, "https://www.examtheorie.nl");
             }
         });
     </script>
