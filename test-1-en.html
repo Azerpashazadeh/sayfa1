@@ -2880,33 +2880,24 @@
         /////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////
 
-        // Dil ofsetini tanımla – bu sayfa İngilizce ise 1000 gibi
-        const LANG_OFFSET = 1000;
+        // Mevcut onclick olayını saklayın
+        const oldOnClick = document.getElementById('viewResult').onclick;
 
-        // viewResult butonunu al
-        const viewResultButton = document.getElementById('viewResult');
-
-        // Eski onclick olayını sakla
-        const oldOnClick = viewResultButton?.onclick;
-
-        // Yeni onclick fonksiyonu tanımla
-        viewResultButton.onclick = function (event) {
-            // Önce eski işlevi çağır (örneğin finalResultShow fonksiyonu)
-            if (typeof oldOnClick === 'function') {
-                oldOnClick.call(this, event);
+        // Yeni onclick olayını tanımlayın
+        document.getElementById('viewResult').onclick = function (event) {
+            // Mevcut işlevselliği çağırın (finalResultShow fonksiyonu)
+            if (oldOnClick) {
+                oldOnClick(event);
             }
 
-            // Tamamlanan test numarasını LANG_OFFSET'e göre hesapla
-            const completedTestNumber = LANG_OFFSET + 1; // Örn: İngilizce TEST1 = 1001
+            // Yeni işlevselliği buraya ekleyin
+            const completedTestNumber = 1; // TEST1 tamamlandı
 
-            // Wix frontend'e mesaj gönder
+            // Frontend'e mesaj gönderme işlemi
             const wixOrigin = 'https://www.examtheorie.nl';
             try {
-                window.parent.postMessage(
-                    { action: 'updateProgress', testNumber: completedTestNumber },
-                    wixOrigin
-                );
-                console.log("Frontend'e mesaj gönderildi:", completedTestNumber);
+                window.parent.postMessage({ action: 'updateProgress', testNumber: completedTestNumber }, wixOrigin);
+                console.log("Frontend'e mesaj gönderildi.");
             } catch (error) {
                 console.error("Mesaj gönderilirken hata oluştu:", error);
             }
@@ -4983,7 +4974,7 @@
                     .slice(0, count);
                 return selectedQuestions;
             } catch (error) {
-                console.error("Soruları alırken bir hata oluştu:", error);
+                console.error("Soruları alırken bir hata oluştu:", error);  
                 return [];
             }
         }
@@ -5852,8 +5843,6 @@
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
 
 
-        const LANG_OFFSET = 1000; // Bu sayfa İngilizce ise
-
         // Mesaj dinleyicisi
         window.addEventListener("message", function (event) {
             // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
@@ -5864,35 +5853,33 @@
 
             // Mesaj bir nesne ise ve action özelliği "updateButtons" ise
             if (typeof message === "object" && message.action === "updateButtons") {
-                const progress = message.progress; // Örn: [1001, 1002]
+                const progress = message.progress; // Tamamlanan testlerin listesi
                 console.log("Progress bilgileri alındı:", progress);
 
-                // LANGUAGE OFFSET'e göre filtrele ve normalize et
-                const filtered = progress
-                    .filter(n => n >= LANG_OFFSET && n < LANG_OFFSET + 1000)
-                    .map(n => n - LANG_OFFSET); // Örn: 1001 → 1
-
-                updateQuiz1Button(filtered);
+                // QUIZ-1 butonunu kontrol et ve güncelle
+                updateQuiz1Button(progress);
             }
         });
 
         // QUIZ-1 butonunu güncelleme fonksiyonu
         function updateQuiz1Button(progress) {
+            // QUIZ-1 butonunu seç
             const quiz1Button = document.getElementById("quizButton1");
 
             if (quiz1Button) {
+                // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
                 if (progress.includes(1)) {
                     quiz1Button.disabled = true;
                     quiz1Button.textContent = "QUIZ-1 (Tamamlandı)";
                     quiz1Button.classList.add("deactivated");
                 } else {
+                    // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
                     quiz1Button.disabled = false;
                     quiz1Button.textContent = "QUIZ-1";
                     quiz1Button.classList.remove("deactivated");
                 }
             }
         }
-
 
 
         // Sağ tıklamayı engelle
