@@ -42,7 +42,7 @@
     </style>
 </head>
 <body>
-    <h1>English Tests</h1>
+    <h1>Practice exams</h1>
     <div id="buttonsContainer"></div>
 
     <script>
@@ -55,7 +55,7 @@
             const button = document.createElement("button");
             button.id = `testButton${i}`;
             button.className = 'testButton';
-            button.textContent = `TEST${i}`;
+            button.textContent = `Test-${i}`;
             button.disabled = i !== 1;
             button.onclick = () => {
                 if (!button.disabled) {
@@ -76,15 +76,15 @@
                 if (button) {
                     if (normalizedCompleted.includes(i)) {
                         button.disabled = true;
-                        button.textContent = `TEST${i} (Tamamlandı)`;
+                        button.textContent = `Test-${i} (Completed)`;
                         button.classList.add("deactivated");
                     } else if (i === 1 || normalizedCompleted.includes(i - 1)) {
                         button.disabled = false;
-                        button.textContent = `TEST${i}`;
+                        button.textContent = `Test-${i}`;
                         button.classList.remove("deactivated");
                     } else {
                         button.disabled = true;
-                        button.textContent = `TEST${i}`;
+                        button.textContent = `Test-${i}`;
                         button.classList.add("deactivated");
                     }
                 }
