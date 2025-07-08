@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Tests</title>
+    <style>
+        .testButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border: 1px solid #007BFF;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s, opacity 0.3s;
+            width: 120px;
+            height: 50px;
+            text-align: center;
+        }
+
+        .testButton:disabled {
+            background-color: #007BFF;
+            border-color: #007BFF;
+            cursor: not-allowed;
+            opacity: 1;
+        }
+
+        .deactivated {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .testButton:not(:disabled):hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Deneme Sınavları</h1>
+    <div id="buttonsContainer"></div>
+
+    <script>
+        const buttonsContainer = document.getElementById("buttonsContainer");
+        const baseUrl = "https://www.examtheorie.nl/engtest/test";
+        const baseOffset = 2000; // Bu sayfa için baseOffset 2000
+
+        // Butonları oluştur
+        for (let i = 1; i <= 50; i++) {
+            const button = document.createElement("button");
+            button.id = `testButton${i}`;
+            button.className = 'testButton';
+            button.textContent = `Sınav-${i}`;
+            button.disabled = i !== 1;
+            button.onclick = () => {
+                if (!button.disabled) {
+                    window.open(`${baseUrl}${i}`, '_blank');
+                }
+            };
+            buttonsContainer.appendChild(button);
+        }
+
+        // Butonları güncelleme fonksiyonu
+        function updateButtons(completedTests, baseOffset = 2000, rangeLimit = 50) {
+            const normalizedCompleted = completedTests
+                .filter(n => n >= baseOffset + 1 && n <= baseOffset + rangeLimit)
+                .map(n => n - baseOffset);
+
+            for (let i = 1; i <= rangeLimit; i++) {
+                const button = document.getElementById(`testButton${i}`);
+                if (button) {
+                    if (normalizedCompleted.includes(i)) {
+                        button.disabled = true;
+                        button.textContent = `Sınav-${i} (Tamamlandı)`;
+                        button.classList.add("deactivated");
+                    } else if (i === 1 || normalizedCompleted.includes(i - 1)) {
+                        button.disabled = false;
+                        button.textContent = `Sınav-${i}`;
+                        button.classList.remove("deactivated");
+                    } else {
+                        button.disabled = true;
+                        button.textContent = `Sınav-${i}`;
+                        button.classList.add("deactivated");
+                    }
+                }
+            }
+        }
+
+        // Mesaj dinleyici
+        window.addEventListener("message", function (event) {
+            if (event.origin !== "https://www.examtheorie.nl") return;
+
+            const message = event.data;
+            if (message.action === "updateButtons") {
+                const progress = message.progress || [];
+                updateButtons(progress, baseOffset);
+            }
+        });
+
+        // Sayfa görünür olunca üst pencereye bildirim gönder
+        document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState === 'visible') {
+                window.parent.postMessage({ action: "visibilityChange", state: 'visible' }, "https://www.examtheorie.nl");
+            }
+        });
+    </script>
+</body>
+</html>
