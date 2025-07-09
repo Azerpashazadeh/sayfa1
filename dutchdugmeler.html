@@ -48,7 +48,7 @@
     <script>
         const buttonsContainer = document.getElementById("buttonsContainer");
         const baseUrl = "https://www.examtheorie.nl/nltoets/toets";
-        const baseOffset = 2000; // Bu sayfa için baseOffset 2000
+        const baseOffset = 3000; // Bu sayfa için baseOffset 3000
 
         // Butonları oluştur
         for (let i = 1; i <= 50; i++) {
@@ -66,7 +66,7 @@
         }
 
         // Butonları güncelleme fonksiyonu
-        function updateButtons(completedTests, baseOffset = 2000, rangeLimit = 50) {
+        function updateButtons(completedTests, baseOffset = 3000, rangeLimit = 50) {
             const normalizedCompleted = completedTests
                 .filter(n => n >= baseOffset + 1 && n <= baseOffset + rangeLimit)
                 .map(n => n - baseOffset);
