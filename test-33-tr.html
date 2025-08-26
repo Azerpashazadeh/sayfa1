@@ -2548,7 +2548,7 @@
 
 
     <!-- SECTION-1 ve teste başla düğmeleri -->
-    <button id="quizButton1" onclick="startQuizAndFullscreen()">QUIZ-1</button>
+    <button id="quizButton1" onclick="startQuizAndFullscreen()">QUIZ-33</button>
 
     <!-- Mesaj alanı -->
     <div id="messageArea">
@@ -5863,27 +5863,27 @@
                 const progress = message.progress; // Tamamlanan testlerin listesi
                 console.log("Progress bilgileri alındı:", progress);
 
-                // QUIZ-1 butonunu kontrol et ve güncelle
-                updateQuiz1Button(progress);
+                // QUIZ-33 butonunu kontrol et ve güncelle
+                updateQuiz33Button(progress);
             }
         });
 
-        // QUIZ-1 butonunu güncelleme fonksiyonu
-        function updateQuiz1Button(progress) {
-            // QUIZ-1 butonunu seç
-            const quiz1Button = document.getElementById("quizButton1");
+        // QUIZ-33 butonunu güncelleme fonksiyonu
+        function updateQuiz33Button(progress) {
+            // QUIZ-33 butonunu seç
+            const quiz33Button = document.getElementById("quizButton33");
 
-            if (quiz1Button) {
+            if (quiz33Button) {
                 // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
-                if (progress.includes(1)) {
-                    quiz1Button.disabled = true;
-                    quiz1Button.textContent = "QUIZ-1 (Tamamlandı)";
-                    quiz1Button.classList.add("deactivated");
+                if (progress.includes(33)) {
+                    quiz33Button.disabled = true;
+                    quiz33Button.textContent = "QUIZ-33 (Tamamlandı)";
+                    quiz33Button.classList.add("deactivated");
                 } else {
                     // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
-                    quiz1Button.disabled = false;
-                    quiz1Button.textContent = "QUIZ-1";
-                    quiz1Button.classList.remove("deactivated");
+                    quiz33Button.disabled = false;
+                    quiz33Button.textContent = "QUIZ-33";
+                    quiz33Button.classList.remove("deactivated");
                 }
             }
         }

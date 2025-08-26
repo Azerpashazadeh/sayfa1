@@ -5863,27 +5863,27 @@
                 const progress = message.progress; // Tamamlanan testlerin listesi
                 console.log("Progress bilgileri alındı:", progress);
 
-                // QUIZ-1 butonunu kontrol et ve güncelle
-                updateQuiz1Button(progress);
+                // QUIZ-47 butonunu kontrol et ve güncelle
+                updateQuiz47Button(progress);
             }
         });
 
-        // QUIZ-1 butonunu güncelleme fonksiyonu
-        function updateQuiz1Button(progress) {
-            // QUIZ-1 butonunu seç
-            const quiz1Button = document.getElementById("quizButton1");
+        // QUIZ-47 butonunu güncelleme fonksiyonu
+        function updateQuiz47Button(progress) {
+            // QUIZ-47 butonunu seç
+            const quiz47Button = document.getElementById("quizButton47");
 
-            if (quiz1Button) {
+            if (quiz47Button) {
                 // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
-                if (progress.includes(1)) {
-                    quiz1Button.disabled = true;
-                    quiz1Button.textContent = "QUIZ-1 (Tamamlandı)";
-                    quiz1Button.classList.add("deactivated");
+                if (progress.includes(47)) {
+                    quiz47Button.disabled = true;
+                    quiz47Button.textContent = "QUIZ-47 (Tamamlandı)";
+                    quiz47Button.classList.add("deactivated");
                 } else {
                     // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
-                    quiz1Button.disabled = false;
-                    quiz1Button.textContent = "QUIZ-1";
-                    quiz1Button.classList.remove("deactivated");
+                    quiz47Button.disabled = false;
+                    quiz47Button.textContent = "QUIZ-47";
+                    quiz47Button.classList.remove("deactivated");
                 }
             }
         }

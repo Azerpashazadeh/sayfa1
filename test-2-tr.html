@@ -5871,11 +5871,11 @@
         // QUIZ-2 butonunu güncelleme fonksiyonu
         function updateQuiz2Button(progress) {
             // QUIZ-2 butonunu seç
-            const quiz2Button = document.getElementById("quizButton1");
+            const quiz2Button = document.getElementById("quizButton2");
 
             if (quiz2Button) {
                 // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
-                if (progress.includes(2002)) {
+                if (progress.includes(2)) {
                     quiz2Button.disabled = true;
                     quiz2Button.textContent = "QUIZ-2 (Tamamlandı)";
                     quiz2Button.classList.add("deactivated");

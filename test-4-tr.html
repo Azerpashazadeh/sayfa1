@@ -5863,27 +5863,27 @@
                 const progress = message.progress; // Tamamlanan testlerin listesi
                 console.log("Progress bilgileri alındı:", progress);
 
-                // QUIZ-1 butonunu kontrol et ve güncelle
-                updateQuiz1Button(progress);
+                // QUIZ-4 butonunu kontrol et ve güncelle
+                updateQuiz4Button(progress);
             }
         });
 
-        // QUIZ-1 butonunu güncelleme fonksiyonu
-        function updateQuiz1Button(progress) {
-            // QUIZ-1 butonunu seç
-            const quiz1Button = document.getElementById("quizButton1");
+        // QUIZ-4 butonunu güncelleme fonksiyonu
+        function updateQuiz4Button(progress) {
+            // QUIZ-4 butonunu seç
+            const quiz4Button = document.getElementById("quizButton4");
 
-            if (quiz1Button) {
+            if (quiz4Button) {
                 // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
-                if (progress.includes(1)) {
-                    quiz1Button.disabled = true;
-                    quiz1Button.textContent = "QUIZ-1 (Tamamlandı)";
-                    quiz1Button.classList.add("deactivated");
+                if (progress.includes(4)) {
+                    quiz4Button.disabled = true;
+                    quiz4Button.textContent = "QUIZ-4 (Tamamlandı)";
+                    quiz4Button.classList.add("deactivated");
                 } else {
                     // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
-                    quiz1Button.disabled = false;
-                    quiz1Button.textContent = "QUIZ-1";
-                    quiz1Button.classList.remove("deactivated");
+                    quiz4Button.disabled = false;
+                    quiz4Button.textContent = "QUIZ-4";
+                    quiz4Button.classList.remove("deactivated");
                 }
             }
         }
