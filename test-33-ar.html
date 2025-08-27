@@ -2548,7 +2548,7 @@
 
 
     <!-- SECTION-1 ve teste başla düğmeleri -->
-    <button id="quizButton1" onclick="startQuizAndFullscreen()">QUIZ-42</button>
+    <button id="quizButton1" onclick="startQuizAndFullscreen()">QUIZ-33</button>
 
     <!-- Mesaj alanı -->
     <div id="messageArea">
@@ -2892,7 +2892,7 @@
             }
 
             // Yeni işlevselliği buraya ekleyin
-            const completedTestNumber = 4042; // TEST42 tamamlandı
+            const completedTestNumber = 4033; // TEST33 tamamlandı
 
             // Frontend'e mesaj gönderme işlemi
             const wixOrigin = 'https://www.examtheorie.nl';
@@ -4976,24 +4976,24 @@
 
         async function loadQuizS3() {
             const t1Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_688b255a44fb4fe8ab69afcb30614d99.json",
-                39
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_0d920876724a40c38a19821604deab15.json",
+                40
             );
             const t2Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_aa8a7ac7c48b416f8caecaf97564229d.json",
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_52557c1587ff4ec7a469a3154aa14af0.json",
                 2
             );
             const t3Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_6c5cfe8b30b14de4ae05f50155e74e48.json",
-                2
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_fc1677776b1349349a9ee691cfbf0374.json",
+                0
             );
             const t4Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_520a6712d4c54f7c9d7f54cbf8d3c20e.json",
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_8c6bcf840d7345f6a0d2a077bb29ba66.json",
                 3
             );
             const t5Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_1506b2332adf4d8696a11e5461d05c0f.json",
-                4
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_c30b465342c443a5ae958af6361ba7be.json",
+                5
             );
 
             // T1'den gelen sorulara "Radio" button, T3'ten gelen sorulara "Checkbox" uygula
@@ -5852,27 +5852,27 @@
                 const progress = message.progress; // Tamamlanan testlerin listesi
                 console.log("Progress bilgileri alındı:", progress);
 
-                // QUIZ-42 butonunu kontrol et ve güncelle
-                updateQuiz42Button(progress);
+                // QUIZ-1 butonunu kontrol et ve güncelle
+                updateQuiz33Button(progress);
             }
         });
 
-        // QUIZ-42 butonunu güncelleme fonksiyonu
-        function updateQuiz42Button(progress) {
-            // QUIZ-42 butonunu seç
-            const quiz42Button = document.getElementById("quizButton42");
+        // QUIZ-1 butonunu güncelleme fonksiyonu
+        function updateQuiz33Button(progress) {
+            // QUIZ-1 butonunu seç
+            const quiz33Button = document.getElementById("quizButton33");
 
-            if (quiz42Button) {
+            if (quiz33Button) {
                 // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
-                if (progress.includes(42)) {
-                    quiz42Button.disabled = true;
-                    quiz42Button.textContent = "QUIZ-42 (تمّ)";
-                    quiz42Button.classList.add("deactivated");
+                if (progress.includes(33)) {
+                    quiz33Button.disabled = true;
+                    quiz33Button.textContent = "QUIZ-33 (Tamamlandı)";
+                    quiz33Button.classList.add("deactivated");
                 } else {
                     // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
-                    quiz42Button.disabled = false;
-                    quiz42Button.textContent = "QUIZ-42";
-                    quiz42Button.classList.remove("deactivated");
+                    quiz1Button.disabled = false;
+                    quiz1Button.textContent = "QUIZ-1";
+                    quiz1Button.classList.remove("deactivated");
                 }
             }
         }
