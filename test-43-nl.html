@@ -2548,7 +2548,7 @@
 
 
     <!-- SECTION-1 ve teste başla düğmeleri -->
-    <button id="quizButton1" onclick="startQuizAndFullscreen()">QUIZ-41</button>
+    <button id="quizButton1" onclick="startQuizAndFullscreen()">QUIZ-43</button>
 
     <!-- Mesaj alanı -->
     <div id="messageArea">
@@ -2894,7 +2894,7 @@
             }
 
             // Yeni işlevselliği buraya ekleyin
-            const completedTestNumber = 3041; // TEST41 tamamlandı
+            const completedTestNumber = 3043; // TEST43 tamamlandı
 
             // Frontend'e mesaj gönderme işlemi
             const wixOrigin = 'https://www.examtheorie.nl';
@@ -4978,24 +4978,24 @@
 
         async function loadQuizS3() {
             const t1Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_26ca68ed7348446d861629449a3f9236.json",
-                35
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_d733fad070704937a876bd1e2d207ced.json",
+                36
             );
             const t2Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_ac4130cdafbe42929d7163f35954bdb2.json",
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_c3753145cf6d4135b5f430832c326490.json",
                 1
             );
             const t3Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_82196982b1ca47538e7ab2974bad8711.json",
-                0
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_135641a7a8e445b8b4f419bc8a08dce7.json",
+                3
             );
             const t4Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_9db01f3873ae41889af4fe6f4aa488eb.json",
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_56a5db02f07a4b969569db18885d1cad.json",
                 5
             );
             const t5Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_406bdbbf1c004b85b96658deeffbd90e.json",
-                9
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_26976764c0f443e8be0a1c959d018fd2.json",
+                5
             );
 
             // T1'den gelen sorulara "Radio" button, T3'ten gelen sorulara "Checkbox" uygula
@@ -5541,7 +5541,6 @@
             }
         }
 
-
         function checkAnswersAndUpdateBlocks() {
             // Evaluate answers for endMessage3 and endMessage4
             evaluateAnswersS3("endMessage3-S3");
@@ -5854,27 +5853,27 @@
                 const progress = message.progress; // Tamamlanan testlerin listesi
                 console.log("Progress bilgileri alındı:", progress);
 
-                // QUIZ-41 butonunu kontrol et ve güncelle
-                updateQuiz41Button(progress);
+                // QUIZ-1 butonunu kontrol et ve güncelle
+                updateQuiz43Button(progress);
             }
         });
 
-        // QUIZ-41 butonunu güncelleme fonksiyonu
-        function updateQuiz41Button(progress) {
-            // QUIZ-41 butonunu seç
-            const quiz41Button = document.getElementById("quizButton41");
+        // QUIZ-1 butonunu güncelleme fonksiyonu
+        function updateQuiz43Button(progress) {
+            // QUIZ-1 butonunu seç
+            const quiz43Button = document.getElementById("quizButton43");
 
-            if (quiz41Button) {
+            if (quiz43Button) {
                 // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
-                if (progress.includes(41)) {
-                    quiz41Button.disabled = true;
-                    quiz41Button.textContent = "QUIZ-41 (Voltooid)";
-                    quiz41Button.classList.add("deactivated");
+                if (progress.includes(43)) {
+                    quiz43Button.disabled = true;
+                    quiz43Button.textContent = "QUIZ-43 (Tamamlandı)";
+                    quiz43Button.classList.add("deactivated");
                 } else {
                     // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
-                    quiz41Button.disabled = false;
-                    quiz41Button.textContent = "QUIZ-41";
-                    quiz41Button.classList.remove("deactivated");
+                    quiz1Button.disabled = false;
+                    quiz1Button.textContent = "QUIZ-1";
+                    quiz1Button.classList.remove("deactivated");
                 }
             }
         }

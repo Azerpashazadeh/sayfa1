@@ -2545,10 +2545,10 @@
     <!-- Diğer içerikler burada -->
     <!--<div class="coordinateDisplay">X: 0, Y: 0</div>-->
 
-
+ 
 
     <!-- SECTION-1 ve teste başla düğmeleri -->
-    <button id="quizButton1" onclick="startQuizAndFullscreen()">QUIZ-41</button>
+    <button id="quizButton1" onclick="startQuizAndFullscreen()">QUIZ-37</button>
 
     <!-- Mesaj alanı -->
     <div id="messageArea">
@@ -2894,7 +2894,7 @@
             }
 
             // Yeni işlevselliği buraya ekleyin
-            const completedTestNumber = 3041; // TEST41 tamamlandı
+            const completedTestNumber = 3037; // TEST37 tamamlandı
 
             // Frontend'e mesaj gönderme işlemi
             const wixOrigin = 'https://www.examtheorie.nl';
@@ -4978,24 +4978,24 @@
 
         async function loadQuizS3() {
             const t1Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_26ca68ed7348446d861629449a3f9236.json",
-                35
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_b4e93c4c8854470694950440943a137f.json",
+                40
             );
             const t2Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_ac4130cdafbe42929d7163f35954bdb2.json",
-                1
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_29db2a2eb6594a92884046d6b9d49429.json",
+                2
             );
             const t3Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_82196982b1ca47538e7ab2974bad8711.json",
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_bf19cfddeb0244c38dd9197ed8b08596.json",
                 0
             );
             const t4Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_9db01f3873ae41889af4fe6f4aa488eb.json",
-                5
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_7b4a21c9369e4b788560a628c50ee787.json",
+                3
             );
             const t5Questions = await fetchQuestionsS3(
-                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_406bdbbf1c004b85b96658deeffbd90e.json",
-                9
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_4ee0511d83ae435da5a033479293c4ae.json",
+                5
             );
 
             // T1'den gelen sorulara "Radio" button, T3'ten gelen sorulara "Checkbox" uygula
@@ -5109,7 +5109,7 @@
                              </label>`;
                         });
                     } else if (question.onlyNumbers) {
-                        html += `<input type="number" name="answer${index + 1}" class="answer-input" placeholder="Answer here" oninput="handleTextInputS3(${index + 1}, this)" inputmode="numeric"><br>`;
+                        html += `<input type="number" name="answer${index + 1}" class="answer-input" placeholder="Vul in" oninput="handleTextInputS3(${index + 1}, this)" inputmode="numeric"><br>`;
                     }
 
                     // Feedback için alan ekleme
@@ -5541,7 +5541,6 @@
             }
         }
 
-
         function checkAnswersAndUpdateBlocks() {
             // Evaluate answers for endMessage3 and endMessage4
             evaluateAnswersS3("endMessage3-S3");
@@ -5854,27 +5853,27 @@
                 const progress = message.progress; // Tamamlanan testlerin listesi
                 console.log("Progress bilgileri alındı:", progress);
 
-                // QUIZ-41 butonunu kontrol et ve güncelle
-                updateQuiz41Button(progress);
+                // QUIZ-1 butonunu kontrol et ve güncelle
+                updateQuiz37Button(progress);
             }
         });
 
-        // QUIZ-41 butonunu güncelleme fonksiyonu
-        function updateQuiz41Button(progress) {
-            // QUIZ-41 butonunu seç
-            const quiz41Button = document.getElementById("quizButton41");
+        // QUIZ-1 butonunu güncelleme fonksiyonu
+        function updateQuiz37Button(progress) {
+            // QUIZ-1 butonunu seç
+            const quiz37Button = document.getElementById("quizButton37");
 
-            if (quiz41Button) {
+            if (quiz37Button) {
                 // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
-                if (progress.includes(41)) {
-                    quiz41Button.disabled = true;
-                    quiz41Button.textContent = "QUIZ-41 (Voltooid)";
-                    quiz41Button.classList.add("deactivated");
+                if (progress.includes(37)) {
+                    quiz37Button.disabled = true;
+                    quiz37Button.textContent = "QUIZ-37 (Tamamlandı)";
+                    quiz37Button.classList.add("deactivated");
                 } else {
                     // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
-                    quiz41Button.disabled = false;
-                    quiz41Button.textContent = "QUIZ-41";
-                    quiz41Button.classList.remove("deactivated");
+                    quiz1Button.disabled = false;
+                    quiz1Button.textContent = "QUIZ-1";
+                    quiz1Button.classList.remove("deactivated");
                 }
             }
         }
