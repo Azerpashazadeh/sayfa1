@@ -10,6 +10,8 @@
             flex-wrap: wrap;
             justify-content: flex-start;
             gap: 8px;
+            max-width: 1200px; /* Maksimum genişlik sınırı */
+            margin: 0 auto; /* Ortalamak için */
         }
 
         .testButton {
@@ -21,7 +23,9 @@
             color: white;
             border-radius: 5px;
             transition: background-color 0.3s, opacity 0.3s;
-            width: 120px;
+            flex: 1 0 calc(20% - 10px); /* Esnek genişlik - 5 sütun için */
+            min-width: 0; /* İçerik taşmasını önler */
+            max-width: calc(20% - 8px); /* Maksimum genişlik */
             height: 50px;
             text-align: center;
             box-sizing: border-box;
@@ -47,6 +51,19 @@
             cursor: pointer;
         }
 
+        /* Masaüstü için ek ayarlar */
+        @media (min-width: 769px) {
+            #buttonsContainer {
+                gap: 10px;
+                padding: 0 10px; /* Kenar boşlukları */
+            }
+            
+            .testButton {
+                flex: 1 0 calc(16.66% - 10px); /* 6 sütun için daha küçük ekranlarda */
+                max-width: calc(16.66% - 10px);
+            }
+        }
+
         /* Mobil ekranlar için stil */
         @media (max-width: 768px) {
             #buttonsContainer {
@@ -59,6 +76,8 @@
                 min-width: 0;
                 font-size: 14px;
                 padding: 8px 2px;
+                flex: none; /* Flex özelliğini mobilde kaldır */
+                max-width: none; /* Maksimum genişliği kaldır */
             }
         }
 
