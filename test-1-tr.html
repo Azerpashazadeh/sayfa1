@@ -5849,14 +5849,11 @@
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
 
+
         // Mesaj dinleyicisi
         window.addEventListener("message", function (event) {
             // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
-            const allowedOrigins = [
-                "https://www.examtheorie.nl",
-                "https://distantedutv.wixstudio.com/my-site-4x"
-            ];
-            if (!allowedOrigins.includes(event.origin)) return;
+            if (event.origin !== "https://www.examtheorie.nl") return;
 
             const message = event.data;
             console.log("Iframe'e mesaj alındı:", message);
@@ -5870,7 +5867,6 @@
                 updateQuiz1Button(progress);
             }
         });
-
 
         // QUIZ-1 butonunu güncelleme fonksiyonu
         function updateQuiz1Button(progress) {
