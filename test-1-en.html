@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz</title>
 
+    <script>
+        (function () {
+            var sp = new URLSearchParams(window.location.search);
+            window.__q1Done = (sp.get('q1') === 'done');
+            // ilk anda yanlış görünmesin diye kısa süre gizle
+            document.documentElement.classList.add('preinit');
+        })();
+    </script>
+
     <style>
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
@@ -22,6 +31,10 @@
             padding: 0;
 
         }
+
+        .preinit #quizButton1 { visibility: hidden; }
+
+        
 
 
 
@@ -174,9 +187,7 @@
 
         }
 */
-*/
-
-
+        */
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
@@ -2539,6 +2550,9 @@
             margin-bottom: 20px !important;
         }
     </style>
+
+
+
 </head>
 
 <body>
@@ -2692,7 +2706,7 @@
 
     <!-- 3. Bölümü Başlatan Mesaj ve Yeni Düğme -->
     <div id="startMessage" style="display:none;">
-        <h4>TTTHEORY EXAM PASSENGER CAR</h4>
+        <h4>THEORY EXAM PASSENGER CAR</h4>
         <p class="start-insight">You can cycle forwards and backwards through the questions. You have 30 minutes for
             this section. As long as the time bar runs, you can cycle through questions, skip, answer or correct them.
         </p>
@@ -4978,7 +4992,7 @@
                     .slice(0, count);
                 return selectedQuestions;
             } catch (error) {
-                console.error("Soruları alırken bir hata oluştu:", error);  
+                console.error("Soruları alırken bir hata oluştu:", error);
                 return [];
             }
         }
@@ -5938,9 +5952,6 @@
 
 
 
-        
-
-
 
 
 
@@ -5952,57 +5963,50 @@
 
 
 (function () {
-  const WIX_ORIGIN = 'https://www.examtheorie.nl';
-  const QUIZ1_TEST_NUMBER = 1001;
+  var ORIGIN = 'https://www.examtheorie.nl';
+  var QUIZ1 = 1001;
+  var btn = document.getElementById('quizButton1');
 
-  // (Güvenlik için) Eğer HTML'de disabled koyamadıysan, şu satırlar ilk anda kilitler:
-  // const firstBtn = document.getElementById('quizButton1');
-  // if (firstBtn) { firstBtn.disabled = true; firstBtn.classList.add('deactivated'); firstBtn.setAttribute('aria-disabled','true'); }
-
-  function applyByProgress(progress) {
-    const arr = Array.isArray(progress) ? progress : [];
-    const btn = document.getElementById('quizButton1');
+  function setCompleted() {
     if (!btn) return;
-
-    if (arr.includes(QUIZ1_TEST_NUMBER)) {
-      // Zaten tamamlandı -> kilitli kalsın
-      btn.disabled = true;
-      btn.classList.add('deactivated');
-      btn.textContent = 'QUIZ-1 (Completed)';
-      btn.onclick = null;
-      btn.setAttribute('aria-disabled', 'true');
-    } else {
-      // Tamamlanmamış -> kilidi aç
-      btn.disabled = false;
-      btn.classList.remove('deactivated');
-      btn.textContent = 'QUIZ-1';
-      btn.removeAttribute('aria-disabled');
-    }
+    btn.disabled = true;
+    btn.classList.add('deactivated');
+    btn.textContent = 'QUIZ-1 (Completed)';
+    btn.onclick = null;
+    btn.setAttribute('aria-disabled','true');
   }
 
-  // Sayfa yüklenince parent'tan progress iste
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      window.parent.postMessage({ action: 'requestProgress' }, WIX_ORIGIN);
-    });
-  } else {
-    window.parent.postMessage({ action: 'requestProgress' }, WIX_ORIGIN);
+  function setAvailable() {
+    if (!btn) return;
+    btn.disabled = false;
+    btn.classList.remove('deactivated');
+    btn.textContent = 'QUIZ-1';
+    btn.removeAttribute('aria-disabled');
+    // onclick zaten HTML'de var: startQuizAndFullscreen()
   }
 
-  // Parent'tan progress geldiğinde uygula
-  window.addEventListener('message', function (event) {
-    if (event.origin !== WIX_ORIGIN) return;
-    const msg = event.data || {};
-    if (msg.action === 'updateButtons') {
-      applyByProgress(msg.progress);
+  // --- İLK ÇİZİM: Velo'nun verdiği parametreye göre anında doğru durum ---
+  if (window.__q1Done) setCompleted(); else setAvailable();
+  document.documentElement.classList.remove('preinit');
+
+  // --- (Opsiyonel/sağlamlık) Velo daha sonra updateButtons gönderirse yine uygula ---
+  window.addEventListener('message', function (e) {
+    if (e.origin !== ORIGIN) return;
+    var d = e.data || {};
+    if (d.action === 'updateButtons') {
+      var done = Array.isArray(d.progress) && d.progress.includes(QUIZ1);
+      if (done) setCompleted(); else setAvailable();
     }
   });
+
+  // Not: 'View Result' tıklamasında postMessage ile updateProgress gönderme
+  // kodun zaten varsa AYNI şekilde kalabilir; burada yeniden yazmaya gerek yok.
 })();
 
 
 
 
-        
+
 
 
 
