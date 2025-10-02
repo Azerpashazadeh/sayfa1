@@ -2692,7 +2692,7 @@
 
     <!-- 3. Bölümü Başlatan Mesaj ve Yeni Düğme -->
     <div id="startMessage" style="display:none;">
-        <h4>TTHEORY EXAM PASSENGER CAR</h4>
+        <h4>TTTHEORY EXAM PASSENGER CAR</h4>
         <p class="start-insight">You can cycle forwards and backwards through the questions. You have 30 minutes for
             this section. As long as the time bar runs, you can cycle through questions, skip, answer or correct them.
         </p>
@@ -5951,46 +5951,53 @@
 
 
 
-// Quiz sayfası: yüklenince parent'tan progress iste ve 1001 varsa QUIZ-1'i kilitle
 (function () {
   const WIX_ORIGIN = 'https://www.examtheorie.nl';
   const QUIZ1_TEST_NUMBER = 1001;
 
-  // Parent'tan progress iste
-  function requestProgress() {
-    try {
-      window.parent.postMessage({ action: 'requestProgress' }, WIX_ORIGIN);
-    } catch (e) {
-      console.error('requestProgress gönderilemedi:', e);
+  // (Güvenlik için) Eğer HTML'de disabled koyamadıysan, şu satırlar ilk anda kilitler:
+  // const firstBtn = document.getElementById('quizButton1');
+  // if (firstBtn) { firstBtn.disabled = true; firstBtn.classList.add('deactivated'); firstBtn.setAttribute('aria-disabled','true'); }
+
+  function applyByProgress(progress) {
+    const arr = Array.isArray(progress) ? progress : [];
+    const btn = document.getElementById('quizButton1');
+    if (!btn) return;
+
+    if (arr.includes(QUIZ1_TEST_NUMBER)) {
+      // Zaten tamamlandı -> kilitli kalsın
+      btn.disabled = true;
+      btn.classList.add('deactivated');
+      btn.textContent = 'QUIZ-1 (Completed)';
+      btn.onclick = null;
+      btn.setAttribute('aria-disabled', 'true');
+    } else {
+      // Tamamlanmamış -> kilidi aç
+      btn.disabled = false;
+      btn.classList.remove('deactivated');
+      btn.textContent = 'QUIZ-1';
+      btn.removeAttribute('aria-disabled');
     }
   }
 
+  // Sayfa yüklenince parent'tan progress iste
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', requestProgress);
+    document.addEventListener('DOMContentLoaded', () => {
+      window.parent.postMessage({ action: 'requestProgress' }, WIX_ORIGIN);
+    });
   } else {
-    requestProgress();
+    window.parent.postMessage({ action: 'requestProgress' }, WIX_ORIGIN);
   }
 
-  // Parent'tan gelen progress ile QUIZ-1'i devre dışı bırak
+  // Parent'tan progress geldiğinde uygula
   window.addEventListener('message', function (event) {
     if (event.origin !== WIX_ORIGIN) return;
     const msg = event.data || {};
     if (msg.action === 'updateButtons') {
-      const progress = Array.isArray(msg.progress) ? msg.progress : [];
-      if (progress.includes(QUIZ1_TEST_NUMBER)) {
-        const btn = document.getElementById('quizButton1');
-        if (btn) {
-          btn.disabled = true;
-          btn.textContent = 'QUIZ-1 (Completed)';
-          if (btn.classList) btn.classList.add('deactivated'); // varsa gri stil
-          btn.onclick = null;
-          btn.setAttribute('aria-disabled', 'true');
-        }
-      }
+      applyByProgress(msg.progress);
     }
   });
 })();
-
 
 
 
