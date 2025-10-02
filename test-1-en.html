@@ -5932,6 +5932,71 @@
 
 
 
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+// --- EKLEYECEĞİN MİNİMAL KOD ---
+// (Mevcut <script> bloğunun en sonuna yapıştır)
+
+const WIX_ORIGIN = 'https://www.examtheorie.nl'; // sitenin gerçek origin'i
+const QUIZ1_TEST_NUMBER = 1001;                  // QUIZ-1 tamam kodu
+
+// Parent (Wix) tarafına: "progress ver" isteği gönder
+try {
+  window.parent.postMessage(
+    { action: 'requestProgress', tests: [QUIZ1_TEST_NUMBER] },
+    WIX_ORIGIN
+  );
+} catch (e) {
+  console.error('requestProgress gönderilemedi:', e);
+}
+
+// Parent'tan gelen cevabı dinle ve QUIZ-1 butonunu kilitle
+window.addEventListener('message', function (event) {
+  if (event.origin !== WIX_ORIGIN) return;
+
+  const msg = event.data || {};
+  if (msg.action === 'progressResponse') {
+    const progress = Array.isArray(msg.progress) ? msg.progress : [];
+    if (progress.includes(QUIZ1_TEST_NUMBER)) {
+      const btn = document.getElementById('quizButton1');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'QUIZ-1 (Completed)';
+        btn.onclick = null;                   // başlatmayı kapat
+        if (btn.classList) btn.classList.add('deactivated'); // varsa gri stil
+        btn.setAttribute('aria-disabled', 'true');
+      }
+    }
+  }
+});
+
+
+
+
+
+        
+
+
+
+
+
     </script>
 </body>
 
