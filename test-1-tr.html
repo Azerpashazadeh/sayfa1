@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz</title>
 
+    <script>
+  (function () {
+    window.__qs = new URLSearchParams(location.search); // idx, tn, status burada
+    // İlk anda yanlış görünmesin diye kısa süre gizle (disabled görünümü olmayacak)
+    document.documentElement.classList.add('preinit');
+  })();
+</script>
+
     <style>
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
@@ -22,6 +30,8 @@
             padding: 0;
 
         }
+
+        .preinit #quizButton1 { visibility: hidden; }
 
 
 
@@ -2690,7 +2700,7 @@
 
     <!-- 3. Bölümü Başlatan Mesaj ve Yeni Düğme -->
     <div id="startMessage" style="display:none;">
-        <h4>TEORİ SINAVI - BİNEK ARAÇ</h4>
+        <h4>TTTEORİ SINAVI - BİNEK ARAÇ</h4>
         <p class="start-insight">Sorular arasında ileri ve geri geçiş yapabilirsiniz. Bu bölüm için 30 dakikanız vardır.
             Zaman çubuğu ilerlediği sürece, sorular arasında geçiş yapabilir, atlayabilir, cevaplayabilir veya cevapları
             düzeltebilirsiniz.
@@ -5930,6 +5940,80 @@
                 event.preventDefault();
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+        (function () {
+  var ORIGIN = 'https://www.examtheorie.nl';
+
+  var btn = document.getElementById('quizButton1');
+  if (!btn) { document.documentElement.classList.remove('preinit'); return; }
+
+  // URL paramlarından oku
+  var idx = parseInt((window.__qs && window.__qs.get('idx')) || '1', 10);   // 1..50
+  if (!Number.isFinite(idx) || idx < 1) idx = 1;
+  var tnParam = parseInt((window.__qs && window.__qs.get('tn')) || '0', 10);
+  var TEST_NUMBER = Number.isFinite(tnParam) && tnParam > 0 ? tnParam : (2000 + idx);
+  var status = (window.__qs && window.__qs.get('status')) || 'avail';      // 'done' | 'avail'
+
+  // Mevcut buton metnini koru (QUIZ-2, QUIZ-3…)
+  var baseLabel = (btn.textContent || ('QUIZ-' + idx)).trim();
+
+  function setCompleted() {
+    btn.disabled = true;
+    btn.classList.add('deactivated');
+    btn.textContent = baseLabel + ' (Tamamlandı)';
+    btn.onclick = null;
+    btn.setAttribute('aria-disabled','true');
+  }
+
+  function setAvailable() {
+    btn.disabled = false;
+    btn.classList.remove('deactivated');
+    btn.textContent = baseLabel;
+    btn.removeAttribute('aria-disabled');
+  }
+
+  // İlk çizim (parametreyle doğrudan doğru görünüm)
+  if (status === 'done') setCompleted(); else setAvailable();
+
+  // Artık göster
+  document.documentElement.classList.remove('preinit');
+
+  // Sonradan Velo updateButtons gönderirse yine uygula
+  window.addEventListener('message', function (e) {
+    if (e.origin !== ORIGIN) return;
+    var d = e.data || {};
+    if (d.action === 'updateButtons') {
+      var done = Array.isArray(d.progress) && d.progress.includes(TEST_NUMBER);
+      if (done) setCompleted(); else setAvailable();
+    }
+  });
+
+  // View Result override'ını dinamikleştir (testNumber = tn)
+  var viewBtn = document.getElementById('viewResult');
+  if (viewBtn) {
+    var old = viewBtn.onclick;
+    viewBtn.onclick = function (ev) {
+      if (old) old(ev);
+      try {
+        window.parent.postMessage({ action: 'updateProgress', testNumber: TEST_NUMBER }, ORIGIN);
+      } catch (e) {}
+      // iyimser UI
+      setCompleted();
+    };
+  }
+})();
+
 
 
 
