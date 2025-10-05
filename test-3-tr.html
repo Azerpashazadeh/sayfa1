@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Quiz</title>
 
     <script>
@@ -863,17 +864,20 @@
         }
 
 
-        /* Start ekranı görünürken altta kaydırma payı bırak */
-        #startMessage.is-active {
-            /* ~buton yüksekliği (80–96px) + güvenli alan */
-            padding-bottom: max(100px, calc(96px + env(safe-area-inset-bottom)));
-        }
+       /* En azından sabit bir pay */
+#startMessage.is-active {
+  padding-bottom: 96px; /* ~buton + nefes payı */
+}
 
-        /* Buton kutusuna da küçük bir alt marj ver */
-        #startMessage.is-active .button-container {
-            margin-bottom: max(12px, env(safe-area-inset-bottom));
-        }
+/* Android/Chrome için: gerçek dinamik viewport */
+#startMessage.is-active {
+  padding-bottom: max(96px, 6dvh);
+}
 
+/* iOS çentik/pill varsa: safe-area'yı ekle */
+#startMessage.is-active {
+  padding-bottom: max(96px, calc(6dvh + env(safe-area-inset-bottom)));
+}
 
 
 
