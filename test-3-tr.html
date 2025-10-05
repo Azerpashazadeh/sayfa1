@@ -5968,6 +5968,21 @@
                 };
             }
         })();
+
+
+
+
+
+        function padForButton() {
+      const wrap = document.getElementById('startMessage');
+      const box  = wrap?.querySelector('.button-container');
+      if (!wrap || !box) return;
+      const btnH = box.offsetHeight || 80;
+      const extra = 24;
+      wrap.style.paddingBottom = (btnH + extra) + 'px';
+    }
+    window.addEventListener('load', padForButton);
+    window.addEventListener('resize', padForButton);
     </script>
 </body>
 
