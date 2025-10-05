@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
     <title>Quiz</title>
 
     <script>
@@ -16,17 +18,44 @@
       /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
       /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
       /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
+      
+      html, body { min-height: 100dvh; }
+      
       body {
         font-family: "Times New Roman";
-        display: grid;
-        /* Mevcut düzen korunuyor */
-        height: 10vh;
+
+         display: block;     /* grid değil */
+  height: auto;       /* 10vh değil */
+  overflow-y: auto;   /* kaydırma açık */
+        
         /* Boyut aynı kalıyor */
         place-items: center;
         /* İçerik merkezi hizalanır */
         margin: 0;
         padding: 0;
       }
+
+      
+
+/* Görünür olduğunda bir sınıf eklemeni öneriyorum (ör. .is-active) */
+#startMessage.is-active {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh; /* 100vh değil, toolbar dalgalanması çözülür */
+  padding-bottom: calc(12vh + env(safe-area-inset-bottom) + 24px);
+}
+#startMessage.is-active .button-container {
+  position: sticky;
+  bottom: max(12px, env(safe-area-inset-bottom) + 8px);
+  margin-top: auto;
+}
+
+
+
+
+
+
+
       .preinit #quizButton1 {
         visibility: hidden;
       }
@@ -221,10 +250,6 @@
 
       .questionContainer {
         outline: 5px solid transparent;
-      }
-
-      #startMessage {
-        outline: 3px solid red;
       }
 
       h4,
@@ -823,19 +848,11 @@
         margin-left: 20px;
       }
 
-    #startMessage {
-  display: none;
-  margin-top: 50px;
-  /* Alta yeterli kaydırma payı ver */
-  padding-bottom: max(24px, env(safe-area-inset-bottom) + 16px);
-}
-
-#startMessage .button-container {
-  margin-bottom: max(300px, env(safe-area-inset-bottom) + 50px);
-}
-
-
-
+      #startMessage {
+        display: none;
+        margin-top: 50px;
+        /* İstediğiniz değeri buraya ekleyin */
+      }
 
       #startMessage p,
       #startMessage h4 {
@@ -2345,7 +2362,7 @@
     <!--<div class="coordinateDisplay">X: 0, Y: 0</div>-->
 
     <!-- SECTION-1 ve teste başla düğmeleri -->
-    <button id="quizButton1" onclick="startQuizAndFullscreen()">QUIZ-1</button>
+    <button id="quizButton1" onclick="startQuizAndFullscreen()">QUIZ-3</button>
 
     <!-- Mesaj alanı -->
     <div id="messageArea">
@@ -2764,7 +2781,7 @@
         }
 
         // Yeni işlevselliği buraya ekleyin
-        const completedTestNumber = 2001; // TEST1 tamamlandı
+        const completedTestNumber = 2003; // TEST3 tamamlandı
 
         // Frontend'e mesaj gönderme işlemi
         const wixOrigin = "https://www.examtheorie.nl";
@@ -4902,24 +4919,24 @@
 
       async function loadQuizS3() {
         const t1Questions = await fetchQuestionsS3(
-          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_f7d6b0e226a94ec5b134351942a1e734.json",
-          37,
+          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_7025f150e15049fd9f9f89bba353f568.json",
+          38,
         );
         const t2Questions = await fetchQuestionsS3(
-          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_5d3c251de3f6436680701cd6c095e3b7.json",
-          3,
+          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_c32e778dba5b41ce8b9db3ae2b0fa13f.json",
+          0,
         );
         const t3Questions = await fetchQuestionsS3(
-          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_d7a473efdba5464499d5e38259b54bc4.json",
-          1,
+          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_ad00809cda964bc79c3a5092b53f25d3.json",
+          3,
         );
         const t4Questions = await fetchQuestionsS3(
-          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_bd4f988951764289ae332872c3b693ad.json",
-          2,
+          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_227539c98aa5486e9fbbf44fa450f327.json",
+          4,
         );
         const t5Questions = await fetchQuestionsS3(
-          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_d3b0c35d29b3482a9511e94abbc71809.json",
-          7,
+          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_feabfcf8f00d499d84ab59df52d21855.json",
+          5,
         );
 
         // T1'den gelen sorulara "Radio" button, T3'ten gelen sorulara "Checkbox" uygula
@@ -5818,27 +5835,27 @@
           const progress = message.progress; // Tamamlanan testlerin listesi
           console.log("Progress bilgileri alındı:", progress);
 
-          // QUIZ-1 butonunu kontrol et ve güncelle
-          updateQuiz1Button(progress);
+          // QUIZ-3 butonunu kontrol et ve güncelle
+          updateQuiz3Button(progress);
         }
       });
 
-      // QUIZ-1 butonunu güncelleme fonksiyonu
-      function updateQuiz1Button(progress) {
-        // QUIZ-1 butonunu seç
-        const quiz1Button = document.getElementById("quizButton1");
+      // QUIZ-3 butonunu güncelleme fonksiyonu
+      function updateQuiz3Button(progress) {
+        // QUIZ-3 butonunu seç
+        const quiz3Button = document.getElementById("quizButton3");
 
-        if (quiz1Button) {
+        if (quiz3Button) {
           // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
-          if (progress.includes(1)) {
-            quiz1Button.disabled = true;
-            quiz1Button.textContent = "QUIZ-1 (Tamamlandı)";
-            quiz1Button.classList.add("deactivated");
+          if (progress.includes(3)) {
+            quiz3Button.disabled = true;
+            quiz3Button.textContent = "QUIZ-3 (Tamamlandı)";
+            quiz3Button.classList.add("deactivated");
           } else {
             // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
-            quiz1Button.disabled = false;
-            quiz1Button.textContent = "QUIZ-1";
-            quiz1Button.classList.remove("deactivated");
+            quiz3Button.disabled = false;
+            quiz3Button.textContent = "QUIZ-3";
+            quiz3Button.classList.remove("deactivated");
           }
         }
       }
