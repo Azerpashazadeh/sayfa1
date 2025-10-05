@@ -2409,6 +2409,55 @@
             margin: 0 auto;
             margin-bottom: 20px !important;
         }
+
+
+
+
+
+
+#button-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jump-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.jump-label {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+#jumpSelS3 {
+  height: 32px;
+  min-width: 64px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0 6px;
+  font-size: 14px;
+}
+
+/* Çok dar ekranda label’ı gizle (yer kazandırır) */
+@media (max-width: 360px) {
+  .jump-label { display: none; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 
@@ -2596,17 +2645,21 @@
     <!-- Zamanlayıcı başlangıçta gizli -->
     <div class="quiz-container-s3"></div>
     <div id="button-container">
-        <button id="previous-button-s3" class="hidden" onclick="previousQuestionS3()">
-            Önceki
-        </button>
-        <div class="flex-grow">
-            <h2 id="soruNumarasiS3"></h2>
-            <!-- Yeni ID: soruNumarasiS3 -->
-        </div>
-        <button id="next-button-s3" class="hidden" onclick="nextQuestionS3()">
-            Sonraki
-        </button>
-    </div>
+  <button id="previous-button-s3" class="hidden" onclick="previousQuestionS3()">Önceki</button>
+
+  <div class="flex-grow">
+    <h2 id="soruNumarasiS3"></h2>
+  </div>
+
+  <!-- Soruya hızlı atlama: kompakt açılır kutu -->
+  <span id="jumpWrapS3" class="jump-wrap">
+    <label for="jumpSelS3" class="jump-label">Git</label>
+    <select id="jumpSelS3" aria-label="Soru seç"></select>
+  </span>
+
+  <button id="next-button-s3" class="hidden" onclick="nextQuestionS3()">Sonraki</button>
+</div>
+
 
     <div id="proceedSection3End" class="center-button hidden" style="flex-direction: column; gap: 10px">
         <div class="button-container">
@@ -4597,6 +4650,26 @@
             updateNextButtonS3();
         }
 
+// *** AYNI DOSYAYA EKLE (currentQuestionIndexS3 ile aynı kapsam) ***
+window.jumpToQuestionS3 = function (oneBased) {
+  const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
+  if (!oneBased || oneBased < 1 || oneBased > total) return;
+
+  currentQuestionIndexS3 = oneBased - 1;
+  showCurrentQuestionS3();
+  if (typeof updatePreviousButtonS3 === 'function') updatePreviousButtonS3();
+  if (typeof updateNextButtonS3 === 'function') updateNextButtonS3();
+  if (typeof checkAnswersAndUpdateBlocks === 'function') checkAnswersAndUpdateBlocks();
+
+  document.querySelector('.quiz-container-s3')?.classList.remove('hidden');
+  document.getElementById('soruNumarasiS3')?.classList.remove('hidden');
+  document.getElementById('finalResultContainerId')?.classList.add('hidden');
+  document.getElementById('proceedSection3End')?.classList.add('hidden');
+};
+
+
+
+
         function previousQuestionS3() {
             if (currentQuestionIndexS3 > 0) {
                 currentQuestionIndexS3--;
@@ -6014,6 +6087,105 @@
         // Ekran döndüğünde / yeniden boyutta yeniden hesapla
         window.addEventListener('resize', padForButton);
         window.addEventListener('orientationchange', padForButton);
+
+
+
+
+
+
+     (function () {
+  const TOTAL_QUESTIONS_S3 = window.allQuestionsS3?.length || 50;
+
+  function fillJumpOptions() {
+    const sel = document.getElementById("jumpSelS3");
+    if (!sel) return;
+    sel.innerHTML = "";
+    for (let i = 1; i <= TOTAL_QUESTIONS_S3; i++) {
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = i;
+      sel.appendChild(opt);
+    }
+  }
+
+  function jumpToSelected() {
+    const sel = document.getElementById("jumpSelS3");
+    if (!sel) return;
+
+    const target = parseInt(sel.value, 10);
+    if (isNaN(target)) return;
+
+    // 0-based indeks
+    window.currentQuestionIndexS3 = target - 1;
+
+    // Bunu currentQuestionIndexS3, showCurrentQuestionS3 vs. ile AYNI dosyaya koy
+window.jumpToQuestionS3 = function(oneBased) {
+  const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
+  if (!oneBased || oneBased < 1 || oneBased > total) return;
+
+  // Modül içindeki DEĞİŞKENİ güncelle
+  currentQuestionIndexS3 = oneBased - 1;
+
+  // Mevcut akışınızı tetikle
+  showCurrentQuestionS3();
+  if (typeof updatePreviousButtonS3 === 'function') updatePreviousButtonS3();
+  if (typeof updateNextButtonS3 === 'function') updateNextButtonS3();
+  if (typeof checkAnswersAndUpdateBlocks === 'function') checkAnswersAndUpdateBlocks();
+
+  // Görünürlükleri garanti altına al
+  const quiz = document.querySelector('.quiz-container-s3');
+  if (quiz) quiz.classList.remove('hidden');
+  const h2 = document.getElementById('soruNumarasiS3');
+  if (h2) h2.classList.remove('hidden');
+  const res = document.getElementById('finalResultContainerId');
+  if (res) res.classList.add('hidden');
+  const proceed = document.getElementById('proceedSection3End');
+  if (proceed) proceed.classList.add('hidden');
+};
+
+
+    // Sualı göstər
+    showCurrentQuestionS3();
+
+    // Əlavə yeniləmələr
+    if (typeof updatePreviousButtonS3 === "function") updatePreviousButtonS3();
+    if (typeof updateNextButtonS3 === "function") updateNextButtonS3();
+    if (typeof checkAnswersAndUpdateBlocks === "function") checkAnswersAndUpdateBlocks();
+
+    // Başlıq görünməzdisə, yenidən göstər
+    const soruNumarasi = document.getElementById("soruNumarasiS3");
+    if (soruNumarasi) soruNumarasi.classList.remove("hidden");
+
+    // Quiz konteynerini göstər
+    const quizContainer = document.querySelector(".quiz-container-s3");
+    if (quizContainer) quizContainer.classList.remove("hidden");
+
+    // “Sonuç” ya da “proceed” hissələri gizlənsin
+    const result = document.getElementById("finalResultContainerId");
+    if (result) result.classList.add("hidden");
+    const proceed = document.getElementById("proceedSection3End");
+    if (proceed) proceed.classList.add("hidden");
+  }
+
+  function initJump() {
+    fillJumpOptions();
+    const sel = document.getElementById("jumpSelS3");
+    if (!sel) return;
+    sel.addEventListener("change", jumpToSelected);
+  }
+
+  document.addEventListener("DOMContentLoaded", initJump);
+})();
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const sel = document.getElementById('jumpSelS3');
+  if (!sel) return;
+  sel.addEventListener('change', function () {
+    const v = parseInt(this.value, 10);
+    if (!isNaN(v)) window.jumpToQuestionS3(v);
+  });
+});
     </script>
 </body>
 
