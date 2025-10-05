@@ -3,8 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
     <title>Quiz</title>
 
     <script>
@@ -19,42 +17,36 @@
       /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
       /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
       
-      html, body { min-height: 100dvh; }
-      
-      body {
-        font-family: "Times New Roman";
-
-         display: block;     /* grid değil */
-  height: auto;       /* 10vh değil */
-  overflow-y: auto;   /* kaydırma açık */
-        
-        /* Boyut aynı kalıyor */
-        place-items: center;
-        /* İçerik merkezi hizalanır */
-        margin: 0;
-        padding: 0;
-      }
-
-      
-
-/* Görünür olduğunda bir sınıf eklemeni öneriyorum (ör. .is-active) */
-#startMessage.is-active {
-  display: flex;
-  flex-direction: column;
-  min-height: 100dvh; /* 100vh değil, toolbar dalgalanması çözülür */
-  padding-bottom: calc(12vh + env(safe-area-inset-bottom) + 24px);
-}
-#startMessage.is-active .button-container {
-  position: sticky;
-  bottom: max(12px, env(safe-area-inset-bottom) + 8px);
-  margin-top: auto;
+     html, body {
+  min-height: 100dvh;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  /* Kenarlarda az boşluq yarat */
+  box-sizing: border-box;
 }
 
+/* Kaydırma çubuğunu gizle ama kaydırma aktif kalsın */
+body {
+  font-family: "Times New Roman";
+  display: block;
+  height: auto;
+  place-items: center;
 
+  /* Kenarlarda ufak boşluk */
+  padding-left: 8px;
+  padding-right: 8px;
 
+  /* Scrollbar gizleme */
+  scrollbar-width: none !important;     /* Firefox */
+  -ms-overflow-style: none !important;  /* Eski Edge/IE */
+}
 
-
-
+body::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
 
       .preinit #quizButton1 {
         visibility: hidden;
