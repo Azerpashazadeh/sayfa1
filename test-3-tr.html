@@ -19,15 +19,22 @@
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
 
-       html, body { min-height: 100dvh; overflow-y: auto; }
+        html,
+        body {
+            min-height: 100dvh;
+            overflow-y: auto;
+        }
 
-#startMessage { display: none; }
+        #startMessage {
+            display: none;
+        }
 
-#startMessage.is-active {
-  display: block;
-  min-height: 100dvh;               /* 100vh değil 100dvh */
-  /* JS ayrıca paddingBottom verecek */
-}
+        #startMessage.is-active {
+            display: block;
+            min-height: 100dvh;
+            /* 100vh değil 100dvh */
+            /* JS ayrıca paddingBottom verecek */
+        }
 
         /* Kaydırma çubuğunu gizle ama kaydırma aktif kalsın */
         body {
@@ -864,20 +871,21 @@
         }
 
 
-       /* En azından sabit bir pay */
-#startMessage.is-active {
-  padding-bottom: 96px; /* ~buton + nefes payı */
-}
+        /* En azından sabit bir pay */
+        #startMessage.is-active {
+            padding-bottom: 96px;
+            /* ~buton + nefes payı */
+        }
 
-/* Android/Chrome için: gerçek dinamik viewport */
-#startMessage.is-active {
-  padding-bottom: max(96px, 6dvh);
-}
+        /* Android/Chrome için: gerçek dinamik viewport */
+        #startMessage.is-active {
+            padding-bottom: max(96px, 6dvh);
+        }
 
-/* iOS çentik/pill varsa: safe-area'yı ekle */
-#startMessage.is-active {
-  padding-bottom: max(96px, calc(6dvh + env(safe-area-inset-bottom)));
-}
+        /* iOS çentik/pill varsa: safe-area'yı ekle */
+        #startMessage.is-active {
+            padding-bottom: max(96px, calc(6dvh + env(safe-area-inset-bottom)));
+        }
 
 
 
@@ -2569,7 +2577,7 @@
         </p>
         <h4 class="start-insight">İyi şanslar!</h4>
         <div class="button-container">
-            <button id="startSection3Button" onclick="startQuizS3()">
+            <button id="startSection3Button" onclick="showStartMessage(); startQuizS3();">
                 İLK SORUYA GEÇ
             </button>
         </div>
@@ -5974,33 +5982,33 @@
 
 
         function padForButton() {
-    const wrap = document.getElementById('startMessage');
-    if (!wrap) return;
-    const box = wrap.querySelector('.button-container');
-    if (!box) return;
+            const wrap = document.getElementById('startMessage');
+            if (!wrap) return;
+            const box = wrap.querySelector('.button-container');
+            if (!box) return;
 
-    // Buton yüksekliği + ekstra nefes (Android için güvenli)
-    const btnH = box.offsetHeight || 80;
-    const extra = 24;
-    wrap.style.paddingBottom = (btnH + extra) + 'px';
-  }
+            // Buton yüksekliği + ekstra nefes (Android için güvenli)
+            const btnH = box.offsetHeight || 80;
+            const extra = 24;
+            wrap.style.paddingBottom = (btnH + extra) + 'px';
+        }
 
-  // Start ekranını açtığın yerde BUNU çağır
-  function showStartMessage() {
-    const wrap = document.getElementById('startMessage');
-    if (!wrap) return;
-    wrap.classList.add('is-active');
-    wrap.style.display = 'block';
+        // Start ekranını açtığın yerde BUNU çağır
+        function showStartMessage() {
+            const wrap = document.getElementById('startMessage');
+            if (!wrap) return;
+            wrap.classList.add('is-active');
+            wrap.style.display = 'block';
 
-    // Görünür olduktan sonra ölçüm: iki kare bekle
-    requestAnimationFrame(() => {
-      requestAnimationFrame(padForButton);
-    });
-  }
+            // Görünür olduktan sonra ölçüm: iki kare bekle
+            requestAnimationFrame(() => {
+                requestAnimationFrame(padForButton);
+            });
+        }
 
-  // Ekran döndüğünde / yeniden boyutta yeniden hesapla
-  window.addEventListener('resize', padForButton);
-  window.addEventListener('orientationchange', padForButton);
+        // Ekran döndüğünde / yeniden boyutta yeniden hesapla
+        window.addEventListener('resize', padForButton);
+        window.addEventListener('orientationchange', padForButton);
     </script>
 </body>
 
