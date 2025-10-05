@@ -19,15 +19,15 @@
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
 
-        html,
-        body {
-            min-height: 100dvh;
-            overflow-y: auto;
-            margin: 0;
-            padding: 0;
-            /* Kenarlarda az boşluq yarat */
-            box-sizing: border-box;
-        }
+       html, body { min-height: 100dvh; overflow-y: auto; }
+
+#startMessage { display: none; }
+
+#startMessage.is-active {
+  display: block;
+  min-height: 100dvh;               /* 100vh değil 100dvh */
+  /* JS ayrıca paddingBottom verecek */
+}
 
         /* Kaydırma çubuğunu gizle ama kaydırma aktif kalsın */
         body {
@@ -5974,15 +5974,33 @@
 
 
         function padForButton() {
-      const wrap = document.getElementById('startMessage');
-      const box  = wrap?.querySelector('.button-container');
-      if (!wrap || !box) return;
-      const btnH = box.offsetHeight || 80;
-      const extra = 24;
-      wrap.style.paddingBottom = (btnH + extra) + 'px';
-    }
-    window.addEventListener('load', padForButton);
-    window.addEventListener('resize', padForButton);
+    const wrap = document.getElementById('startMessage');
+    if (!wrap) return;
+    const box = wrap.querySelector('.button-container');
+    if (!box) return;
+
+    // Buton yüksekliği + ekstra nefes (Android için güvenli)
+    const btnH = box.offsetHeight || 80;
+    const extra = 24;
+    wrap.style.paddingBottom = (btnH + extra) + 'px';
+  }
+
+  // Start ekranını açtığın yerde BUNU çağır
+  function showStartMessage() {
+    const wrap = document.getElementById('startMessage');
+    if (!wrap) return;
+    wrap.classList.add('is-active');
+    wrap.style.display = 'block';
+
+    // Görünür olduktan sonra ölçüm: iki kare bekle
+    requestAnimationFrame(() => {
+      requestAnimationFrame(padForButton);
+    });
+  }
+
+  // Ekran döndüğünde / yeniden boyutta yeniden hesapla
+  window.addEventListener('resize', padForButton);
+  window.addEventListener('orientationchange', padForButton);
     </script>
 </body>
 
