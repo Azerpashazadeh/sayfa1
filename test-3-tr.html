@@ -37,9 +37,8 @@
         }
 
         #startMessage .button-container {
-            margin-bottom: 60px;
-            /* 24px idi, indi biraz daha fazla */
-        }
+  margin-bottom: 60px; /* 24px idi, indi biraz daha fazla */
+}
 
 
         /* Kaydırma çubuğunu gizle ama kaydırma aktif kalsın */
@@ -2412,12 +2411,52 @@
         }
 
 
-        .map-buttons { display:inline-flex; margin-left:8px; }
-#btnQuestionMap {
-  height:32px; padding:0 10px; border:none; border-radius:6px;
-  background:#c47308; color:#fff; font-size:14px; cursor:pointer;
+
+
+
+
+#button-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-.hidden { display:none !important; }
+
+.jump-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.jump-label {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+#jumpSelS3 {
+  height: 32px;
+  min-width: 64px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0 6px;
+  font-size: 14px;
+}
+
+/* Çok dar ekranda label’ı gizle (yer kazandırır) */
+@media (max-width: 360px) {
+  .jump-label { display: none; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
     </style>
 </head>
@@ -2606,25 +2645,20 @@
     <!-- Zamanlayıcı başlangıçta gizli -->
     <div class="quiz-container-s3"></div>
     <div id="button-container">
-        <button id="previous-button-s3" class="hidden" onclick="previousQuestionS3()">
-            Önceki
-        </button>
+  <button id="previous-button-s3" class="hidden" onclick="previousQuestionS3()">Önceki</button>
 
-        <div class="flex-grow">
-            <h2 id="soruNumarasiS3"></h2>
-            <!-- Yeni ID: soruNumarasiS3 -->
+  <div class="flex-grow">
+    <h2 id="soruNumarasiS3"></h2>
+  </div>
 
-            <span class="map-buttons">
-                <button id="btnQuestionMap" type="button" class="hidden">
-                    Soru Haritası
-                </button>
-            </span>
-        </div>
+  <!-- Soruya hızlı atlama: kompakt açılır kutu -->
+  <span id="jumpWrapS3" class="jump-wrap">
+    <label for="jumpSelS3" class="jump-label">Git</label>
+    <select id="jumpSelS3" aria-label="Soru seç"></select>
+  </span>
 
-        <button id="next-button-s3" class="hidden" onclick="nextQuestionS3()">
-            Sonraki
-        </button>
-    </div>
+  <button id="next-button-s3" class="hidden" onclick="nextQuestionS3()">Sonraki</button>
+</div>
 
 
     <div id="proceedSection3End" class="center-button hidden" style="flex-direction: column; gap: 10px">
@@ -4616,6 +4650,26 @@
             updateNextButtonS3();
         }
 
+// *** AYNI DOSYAYA EKLE (currentQuestionIndexS3 ile aynı kapsam) ***
+window.jumpToQuestionS3 = function (oneBased) {
+  const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
+  if (!oneBased || oneBased < 1 || oneBased > total) return;
+
+  currentQuestionIndexS3 = oneBased - 1;
+  showCurrentQuestionS3();
+  if (typeof updatePreviousButtonS3 === 'function') updatePreviousButtonS3();
+  if (typeof updateNextButtonS3 === 'function') updateNextButtonS3();
+  if (typeof checkAnswersAndUpdateBlocks === 'function') checkAnswersAndUpdateBlocks();
+
+  document.querySelector('.quiz-container-s3')?.classList.remove('hidden');
+  document.getElementById('soruNumarasiS3')?.classList.remove('hidden');
+  document.getElementById('finalResultContainerId')?.classList.add('hidden');
+  document.getElementById('proceedSection3End')?.classList.add('hidden');
+};
+
+
+
+
         function previousQuestionS3() {
             if (currentQuestionIndexS3 > 0) {
                 currentQuestionIndexS3--;
@@ -6036,122 +6090,102 @@
 
 
 
-        (function(){
-  const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
-  const btn  = document.getElementById('btnQuestionMap');
-  const map  = document.getElementById('endMessage3-S3');
-  if (!btn || !map) return;
 
-  // 1) Harita oluşturulunca (NEXT’in sonundaki doldurma işlemi) algıla
-  //    #endMessage3-S3 içindeki kareler eklendiğinde childElementCount > 0 olur
-  const mo = new MutationObserver(() => {
-    if (map.childElementCount > 0) {
-      // Harita artık var → karelere tıklanıp soruya dönünce düğmeyi göstereceğiz
-      // Delegasyon: .question-block-s3 üzerine tıklamaları yakala
-      map.addEventListener('click', function onMapClick(e){
-        const cell = e.target.closest('.question-block-s3');
-        if (!cell) return;
-        // Kullanıcı kareye tıkladı → kısa süre sonra quiz görünür olacak.
-        // Bir sonraki frame’de butonu görünür yap.
-        requestAnimationFrame(() => btn.classList.remove('hidden'));
-      }, { once:false });
 
-      // Artık gözlemci gereksiz — bir kez keşfettikten sonra durdurabiliriz
-      mo.disconnect();
+
+     (function () {
+  const TOTAL_QUESTIONS_S3 = window.allQuestionsS3?.length || 50;
+
+  function fillJumpOptions() {
+    const sel = document.getElementById("jumpSelS3");
+    if (!sel) return;
+    sel.innerHTML = "";
+    for (let i = 1; i <= TOTAL_QUESTIONS_S3; i++) {
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = i;
+      sel.appendChild(opt);
     }
-  });
-  mo.observe(map, { childList: true });
+  }
 
-  // 2) Düğmeye basınca haritayı aç / haritaya kaydır
-  btn.addEventListener('click', () => {
-    // Quiz UI’ı gizle, haritayı göster
-    document.querySelector('.quiz-container-s3')?.classList.add('hidden');
-    document.getElementById('soruNumarasiS3')?.classList.add('hidden');
+  function jumpToSelected() {
+    const sel = document.getElementById("jumpSelS3");
+    if (!sel) return;
 
-    // Haritayı görünür yap (NEXT akışında bazen display ayarı kalabiliyor)
-    map.classList.remove('hidden');
-    map.style.display = 'flex';
-    map.style.flexWrap = 'wrap';
+    const target = parseInt(sel.value, 10);
+    if (isNaN(target)) return;
 
-    // Yumuşak kaydır
-    map.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+    // 0-based indeks
+    window.currentQuestionIndexS3 = target - 1;
 
+    // Bunu currentQuestionIndexS3, showCurrentQuestionS3 vs. ile AYNI dosyaya koy
+window.jumpToQuestionS3 = function(oneBased) {
+  const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
+  if (!oneBased || oneBased < 1 || oneBased > total) return;
+
+  // Modül içindeki DEĞİŞKENİ güncelle
+  currentQuestionIndexS3 = oneBased - 1;
+
+  // Mevcut akışınızı tetikle
+  showCurrentQuestionS3();
+  if (typeof updatePreviousButtonS3 === 'function') updatePreviousButtonS3();
+  if (typeof updateNextButtonS3 === 'function') updateNextButtonS3();
+  if (typeof checkAnswersAndUpdateBlocks === 'function') checkAnswersAndUpdateBlocks();
+
+  // Görünürlükleri garanti altına al
+  const quiz = document.querySelector('.quiz-container-s3');
+  if (quiz) quiz.classList.remove('hidden');
+  const h2 = document.getElementById('soruNumarasiS3');
+  if (h2) h2.classList.remove('hidden');
+  const res = document.getElementById('finalResultContainerId');
+  if (res) res.classList.add('hidden');
+  const proceed = document.getElementById('proceedSection3End');
+  if (proceed) proceed.classList.add('hidden');
+};
+
+
+    // Sualı göstər
+    showCurrentQuestionS3();
+
+    // Əlavə yeniləmələr
+    if (typeof updatePreviousButtonS3 === "function") updatePreviousButtonS3();
+    if (typeof updateNextButtonS3 === "function") updateNextButtonS3();
+    if (typeof checkAnswersAndUpdateBlocks === "function") checkAnswersAndUpdateBlocks();
+
+    // Başlıq görünməzdisə, yenidən göstər
+    const soruNumarasi = document.getElementById("soruNumarasiS3");
+    if (soruNumarasi) soruNumarasi.classList.remove("hidden");
+
+    // Quiz konteynerini göstər
+    const quizContainer = document.querySelector(".quiz-container-s3");
+    if (quizContainer) quizContainer.classList.remove("hidden");
+
+    // “Sonuç” ya da “proceed” hissələri gizlənsin
+    const result = document.getElementById("finalResultContainerId");
+    if (result) result.classList.add("hidden");
+    const proceed = document.getElementById("proceedSection3End");
+    if (proceed) proceed.classList.add("hidden");
+  }
+
+  function initJump() {
+    fillJumpOptions();
+    const sel = document.getElementById("jumpSelS3");
+    if (!sel) return;
+    sel.addEventListener("change", jumpToSelected);
+  }
+
+  document.addEventListener("DOMContentLoaded", initJump);
 })();
 
 
-
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("btnQuestionMap");
-  if (!btn) return;
-
-  btn.addEventListener("click", () => {
-    const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
-    const quizContainer = document.querySelector(".quiz-container-s3");
-    const proceed = document.getElementById("proceedSection3End");   // ebeveyn
-    const endMessage3 = document.getElementById("endMessage3-S3");   // karelerin olduğu yer
-
-    // 1) endMessage3 dolu değilse, kareleri oluştur (NEXT'in else'inde yapıldığı gibi)
-    if (endMessage3 && endMessage3.childElementCount !== total) {
-      endMessage3.innerHTML = "";
-      for (let i = 0; i < total; i++) {
-        const el = document.createElement("div");
-        el.className = "question-block-s3";
-        el.style.width = "30px";
-        el.style.height = "30px";
-        el.style.border = "1px solid black";
-        el.style.textAlign = "center";
-        el.style.lineHeight = "30px";
-        el.style.margin = "5px";
-        el.style.cursor = "pointer";
-        el.textContent = i + 1;
-
-        el.addEventListener("click", () => {
-          // Seçilen soruya dön
-          window.currentQuestionIndexS3 = i;
-          if (typeof window.showCurrentQuestionS3 === "function") window.showCurrentQuestionS3();
-          if (typeof window.updatePreviousButtonS3 === "function") window.updatePreviousButtonS3();
-          if (typeof window.updateNextButtonS3 === "function") window.updateNextButtonS3();
-          if (typeof window.checkAnswersAndUpdateBlocks === "function") window.checkAnswersAndUpdateBlocks();
-
-          // Haritayı kapat, quiz UI'ı aç, düğmeyi geri göster
-          proceed?.classList.add("hidden");
-          quizContainer?.classList.remove("hidden");
-          document.getElementById("soruNumarasiS3")?.classList.remove("hidden");
-          btn.classList.remove("hidden");
-        });
-
-        endMessage3.appendChild(el);
-      }
-    }
-
-    // 2) “Son NEXT”te olduğu gibi UI durumunu ayarla
-    document.getElementById("previous-button-s3")?.classList.add("hidden");
-    document.getElementById("next-button-s3")?.classList.add("hidden");
-    document.getElementById("soruNumarasiS3")?.classList.add("hidden");
-
-    quizContainer?.classList.add("hidden");
-    proceed?.classList.remove("hidden");       // ⬅️ ebeveyni görünür yap
-    if (endMessage3) {
-      endMessage3.classList.remove("hidden");
-      endMessage3.style.display = "flex";
-      endMessage3.style.flexWrap = "wrap";
-    }
-
-    // Renkler/istatistikler için aynı hesaplamayı tetikle
-    if (typeof window.checkAnswersAndUpdateBlocks === "function") {
-      window.checkAnswersAndUpdateBlocks();
-    }
-
-    // Harita açıkken buton gizli
-    btn.classList.add("hidden");
+document.addEventListener('DOMContentLoaded', function () {
+  const sel = document.getElementById('jumpSelS3');
+  if (!sel) return;
+  sel.addEventListener('change', function () {
+    const v = parseInt(this.value, 10);
+    if (!isNaN(v)) window.jumpToQuestionS3(v);
   });
 });
-
-
     </script>
 </body>
 
