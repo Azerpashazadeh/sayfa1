@@ -2634,43 +2634,53 @@
     <div id="app-s3" class="hidden"></div>
     <!-- Zamanlayıcı başlangıçta gizli -->
     <div class="quiz-container-s3"></div>
-    <div id="button-container">
-        <button id="previous-button-s3" class="hidden" onclick="previousQuestionS3()">
-            Önceki
-        </button>
+   <div id="button-container">
+  <button id="previous-button-s3" class="hidden" onclick="previousQuestionS3()">
+    Önceki
+  </button>
 
-        <div class="flex-grow">
-            <h2 id="soruNumarasiS3"></h2>
-            <!-- Yeni ID: soruNumarasiS3 -->
+  <div class="flex-grow">
+    <h2 id="soruNumarasiS3"></h2>
+    <!-- Yeni ID: soruNumarasiS3 -->
 
-            <span class="map-buttons">
-                <!-- 🔹 Eski “Soru Haritası” butonu kaldırıldı -->
-                <!-- 🔹 Yerine SVG ikonlu kare buton entegre edildi -->
-                <button id="btnQuestionMap" type="button" class="grid-button hidden" title="Soru Haritası"
-                    aria-label="Soru Haritası">
-                    <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <!-- cell=6, gap=2  → x/y: 0, 8, 16 -->
-                        <!-- Satır 1 -->
-                        <rect x="0" y="0" width="6" height="6" rx="1" />
-                        <rect x="8" y="0" width="6" height="6" rx="1" />
-                        <rect x="16" y="0" width="6" height="6" rx="1" />
-                        <!-- Satır 2 -->
-                        <rect x="0" y="8" width="6" height="6" rx="1" />
-                        <rect x="8" y="8" width="6" height="6" rx="1" />
-                        <rect x="16" y="8" width="6" height="6" rx="1" />
-                        <!-- Satır 3 -->
-                        <rect x="0" y="16" width="6" height="6" rx="1" />
-                        <rect x="8" y="16" width="6" height="6" rx="1" />
-                        <rect x="16" y="16" width="6" height="6" rx="1" />
-                    </svg>
-                </button>
-            </span>
-        </div>
+    <span class="map-buttons">
+      <!-- Soru haritası (zaten var) -->
+      <button id="btnQuestionMap" type="button" class="grid-button hidden" title="Soru Haritası" aria-label="Soru Haritası">
+        <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="0"  y="0"  width="6" height="6" rx="1" />
+          <rect x="8"  y="0"  width="6" height="6" rx="1" />
+          <rect x="16" y="0"  width="6" height="6" rx="1" />
+          <rect x="0"  y="8"  width="6" height="6" rx="1" />
+          <rect x="8"  y="8"  width="6" height="6" rx="1" />
+          <rect x="16" y="8"  width="6" height="6" rx="1" />
+          <rect x="0"  y="16" width="6" height="6" rx="1" />
+          <rect x="8"  y="16" width="6" height="6" rx="1" />
+          <rect x="16" y="16" width="6" height="6" rx="1" />
+        </svg>
+      </button>
 
-        <button id="next-button-s3" class="hidden" onclick="nextQuestionS3()">
-            Sonraki
-        </button>
-    </div>
+      <!-- 🔹 Yeni: Sonuç haritası butonu -->
+      <button id="btnResultMap" type="button" class="grid-button hidden" title="Sonuç Haritası" aria-label="Sonuç Haritası">
+        <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="0"  y="0"  width="6" height="6" rx="1" />
+          <rect x="8"  y="0"  width="6" height="6" rx="1" />
+          <rect x="16" y="0"  width="6" height="6" rx="1" />
+          <rect x="0"  y="8"  width="6" height="6" rx="1" />
+          <rect x="8"  y="8"  width="6" height="6" rx="1" />
+          <rect x="16" y="8"  width="6" height="6" rx="1" />
+          <rect x="0"  y="16" width="6" height="6" rx="1" />
+          <rect x="8"  y="16" width="6" height="6" rx="1" />
+          <rect x="16" y="16" width="6" height="6" rx="1" />
+        </svg>
+      </button>
+    </span>
+  </div>
+
+  <button id="next-button-s3" class="hidden" onclick="nextQuestionS3()">
+    Sonraki
+  </button>
+</div>
+
 
 
     <div id="proceedSection3End" class="center-button hidden" style="flex-direction: column; gap: 10px">
@@ -4578,42 +4588,47 @@
             }
         }
 
-        function finalResultShow() {
-            viewResult = true;
-            lockQuizQuestionsS3();
+       function finalResultShow() {
+    viewResult = true;
+    lockQuizQuestionsS3();
 
-            // Sonucu gösterme işlemi
-            document
-                .getElementById("viewResultContainerId")
-                .classList.add("hidden");
-            document
-                .getElementById("finalResultContainerId")
-                .classList.remove("hidden");
+    // Sonucu gösterme işlemi
+    document
+        .getElementById("viewResultContainerId")
+        .classList.add("hidden");
+    document
+        .getElementById("finalResultContainerId")
+        .classList.remove("hidden");
 
-            let calculateS3Correct = correctAnswerS3.questions.filter(
-                (x) => x.isCorrect === true,
-            );
+    let calculateS3Correct = correctAnswerS3.questions.filter(
+        (x) => x.isCorrect === true,
+    );
 
-            if (calculateS3Correct.length >= 44) {
-                document.getElementById("failOrPassEndS3").src =
-                    "https://static.wixstatic.com/media/4b688f_12a1098a791f44f88cd7265a0517b851~mv2.png";
-            } else {
-                document.getElementById("failOrPassEndS3").src =
-                    "https://static.wixstatic.com/media/4b688f_149ee4392b034dac89b73aef8268aef9~mv2.png";
-            }
+    if (calculateS3Correct.length >= 44) {
+        document.getElementById("failOrPassEndS3").src =
+            "https://static.wixstatic.com/media/4b688f_12a1098a791f44f88cd7265a0517b851~mv2.png";
+    } else {
+        document.getElementById("failOrPassEndS3").src =
+            "https://static.wixstatic.com/media/4b688f_149ee4392b034dac89b73aef8268aef9~mv2.png";
+    }
 
-            // resultS3 içindeki tüm endMessage4-S3 öğelerini al
-            const endMessageElements = document.querySelectorAll(
-                "#resultS3 #endMessage4-S3",
-            );
+    // resultS3 içindeki tüm endMessage4-S3 öğelerini al
+    const endMessageElements = document.querySelectorAll(
+        "#resultS3 #endMessage4-S3",
+    );
 
-            if (endMessageElements.length > 1) {
-                // İlk öğeyi hariç tutarak diğerlerini gizle
-                for (let i = 1; i < endMessageElements.length; i++) {
-                    endMessageElements[i].classList.add("hidden");
-                }
-            }
+    if (endMessageElements.length > 1) {
+        // İlk öğeyi hariç tutarak diğerlerini gizle
+        for (let i = 1; i < endMessageElements.length; i++) {
+            endMessageElements[i].classList.add("hidden");
         }
+    }
+
+    // 💙 Yeni eklenen satır:
+    // “Sonuç Haritası” butonunu görünür yap ve “Soru Haritası” butonunu gizle
+    if (typeof window.setResultsModeS3 === 'function') window.setResultsModeS3();
+}
+
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
@@ -6197,6 +6212,157 @@
                 btn.classList.add("hidden");
             });
         });
+
+
+
+
+
+
+
+
+
+       (function(){
+  const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
+
+  function showQuizUI(){
+    document.querySelector('.quiz-container-s3')?.classList.remove('hidden');
+    document.getElementById('soruNumarasiS3')?.classList.remove('hidden');
+  }
+  function hideQuizUI(){
+    document.querySelector('.quiz-container-s3')?.classList.add('hidden');
+    document.getElementById('soruNumarasiS3')?.classList.add('hidden');
+  }
+
+  // #endMessage4-S3 oluşturulmamışsa oluştur
+  function ensureEndMessage4(){
+    let endMessage4 = document.getElementById('endMessage4-S3');
+    if (!endMessage4) {
+      endMessage4 = document.createElement('div');
+      endMessage4.id = 'endMessage4-S3';
+      endMessage4.style.display = 'flex';
+      endMessage4.style.flexWrap = 'wrap';
+      (document.getElementById('resultS3') || document.body).appendChild(endMessage4);
+    }
+    if (endMessage4.childElementCount < total) {
+      endMessage4.innerHTML = '';
+      for (let i = 0; i < total; i++) {
+        const el = document.createElement('div');
+        el.className = 'question-block-s3';
+        Object.assign(el.style, {
+          width:'30px', height:'30px', border:'1px solid black',
+          textAlign:'center', lineHeight:'30px', margin:'5px', cursor:'pointer'
+        });
+        el.textContent = i + 1;
+        el.addEventListener('click', () => {
+          // 🔹 Soruya dön
+          window.currentQuestionIndexS3 = i;
+          if (typeof window.showCurrentQuestionS3 === 'function') window.showCurrentQuestionS3();
+          if (typeof window.updatePreviousButtonS3 === 'function') window.updatePreviousButtonS3();
+          if (typeof window.updateNextButtonS3 === 'function') window.updateNextButtonS3();
+          if (typeof window.checkAnswersAndUpdateBlocks === 'function') window.checkAnswersAndUpdateBlocks();
+
+          // 🔹 Quiz'i göster, endMessage4'ü gizle
+          endMessage4.classList.add('hidden');
+          showQuizUI();
+
+          // 🔹 Şimdi yalnızca bu durumda "Sonuç Haritası" butonu görünsün
+          document.getElementById('btnResultMap')?.classList.remove('hidden');
+        });
+        endMessage4.appendChild(el);
+      }
+    }
+    return endMessage4;
+  }
+
+  // 🔹 Sonuç Haritası düğmesine tıklanınca
+  function openResultMap(){
+    const endMessage4 = ensureEndMessage4();
+
+    // Quiz arayüzünü gizle
+    hideQuizUI();
+
+    // endMessage4 görünür hale gelsin
+    endMessage4.classList.remove('hidden');
+    endMessage4.style.display = 'flex';
+    endMessage4.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // 🔹 Buton kendini gizlesin
+    document.getElementById('btnResultMap')?.classList.add('hidden');
+  }
+
+  // 🔹 Sonuçlarımı Görüntüle tıklanınca bu çağrılır
+  window.setResultsModeS3 = function(){
+    // İlk başta buton görünmesin
+    document.getElementById('btnResultMap')?.classList.add('hidden');
+  };
+
+  // Click bağla
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('btnResultMap')?.addEventListener('click', openResultMap);
+  });
+})();
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  // 1) View My Result akışında buton başta gizli kalsın
+  if (typeof window.setResultsModeS3 === 'function') {
+    // zaten finalResultShow içinde çağırıyorsun; burada emniyet için tekrar saklı tutuyoruz
+    window.setResultsModeS3();
+  }
+
+  // 2) #endMessage4-S3 içindeki kare tıklamalarını delege ederek yakala
+  document.addEventListener('click', function (e) {
+    const cell = e.target.closest('#endMessage4-S3 .question-block-s3');
+    if (!cell) return;
+
+    // Kullanıcının kendi click handler’ların çalışıp soruya dönmesini bekleyelim
+    // (endMessage4 gizlenecek, quiz açılacak). Sonra butonu göster.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const btn = document.getElementById('btnResultMap');
+        if (btn) btn.classList.remove('hidden');  // ✅ SORU 1/50’nin sağında görünür
+      });
+    });
+  });
+
+  // 3) Sonuç haritası butonuna basınca kendini gizle ve sonuç ekranına dön
+  const btnResult = document.getElementById('btnResultMap');
+  if (btnResult) {
+    btnResult.addEventListener('click', function () {
+      // kendini gizle
+      btnResult.classList.add('hidden');
+
+      // sonuç görünümü (senin mevcut akışınla uyumlu)
+      const endMessage4 = document.getElementById('endMessage4-S3');
+      const quiz = document.querySelector('.quiz-container-s3');
+      const h2 = document.getElementById('soruNumarasiS3');
+
+      if (quiz) quiz.classList.add('hidden');
+      if (h2) h2.classList.add('hidden');
+
+      if (endMessage4) {
+        endMessage4.classList.remove('hidden');
+        endMessage4.style.display = 'flex';
+        endMessage4.style.flexWrap = 'wrap';
+        endMessage4.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      // (İsteğe bağlı) sonuç kapsayıcısını da görünür yap
+      document.getElementById('finalResultContainerId')?.classList.remove('hidden');
+    });
+  }
+});
+
+
 
 
     </script>
