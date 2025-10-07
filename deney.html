@@ -2448,6 +2448,16 @@
             display: flex;
             align-items: center;
         }
+
+
+        #endMessage4-S3 {
+  display: flex !important;
+  flex-wrap: wrap;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
     </style>
 </head>
 
@@ -4704,26 +4714,37 @@
                 // endMessage3.style.display = "flex";
                 // endMessage3.style.flexWrap = "wrap";
 
-                const endMessage4 = document.createElement("div");
-                endMessage4.id = "endMessage4-S3"; // endMessage4 öğesine bir id atayın
+                // Mevcut endMessage4-S3'ü kontrol et, yoksa oluştur
+                let endMessage4 = document.getElementById("endMessage4-S3");
+                if (!endMessage4) {
+                    endMessage4 = document.createElement("div");
+                    endMessage4.id = "endMessage4-S3";
+                }
+                
+                // Her zaman temizle ve yeniden doldur
+                endMessage4.innerHTML = "";
                 endMessage4.style.display = "flex";
                 endMessage4.style.flexWrap = "wrap";
-                for (let i = 0; i < totalQuestions; i++) {
-                    const questionNumber = i + 1;
-                    const questionBlock = document.createElement("div");
-                    questionBlock.classList.add("question-block-s3");
-                    questionBlock.style.width = "30px";
-                    questionBlock.style.height = "30px";
-                    questionBlock.style.border = "1px solid black";
-                    questionBlock.style.textAlign = "center";
-                    questionBlock.style.lineHeight = "30px";
-                    questionBlock.style.margin = "5px";
-                    questionBlock.textContent = questionNumber;
-                    if (endMessage3.childElementCount != totalQuestions) {
+                
+                // endMessage3'ü doldur (sadece boşsa)
+                if (endMessage3.childElementCount != totalQuestions) {
+                    endMessage3.innerHTML = "";
+                    for (let i = 0; i < totalQuestions; i++) {
+                        const questionNumber = i + 1;
+                        const questionBlock = document.createElement("div");
+                        questionBlock.classList.add("question-block-s3");
+                        questionBlock.style.width = "30px";
+                        questionBlock.style.height = "30px";
+                        questionBlock.style.border = "1px solid black";
+                        questionBlock.style.textAlign = "center";
+                        questionBlock.style.lineHeight = "30px";
+                        questionBlock.style.margin = "5px";
+                        questionBlock.textContent = questionNumber;
                         endMessage3.appendChild(questionBlock);
                     }
                 }
 
+                // endMessage4'ü doldur (her zaman temiz başla)
                 for (let i = 0; i < totalQuestions; i++) {
                     const questionNumber = i + 1;
                     const questionBlock = document.createElement("div");
@@ -4821,22 +4842,28 @@
                             endMessage4.classList.add("hidden");
                         });
                     });
-
                 document.getElementById("previous-button-s3").classList.add("hidden");
                 document.getElementById("next-button-s3").classList.add("hidden");
 
                 // <div class="flex-grow"> içindeki <h2 id="soruNumarasiS3"> başlığını gizle
                 document.getElementById("soruNumarasiS3").classList.add("hidden");
                 document.getElementById('btnQuestionMap')?.classList.add('hidden');
+                document.getElementById('btnResultMap')?.classList.add('hidden');
 
                 quizContainer.classList.add("hidden");
 
                 const body = document.querySelector("body");
                 // body.appendChild(endMessage3);
-
                 const resultSection3 = document.getElementById("resultS3");
-                resultSection3.appendChild(endMessage4);
+                
+                // Sadece DOM'da yoksa ekle
+                if (!endMessage4.parentElement) {
+                    resultSection3.appendChild(endMessage4);
+                }
                 // body.appendChild(endMessage4);
+
+                // endMessage4'e aynı styling'i uygula (btnResultMap ile aynı görünsün)
+                endMessage4.style.cssText = 'display: flex !important; flex-wrap: wrap; visibility: visible; opacity: 1; position: relative; padding: 10px; margin: 20px 0;';
 
                 // Cevapları değerlendir ve "endMessage3" ve "endMessage4" içindeki questionBlock'ların rengini güncelle
                 if (viewResult) {
@@ -6134,7 +6161,6 @@
                 map.classList.remove('hidden');
                 map.style.display = 'flex';
                 map.style.flexWrap = 'wrap';
-
                 // Yumuşak kaydır
                 map.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
@@ -6143,7 +6169,85 @@
 
 
 
+        // 🔹 Sonuç Haritası (btnResultMap) İşlevselliği
+        (function () {
+            const btnResult = document.getElementById('btnResultMap');
+            if (!btnResult) return;
 
+            // endMessage4-S3 içindeki karelere tıklanınca btnResultMap'i göster
+            document.addEventListener('click', function(e) {
+                const cell = e.target.closest('#endMessage4-S3 .question-block-s3');
+                if (!cell) return;
+                
+                // Kullanıcı endMessage4-S3 içindeki bir kareye tıkladı
+                // btnResultMap'i görünür yap
+                requestAnimationFrame(() => {
+                    btnResult.classList.remove('hidden');
+                });
+            });
+
+            // btnResultMap'e tıklanınca sonuç sayfasını göster
+            btnResult.addEventListener('click', () => {
+                // Quiz UI'ı gizle
+                document.querySelector('.quiz-container-s3')?.classList.add('hidden');
+                document.getElementById('previous-button-s3')?.classList.add('hidden');
+                document.getElementById('next-button-s3')?.classList.add('hidden');
+                document.getElementById('soruNumarasiS3')?.classList.add('hidden');
+                document.getElementById('btnQuestionMap')?.classList.add('hidden');
+                
+                // Sonuç sayfasını göster (finalResultContainerId)
+                const finalResultContainer = document.getElementById('finalResultContainerId');
+                if (finalResultContainer) {
+                    finalResultContainer.classList.remove('hidden');
+                    finalResultContainer.style.display = 'block';
+                }
+                
+                // resultS3 div'ini de görünür yap
+                const resultS3 = document.getElementById('resultS3');
+                if (resultS3) {
+                    resultS3.classList.remove('hidden');
+                    resultS3.style.display = 'block';
+                }
+                
+                // TÜM endMessage4-S3 bloklarını bul
+                const allEndMessage4 = document.querySelectorAll('#endMessage4-S3');
+                console.log('Toplam endMessage4-S3 sayısı:', allEndMessage4.length);
+                
+                // İLK endMessage4-S3'ü görünür yap, diğerlerini gizle
+                allEndMessage4.forEach((element, index) => {
+                    if (index === 0) {
+                        // İlk elementi görünür yap
+                        element.classList.remove('hidden');
+                        element.style.cssText = 'display: flex !important; flex-wrap: wrap; visibility: visible; opacity: 1; position: relative; padding: 10px; margin: 20px 0;';
+                        
+                        // 🔥 ÖNEMLİ: İçindeki tüm child elementleri (kareleri) de görünür yap!
+                        const children = element.querySelectorAll('.question-block-s3');
+                        children.forEach(child => {
+                            child.classList.remove('hidden');
+                            child.style.display = 'block';
+                        });
+                        
+                        console.log('İlk endMessage4-S3 görünür yapıldı, child count:', element.childElementCount);
+                        console.log('Görünür yapılan child sayısı:', children.length);
+                    } else {
+                        // Diğerlerini gizle
+                        element.classList.add('hidden');
+                    }
+                });
+                
+                // Butonu gizle (sonuç sayfasındayken)
+                btnResult.classList.add('hidden');
+                
+                // Yumuşak kaydırma - ilk endMessage4'e kaydır
+                setTimeout(() => {
+                    if (allEndMessage4.length > 0) {
+                        allEndMessage4[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else if (finalResultContainer) {
+                        finalResultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 100);
+            });
+        })();
 
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -6190,7 +6294,7 @@
                     }
                 }
 
-                // 2) “Son NEXT”te olduğu gibi UI durumunu ayarla
+                // 2) "Son NEXT"te olduğu gibi UI durumunu ayarla
                 document.getElementById("previous-button-s3")?.classList.add("hidden");
                 document.getElementById("next-button-s3")?.classList.add("hidden");
                 document.getElementById("soruNumarasiS3")?.classList.add("hidden");
@@ -6218,149 +6322,6 @@
 
 
 
-
-
-
-       (function(){
-  const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
-
-  function showQuizUI(){
-    document.querySelector('.quiz-container-s3')?.classList.remove('hidden');
-    document.getElementById('soruNumarasiS3')?.classList.remove('hidden');
-  }
-  function hideQuizUI(){
-    document.querySelector('.quiz-container-s3')?.classList.add('hidden');
-    document.getElementById('soruNumarasiS3')?.classList.add('hidden');
-  }
-
-  // #endMessage4-S3 oluşturulmamışsa oluştur
-  function ensureEndMessage4(){
-    let endMessage4 = document.getElementById('endMessage4-S3');
-    if (!endMessage4) {
-      endMessage4 = document.createElement('div');
-      endMessage4.id = 'endMessage4-S3';
-      endMessage4.style.display = 'flex';
-      endMessage4.style.flexWrap = 'wrap';
-      (document.getElementById('resultS3') || document.body).appendChild(endMessage4);
-    }
-    if (endMessage4.childElementCount < total) {
-      endMessage4.innerHTML = '';
-      for (let i = 0; i < total; i++) {
-        const el = document.createElement('div');
-        el.className = 'question-block-s3';
-        Object.assign(el.style, {
-          width:'30px', height:'30px', border:'1px solid black',
-          textAlign:'center', lineHeight:'30px', margin:'5px', cursor:'pointer'
-        });
-        el.textContent = i + 1;
-        el.addEventListener('click', () => {
-          // 🔹 Soruya dön
-          window.currentQuestionIndexS3 = i;
-          if (typeof window.showCurrentQuestionS3 === 'function') window.showCurrentQuestionS3();
-          if (typeof window.updatePreviousButtonS3 === 'function') window.updatePreviousButtonS3();
-          if (typeof window.updateNextButtonS3 === 'function') window.updateNextButtonS3();
-          if (typeof window.checkAnswersAndUpdateBlocks === 'function') window.checkAnswersAndUpdateBlocks();
-
-          // 🔹 Quiz'i göster, endMessage4'ü gizle
-          endMessage4.classList.add('hidden');
-          showQuizUI();
-
-          // 🔹 Şimdi yalnızca bu durumda "Sonuç Haritası" butonu görünsün
-          document.getElementById('btnResultMap')?.classList.remove('hidden');
-        });
-        endMessage4.appendChild(el);
-      }
-    }
-    return endMessage4;
-  }
-
-  // 🔹 Sonuç Haritası düğmesine tıklanınca
-  function openResultMap(){
-    const endMessage4 = ensureEndMessage4();
-
-    // Quiz arayüzünü gizle
-    hideQuizUI();
-
-    // endMessage4 görünür hale gelsin
-    endMessage4.classList.remove('hidden');
-    endMessage4.style.display = 'flex';
-    endMessage4.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    // 🔹 Buton kendini gizlesin
-    document.getElementById('btnResultMap')?.classList.add('hidden');
-  }
-
-  // 🔹 Sonuçlarımı Görüntüle tıklanınca bu çağrılır
-  window.setResultsModeS3 = function(){
-    // İlk başta buton görünmesin
-    document.getElementById('btnResultMap')?.classList.add('hidden');
-  };
-
-  // Click bağla
-  document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById('btnResultMap')?.addEventListener('click', openResultMap);
-  });
-})();
-
-
-
-
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  // 1) View My Result akışında buton başta gizli kalsın
-  if (typeof window.setResultsModeS3 === 'function') {
-    // zaten finalResultShow içinde çağırıyorsun; burada emniyet için tekrar saklı tutuyoruz
-    window.setResultsModeS3();
-  }
-
-  // 2) #endMessage4-S3 içindeki kare tıklamalarını delege ederek yakala
-  document.addEventListener('click', function (e) {
-    const cell = e.target.closest('#endMessage4-S3 .question-block-s3');
-    if (!cell) return;
-
-    // Kullanıcının kendi click handler’ların çalışıp soruya dönmesini bekleyelim
-    // (endMessage4 gizlenecek, quiz açılacak). Sonra butonu göster.
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const btn = document.getElementById('btnResultMap');
-        if (btn) btn.classList.remove('hidden');  // ✅ SORU 1/50’nin sağında görünür
-      });
-    });
-  });
-
-  // 3) Sonuç haritası butonuna basınca kendini gizle ve sonuç ekranına dön
-  const btnResult = document.getElementById('btnResultMap');
-  if (btnResult) {
-    btnResult.addEventListener('click', function () {
-      // kendini gizle
-      btnResult.classList.add('hidden');
-
-      // sonuç görünümü (senin mevcut akışınla uyumlu)
-      const endMessage4 = document.getElementById('endMessage4-S3');
-      const quiz = document.querySelector('.quiz-container-s3');
-      const h2 = document.getElementById('soruNumarasiS3');
-
-      if (quiz) quiz.classList.add('hidden');
-      if (h2) h2.classList.add('hidden');
-
-      if (endMessage4) {
-        endMessage4.classList.remove('hidden');
-        endMessage4.style.display = 'flex';
-        endMessage4.style.flexWrap = 'wrap';
-        endMessage4.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
-      // (İsteğe bağlı) sonuç kapsayıcısını da görünür yap
-      document.getElementById('finalResultContainerId')?.classList.remove('hidden');
-    });
-  }
-});
 
 
 
