@@ -2546,6 +2546,26 @@
             align-items: center;
         }
 
+        /* Soru istatistik metinleri */
+        #answeredQuestionsS3End,
+        #unAnsweredQuestionsS3End,
+        #correctAnswersS3End {
+            font-size: 18px;
+            font-weight: 600;
+            color: #085dc4;
+            margin: 15px 70px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+            border-left: 4px solid #085dc4;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(8, 93, 196, 0.1);
+        }
+
+        #correctAnswersS3End {
+            border-left-color: #4caf50;
+            color: #2e7d32;
+        }
+
         /* Mobile version - applies when screen width is 768px or less */
         @media (max-width: 768px) {
             #endMessage3-S3 {
@@ -2556,10 +2576,11 @@
             
             /* Mobil versiyonda bu metinlere daha az boşluk */
             #answeredQuestionsS3End,
-            #unAnsweredQuestionsS3End {
-                margin-left: 15px !important;
-                margin-right: 15px !important;
-                padding: 0 10px;
+            #unAnsweredQuestionsS3End,
+            #correctAnswersS3End {
+                margin: 10px 15px !important;
+                padding: 10px 15px !important;
+                font-size: 16px;
             }
 
             /* Mobil cihazlarda İLERLE butonunun alt kenardan taşmasını önle */
@@ -2657,6 +2678,8 @@
         #endMessage4-S3 {
   display: flex !important;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
