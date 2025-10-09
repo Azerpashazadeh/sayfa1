@@ -378,11 +378,6 @@
                 /* Taşan içeriklerin görünmesini sağlar */
             }
 
-            #soruNumarasiS3 {
-                font-size: 14px;
-                color: #fefefe;
-                /* QUESTION 1 OF 25 yazısının boyutu */
-            }
 
             #cevaplar {
                 display: flex;
@@ -449,15 +444,6 @@
                 /* Kenarlara boşluk bırakmak için */
             }
 
-            #soruNumarasiS3 {
-                font-size: 18px;
-                color: #fefefe;
-                /* QUESTION 1 OF 25 yazısının boyutu */
-                display: flex;
-                justify-content: center;
-
-                /* Yatayda ortalar */
-            }
 
             #quizAlani {
                 height: 540px;
@@ -933,6 +919,13 @@
                 margin-left: 20px;
                 margin-right: 20px;
             }
+
+            #proceedSection3End .button-container h2 {
+                margin: 2px 15px;
+
+                padding: 2px 1px;
+
+            }
         }
 
         .button-container {
@@ -1013,46 +1006,149 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 1;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgb(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            margin: 25% auto;
+            /* Daha aşağıda konumlandırıldı (15%'den 25%'e) */
+            padding: 35px 30px;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            width: 85%;
+            max-width: 450px;
             text-align: center;
             position: relative;
+            animation: slideDown 0.4s ease;
+        }
+
+        .modal-content h2 {
+            color: #085dc4;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .modal-content p {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 25px;
+            line-height: 1.5;
         }
 
         .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+            color: #999;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 32px;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            line-height: 1;
         }
 
         .close:hover,
         .close:focus {
-            color: black;
+            color: #e74c3c;
+            transform: rotate(90deg);
             text-decoration: none;
             cursor: pointer;
         }
 
         .popup-btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 10px;
+            padding: 14px 35px;
+            font-size: 17px;
+            font-weight: 600;
+            margin: 10px 8px;
             cursor: pointer;
+            border: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+        }
+
+        #yesBtn {
+            background: linear-gradient(135deg, #085dc4 0%, #0652a8 100%);
+            color: white;
+        }
+
+        #yesBtn:hover {
+            background: linear-gradient(135deg, #0652a8 0%, #054a8f 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(8, 93, 196, 0.4);
+        }
+
+        #noBtn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+        }
+
+        #noBtn:hover {
+            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .popup-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Mobil uyumluluk */
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 35% auto;
+                /* Mobilde daha da aşağıda */
+                width: 90%;
+                padding: 30px 20px;
+            }
+
+            .modal-content h2 {
+                font-size: 20px;
+            }
+
+            .modal-content p {
+                font-size: 15px;
+            }
+
+            .popup-btn {
+                padding: 12px 25px;
+                font-size: 16px;
+                min-width: 100px;
+            }
         }
 
         .viewResultContainer {
@@ -2297,6 +2393,91 @@
 
         .question-block-s3 {
             cursor: pointer;
+            width: 45px;
+            height: 45px;
+            border: 2px solid #085dc4;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 45px;
+            margin: 5px;
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+            box-shadow: 0 3px 10px rgba(8, 93, 196, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-block-s3::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .question-block-s3:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(8, 93, 196, 0.3);
+            border-color: #0652a8;
+        }
+
+        .question-block-s3:hover::before {
+            left: 100%;
+        }
+
+        .question-block-s3:active {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 0 3px 10px rgba(8, 93, 196, 0.2);
+        }
+
+        /* Cevaplanan soru (gri) */
+        .question-block-s3.answered-block {
+            background: linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%);
+            border-color: #999;
+            color: #555;
+        }
+
+        /* Doğru cevap (yeşil) */
+        .question-block-s3.correct-block {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            border-color: #2e7d32;
+            color: white;
+            box-shadow: 0 3px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .question-block-s3.correct-block:hover {
+            background: linear-gradient(135deg, #45a049 0%, #388e3c 100%);
+            box-shadow: 0 6px 25px rgba(76, 175, 80, 0.5);
+        }
+
+        /* Yanlış cevap (kırmızı) */
+        .question-block-s3.incorrect-block {
+            background: linear-gradient(135deg, #f44336 0%, #e53935 100%);
+            border-color: #c62828;
+            color: white;
+            box-shadow: 0 3px 15px rgba(244, 67, 54, 0.4);
+        }
+
+        .question-block-s3.incorrect-block:hover {
+            background: linear-gradient(135deg, #e53935 0%, #d32f2f 100%);
+            box-shadow: 0 6px 25px rgba(244, 67, 54, 0.5);
+        }
+
+        /* Mobil uyumluluk */
+        @media (max-width: 768px) {
+            .question-block-s3 {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 14px;
+                margin: 4px;
+            }
         }
 
         .quiz-container-s3 {
@@ -2374,6 +2555,30 @@
         #endMessage3-S3 {
             margin-left: 70px;
             margin-right: 70px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Soru istatistik metinleri */
+        #answeredQuestionsS3End,
+        #unAnsweredQuestionsS3End,
+        #correctAnswersS3End {
+            font-size: 18px;
+            font-weight: 600;
+            color: #085dc4;
+            margin: 15px 70px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+            border-left: 4px solid #085dc4;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(8, 93, 196, 0.1);
+        }
+
+        #correctAnswersS3End {
+            border-left-color: #4caf50;
+            color: #2e7d32;
         }
 
         /* Mobile version - applies when screen width is 768px or less */
@@ -2381,11 +2586,33 @@
             #endMessage3-S3 {
                 margin-left: 10px;
                 margin-right: 10px;
+                justify-content: center;
+            }
+
+            /* Mobil versiyonda bu metinlere daha az boşluk */
+            #answeredQuestionsS3End,
+            #unAnsweredQuestionsS3End,
+            #correctAnswersS3End {
+                margin: 5px 15px !important;
+                padding: 5px 5px !important;
+                font-size: 14px;
+            }
+
+            /* Mobil cihazlarda İLERLE butonunun alt kenardan taşmasını önle */
+            #proceedSection3End {
+                padding-bottom: 400px !important;
+                margin-bottom: 400px !important;
+            }
+
+            /* İLERLE butonu için ekstra güvenlik */
+            #proceedToResultDivBtn {
+                margin-bottom: 20px !important;
             }
         }
 
         #proceedSection3End {
             margin-top: 50px;
+            margin-bottom: 60px;
         }
 
         #proceedSection3End p {
@@ -2412,13 +2639,68 @@
         }
 
 
-        .map-buttons { display:inline-flex; margin-left:8px; }
-#btnQuestionMap {
-  height:32px; padding:0 10px; border:none; border-radius:6px;
-  background:#c47308; color:#fff; font-size:14px; cursor:pointer;
-}
-.hidden { display:none !important; }
+        /* Yüksek özgüllük + reset: başka kurallar ezemesin */
+        #button-container .map-buttons .grid-button {
+            background-color: #085dc4 !important;
+            color: #fff !important;
+            border: none !important;
+            box-shadow: none !important;
+            background-image: none !important;
+            appearance: none;
+            -webkit-appearance: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 8px;
+        }
 
+        #button-container .map-buttons .grid-button:hover {
+            background-color: #004a9e !important;
+        }
+
+        #button-container .map-buttons .grid-button svg {
+            width: 28px;
+            height: 28px;
+            fill: #fff !important;
+        }
+
+        .flex-grow {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        #soruNumarasiS3 {
+            margin: 0;
+            font-size: 14px;
+            color: #fefefe;
+            display: flex;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .map-buttons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+
+        #endMessage4-S3 {
+            display: flex !important;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
     </style>
 </head>
 
@@ -2615,8 +2897,46 @@
             <!-- Yeni ID: soruNumarasiS3 -->
 
             <span class="map-buttons">
-                <button id="btnQuestionMap" type="button" class="hidden">
-                    Soru Haritası
+                <!-- Soru haritası (zaten var) -->
+                <button id="btnQuestionMap" type="button" class="grid-button hidden" title="Soru Haritası"
+                    aria-label="Soru Haritası">
+                    <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect x="0" y="0" width="6" height="6" rx="1" />
+                        <rect x="8" y="0" width="6" height="6" rx="1" />
+                        <rect x="16" y="0" width="6" height="6" rx="1" />
+                        <rect x="0" y="8" width="6" height="6" rx="1" />
+                        <rect x="8" y="8" width="6" height="6" rx="1" />
+                        <rect x="16" y="8" width="6" height="6" rx="1" />
+                        <rect x="0" y="16" width="6" height="6" rx="1" />
+                        <rect x="8" y="16" width="6" height="6" rx="1" />
+                        <rect x="16" y="16" width="6" height="6" rx="1" />
+                    </svg>
+                </button>
+
+                <!-- 🔹 Yeni: Sonuç haritası butonu -->
+                <button id="btnResultMap" type="button" class="grid-button hidden" title="Sonuç Haritası"
+                    aria-label="Sonuç Haritası">
+                    <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect x="0" y="0" width="6" height="6" rx="1" />
+                        <rect x="8" y="0" width="6" height="6" rx="1" />
+                        <rect x="16" y="0" width="6" height="6" rx="1" />
+                        <rect x="0" y="8" width="6" height="6" rx="1" />
+                        <rect x="8" y="8" width="6" height="6" rx="1" />
+                        <rect x="16" y="8" width="6" height="6" rx="1" />
+                        <rect x="0" y="16" width="6" height="6" rx="1" />
+                        <rect x="8" y="16" width="6" height="6" rx="1" />
+                        <rect x="16" y="16" width="6" height="6" rx="1" />
+                    </svg>
+                </button>
+
+
+                <!-- 🔹 Yeni: Dış bağlantı butonu -->
+                <button id="btnExternalLink" type="button" class="grid-button hidden" title="İlerle" aria-label="İlerle"
+                    onclick="window.open('BURAYA_BAGLANTI_EKLE', '_blank')">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor">
+                        <path
+                            d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+                    </svg>
                 </button>
             </span>
         </div>
@@ -2625,6 +2945,7 @@
             Sonraki
         </button>
     </div>
+
 
 
     <div id="proceedSection3End" class="center-button hidden" style="flex-direction: column; gap: 10px">
@@ -4567,7 +4888,23 @@
                     endMessageElements[i].classList.add("hidden");
                 }
             }
+
+            // 💙 Yeni eklenen satır:
+            // "Sonuç Haritası" butonunu görünür yap ve "Soru Haritası" butonunu gizle
+            if (typeof window.setResultsModeS3 === 'function') window.setResultsModeS3();
+
+            // Dış bağlantı butonunu görünür yap
+            const btnExternalLink = document.getElementById('btnExternalLink');
+            console.log('btnExternalLink elementi:', btnExternalLink);
+            if (btnExternalLink) {
+                btnExternalLink.classList.remove('hidden');
+                btnExternalLink.style.display = 'flex';
+                console.log('btnExternalLink görünür yapıldı');
+            } else {
+                console.error('btnExternalLink bulunamadı!');
+            }
         }
+
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event) {
@@ -4637,42 +4974,58 @@
                 checkAnswersAndUpdateBlocks();
             } else {
                 // Son soru ise
+
+                // Eğer quiz henüz kilitlenmediyse (viewResult === false), btnExternalLink'i gizle
+                if (!viewResult) {
+                    const btnExternalLink = document.getElementById('btnExternalLink');
+                    if (btnExternalLink) {
+                        btnExternalLink.classList.add('hidden');
+                        btnExternalLink.style.display = 'none';
+                    }
+                } else {
+                    // Quiz kilitlendiyse (viewResult === true), btnExternalLink'i görünür yap
+                    const btnExternalLink = document.getElementById('btnExternalLink');
+                    if (btnExternalLink) {
+                        btnExternalLink.classList.remove('hidden');
+                        btnExternalLink.style.display = 'flex';
+                    }
+                }
+
                 const quizContainer = document.querySelector(".quiz-container-s3");
                 const endMessage3 = document.getElementById("endMessage3-S3");
                 // endMessage3.id = "endMessage3-S3"; // endMessage3 öğesine bir id atayın
                 // endMessage3.style.display = "flex";
                 // endMessage3.style.flexWrap = "wrap";
 
-                const endMessage4 = document.createElement("div");
-                endMessage4.id = "endMessage4-S3"; // endMessage4 öğesine bir id atayın
+                // Mevcut endMessage4-S3'ü kontrol et, yoksa oluştur
+                let endMessage4 = document.getElementById("endMessage4-S3");
+                if (!endMessage4) {
+                    endMessage4 = document.createElement("div");
+                    endMessage4.id = "endMessage4-S3";
+                }
+
+                // Her zaman temizle ve yeniden doldur
+                endMessage4.innerHTML = "";
                 endMessage4.style.display = "flex";
                 endMessage4.style.flexWrap = "wrap";
-                for (let i = 0; i < totalQuestions; i++) {
-                    const questionNumber = i + 1;
-                    const questionBlock = document.createElement("div");
-                    questionBlock.classList.add("question-block-s3");
-                    questionBlock.style.width = "30px";
-                    questionBlock.style.height = "30px";
-                    questionBlock.style.border = "1px solid black";
-                    questionBlock.style.textAlign = "center";
-                    questionBlock.style.lineHeight = "30px";
-                    questionBlock.style.margin = "5px";
-                    questionBlock.textContent = questionNumber;
-                    if (endMessage3.childElementCount != totalQuestions) {
+
+                // endMessage3'ü doldur (sadece boşsa)
+                if (endMessage3.childElementCount != totalQuestions) {
+                    endMessage3.innerHTML = "";
+                    for (let i = 0; i < totalQuestions; i++) {
+                        const questionNumber = i + 1;
+                        const questionBlock = document.createElement("div");
+                        questionBlock.classList.add("question-block-s3");
+                        questionBlock.textContent = questionNumber;
                         endMessage3.appendChild(questionBlock);
                     }
                 }
 
+                // endMessage4'ü doldur (her zaman temiz başla)
                 for (let i = 0; i < totalQuestions; i++) {
                     const questionNumber = i + 1;
                     const questionBlock = document.createElement("div");
                     questionBlock.classList.add("question-block-s3");
-                    questionBlock.style.width = "30px";
-                    questionBlock.style.height = "30px";
-                    questionBlock.style.border = "1px solid black";
-                    questionBlock.style.textAlign = "center";
-                    questionBlock.style.lineHeight = "30px";
-                    questionBlock.style.margin = "5px";
                     questionBlock.textContent = questionNumber;
                     endMessage4.appendChild(questionBlock);
                 }
@@ -4755,27 +5108,40 @@
                                 .getElementById("soruNumarasiS3")
                                 .classList.remove("hidden");
 
+                            // btnExternalLink'i gizle
+                            const btnExternalLink = document.getElementById('btnExternalLink');
+                            if (btnExternalLink) {
+                                btnExternalLink.classList.add('hidden');
+                                btnExternalLink.style.display = 'none';
+                            }
+
                             // endMessage öğesini gizle
                             // endMessage3.classList.add("hidden");
                             endMessage4.classList.add("hidden");
                         });
                     });
-
                 document.getElementById("previous-button-s3").classList.add("hidden");
                 document.getElementById("next-button-s3").classList.add("hidden");
 
                 // <div class="flex-grow"> içindeki <h2 id="soruNumarasiS3"> başlığını gizle
                 document.getElementById("soruNumarasiS3").classList.add("hidden");
                 document.getElementById('btnQuestionMap')?.classList.add('hidden');
+                document.getElementById('btnResultMap')?.classList.add('hidden');
 
                 quizContainer.classList.add("hidden");
 
                 const body = document.querySelector("body");
                 // body.appendChild(endMessage3);
-
                 const resultSection3 = document.getElementById("resultS3");
-                resultSection3.appendChild(endMessage4);
+
+                // Sadece DOM'da yoksa ekle
+                if (!endMessage4.parentElement) {
+                    resultSection3.appendChild(endMessage4);
+                }
                 // body.appendChild(endMessage4);
+
+                // endMessage4'e aynı styling'i uygula (btnResultMap ile aynı görünsün)
+                endMessage4.style.cssText = 'display: flex !important; flex-wrap: wrap; visibility: visible; opacity: 1; position: relative; padding: 10px; margin: 20px 0;';
 
                 // Cevapları değerlendir ve "endMessage3" ve "endMessage4" içindeki questionBlock'ların rengini güncelle
                 if (viewResult) {
@@ -5379,7 +5745,8 @@
                     (x) => x.id === questionIndex,
                 );
 
-                block.style.backgroundColor = "transparent";
+                // Önce tüm renk class'larını temizle
+                block.classList.remove('answered-block', 'correct-block', 'incorrect-block');
 
                 if (question.userAnswer && question.userAnswer.length > 0) {
                     if (containerId === "endMessage3-S3") {
@@ -5480,12 +5847,12 @@
                     }
 
                     if (containerId === "endMessage3-S3") {
-                        block.style.backgroundColor = "lightgray";
+                        block.classList.add('answered-block');
                         if (findCheck) {
                             findCheck.isCorrect = false;
                         }
                     } else if (containerId === "endMessage4-S3") {
-                        block.style.backgroundColor = isCorrect ? "#00FF00" : "red";
+                        block.classList.add(isCorrect ? 'correct-block' : 'incorrect-block');
                         if (isCorrect) {
                             correctAnswerS3.correct += 1;
                             if (findCheck) {
@@ -6037,120 +6404,205 @@
 
 
 
-        (function(){
-  const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
-  const btn  = document.getElementById('btnQuestionMap');
-  const map  = document.getElementById('endMessage3-S3');
-  if (!btn || !map) return;
+        (function () {
+            const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
+            const btn = document.getElementById('btnQuestionMap');
+            const map = document.getElementById('endMessage3-S3');
+            if (!btn || !map) return;
 
-  // 1) Harita oluşturulunca (NEXT’in sonundaki doldurma işlemi) algıla
-  //    #endMessage3-S3 içindeki kareler eklendiğinde childElementCount > 0 olur
-  const mo = new MutationObserver(() => {
-    if (map.childElementCount > 0) {
-      // Harita artık var → karelere tıklanıp soruya dönünce düğmeyi göstereceğiz
-      // Delegasyon: .question-block-s3 üzerine tıklamaları yakala
-      map.addEventListener('click', function onMapClick(e){
-        const cell = e.target.closest('.question-block-s3');
-        if (!cell) return;
-        // Kullanıcı kareye tıkladı → kısa süre sonra quiz görünür olacak.
-        // Bir sonraki frame’de butonu görünür yap.
-        requestAnimationFrame(() => btn.classList.remove('hidden'));
-      }, { once:false });
+            // 1) Harita oluşturulunca (NEXT’in sonundaki doldurma işlemi) algıla
+            //    #endMessage3-S3 içindeki kareler eklendiğinde childElementCount > 0 olur
+            const mo = new MutationObserver(() => {
+                if (map.childElementCount > 0) {
+                    // Harita artık var → karelere tıklanıp soruya dönünce düğmeyi göstereceğiz
+                    // Delegasyon: .question-block-s3 üzerine tıklamaları yakala
+                    map.addEventListener('click', function onMapClick(e) {
+                        const cell = e.target.closest('.question-block-s3');
+                        if (!cell) return;
+                        // Kullanıcı kareye tıkladı → kısa süre sonra quiz görünür olacak.
+                        // Bir sonraki frame’de butonu görünür yap.
+                        requestAnimationFrame(() => btn.classList.remove('hidden'));
+                    }, { once: false });
 
-      // Artık gözlemci gereksiz — bir kez keşfettikten sonra durdurabiliriz
-      mo.disconnect();
-    }
-  });
-  mo.observe(map, { childList: true });
+                    // Artık gözlemci gereksiz — bir kez keşfettikten sonra durdurabiliriz
+                    mo.disconnect();
+                }
+            });
+            mo.observe(map, { childList: true });
 
-  // 2) Düğmeye basınca haritayı aç / haritaya kaydır
-  btn.addEventListener('click', () => {
-    // Quiz UI’ı gizle, haritayı göster
-    document.querySelector('.quiz-container-s3')?.classList.add('hidden');
-    document.getElementById('soruNumarasiS3')?.classList.add('hidden');
+            // 2) Düğmeye basınca haritayı aç / haritaya kaydır
+            btn.addEventListener('click', () => {
+                // Quiz UI’ı gizle, haritayı göster
+                document.querySelector('.quiz-container-s3')?.classList.add('hidden');
+                document.getElementById('soruNumarasiS3')?.classList.add('hidden');
 
-    // Haritayı görünür yap (NEXT akışında bazen display ayarı kalabiliyor)
-    map.classList.remove('hidden');
-    map.style.display = 'flex';
-    map.style.flexWrap = 'wrap';
+                // Haritayı görünür yap (NEXT akışında bazen display ayarı kalabiliyor)
+                map.classList.remove('hidden');
+                map.style.display = 'flex';
+                map.style.flexWrap = 'wrap';
+                // Yumuşak kaydır
+                map.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
 
-    // Yumuşak kaydır
-    map.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-
-})();
-
+        })();
 
 
 
+        // 🔹 Sonuç Haritası (btnResultMap) İşlevselliği
+        (function () {
+            const btnResult = document.getElementById('btnResultMap');
+            if (!btnResult) return;
+
+            // endMessage4-S3 içindeki karelere tıklanınca btnResultMap'i göster
+            document.addEventListener('click', function (e) {
+                const cell = e.target.closest('#endMessage4-S3 .question-block-s3');
+                if (!cell) return;
+
+                // Kullanıcı endMessage4-S3 içindeki bir kareye tıkladı
+                // btnResultMap'i görünür yap
+                requestAnimationFrame(() => {
+                    btnResult.classList.remove('hidden');
+                });
+            });
+
+            // btnResultMap'e tıklanınca sonuç sayfasını göster
+            btnResult.addEventListener('click', () => {
+                // Quiz UI'ı gizle
+                document.querySelector('.quiz-container-s3')?.classList.add('hidden');
+                document.getElementById('previous-button-s3')?.classList.add('hidden');
+                document.getElementById('next-button-s3')?.classList.add('hidden');
+                document.getElementById('soruNumarasiS3')?.classList.add('hidden');
+                document.getElementById('btnQuestionMap')?.classList.add('hidden');
+
+                // btnExternalLink'i görünür yap
+                const btnExternalLink = document.getElementById('btnExternalLink');
+                if (btnExternalLink) {
+                    btnExternalLink.classList.remove('hidden');
+                    btnExternalLink.style.display = 'flex';
+                }
+
+                // Sonuç sayfasını göster (finalResultContainerId)
+                const finalResultContainer = document.getElementById('finalResultContainerId');
+                if (finalResultContainer) {
+                    finalResultContainer.classList.remove('hidden');
+                    finalResultContainer.style.display = 'block';
+                }
+
+                // resultS3 div'ini de görünür yap
+                const resultS3 = document.getElementById('resultS3');
+                if (resultS3) {
+                    resultS3.classList.remove('hidden');
+                    resultS3.style.display = 'block';
+                }
+
+                // TÜM endMessage4-S3 bloklarını bul
+                const allEndMessage4 = document.querySelectorAll('#endMessage4-S3');
+                console.log('Toplam endMessage4-S3 sayısı:', allEndMessage4.length);
+
+                // İLK endMessage4-S3'ü görünür yap, diğerlerini gizle
+                allEndMessage4.forEach((element, index) => {
+                    if (index === 0) {
+                        // İlk elementi görünür yap
+                        element.classList.remove('hidden');
+                        element.style.cssText = 'display: flex !important; flex-wrap: wrap; visibility: visible; opacity: 1; position: relative; padding: 10px; margin: 20px 0;';
+
+                        // 🔥 ÖNEMLİ: İçindeki tüm child elementleri (kareleri) de görünür yap!
+                        const children = element.querySelectorAll('.question-block-s3');
+                        children.forEach(child => {
+                            child.classList.remove('hidden');
+                            child.style.display = 'block';
+                        });
+
+                        console.log('İlk endMessage4-S3 görünür yapıldı, child count:', element.childElementCount);
+                        console.log('Görünür yapılan child sayısı:', children.length);
+                    } else {
+                        // Diğerlerini gizle
+                        element.classList.add('hidden');
+                    }
+                });
+
+                // Butonu gizle (sonuç sayfasındayken)
+                btnResult.classList.add('hidden');
+
+                // Yumuşak kaydırma - ilk endMessage4'e kaydır
+                setTimeout(() => {
+                    if (allEndMessage4.length > 0) {
+                        allEndMessage4[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else if (finalResultContainer) {
+                        finalResultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 100);
+            });
+        })();
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("btnQuestionMap");
-  if (!btn) return;
+        document.addEventListener("DOMContentLoaded", () => {
+            const btn = document.getElementById("btnQuestionMap");
+            if (!btn) return;
 
-  btn.addEventListener("click", () => {
-    const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
-    const quizContainer = document.querySelector(".quiz-container-s3");
-    const proceed = document.getElementById("proceedSection3End");   // ebeveyn
-    const endMessage3 = document.getElementById("endMessage3-S3");   // karelerin olduğu yer
+            btn.addEventListener("click", () => {
+                const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
+                const quizContainer = document.querySelector(".quiz-container-s3");
+                const proceed = document.getElementById("proceedSection3End");   // ebeveyn
+                const endMessage3 = document.getElementById("endMessage3-S3");   // karelerin olduğu yer
 
-    // 1) endMessage3 dolu değilse, kareleri oluştur (NEXT'in else'inde yapıldığı gibi)
-    if (endMessage3 && endMessage3.childElementCount !== total) {
-      endMessage3.innerHTML = "";
-      for (let i = 0; i < total; i++) {
-        const el = document.createElement("div");
-        el.className = "question-block-s3";
-        el.style.width = "30px";
-        el.style.height = "30px";
-        el.style.border = "1px solid black";
-        el.style.textAlign = "center";
-        el.style.lineHeight = "30px";
-        el.style.margin = "5px";
-        el.style.cursor = "pointer";
-        el.textContent = i + 1;
+                // 1) endMessage3 dolu değilse, kareleri oluştur (NEXT'in else'inde yapıldığı gibi)
+                if (endMessage3 && endMessage3.childElementCount !== total) {
+                    endMessage3.innerHTML = "";
+                    for (let i = 0; i < total; i++) {
+                        const el = document.createElement("div");
+                        el.className = "question-block-s3";
+                        el.textContent = i + 1;
 
-        el.addEventListener("click", () => {
-          // Seçilen soruya dön
-          window.currentQuestionIndexS3 = i;
-          if (typeof window.showCurrentQuestionS3 === "function") window.showCurrentQuestionS3();
-          if (typeof window.updatePreviousButtonS3 === "function") window.updatePreviousButtonS3();
-          if (typeof window.updateNextButtonS3 === "function") window.updateNextButtonS3();
-          if (typeof window.checkAnswersAndUpdateBlocks === "function") window.checkAnswersAndUpdateBlocks();
+                        el.addEventListener("click", () => {
+                            // Seçilen soruya dön
+                            window.currentQuestionIndexS3 = i;
+                            if (typeof window.showCurrentQuestionS3 === "function") window.showCurrentQuestionS3();
+                            if (typeof window.updatePreviousButtonS3 === "function") window.updatePreviousButtonS3();
+                            if (typeof window.updateNextButtonS3 === "function") window.updateNextButtonS3();
+                            if (typeof window.checkAnswersAndUpdateBlocks === "function") window.checkAnswersAndUpdateBlocks();
 
-          // Haritayı kapat, quiz UI'ı aç, düğmeyi geri göster
-          proceed?.classList.add("hidden");
-          quizContainer?.classList.remove("hidden");
-          document.getElementById("soruNumarasiS3")?.classList.remove("hidden");
-          btn.classList.remove("hidden");
+                            // Haritayı kapat, quiz UI'ı aç, düğmeyi geri göster
+                            proceed?.classList.add("hidden");
+                            quizContainer?.classList.remove("hidden");
+                            document.getElementById("soruNumarasiS3")?.classList.remove("hidden");
+                            btn.classList.remove("hidden");
+                        });
+
+                        endMessage3.appendChild(el);
+                    }
+                }
+
+                // 2) "Son NEXT"te olduğu gibi UI durumunu ayarla
+                document.getElementById("previous-button-s3")?.classList.add("hidden");
+                document.getElementById("next-button-s3")?.classList.add("hidden");
+                document.getElementById("soruNumarasiS3")?.classList.add("hidden");
+
+                quizContainer?.classList.add("hidden");
+                proceed?.classList.remove("hidden");       // ⬅️ ebeveyni görünür yap
+                if (endMessage3) {
+                    endMessage3.classList.remove("hidden");
+                    endMessage3.style.display = "flex";
+                    endMessage3.style.flexWrap = "wrap";
+                }
+
+                // Renkler/istatistikler için aynı hesaplamayı tetikle
+                if (typeof window.checkAnswersAndUpdateBlocks === "function") {
+                    window.checkAnswersAndUpdateBlocks();
+                }
+
+                // Harita açıkken buton gizli
+                btn.classList.add("hidden");
+            });
         });
 
-        endMessage3.appendChild(el);
-      }
-    }
 
-    // 2) “Son NEXT”te olduğu gibi UI durumunu ayarla
-    document.getElementById("previous-button-s3")?.classList.add("hidden");
-    document.getElementById("next-button-s3")?.classList.add("hidden");
-    document.getElementById("soruNumarasiS3")?.classList.add("hidden");
 
-    quizContainer?.classList.add("hidden");
-    proceed?.classList.remove("hidden");       // ⬅️ ebeveyni görünür yap
-    if (endMessage3) {
-      endMessage3.classList.remove("hidden");
-      endMessage3.style.display = "flex";
-      endMessage3.style.flexWrap = "wrap";
-    }
 
-    // Renkler/istatistikler için aynı hesaplamayı tetikle
-    if (typeof window.checkAnswersAndUpdateBlocks === "function") {
-      window.checkAnswersAndUpdateBlocks();
-    }
 
-    // Harita açıkken buton gizli
-    btn.classList.add("hidden");
-  });
-});
+
+
+
 
 
     </script>
