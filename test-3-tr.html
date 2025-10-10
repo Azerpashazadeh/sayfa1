@@ -2889,7 +2889,7 @@
 
     <!-- 3. Bölümü Başlatan Mesaj ve Yeni Düğme -->
     <div id="startMessage" style="display: none">
-        <h4>TEORİİİİİ SINAVI - BİNEK ARAÇ</h4>
+        <h4>TEORİ SINAVI - BİNEK ARAÇ</h4>
         <p class="start-insight">
             Sorular arasında ileri ve geri geçiş yapabilirsiniz. Bu bölüm için 30
             dakikanız vardır. Zaman çubuğu ilerlediği sürece, sorular arasında geçiş
@@ -6437,13 +6437,33 @@
         function setDynamicVH() {
             const vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--dvh', `${vh}px`);
+            
+            // Debug için konsola yazdır
+            console.log('VH güncellendi:', vh, 'innerHeight:', window.innerHeight);
         }
         
-        // İlk yüklemede ve her resize/scroll'da çalıştır
+        // İlk yüklemede çalıştır
         setDynamicVH();
+        
+        // Tüm olası olaylarda güncelle
         window.addEventListener('resize', setDynamicVH);
-        window.addEventListener('scroll', setDynamicVH);
+        window.addEventListener('scroll', setDynamicVH, { passive: true });
         window.addEventListener('orientationchange', setDynamicVH);
+        
+        // VisualViewport API desteği varsa onu da kullan (daha hassas)
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', setDynamicVH);
+            window.visualViewport.addEventListener('scroll', setDynamicVH);
+        }
+        
+        // Periyodik güncelleme (her 100ms'de bir kontrol et)
+        let lastHeight = window.innerHeight;
+        setInterval(() => {
+            if (window.innerHeight !== lastHeight) {
+                lastHeight = window.innerHeight;
+                setDynamicVH();
+            }
+        }, 100);
 
         (function () {
             const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
