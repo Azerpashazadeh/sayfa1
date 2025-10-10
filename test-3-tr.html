@@ -156,7 +156,7 @@
             right: 0;
             bottom: 0;
             width: 100vw;
-            height: 100dvh;
+            height: 100vh;
             pointer-events: none;
             /* İçeriğe tıklamayı engellemez */
             box-shadow:
@@ -182,8 +182,8 @@
                     /* Sol kenar */
                     inset -5px 0 0 0 #085dc4,
                     /* Sağ kenar */
-                    inset 0 -120px 0 0 #085dc4;
-                /* Alt kenar - iframe için sabit değer (120px ≈ 11.75vh mobilde) */
+                    inset 0 calc(-11.75vh) 0 0 #085dc4;
+                /* Alt kenar */
             }
         }
 
@@ -194,7 +194,7 @@
             right: 0;
             bottom: 0;
             width: 100vw;
-            height: 100dvh;
+            height: 100vh;
             pointer-events: none;
             box-shadow:
                 inset 0 10px 0 0 #085dc4,
@@ -213,8 +213,8 @@
                 box-shadow:
                     inset 0 10px 0 0 #085dc4,
                     /* Üst kenar 5px */
-                    inset 0 -120px 0 0 #085dc4,
-                    /* Alt kenar - iframe için sabit değer */
+                    inset 0 calc(-11.75vh) 0 0 #085dc4,
+                    /* Alt kenar */
                     inset 5px 0 0 0 #085dc4,
                     /* Sol kenar */
                     inset -5px 0 0 0 #085dc4;
@@ -1458,8 +1458,8 @@
                 justify-content: flex-start;
                 /* İçeriği yukarı hizala */
                 padding: 10px;
-                padding-bottom: 180px;
-                /* iframe için sabit değer (18vh ≈ 180px mobilde) */
+                padding-bottom: calc(11vh + 7vh);
+                /* Ekran yüksekliğinin %11'i + 6vh */
                 background: white;
                 /* Arka planı düzenle */
                 border-radius: 10px;
@@ -1516,29 +1516,25 @@
             #next-button {
                 position: fixed;
                 width: 20%;
-                height: 60px;
-                /* iframe için sabit değer (6vh ≈ 60px mobilde) */
+                height: 6vh;
                 background-color: #007bff;
                 color: white;
                 border: none;
                 border-radius: 8px;
                 text-align: center;
-                line-height: 60px;
-                /* Yükseklikle aynı - dikey ortalama için */
+                line-height: 5vh;
                 cursor: pointer;
                 z-index: 1000;
             }
 
             #previous-button {
                 left: 1%;
-                bottom: 110px;
-                /* iframe için sabit değer (11vh ≈ 110px mobilde) */
+                bottom: 11%;
             }
 
             #next-button {
                 right: 1%;
-                bottom: 110px;
-                /* iframe için sabit değer (11vh ≈ 110px mobilde) */
+                bottom: 11%;
             }
 
             .show-rectangle {
@@ -2893,7 +2889,7 @@
 
     <!-- 3. Bölümü Başlatan Mesaj ve Yeni Düğme -->
     <div id="startMessage" style="display: none">
-        <h4>TEORİ SINAVIII - BİNEK ARAÇ</h4>
+        <h4>TEORİ SINAVI - BİNEK ARAÇ</h4>
         <p class="start-insight">
             Sorular arasında ileri ve geri geçiş yapabilirsiniz. Bu bölüm için 30
             dakikanız vardır. Zaman çubuğu ilerlediği sürece, sorular arasında geçiş
@@ -6437,38 +6433,7 @@
         window.addEventListener('resize', padForButton);
         window.addEventListener('orientationchange', padForButton);
 
-        // ⚠️ IFRAME İÇİNDE ÇALIŞTIĞI İÇİN DİNAMİK VH HESAPLAMALARI ÇALIŞMAZ
-        // iframe, parent tarayıcının adres çubuğu değişikliklerini algılayamaz
-        // Çözüm: CSS'te sabit değerler kullan veya Wix'ten mesaj al
-        
-        // Dinamik viewport yüksekliğini ayarla (iframe içinde sınırlı çalışır)
-        function setDynamicVH() {
-            const vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--dvh', `${vh}px`);
-            
-            // Debug: iframe yüksekliğini göster
-            console.log('iframe VH:', vh, 'iframe innerHeight:', window.innerHeight);
-            console.log('iframe içinde mi?', window.self !== window.top);
-        }
-        
-        // İlk yüklemede çalıştır
-        setDynamicVH();
-        
-        // Sadece resize ve orientation change'i dinle (scroll gereksiz)
-        window.addEventListener('resize', setDynamicVH);
-        window.addEventListener('orientationchange', setDynamicVH);
-        
-        // Wix'ten gelen viewport mesajlarını dinle (eğer Wix gönderiyorsa)
-        window.addEventListener('message', function(event) {
-            // Güvenlik: Sadece Wix'ten gelen mesajları kabul et
-            if (event.origin !== 'https://www.examtheorie.nl') return;
-            
-            if (event.data && event.data.action === 'viewportChange') {
-                const vh = event.data.height * 0.01;
-                document.documentElement.style.setProperty('--dvh', `${vh}px`);
-                console.log('Wix\'ten viewport güncellendi:', vh);
-            }
-        });
+
 
         (function () {
             const total = (window.allQuestionsS3 && allQuestionsS3.length) || 50;
