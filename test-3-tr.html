@@ -86,53 +86,75 @@
             left: 50%;
             transform: translateX(-50%);
             position: absolute;
-            padding: 10px 40px;
+            padding: 14px 40px;
             display: inline-block;
             text-decoration: none;
             text-transform: uppercase;
             overflow: hidden;
             cursor: pointer;
-            font:
-                16px/24px Arial,
-                sans-serif;
-            background-color: #4973ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
             border: none;
-            border-radius: 5px;
-            /* Butonun varsayılan kenarlığını kaldırır */
+            border-radius: 12px;
             color: #fff;
-            /* Metin rengi */
-            letter-spacing: 3px;
-            /* Metin harfleri arası boşluk */
+            letter-spacing: 2.5px;
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        #quizButton1:hover {
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.6);
+            background: linear-gradient(135deg, #357ABD 0%, #2868A8 100%);
+        }
+
+        #quizButton1:active {
+            transform: translateX(-50%) translateY(-1px);
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
         }
 
         #viewResult {
             top: 430px;
-            /* Butonun üst kenardan mesafesi */
+            /* Butonun üstkenardan mesafesi */
             left: 50%;
             transform: translateX(-50%);
             position: absolute;
-            padding: 6px 10px;
+            padding: 14px 32px;
             display: inline-block;
             text-decoration: none;
             overflow: hidden;
             cursor: pointer;
-            font:
-                14px/22px Times,
-                sans-serif;
-            background-color: #4973ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
-            border-radius: 5px;
-            /* Butonun varsayılan kenarlığını kaldırır */
+            border-radius: 12px;
             color: #fff;
-            /* Metin rengi */
-            letter-spacing: 1px;
-            /* Metin harfleri arası boşluk */
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        #viewResult:hover {
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        #viewResult:active {
+            transform: translateX(-50%) translateY(0);
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.4);
         }
 
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
+            bottom: 0;
             width: 100vw;
             height: 100vh;
             pointer-events: none;
@@ -166,6 +188,14 @@
         }
 
         .overlay-thin-top {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
             box-shadow:
                 inset 0 10px 0 0 #085dc4,
                 /* Üst kenar 5px */
@@ -175,6 +205,7 @@
                 /* Sol kenar */
                 inset -50px 0 0 0 #085dc4;
             /* Sağ kenar */
+            z-index: 1;
         }
 
         @media (max-width: 768px) {
@@ -2600,8 +2631,8 @@
 
             /* Mobil cihazlarda İLERLE butonunun alt kenardan taşmasını önle */
             #proceedSection3End {
-                padding-bottom: 400px !important;
-                margin-bottom: 400px !important;
+                padding-bottom: 70px !important;
+                margin-bottom: 100px !important;
             }
 
             /* İLERLE butonu için ekstra güvenlik */
@@ -2858,7 +2889,7 @@
 
     <!-- 3. Bölümü Başlatan Mesaj ve Yeni Düğme -->
     <div id="startMessage" style="display: none">
-        <h4>TEORİ SINAVI - BİNEK ARAÇ</h4>
+        <h4>TEORİİİ SINAVI - BİNEK ARAÇ</h4>
         <p class="start-insight">
             Sorular arasında ileri ve geri geçiş yapabilirsiniz. Bu bölüm için 30
             dakikanız vardır. Zaman çubuğu ilerlediği sürece, sorular arasında geçiş
