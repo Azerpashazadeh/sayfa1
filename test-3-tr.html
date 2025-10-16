@@ -1193,6 +1193,8 @@
             /* Metinleri de ortalar */
             width: 100%;
             /* Konteynerin genişliği */
+            margin-bottom: 150px;
+            /* Mobil cihazlarda düğmenin overlay altına taşmasını önler */
         }
 
         /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -2746,10 +2748,8 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, calc(-50% - 6vh));
-                /* biraz yukarı it */
             }
         }
-
 
         /* Masaüstü: >=768px */
         @media (min-width: 769px) {
@@ -2761,11 +2761,100 @@
                 /* ~24px yukarı it */
             }
         }
+
+        /* Fullscreen Toggle Button Styles */
+        .toggle-fullscreen-btn {
+            position: fixed;
+            z-index: 10000;
+            top: 0px;
+            right: 0px;
+            width: 25px;
+            height: 25px;
+            border: 0;
+            padding: 0;
+            border-radius: 0px;
+            background: #085dc4;
+            cursor: pointer;
+            outline: none;
+            display: grid;
+            place-items: center;
+            opacity: .92;
+            transition: transform .15s ease, opacity .15s ease;
+        }
+
+        .toggle-fullscreen-btn:hover,
+        .toggle-fullscreen-btn:focus {
+            opacity: 1;
+            transform: scale(1.06);
+        }
+
+        .toggle-fullscreen-svg {
+            display: block;
+            height: auto;
+        }
+
+        .toggle-fullscreen-svg path {
+            transform-box: view-box;
+            transform-origin: 12px 12px;
+            fill: none;
+            stroke: #fff;
+            stroke-width: 4;
+            transition: .15s;
+        }
+
+        .toggle-fullscreen-btn:hover path:nth-child(1),
+        .toggle-fullscreen-btn:focus path:nth-child(1) {
+            transform: translate(-2px, -2px);
+        }
+
+        .toggle-fullscreen-btn:hover path:nth-child(2),
+        .toggle-fullscreen-btn:focus path:nth-child(2) {
+            transform: translate(2px, -2px);
+        }
+
+        .toggle-fullscreen-btn:hover path:nth-child(3),
+        .toggle-fullscreen-btn:focus path:nth-child(3) {
+            transform: translate(2px, 2px);
+        }
+
+        .toggle-fullscreen-btn:hover path:nth-child(4),
+        .toggle-fullscreen-btn:focus path:nth-child(4) {
+            transform: translate(-2px, 2px);
+        }
+
+        .toggle-fullscreen-btn:not(.on) .icon-fullscreen-leave {
+            display: none;
+        }
+
+        .toggle-fullscreen-btn.on .icon-fullscreen-enter {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
     <div class="overlay"></div>
+
+    <!-- Fullscreen Toggle Button -->
+    <button class="js-toggle-fullscreen-btn toggle-fullscreen-btn" aria-label="Enter fullscreen mode" hidden>
+        <svg class="toggle-fullscreen-svg" width="18" height="18" viewBox="-2 -2 28 28" aria-hidden="true">
+            <!-- Tam ekrana GİR (enter) ikonu -->
+            <g class="icon-fullscreen-enter">
+                <path d="M 2 9 v -7 h 7" />
+                <path d="M 22 9 v -7 h -7" />
+                <path d="M 22 15 v 7 h -7" />
+                <path d="M 2 15 v 7 h 7" />
+            </g>
+            <!-- Tam ekrandan ÇIK (leave) ikonu -->
+            <g class="icon-fullscreen-leave">
+                <path d="M 24 17 h -7 v 7" />
+                <path d="M 0 17 h 7 v 7" />
+                <path d="M 0 7 h 7 v -7" />
+                <path d="M 24 7 h -7 v -7" />
+            </g>
+        </svg>
+    </button>
+
     <!-- Diğer içerikler burada -->
     <!--<div class="coordinateDisplay">X: 0, Y: 0</div>-->
 
@@ -6657,14 +6746,39 @@
         });
 
 
+        // Fullscreen Toggle Button Script
+        if (document.fullscreenEnabled || document.webkitFullscreenEnabled) {
+            const toggleBtn = document.querySelector('.js-toggle-fullscreen-btn');
 
+            // Düğmeyi görünür yap
+            toggleBtn.hidden = false;
 
+            toggleBtn.addEventListener('click', function () {
+                // Tüm sayfayı tam ekran yap/çık
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                } else if (document.webkitFullscreenElement) {
+                    document.webkitCancelFullScreen();
+                } else if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.documentElement.webkitRequestFullScreen();
+                }
+            });
 
+            document.addEventListener('fullscreenchange', handleFullscreen);
+            document.addEventListener('webkitfullscreenchange', handleFullscreen);
 
-
-
-
-
+            function handleFullscreen() {
+                if (document.fullscreenElement || document.webkitFullscreenElement) {
+                    toggleBtn.classList.add('on');
+                    toggleBtn.setAttribute('aria-label', 'Exit fullscreen mode');
+                } else {
+                    toggleBtn.classList.remove('on');
+                    toggleBtn.setAttribute('aria-label', 'Enter fullscreen mode');
+                }
+            }
+        }
     </script>
 </body>
 
