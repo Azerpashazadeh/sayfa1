@@ -6095,251 +6095,245 @@
         }
 
         // lockQuizQuestions fonksiyonu
-        function lockQuizQuestionsS3() {
-            const questions = document.querySelectorAll(".questionS3");
-            questions.forEach((question, index) => {
-                let isCorrectArrayDragDrop = [];
-                question.classList.add("hidden");
+        
+function lockQuizQuestionsS3() { 
+    const questions = document.querySelectorAll(".questionS3");
+    questions.forEach((question, index) => {
+        let isCorrectArrayDragDrop = [];
+        question.classList.add("hidden");
 
-                const inputs = question.querySelectorAll("input, .question-image-t4");
-                const isDragDropQuestion =
-                    question.querySelector(".drag-drop-container") !== null;
+        const inputs = question.querySelectorAll("input, .question-image-t4");
+        const isDragDropQuestion =
+            question.querySelector(".drag-drop-container") !== null;
 
-                // Drag-drop soruları için işlemler
-                if (isDragDropQuestion) {
+        // Drag-drop soruları için işlemler
+        if (isDragDropQuestion) {
+            const questionIndex = parseInt(question.id.split("-")[1]) - 1;
+            const questionData = quizAnswersS3[questionIndex];
+
+            const checkDrops = question.querySelectorAll(".box");
+
+            checkDrops.forEach((box) => {
+                if (box.dataset.target) {
+                    let split = box.id.split("-");
+                    let split2 = box.dataset.target.split("-");
+
+                    if (
+                        split[split.length - 1] ==
+                        split2[split2.length - 1] - checkDrops.length
+                    ) {
+                        box.style.backgroundColor = "rgb(11, 207, 11)";
+                        box.style.border = "4px solid white";
+                        box.style.color = "white";
+                        isCorrectArrayDragDrop.push(true);
+                    } else {
+                        box.style.backgroundColor = "red";
+                        box.style.border = "4px solid white";
+                        box.style.color = "white";
+                        isCorrectArrayDragDrop.push(false);
+                    }
+                }
+                box.draggable = false;
+                box.style.pointerEvents = "none";
+            });
+        }
+
+        // Inputlar ve diğer elementler için işlemler
+        inputs.forEach((input) => {
+            const label = input.closest(".cevapSecenegi-s3");
+            if (!label && input.classList.contains("question-image-t4")) {
+                input.classList.add("disabled3");
+
+                const markerSpan = document.createElement("span");
+                markerSpan.classList.add("marker");
+                markerSpan.style.position = "absolute";
+                markerSpan.style.top = "5px";
+                markerSpan.style.right = "5px";
+                markerSpan.style.fontSize = "15px";
+                markerSpan.style.backgroundColor = "white";
+                markerSpan.style.borderRadius = "50%";
+                markerSpan.style.padding = "2px";
+
+                const questionIndex = parseInt(question.id.split("-")[1]) - 1;
+                const questionData = quizAnswersS3[questionIndex];
+                if (questionData.dogruCevap.includes(input.src)) {
+                    markerSpan.textContent = "✔️";
+                } else {
+                    markerSpan.textContent = "❌";
+                }
+
+                const parentContainer = input.parentElement;
+                parentContainer.style.position = "relative";
+                parentContainer.appendChild(markerSpan);
+                markerSpan.style.top = `${input.offsetTop + 5}px`;
+                markerSpan.style.right = `${input.offsetLeft + 5}px`;
+                return;
+            }
+
+            if (input.type === "text") {
+                input.disabled = true;
+
+                const questionIndex = parseInt(question.id.split("-")[1]) - 1;
+                const questionData = quizAnswersS3[questionIndex];
+                if (!input.value.trim()) {
+                    input.style.backgroundColor = "lightgray";
+                    return;
+                }
+                if (!input.parentNode.querySelector(".marker")) {
+                    const markerSpan = document.createElement("span");
+                    markerSpan.classList.add("marker");
+                    markerSpan.style.marginRight = "10px";
+                    markerSpan.style.display = "inline-block";
+                    markerSpan.style.width = "20px";
+
+                    if (questionData.dogruCevap.includes(input.value)) {
+                        markerSpan.textContent = "✔️";
+                        input.style.backgroundColor = "rgb(11, 207, 11)";
+                    } else {
+                        markerSpan.textContent = "❌";
+                        input.style.backgroundColor = "red";
+                    }
+
+                    input.parentNode.insertBefore(markerSpan, input);
+                }
+                return;
+            }
+
+            if (label && input.type !== "text") {
+                input.disabled = true;
+                label.style.pointerEvents = "none";
+
+                if (!label.querySelector(".marker")) {
+                    const markerSpan = document.createElement("span");
+                    markerSpan.classList.add("marker");
+                    markerSpan.style.marginRight = "0px";
+                    markerSpan.style.display = "inline-block";
+                    markerSpan.style.width = "20px";
+
                     const questionIndex = parseInt(question.id.split("-")[1]) - 1;
                     const questionData = quizAnswersS3[questionIndex];
 
-                    const checkDrops = question.querySelectorAll(".box");
-
-                    checkDrops.forEach((box) => {
-                        if (box.dataset.target) {
-                            let split = box.id.split("-");
-                            let split2 = box.dataset.target.split("-");
-
-                            if (
-                                split[split.length - 1] ==
-                                split2[split2.length - 1] - checkDrops.length
-                            ) {
-                                box.style.backgroundColor = "rgb(11, 207, 11)";
-                                box.style.border = "4px solid white";
-                                box.style.color = "white";
-                                isCorrectArrayDragDrop.push(true);
-                            } else {
-                                box.style.backgroundColor = "red";
-                                box.style.border = "4px solid white";
-                                box.style.color = "white";
-                                isCorrectArrayDragDrop.push(false);
-                            }
-                        }
-                        box.draggable = false;
-                        box.style.pointerEvents = "none";
-                    });
-                }
-
-                // Inputlar ve diğer elementler için işlemler
-                inputs.forEach((input) => {
-                    const label = input.closest(".cevapSecenegi-s3");
-                    if (!label && input.classList.contains("question-image-t4")) {
-                        input.classList.add("disabled3");
-
-                        const markerSpan = document.createElement("span");
-                        markerSpan.classList.add("marker");
-                        markerSpan.style.position = "absolute";
-                        markerSpan.style.top = "5px";
-                        markerSpan.style.right = "5px";
-                        markerSpan.style.fontSize = "15px";
-                        markerSpan.style.backgroundColor = "white";
-                        markerSpan.style.borderRadius = "50%";
-                        markerSpan.style.padding = "2px";
-
-                        const questionIndex = parseInt(question.id.split("-")[1]) - 1;
-                        const questionData = quizAnswersS3[questionIndex];
-                        if (questionData.dogruCevap.includes(input.src)) {
-                            markerSpan.textContent = "✔️";
+                    if (questionData.dogruCevap.includes(input.value)) {
+                        markerSpan.textContent = "✔️";
+                        if (input.checked) {
+                            label.classList.add("selected-correct");
+                            label.style.backgroundColor = "rgb(11, 207, 11)";
                         } else {
-                            markerSpan.textContent = "❌";
-                        }
-
-                        const parentContainer = input.parentElement;
-                        parentContainer.style.position = "relative";
-                        parentContainer.appendChild(markerSpan);
-                        markerSpan.style.top = `${input.offsetTop + 5}px`;
-                        markerSpan.style.right = `${input.offsetLeft + 5}px`;
-                        return;
-                    }
-
-                    if (input.type === "text") {
-                        input.disabled = true;
-
-                        const questionIndex = parseInt(question.id.split("-")[1]) - 1;
-                        const questionData = quizAnswersS3[questionIndex];
-                        if (!input.value.trim()) {
-                            input.style.backgroundColor = "lightgray";
-                            return;
-                        }
-                        if (!input.parentNode.querySelector(".marker")) {
-                            const markerSpan = document.createElement("span");
-                            markerSpan.classList.add("marker");
-                            markerSpan.style.marginRight = "10px";
-                            markerSpan.style.display = "inline-block";
-                            markerSpan.style.width = "20px";
-
-                            if (questionData.dogruCevap.includes(input.value)) {
-                                markerSpan.textContent = "✔️";
-                                input.style.backgroundColor = "rgb(11, 207, 11)";
-                            } else {
-                                markerSpan.textContent = "❌";
-                                input.style.backgroundColor = "red";
-                            }
-
-                            input.parentNode.insertBefore(markerSpan, input);
-                        }
-                        return;
-                    }
-
-                    if (label && input.type !== "text") {
-                        input.disabled = true;
-                        label.style.pointerEvents = "none";
-
-                        if (!label.querySelector(".marker")) {
-                            const markerSpan = document.createElement("span");
-                            markerSpan.classList.add("marker");
-                            markerSpan.style.marginRight = "0px";
-                            markerSpan.style.display = "inline-block";
-                            markerSpan.style.width = "20px";
-
-                            const questionIndex = parseInt(question.id.split("-")[1]) - 1;
-                            const questionData = quizAnswersS3[questionIndex];
-
-                            if (questionData.dogruCevap.includes(input.value)) {
-                                markerSpan.textContent = "✔️";
-                                if (input.checked) {
-                                    label.classList.add("selected-correct");
-                                    label.style.backgroundColor = "rgb(11, 207, 11)";
-                                } else {
-                                    label.style.backgroundColor = "lightgrey";
-                                }
-                            } else {
-                                markerSpan.textContent = "❌";
-                                if (input.checked) {
-                                    label.classList.add("selected-wrong");
-                                    label.style.backgroundColor = "red";
-                                } else {
-                                    label.style.backgroundColor = "lightgrey";
-                                }
-                            }
-
-                            label.insertBefore(markerSpan, label.firstChild);
-                        }
-                    }
-                });
-
-                // Number inputlarını devre dışı bırak
-                const numberInputs = question.querySelectorAll(
-                    'input[type="number"]',
-                );
-                numberInputs.forEach((input) => {
-                    input.disabled = true;
-                });
-
-                // Feedback kutusunu ekle
-                const questionIndex = parseInt(question.id.split("-")[1]) - 1;
-                const feedback = allQuestionsS3[questionIndex].feedback;
-
-                if (feedback) {
-                    const feedbackDiv = document.createElement("div");
-                    feedbackDiv.className = "feedback-container";
-                    feedbackDiv.style.border = "1px solid #848586";
-                    feedbackDiv.style.padding = "10px";
-                    feedbackDiv.style.display = "flex";
-                    feedbackDiv.style.alignItems = "center";
-                    feedbackDiv.style.width = "93%";
-                    feedbackDiv.style.maxWidth = "100%";
-                    feedbackDiv.style.borderRadius = "10px";
-                    feedbackDiv.style.boxShadow =
-                        "0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)";
-                    feedbackDiv.style.margin = "0 auto"; // Yatay ortalama
-                    feedbackDiv.style.justifyContent = "center"; // İçeriği ortalama
-                    feedbackDiv.id = `feedback-${index + 1}`;
-
-                    // Drag-drop soruları için feedback kutusuna ekstra genişlik ayarla
-                    if (isDragDropQuestion) {
-                        const parentGridCell = question.closest(".grid-cell"); // Bulunduğu grid hücresini seç
-                        if (parentGridCell) {
-                            const gridWidth = parentGridCell.getBoundingClientRect().width; // Hücrenin genişliğini al
-                            feedbackDiv.style.width = `${gridWidth * 0.9}px`; // %90'ını ayarla
-                        }
-                    }
-
-                    const feedbackText = feedback.metin;
-
-                    const feedbackTextBox = document.createElement("div");
-                    feedbackTextBox.className = "feedback-text";
-                    feedbackTextBox.textContent = feedbackText;
-                    feedbackTextBox.style.margin = "0";
-                    feedbackTextBox.style.flex = "1";
-                    feedbackTextBox.style.overflow = "auto";
-                    feedbackTextBox.style.whiteSpace = "pre-wrap";
-                    feedbackTextBox.style.textAlign = "center"; // Metni ortalama
-                    feedbackDiv.appendChild(feedbackTextBox);
-
-                    const feedbackImage = document.createElement("img");
-                    feedbackImage.style.width = "30px";
-                    feedbackImage.style.height = "30px";
-                    feedbackImage.style.marginLeft = "5px";
-                    feedbackImage.style.border = "0px solid";
-
-                    const endMessage4Block = document.querySelector(
-                        `#endMessage4-S3 .question-block-s3:nth-child(${index + 1})`,
-                    );
-                    let feedbackImageUrl;
-                    if (endMessage4Block) {
-                        const backgroundColor =
-                            window.getComputedStyle(endMessage4Block).backgroundColor;
-                        if (backgroundColor === "rgb(0, 255, 0)") {
-                            // Yeşil renk (Doğru cevap)
-                            feedbackImageUrl = feedback.dogruCevapResim;
-                        } else if (backgroundColor === "rgb(255, 0, 0)") {
-                            // Kırmızı renk (Yanlış cevap)
-                            feedbackImageUrl = feedback.yanlisCevapResim;
-                        } else {
-                            // Cevaplanmamış
-                            feedbackImageUrl = feedback.cevaplanmamisResim;
+                            label.style.backgroundColor = "lightgrey";
                         }
                     } else {
-                        feedbackImageUrl = feedback.cevaplanmamisResim;
+                        markerSpan.textContent = "❌";
+                        if (input.checked) {
+                            label.classList.add("selected-wrong");
+                            label.style.backgroundColor = "red";
+                        } else {
+                            label.style.backgroundColor = "lightgrey";
+                        }
                     }
 
-                    feedbackImage.src = feedbackImageUrl;
-                    feedbackDiv.appendChild(feedbackImage);
-
-                    const answersElement = question.querySelector(".answers");
-                    if (answersElement) {
-                        answersElement.appendChild(feedbackDiv);
-                    } else {
-                        question.appendChild(feedbackDiv);
-                    }
+                    label.insertBefore(markerSpan, label.firstChild);
                 }
-            });
+            }
+        });
 
-            // Timer'ı gizle
-            const timerDiv = document.getElementById("timerDiv");
-            if (timerDiv) {
-                timerDiv.style.display = "none";
+        // Number inputlarını devre dışı bırak
+        const numberInputs = question.querySelectorAll(
+            'input[type="number"]',
+        );
+        numberInputs.forEach((input) => {
+            input.disabled = true;
+        });
+
+        // Feedback kutusunu ekle
+        const questionIndex = parseInt(question.id.split("-")[1]) - 1;
+        const feedback = allQuestionsS3[questionIndex].feedback;
+
+        if (feedback) {
+            const feedbackDiv = document.createElement("div");
+            feedbackDiv.className = "feedback-container";
+            feedbackDiv.style.border = "1px solid #848586";
+            feedbackDiv.style.padding = "10px";
+            feedbackDiv.style.display = "flex";
+            feedbackDiv.style.alignItems = "center";
+            feedbackDiv.style.width = "93%";
+            feedbackDiv.style.maxWidth = "100%";
+            feedbackDiv.style.borderRadius = "10px";
+            feedbackDiv.style.boxShadow =
+                "0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)";
+            feedbackDiv.style.margin = "0 auto";
+            feedbackDiv.style.justifyContent = "center";
+            feedbackDiv.id = `feedback-${index + 1}`;
+
+            if (isDragDropQuestion) {
+                const parentGridCell = question.closest(".grid-cell");
+                if (parentGridCell) {
+                    const gridWidth = parentGridCell.getBoundingClientRect().width;
+                    feedbackDiv.style.width = `${gridWidth * 0.9}px`;
+                }
             }
 
-            // Soru alanlarını sıfırla
-            const soruAlanlari = document.querySelectorAll(".questionS3");
-            soruAlanlari.forEach((soruAlani) => {
-                soruAlani.style.top = "0px";
-            });
+            const feedbackText = feedback.metin;
 
-            const overlay = document.querySelector(".overlay");
-            if (overlay) {
-                overlay.classList.add("overlay-thin-top");
+            const feedbackTextBox = document.createElement("div");
+            feedbackTextBox.className = "feedback-text";
+            feedbackTextBox.textContent = feedbackText;
+            feedbackTextBox.style.margin = "0";
+            feedbackTextBox.style.flex = "1";
+            feedbackTextBox.style.overflow = "auto";
+            feedbackTextBox.style.whiteSpace = "pre-wrap";
+            feedbackTextBox.style.textAlign = "center";
+            feedbackDiv.appendChild(feedbackTextBox);
+
+            const feedbackImage = document.createElement("img");
+            feedbackImage.style.width = "30px";
+            feedbackImage.style.height = "30px";
+            feedbackImage.style.marginLeft = "5px";
+            feedbackImage.style.border = "0px solid";
+
+            const endMessage4Block = document.querySelector(
+                `#endMessage4-S3 .question-block-s3:nth-child(${index + 1})`,
+            );
+            let feedbackImageUrl; 
+            if (endMessage4Block) {
+                if (endMessage4Block.classList.contains('correct-block')) {
+                    feedbackImageUrl = feedback.dogruCevapResim;
+                } else if (endMessage4Block.classList.contains('incorrect-block')) {
+                    feedbackImageUrl = feedback.yanlisCevapResim;
+                } else {
+                    feedbackImageUrl = feedback.cevaplanmamisResim;
+                }
+            } else {
+                feedbackImageUrl = feedback.cevaplanmamisResim;
+            }
+
+            feedbackImage.src = feedbackImageUrl;
+            feedbackDiv.appendChild(feedbackImage);
+
+            const answersElement = question.querySelector(".answers");
+            if (answersElement) {
+                answersElement.appendChild(feedbackDiv);
+            } else {
+                question.appendChild(feedbackDiv);
             }
         }
+    });
+
+    const timerDiv = document.getElementById("timerDiv");
+    if (timerDiv) {
+        timerDiv.style.display = "none";
+    }
+
+    const soruAlanlari = document.querySelectorAll(".questionS3");
+    soruAlanlari.forEach((soruAlani) => {
+        soruAlani.style.top = "0px";
+    });
+
+    const overlay = document.querySelector(".overlay");
+    if (overlay) {
+        overlay.classList.add("overlay-thin-top");
+    }
+}
+
 
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
