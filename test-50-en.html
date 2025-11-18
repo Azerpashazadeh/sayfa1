@@ -3281,39 +3281,36 @@
         /////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////
 
-        (function () {
-            const viewBtn = document.getElementById("viewResult");
-            if (!viewBtn) return;
+        // Mevcut onclick olayını saklayın
+        const oldOnClick = document.getElementById("viewResult").onclick;
 
-            // Mevcut onclick olayını sakla
-            const oldOnClick = viewBtn.onclick;
+        // Yeni onclick olayını tanımlayın
+        document.getElementById("viewResult").onclick = function (event) {
+            // Mevcut işlevselliği çağırın (finalResultShow fonksiyonu)
+            if (oldOnClick) {
+                oldOnClick(event);
+            }
 
-            // Yeni onclick olayını tanımla
-            viewBtn.onclick = function (event) {
-                // Eski işleyişi çalıştır (sonuç ekranını vs. açan fonksiyon)
-                if (oldOnClick) {
-                    oldOnClick(event);
-                }
+            // Yeni işlevsellik: TEST50 tamamlandı
+            const completedTestNumber = 1050; // TEST50 tamamlandı
 
-                // TEST50 tamamlandı → 1050
-                const completedTestNumber = 1050;
+            // Frontend'e mesaj gönderme işlemi
+            const wixOrigin = "https://www.examtheorie.nl";
+            try {
+                window.parent.postMessage(
+                    {
+                        action: "updateProgress",
+                        testNumber: completedTestNumber,
+                        lang: "en" // Bu Quiz-50 İngilizce sayfa olduğu için
+                    },
+                    wixOrigin
+                );
+                console.log("Frontend'e mesaj gönderildi.");
+            } catch (error) {
+                console.error("Mesaj gönderilirken hata oluştu:", error);
+            }
+        };
 
-                const wixOrigin = "https://www.examtheorie.nl";
-                try {
-                    window.parent.postMessage(
-                        {
-                            action: "quizCompleted",     // 🔴 artık updateProgress değil
-                            testNumber: completedTestNumber,
-                            lang: "en"                   // Bu sayfa İngilizce
-                        },
-                        wixOrigin
-                    );
-                    console.log("Frontend'e quizCompleted mesajı gönderildi.");
-                } catch (error) {
-                    console.error("Mesaj gönderilirken hata oluştu:", error);
-                }
-            };
-        })();
 
         ////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////
@@ -6527,27 +6524,18 @@
             if (viewBtn) {
                 var old = viewBtn.onclick;
                 viewBtn.onclick = function (ev) {
-                    // Eski davranış: sonuç ekranını açan fonksiyon (finalResultShow)
                     if (old) old(ev);
-
-                    // 🔹 Yeni davranış: Wix ana sayfaya quizCompleted mesajı gönder
                     try {
                         window.parent.postMessage(
-                            {
-                                action: "quizCompleted",
-                                testNumber: TEST_NUMBER, // Quiz-50 için 1050
-                                lang: "en"               // Bu sayfa İngilizce olduğu için
-                            },
-                            ORIGIN
+                            { action: "updateProgress", testNumber: TEST_NUMBER },
+                            ORIGIN,
                         );
                     } catch (e) { }
-
-                    // Butonu "Completed" yapmaya devam et (istersen bırakabiliriz)
+                    // iyimser UI
                     setCompleted();
                 };
             }
         })();
-
 
 
 
