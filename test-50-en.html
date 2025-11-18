@@ -3281,30 +3281,39 @@
         /////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////
 
-       
+        (function () {
+            const viewBtn = document.getElementById("viewResult");
+            if (!viewBtn) return;
 
+            // Mevcut onclick olayını sakla
+            const oldOnClick = viewBtn.onclick;
 
+            // Yeni onclick olayını tanımla
+            viewBtn.onclick = function (event) {
+                // Eski işleyişi çalıştır (sonuç ekranını vs. açan fonksiyon)
+                if (oldOnClick) {
+                    oldOnClick(event);
+                }
 
+                // TEST50 tamamlandı → 1050
+                const completedTestNumber = 1050;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+                const wixOrigin = "https://www.examtheorie.nl";
+                try {
+                    window.parent.postMessage(
+                        {
+                            action: "quizCompleted",     // 🔴 artık updateProgress değil
+                            testNumber: completedTestNumber,
+                            lang: "en"                   // Bu sayfa İngilizce
+                        },
+                        wixOrigin
+                    );
+                    console.log("Frontend'e quizCompleted mesajı gönderildi.");
+                } catch (error) {
+                    console.error("Mesaj gönderilirken hata oluştu:", error);
+                }
+            };
+        })();
 
         ////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////
