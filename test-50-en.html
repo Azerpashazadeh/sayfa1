@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -3026,27 +3026,27 @@
 
     <!-- 3. Bölümü Başlatan Mesaj ve Yeni Düğme -->
     <div id="startMessage" style="display: none">
-      <h4>THEORY EXAM PASSENGER CAR</h4>
-      <p class="start-insight">
-        You can cycle forwards and backwards through the questions. You have 30
-        minutes for this section. As long as the time bar runs, you can cycle
-        through questions, skip, answer or correct them.
-      </p>
-      <p class="start-insight">
-        Are you doing an extended or individual exam, then you even have 45
-        minutes. When there is a lesson car on screen, you are the driver.
-      </p>
-      <p class="start-insight">
-        In this section you will get 50 questions, of which you need to
-        correctly answer a minimum of 44 questions. Questions that are not
-        (fully) answered will always be incorrect.
-      </p>
-      <h4 class="start-insight">Good luck!</h4>
-      <div class="button-container">
-        <button id="startSection3Button" onclick="startQuizS3()">
-          PROCEED TO THE FIRST QUESTION
-        </button>
-      </div>
+        <h4>THEORY EXAM PASSENGER CAR</h4>
+        <p class="start-insight">
+            You can cycle forwards and backwards through the questions. You have 30
+            minutes for this section. As long as the time bar runs, you can cycle
+            through questions, skip, answer or correct them.
+        </p>
+        <p class="start-insight">
+            Are you doing an extended or individual exam, then you even have 45
+            minutes. When there is a lesson car on screen, you are the driver.
+        </p>
+        <p class="start-insight">
+            In this section you will get 50 questions, of which you need to
+            correctly answer a minimum of 44 questions. Questions that are not
+            (fully) answered will always be incorrect.
+        </p>
+        <h4 class="start-insight">Good luck!</h4>
+        <div class="button-container">
+            <button id="startSection3Button" onclick="startQuizS3()">
+                PROCEED TO THE FIRST QUESTION
+            </button>
+        </div>
     </div>
 
     <!-- Section 3 -->
@@ -3057,13 +3057,9 @@
     <!-- Zamanlayıcı başlangıçta gizli -->
     <div class="quiz-container-s3"></div>
     <div id="button-container">
-        <button
-        id="previous-button-s3"
-        class="hidden"
-        onclick="previousQuestionS3()"
-      >
-        Previous
-      </button>
+        <button id="previous-button-s3" class="hidden" onclick="previousQuestionS3()">
+            Previous
+        </button>
 
         <div class="flex-grow">
             <h2 id="soruNumarasiS3"></h2>
@@ -3115,28 +3111,24 @@
         </div>
 
         <button id="next-button-s3" class="hidden" onclick="nextQuestionS3()">
-        Next
-      </button>
+            Next
+        </button>
     </div>
 
 
 
-    <div
-      id="proceedSection3End"
-      class="center-button hidden"
-      style="flex-direction: column; gap: 10px"
-    >
-      <div class="button-container">
-        <h2>Final Stage of the Exam</h2>
-      </div>
-      <p id="answeredQuestionsS3End"></p>
-      <p id="unAnsweredQuestionsS3End"></p>
-      <div id="endMessage3-S3" style="display: flex; flex-wrap: wrap"></div>
-      <div class="button-container">
-        <button id="proceedToResultDivBtn" onclick="proceedToResultDiv()">
-          PROCEED
-        </button>
-      </div>
+    <div id="proceedSection3End" class="center-button hidden" style="flex-direction: column; gap: 10px">
+        <div class="button-container">
+            <h2>Final Stage of the Exam</h2>
+        </div>
+        <p id="answeredQuestionsS3End"></p>
+        <p id="unAnsweredQuestionsS3End"></p>
+        <div id="endMessage3-S3" style="display: flex; flex-wrap: wrap"></div>
+        <div class="button-container">
+            <button id="proceedToResultDivBtn" onclick="proceedToResultDiv()">
+                PROCEED
+            </button>
+        </div>
     </div>
 
     <div id="myModal" class="modal">
@@ -3154,55 +3146,42 @@
     </div>
 
     <div id="myModalS3" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="noButtonClicked('section3')">&times;</span>
-        <h2>Proceed?</h2>
-        <p>You can not go back after this.</p>
-        <button
-          class="popup-btn"
-          onclick="yesButtonClicked('section3')"
-          id="yesBtn"
-        >
-          Yes
-        </button>
-        <button
-          class="popup-btn"
-          onclick="noButtonClicked('section3')"
-          id="noBtn"
-        >
-          No
-        </button>
-      </div>
+        <div class="modal-content">
+            <span class="close" onclick="noButtonClicked('section3')">&times;</span>
+            <h2>Proceed?</h2>
+            <p>You can not go back after this.</p>
+            <button class="popup-btn" onclick="yesButtonClicked('section3')" id="yesBtn">
+                Yes
+            </button>
+            <button class="popup-btn" onclick="noButtonClicked('section3')" id="noBtn">
+                No
+            </button>
+        </div>
     </div>
 
     <div id="viewResultContainerId" class="viewResultContainer hidden">
-      <p>Thank You for submiting the exam!</p>
-      <hr />
-      <h2 id="failOrPass"></h2>
-      <div>
-        <img id="failOrPassIcon" alt="failOrPass" src="" />
-      </div>
-      <h3 id="endResult"></h3>
-      <button id="viewResult" onclick="finalResultShow()">
-        View My Result!
-      </button>
+        <p>Thank You for submiting the exam!</p>
+        <hr />
+        <h2 id="failOrPass"></h2>
+        <div>
+            <img id="failOrPassIcon" alt="failOrPass" src="" />
+        </div>
+        <h3 id="endResult"></h3>
+        <button id="viewResult" onclick="finalResultShow()">
+            View My Result!
+        </button>
     </div>
 
     <div id="finalResultContainerId" class="finalResultContainer hidden">
-      <h2>REVIEW ANSWERS</h2>
-      <p>
-        Below you can find the results of the exam. You can click on a square to
-        go to the relevant question and review your results.
-      </p>
-      <div id="resultS3">
-        <h2>Check Your Answers</h2>
-        <img
-          id="failOrPassEndS3"
-          alt="failOrPassEnd"
-          style="height: 50px"
-          src=""
-        />
-      </div>
+        <h2>REVIEW ANSWERS</h2>
+        <p>
+            Below you can find the results of the exam. You can click on a square to
+            go to the relevant question and review your results.
+        </p>
+        <div id="resultS3">
+            <h2>Check Your Answers</h2>
+            <img id="failOrPassEndS3" alt="failOrPassEnd" style="height: 50px" src="" />
+        </div>
     </div>
 
     <!-- HTTP -->
@@ -3302,31 +3281,30 @@
         /////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////
 
-        // Mevcut onclick olayını saklayın
-        const oldOnClick = document.getElementById("viewResult").onclick;
+       
 
-        // Yeni onclick olayını tanımlayın
-        document.getElementById("viewResult").onclick = function (event) {
-            // Mevcut işlevselliği çağırın (finalResultShow fonksiyonu)
-            if (oldOnClick) {
-                oldOnClick(event);
-            }
 
-            // Yeni işlevselliği buraya ekleyin
-        const completedTestNumber = 1050; // TEST50 tamamlandı
 
-            // Frontend'e mesaj gönderme işlemi
-            const wixOrigin = "https://www.examtheorie.nl";
-            try {
-                window.parent.postMessage(
-                    { action: "updateProgress", testNumber: completedTestNumber },
-                    wixOrigin,
-                );
-                console.log("Frontend'e mesaj gönderildi.");
-            } catch (error) {
-                console.error("Mesaj gönderilirken hata oluştu:", error);
-            }
-        };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
 
         ////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////
@@ -4969,79 +4947,79 @@
         let isYesClickedS3 = false; // Section 3 için bayrak
 
         function yesButtonClicked(type, timesUp = false) {
-        if (type == "section2") {
-          if (timesUp && isYesClickedS2) {
-            return; // YES düğmesine tıklanmışsa, timesUp işlemini durdur.
-          }
+            if (type == "section2") {
+                if (timesUp && isYesClickedS2) {
+                    return; // YES düğmesine tıklanmışsa, timesUp işlemini durdur.
+                }
 
-          isYesClickedS2 = true; // Section 2 için YES düğmesine tıklanıldığında bayrağı set ediyoruz.
+                isYesClickedS2 = true; // Section 2 için YES düğmesine tıklanıldığında bayrağı set ediyoruz.
 
-          // YES düğmesine tıklandığında Section 2 zamanlayıcısını durdur
-          clearInterval(timerIntervalS2);
+                // YES düğmesine tıklandığında Section 2 zamanlayıcısını durdur
+                clearInterval(timerIntervalS2);
 
-          if (timesUp) {
-            const totalQuestions =
-              document.querySelectorAll(".question").length;
-            currentQuestionIndex = totalQuestions - 1;
-            nextQuestionS2();
-            checkAnswersAndUpdateBlocksS2();
-          }
+                if (timesUp) {
+                    const totalQuestions =
+                        document.querySelectorAll(".question").length;
+                    currentQuestionIndex = totalQuestions - 1;
+                    nextQuestionS2();
+                    checkAnswersAndUpdateBlocksS2();
+                }
 
-          document.getElementById("myModal").style.display = "none";
-          document.getElementById("proceedSection3").classList.add("hidden");
-          document.getElementById("countdown").style.display = "none";
-          document.getElementById("startMessage").style.display = "block";
-        } else if (type == "section3") {
-          if (timesUp && isYesClickedS3) {
-            return; // YES düğmesine tıklanmışsa, Section 3 için timesUp işlemini durdur.
-          }
+                document.getElementById("myModal").style.display = "none";
+                document.getElementById("proceedSection3").classList.add("hidden");
+                document.getElementById("countdown").style.display = "none";
+                document.getElementById("startMessage").style.display = "block";
+            } else if (type == "section3") {
+                if (timesUp && isYesClickedS3) {
+                    return; // YES düğmesine tıklanmışsa, Section 3 için timesUp işlemini durdur.
+                }
 
-          isYesClickedS3 = true; // Section 3 için YES düğmesine tıklanıldığında bayrağı set ediyoruz.
+                isYesClickedS3 = true; // Section 3 için YES düğmesine tıklanıldığında bayrağı set ediyoruz.
 
-          // YES düğmesine tıklandığında Section 3 zamanlayıcısını durdur
-          clearInterval(timerInterval_S3);
+                // YES düğmesine tıklandığında Section 3 zamanlayıcısını durdur
+                clearInterval(timerInterval_S3);
 
-          if (timesUp) {
-            const totalQuestions =
-              document.querySelectorAll(".questionS3").length;
-            currentQuestionIndexS3 = totalQuestions - 1;
-            nextQuestionS3();
-            checkAnswersAndUpdateBlocks();
-          }
+                if (timesUp) {
+                    const totalQuestions =
+                        document.querySelectorAll(".questionS3").length;
+                    currentQuestionIndexS3 = totalQuestions - 1;
+                    nextQuestionS3();
+                    checkAnswersAndUpdateBlocks();
+                }
 
-          document.getElementById("myModalS3").style.display = "none";
-          document.getElementById("proceedSection3End").classList.add("hidden");
-          document.getElementById("app-s3").classList.add("hidden");
-          document
-            .getElementById("viewResultContainerId")
-            .classList.remove("hidden");
+                document.getElementById("myModalS3").style.display = "none";
+                document.getElementById("proceedSection3End").classList.add("hidden");
+                document.getElementById("app-s3").classList.add("hidden");
+                document
+                    .getElementById("viewResultContainerId")
+                    .classList.remove("hidden");
 
-          let calculateS3Correct = correctAnswerS3.questions.filter(
-            (x) => x.isCorrect === true,
-          );
-          let calculateS2Correct = correctAnswerS2.questions.filter(
-            (x) => x.isCorrect === true,
-          );
+                let calculateS3Correct = correctAnswerS3.questions.filter(
+                    (x) => x.isCorrect === true,
+                );
+                let calculateS2Correct = correctAnswerS2.questions.filter(
+                    (x) => x.isCorrect === true,
+                );
 
-          let scoredMarks =
-            correctAnswerS1 +
-            calculateS2Correct.length +
-            calculateS3Correct.length;
-          document.getElementById("endResult").textContent = scoredMarks;
+                let scoredMarks =
+                    correctAnswerS1 +
+                    calculateS2Correct.length +
+                    calculateS3Correct.length;
+                document.getElementById("endResult").textContent = scoredMarks;
 
-          if (calculateS3Correct.length >= 44) {
-            document.getElementById("failOrPass").textContent =
-              "Successfully Passed";
-            document.getElementById("failOrPassIcon").src =
-              "https://static.wixstatic.com/media/4b688f_12a1098a791f44f88cd7265a0517b851~mv2.png";
-          } else {
-            document.getElementById("failOrPass").textContent =
-              "Unfortunately Failed";
-            document.getElementById("failOrPassIcon").src =
-              "https://static.wixstatic.com/media/4b688f_149ee4392b034dac89b73aef8268aef9~mv2.png";
-          }
+                if (calculateS3Correct.length >= 44) {
+                    document.getElementById("failOrPass").textContent =
+                        "Successfully Passed";
+                    document.getElementById("failOrPassIcon").src =
+                        "https://static.wixstatic.com/media/4b688f_12a1098a791f44f88cd7265a0517b851~mv2.png";
+                } else {
+                    document.getElementById("failOrPass").textContent =
+                        "Unfortunately Failed";
+                    document.getElementById("failOrPassIcon").src =
+                        "https://static.wixstatic.com/media/4b688f_149ee4392b034dac89b73aef8268aef9~mv2.png";
+                }
+            }
         }
-      }
 
         function finalResultShow() {
             viewResult = true;
@@ -5122,26 +5100,26 @@
         }
 
         function showCurrentQuestionS3() {
-        // Proceed bölümünü gizle
-        document.getElementById("proceedSection3End").classList.add("hidden");
+            // Proceed bölümünü gizle
+            document.getElementById("proceedSection3End").classList.add("hidden");
 
-        // Soru numarasını güncelle
-        const soruNumarasiS3 = document.getElementById("soruNumarasiS3");
-        if (soruNumarasiS3) {
-          soruNumarasiS3.innerText = `QUESTION ${currentQuestionIndexS3 + 1} OF ${allQuestionsS3.length}`;
-        } else {
-          console.error("soruNumarasiS3 elementi bulunamadı!"); // Hata kontrolü
+            // Soru numarasını güncelle
+            const soruNumarasiS3 = document.getElementById("soruNumarasiS3");
+            if (soruNumarasiS3) {
+                soruNumarasiS3.innerText = `QUESTION ${currentQuestionIndexS3 + 1} OF ${allQuestionsS3.length}`;
+            } else {
+                console.error("soruNumarasiS3 elementi bulunamadı!"); // Hata kontrolü
+            }
+
+            // Soruları göster/gizle
+            document.querySelectorAll(".questionS3").forEach((question, index) => {
+                question.classList.toggle("hidden", index !== currentQuestionIndexS3);
+            });
+
+            // Butonları güncelle
+            updatePreviousButtonS3();
+            updateNextButtonS3();
         }
-
-        // Soruları göster/gizle
-        document.querySelectorAll(".questionS3").forEach((question, index) => {
-          question.classList.toggle("hidden", index !== currentQuestionIndexS3);
-        });
-
-        // Butonları güncelle
-        updatePreviousButtonS3();
-        updateNextButtonS3();
-      }
 
         function previousQuestionS3() {
             if (currentQuestionIndexS3 > 0) {
@@ -5495,152 +5473,152 @@
         }
 
         async function loadQuizS3() {
-        const t1Questions = await fetchQuestionsS3(
-          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_2170922ca2d145bfb524189dde8dcf0f.json",
-          40,
-        );
-        const t2Questions = await fetchQuestionsS3(
-          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_5d5243611c82401391da3505f38b7e5e.json",
-          0,
-        );
-        const t3Questions = await fetchQuestionsS3(
-          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_405b8b6f24ea49ae9c386d9478cc680f.json",
-          2,
-        );
-        const t4Questions = await fetchQuestionsS3(
-          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_561b6435a2f84da4826ecd9534905744.json",
-          4,
-        );
-        const t5Questions = await fetchQuestionsS3(
-          "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_cd071f73f6d6439c940081ca0d5195c6.json",
-          4,
-        );
+            const t1Questions = await fetchQuestionsS3(
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_2170922ca2d145bfb524189dde8dcf0f.json",
+                40,
+            );
+            const t2Questions = await fetchQuestionsS3(
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_5d5243611c82401391da3505f38b7e5e.json",
+                0,
+            );
+            const t3Questions = await fetchQuestionsS3(
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_405b8b6f24ea49ae9c386d9478cc680f.json",
+                2,
+            );
+            const t4Questions = await fetchQuestionsS3(
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_561b6435a2f84da4826ecd9534905744.json",
+                4,
+            );
+            const t5Questions = await fetchQuestionsS3(
+                "https://4b688f47-79ef-4ce7-8524-c798a9ad084b.usrfiles.com/ugd/4b688f_cd071f73f6d6439c940081ca0d5195c6.json",
+                4,
+            );
 
-        // T1'den gelen sorulara "Radio" button, T3'ten gelen sorulara "Checkbox" uygula
-        t1Questions.forEach((question) => {
-          question.type = "radio";
-          question.cevaplar = shuffleS3(question.cevaplar); // Seçenekleri karıştır
-          question.correctAnswer = question.dogruCevap;
-        });
-        t2Questions.forEach((question) => (question.onlyNumbers = true));
-        t3Questions.forEach((question) => {
-          question.type = "checkbox";
-          question.cevaplar = shuffleS3(question.cevaplar); // Seçenekleri karıştır
-          question.correctAnswers = question.dogruCevap;
-        });
+            // T1'den gelen sorulara "Radio" button, T3'ten gelen sorulara "Checkbox" uygula
+            t1Questions.forEach((question) => {
+                question.type = "radio";
+                question.cevaplar = shuffleS3(question.cevaplar); // Seçenekleri karıştır
+                question.correctAnswer = question.dogruCevap;
+            });
+            t2Questions.forEach((question) => (question.onlyNumbers = true));
+            t3Questions.forEach((question) => {
+                question.type = "checkbox";
+                question.cevaplar = shuffleS3(question.cevaplar); // Seçenekleri karıştır
+                question.correctAnswers = question.dogruCevap;
+            });
 
-        // T4'den gelen sorulara resim ekleyelim
-        t4Questions.forEach((question) => {
-          question.type = "image";
-          // question.secenekler = shuffleS3(question.secenekler); // Artık karıştırma yapılmıyor
-          question.correctAnswers = question.dogruCevap;
-        });
+            // T4'den gelen sorulara resim ekleyelim
+            t4Questions.forEach((question) => {
+                question.type = "image";
+                // question.secenekler = shuffleS3(question.secenekler); // Artık karıştırma yapılmıyor
+                question.correctAnswers = question.dogruCevap;
+            });
 
-        t5Questions.forEach((question) => (question.type = "dragdrop"));
+            t5Questions.forEach((question) => (question.type = "dragdrop"));
 
-        allQuestionsS3 = [
-          ...t1Questions,
-          ...t2Questions,
-          ...t3Questions,
-          ...t4Questions,
-          ...t5Questions,
-        ].sort(() => Math.random() - 0.5);
+            allQuestionsS3 = [
+                ...t1Questions,
+                ...t2Questions,
+                ...t3Questions,
+                ...t4Questions,
+                ...t5Questions,
+            ].sort(() => Math.random() - 0.5);
 
-        console.log("Toplam soru sayısı:", allQuestionsS3.length); // Test amaçlı
+            console.log("Toplam soru sayısı:", allQuestionsS3.length); // Test amaçlı
 
-        // Soruların doğru cevaplarını ve kullanıcı cevaplarını belirleyin
-        quizAnswersS3 = allQuestionsS3.map((question, index) => ({
-          id: index + 1,
-          dogruCevap: question.dogruCevap,
-          userAnswer: [], // Önce userAnswer'ı boş dizi olarak başlat
-          type: question.type,
-        }));
+            // Soruların doğru cevaplarını ve kullanıcı cevaplarını belirleyin
+            quizAnswersS3 = allQuestionsS3.map((question, index) => ({
+                id: index + 1,
+                dogruCevap: question.dogruCevap,
+                userAnswer: [], // Önce userAnswer'ı boş dizi olarak başlat
+                type: question.type,
+            }));
 
-        const quizContainer = document.querySelector(".quiz-container-s3");
-        quizContainer.innerHTML = createHTMLForQuestionsS3(allQuestionsS3);
+            const quizContainer = document.querySelector(".quiz-container-s3");
+            quizContainer.innerHTML = createHTMLForQuestionsS3(allQuestionsS3);
 
-        allQuestionsS3.forEach((question, index) => {
-          if (question.type === "dragdrop") {
-            createDragAndDropHTMLFromJSONS3(question, index + 1);
-            addDragAndDropFunctionalityS3(index + 1);
-          }
-        });
+            allQuestionsS3.forEach((question, index) => {
+                if (question.type === "dragdrop") {
+                    createDragAndDropHTMLFromJSONS3(question, index + 1);
+                    addDragAndDropFunctionalityS3(index + 1);
+                }
+            });
 
-        showCurrentQuestionS3();
-        updatePreviousButtonS3();
-        updateNextButtonS3();
-        checkAnswersAndUpdateBlocks();
-      }
+            showCurrentQuestionS3();
+            updatePreviousButtonS3();
+            updateNextButtonS3();
+            checkAnswersAndUpdateBlocks();
+        }
 
         function createHTMLForQuestionsS3(questions) {
-        let html = "";
-        questions.forEach((question, index) => {
-          console.log("Processing question:", question); // Debug log
+            let html = "";
+            questions.forEach((question, index) => {
+                console.log("Processing question:", question); // Debug log
 
-          const questionId = `questionS3-${index + 1}`;
-          html += `<div class="questionS3 hidden ${!question.resim && !question.video && question.type !== "image" ? "no-image" : ""}" id="${questionId}">`;
-          html += `<p>${index + 1}. ${question.soru}</p>`;
+                const questionId = `questionS3-${index + 1}`;
+                html += `<div class="questionS3 hidden ${!question.resim && !question.video && question.type !== "image" ? "no-image" : ""}" id="${questionId}">`;
+                html += `<p>${index + 1}. ${question.soru}</p>`;
 
-          if (question.type === "dragdrop") {
-            html += `<div id="demo-${index + 1}" class="drag-drop-container"></div>`;
-          } else {
-            if (question.resim) {
-              console.log("Adding image:", question.resim); // Debug log
-              html += `<img src="${question.resim}" alt="Resim" class="question-image"><br>`;
-            }
-            if (question.video) {
-              console.log("Adding video:", question.video); // Debug log
-              html += `<video controls class="question-video">
+                if (question.type === "dragdrop") {
+                    html += `<div id="demo-${index + 1}" class="drag-drop-container"></div>`;
+                } else {
+                    if (question.resim) {
+                        console.log("Adding image:", question.resim); // Debug log
+                        html += `<img src="${question.resim}" alt="Resim" class="question-image"><br>`;
+                    }
+                    if (question.video) {
+                        console.log("Adding video:", question.video); // Debug log
+                        html += `<video controls class="question-video">
                             <source src="${question.video}" type="video/mp4">
                             Tarayıcınız video etiketini desteklemiyor.
                          </video><br>`;
-            }
-            if (question.type === "image") {
-              const imageContainerClass =
-                question.secenekler.length === 4
-                  ? "image-container grid-4"
-                  : "image-container";
-              html += `<div class="${imageContainerClass}">`;
-              question.secenekler.forEach((resim, resimIndex) => {
-                html += `<div class="image-wrapper">
+                    }
+                    if (question.type === "image") {
+                        const imageContainerClass =
+                            question.secenekler.length === 4
+                                ? "image-container grid-4"
+                                : "image-container";
+                        html += `<div class="${imageContainerClass}">`;
+                        question.secenekler.forEach((resim, resimIndex) => {
+                            html += `<div class="image-wrapper">
                                 <img src="${resim}" alt="Resim ${resimIndex + 1}" class="question-image question-image-t4 selectable" onclick="toggleSelectionS3(this, ${index + 1}, ${resimIndex})">
                              </div>`;
-              });
-              html += `</div><br>`;
-            } else if (question.resimler) {
-              question.resimler.forEach((resim, resimIndex) => {
-                html += `<img src="${resim}" alt="Resim ${resimIndex + 1}" class="selectable" onclick="toggleSelectionS3(this)"><br>`;
-              });
-            }
+                        });
+                        html += `</div><br>`;
+                    } else if (question.resimler) {
+                        question.resimler.forEach((resim, resimIndex) => {
+                            html += `<img src="${resim}" alt="Resim ${resimIndex + 1}" class="selectable" onclick="toggleSelectionS3(this)"><br>`;
+                        });
+                    }
 
-            html += '<div class="answers">';
+                    html += '<div class="answers">';
 
-            if (question.type === "radio") {
-              question.cevaplar.forEach((cevap, cevapIndex) => {
-                html += `<label class="cevapSecenegi-s3" onclick="highlightSelectedS3(this, ${index + 1})">
+                    if (question.type === "radio") {
+                        question.cevaplar.forEach((cevap, cevapIndex) => {
+                            html += `<label class="cevapSecenegi-s3" onclick="highlightSelectedS3(this, ${index + 1})">
                                 <input type="radio" name="answer${index + 1}" value="${cevap}"> ${cevap}<br>
                              </label>`;
-              });
-            } else if (question.type === "checkbox") {
-              question.cevaplar.forEach((cevap, cevapIndex) => {
-                html += `<label class="cevapSecenegi-s3" onclick="highlightSelectedCheckboxS3(this, ${index + 1})">
+                        });
+                    } else if (question.type === "checkbox") {
+                        question.cevaplar.forEach((cevap, cevapIndex) => {
+                            html += `<label class="cevapSecenegi-s3" onclick="highlightSelectedCheckboxS3(this, ${index + 1})">
                                 <input type="checkbox" name="answer${index + 1}[]" value="${cevap}"> ${cevap}<br>
                              </label>`;
-              });
-            } else if (question.onlyNumbers) {
-              html += `<input type="number" name="answer${index + 1}" class="answer-input" placeholder="Answer here" oninput="handleTextInputS3(${index + 1}, this)" inputmode="numeric"><br>`;
-            }
+                        });
+                    } else if (question.onlyNumbers) {
+                        html += `<input type="number" name="answer${index + 1}" class="answer-input" placeholder="Answer here" oninput="handleTextInputS3(${index + 1}, this)" inputmode="numeric"><br>`;
+                    }
 
-            // Feedback için alan ekleme
-            html += `</div>
+                    // Feedback için alan ekleme
+                    html += `</div>
                      <div class="feedback" id="feedback-${index + 1}" style="display: none;">
                      ${question.feedback ? question.feedback : ""}
                      </div>`;
-          }
-          html += "</div>";
-        });
-        return html;
-      }
+                }
+                html += "</div>";
+            });
+            return html;
+        }
 
         // Cevapları karıştırmak için fonksiyon
         function shuffleS3(array) {
@@ -6071,22 +6049,22 @@
 
             // Sonuç gösterimi
             try {
-          const answeredEl = document.getElementById("answeredQuestionsS3End");
-          const unAnsweredEl = document.getElementById(
-            "unAnsweredQuestionsS3End",
-          );
+                const answeredEl = document.getElementById("answeredQuestionsS3End");
+                const unAnsweredEl = document.getElementById(
+                    "unAnsweredQuestionsS3End",
+                );
 
-          if (answeredEl)
-            answeredEl.textContent = `Number of Answered Questions: ${correctAnswerS3.answer}`;
-          if (unAnsweredEl)
-            unAnsweredEl.textContent = `Number of Unanswered Questions: ${correctAnswerS3.unanswer}`;
+                if (answeredEl)
+                    answeredEl.textContent = `Number of Answered Questions: ${correctAnswerS3.answer}`;
+                if (unAnsweredEl)
+                    unAnsweredEl.textContent = `Number of Unanswered Questions: ${correctAnswerS3.unanswer}`;
 
-          if (containerId === "endMessage4-S3") {
-            const correctEl = document.getElementById("correctAnswersS3End");
-            if (correctEl)
-              correctEl.textContent = `Number of Correct Answers: ${correctAnswerS3.correct}`;
-          }
-        } catch (error) {
+                if (containerId === "endMessage4-S3") {
+                    const correctEl = document.getElementById("correctAnswersS3End");
+                    if (correctEl)
+                        correctEl.textContent = `Number of Correct Answers: ${correctAnswerS3.correct}`;
+                }
+            } catch (error) {
                 console.warn("Sonuçlar gösterilirken hata oluştu:", error);
             }
         }
@@ -6117,244 +6095,244 @@
         }
 
         // lockQuizQuestions fonksiyonu
-        
-function lockQuizQuestionsS3() { 
-    const questions = document.querySelectorAll(".questionS3");
-    questions.forEach((question, index) => {
-        let isCorrectArrayDragDrop = [];
-        question.classList.add("hidden");
 
-        const inputs = question.querySelectorAll("input, .question-image-t4");
-        const isDragDropQuestion =
-            question.querySelector(".drag-drop-container") !== null;
+        function lockQuizQuestionsS3() {
+            const questions = document.querySelectorAll(".questionS3");
+            questions.forEach((question, index) => {
+                let isCorrectArrayDragDrop = [];
+                question.classList.add("hidden");
 
-        // Drag-drop soruları için işlemler
-        if (isDragDropQuestion) {
-            const questionIndex = parseInt(question.id.split("-")[1]) - 1;
-            const questionData = quizAnswersS3[questionIndex];
+                const inputs = question.querySelectorAll("input, .question-image-t4");
+                const isDragDropQuestion =
+                    question.querySelector(".drag-drop-container") !== null;
 
-            const checkDrops = question.querySelectorAll(".box");
-
-            checkDrops.forEach((box) => {
-                if (box.dataset.target) {
-                    let split = box.id.split("-");
-                    let split2 = box.dataset.target.split("-");
-
-                    if (
-                        split[split.length - 1] ==
-                        split2[split2.length - 1] - checkDrops.length
-                    ) {
-                        box.style.backgroundColor = "rgb(11, 207, 11)";
-                        box.style.border = "4px solid white";
-                        box.style.color = "white";
-                        isCorrectArrayDragDrop.push(true);
-                    } else {
-                        box.style.backgroundColor = "red";
-                        box.style.border = "4px solid white";
-                        box.style.color = "white";
-                        isCorrectArrayDragDrop.push(false);
-                    }
-                }
-                box.draggable = false;
-                box.style.pointerEvents = "none";
-            });
-        }
-
-        // Inputlar ve diğer elementler için işlemler
-        inputs.forEach((input) => {
-            const label = input.closest(".cevapSecenegi-s3");
-            if (!label && input.classList.contains("question-image-t4")) {
-                input.classList.add("disabled3");
-
-                const markerSpan = document.createElement("span");
-                markerSpan.classList.add("marker");
-                markerSpan.style.position = "absolute";
-                markerSpan.style.top = "5px";
-                markerSpan.style.right = "5px";
-                markerSpan.style.fontSize = "15px";
-                markerSpan.style.backgroundColor = "white";
-                markerSpan.style.borderRadius = "50%";
-                markerSpan.style.padding = "2px";
-
-                const questionIndex = parseInt(question.id.split("-")[1]) - 1;
-                const questionData = quizAnswersS3[questionIndex];
-                if (questionData.dogruCevap.includes(input.src)) {
-                    markerSpan.textContent = "✔️";
-                } else {
-                    markerSpan.textContent = "❌";
-                }
-
-                const parentContainer = input.parentElement;
-                parentContainer.style.position = "relative";
-                parentContainer.appendChild(markerSpan);
-                markerSpan.style.top = `${input.offsetTop + 5}px`;
-                markerSpan.style.right = `${input.offsetLeft + 5}px`;
-                return;
-            }
-
-            if (input.type === "text") {
-                input.disabled = true;
-
-                const questionIndex = parseInt(question.id.split("-")[1]) - 1;
-                const questionData = quizAnswersS3[questionIndex];
-                if (!input.value.trim()) {
-                    input.style.backgroundColor = "lightgray";
-                    return;
-                }
-                if (!input.parentNode.querySelector(".marker")) {
-                    const markerSpan = document.createElement("span");
-                    markerSpan.classList.add("marker");
-                    markerSpan.style.marginRight = "10px";
-                    markerSpan.style.display = "inline-block";
-                    markerSpan.style.width = "20px";
-
-                    if (questionData.dogruCevap.includes(input.value)) {
-                        markerSpan.textContent = "✔️";
-                        input.style.backgroundColor = "rgb(11, 207, 11)";
-                    } else {
-                        markerSpan.textContent = "❌";
-                        input.style.backgroundColor = "red";
-                    }
-
-                    input.parentNode.insertBefore(markerSpan, input);
-                }
-                return;
-            }
-
-            if (label && input.type !== "text") {
-                input.disabled = true;
-                label.style.pointerEvents = "none";
-
-                if (!label.querySelector(".marker")) {
-                    const markerSpan = document.createElement("span");
-                    markerSpan.classList.add("marker");
-                    markerSpan.style.marginRight = "0px";
-                    markerSpan.style.display = "inline-block";
-                    markerSpan.style.width = "20px";
-
+                // Drag-drop soruları için işlemler
+                if (isDragDropQuestion) {
                     const questionIndex = parseInt(question.id.split("-")[1]) - 1;
                     const questionData = quizAnswersS3[questionIndex];
 
-                    if (questionData.dogruCevap.includes(input.value)) {
-                        markerSpan.textContent = "✔️";
-                        if (input.checked) {
-                            label.classList.add("selected-correct");
-                            label.style.backgroundColor = "rgb(11, 207, 11)";
-                        } else {
-                            label.style.backgroundColor = "lightgrey";
+                    const checkDrops = question.querySelectorAll(".box");
+
+                    checkDrops.forEach((box) => {
+                        if (box.dataset.target) {
+                            let split = box.id.split("-");
+                            let split2 = box.dataset.target.split("-");
+
+                            if (
+                                split[split.length - 1] ==
+                                split2[split2.length - 1] - checkDrops.length
+                            ) {
+                                box.style.backgroundColor = "rgb(11, 207, 11)";
+                                box.style.border = "4px solid white";
+                                box.style.color = "white";
+                                isCorrectArrayDragDrop.push(true);
+                            } else {
+                                box.style.backgroundColor = "red";
+                                box.style.border = "4px solid white";
+                                box.style.color = "white";
+                                isCorrectArrayDragDrop.push(false);
+                            }
                         }
-                    } else {
-                        markerSpan.textContent = "❌";
-                        if (input.checked) {
-                            label.classList.add("selected-wrong");
-                            label.style.backgroundColor = "red";
+                        box.draggable = false;
+                        box.style.pointerEvents = "none";
+                    });
+                }
+
+                // Inputlar ve diğer elementler için işlemler
+                inputs.forEach((input) => {
+                    const label = input.closest(".cevapSecenegi-s3");
+                    if (!label && input.classList.contains("question-image-t4")) {
+                        input.classList.add("disabled3");
+
+                        const markerSpan = document.createElement("span");
+                        markerSpan.classList.add("marker");
+                        markerSpan.style.position = "absolute";
+                        markerSpan.style.top = "5px";
+                        markerSpan.style.right = "5px";
+                        markerSpan.style.fontSize = "15px";
+                        markerSpan.style.backgroundColor = "white";
+                        markerSpan.style.borderRadius = "50%";
+                        markerSpan.style.padding = "2px";
+
+                        const questionIndex = parseInt(question.id.split("-")[1]) - 1;
+                        const questionData = quizAnswersS3[questionIndex];
+                        if (questionData.dogruCevap.includes(input.src)) {
+                            markerSpan.textContent = "✔️";
                         } else {
-                            label.style.backgroundColor = "lightgrey";
+                            markerSpan.textContent = "❌";
+                        }
+
+                        const parentContainer = input.parentElement;
+                        parentContainer.style.position = "relative";
+                        parentContainer.appendChild(markerSpan);
+                        markerSpan.style.top = `${input.offsetTop + 5}px`;
+                        markerSpan.style.right = `${input.offsetLeft + 5}px`;
+                        return;
+                    }
+
+                    if (input.type === "text") {
+                        input.disabled = true;
+
+                        const questionIndex = parseInt(question.id.split("-")[1]) - 1;
+                        const questionData = quizAnswersS3[questionIndex];
+                        if (!input.value.trim()) {
+                            input.style.backgroundColor = "lightgray";
+                            return;
+                        }
+                        if (!input.parentNode.querySelector(".marker")) {
+                            const markerSpan = document.createElement("span");
+                            markerSpan.classList.add("marker");
+                            markerSpan.style.marginRight = "10px";
+                            markerSpan.style.display = "inline-block";
+                            markerSpan.style.width = "20px";
+
+                            if (questionData.dogruCevap.includes(input.value)) {
+                                markerSpan.textContent = "✔️";
+                                input.style.backgroundColor = "rgb(11, 207, 11)";
+                            } else {
+                                markerSpan.textContent = "❌";
+                                input.style.backgroundColor = "red";
+                            }
+
+                            input.parentNode.insertBefore(markerSpan, input);
+                        }
+                        return;
+                    }
+
+                    if (label && input.type !== "text") {
+                        input.disabled = true;
+                        label.style.pointerEvents = "none";
+
+                        if (!label.querySelector(".marker")) {
+                            const markerSpan = document.createElement("span");
+                            markerSpan.classList.add("marker");
+                            markerSpan.style.marginRight = "0px";
+                            markerSpan.style.display = "inline-block";
+                            markerSpan.style.width = "20px";
+
+                            const questionIndex = parseInt(question.id.split("-")[1]) - 1;
+                            const questionData = quizAnswersS3[questionIndex];
+
+                            if (questionData.dogruCevap.includes(input.value)) {
+                                markerSpan.textContent = "✔️";
+                                if (input.checked) {
+                                    label.classList.add("selected-correct");
+                                    label.style.backgroundColor = "rgb(11, 207, 11)";
+                                } else {
+                                    label.style.backgroundColor = "lightgrey";
+                                }
+                            } else {
+                                markerSpan.textContent = "❌";
+                                if (input.checked) {
+                                    label.classList.add("selected-wrong");
+                                    label.style.backgroundColor = "red";
+                                } else {
+                                    label.style.backgroundColor = "lightgrey";
+                                }
+                            }
+
+                            label.insertBefore(markerSpan, label.firstChild);
+                        }
+                    }
+                });
+
+                // Number inputlarını devre dışı bırak
+                const numberInputs = question.querySelectorAll(
+                    'input[type="number"]',
+                );
+                numberInputs.forEach((input) => {
+                    input.disabled = true;
+                });
+
+                // Feedback kutusunu ekle
+                const questionIndex = parseInt(question.id.split("-")[1]) - 1;
+                const feedback = allQuestionsS3[questionIndex].feedback;
+
+                if (feedback) {
+                    const feedbackDiv = document.createElement("div");
+                    feedbackDiv.className = "feedback-container";
+                    feedbackDiv.style.border = "1px solid #848586";
+                    feedbackDiv.style.padding = "10px";
+                    feedbackDiv.style.display = "flex";
+                    feedbackDiv.style.alignItems = "center";
+                    feedbackDiv.style.width = "93%";
+                    feedbackDiv.style.maxWidth = "100%";
+                    feedbackDiv.style.borderRadius = "10px";
+                    feedbackDiv.style.boxShadow =
+                        "0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)";
+                    feedbackDiv.style.margin = "0 auto";
+                    feedbackDiv.style.justifyContent = "center";
+                    feedbackDiv.id = `feedback-${index + 1}`;
+
+                    if (isDragDropQuestion) {
+                        const parentGridCell = question.closest(".grid-cell");
+                        if (parentGridCell) {
+                            const gridWidth = parentGridCell.getBoundingClientRect().width;
+                            feedbackDiv.style.width = `${gridWidth * 0.9}px`;
                         }
                     }
 
-                    label.insertBefore(markerSpan, label.firstChild);
+                    const feedbackText = feedback.metin;
+
+                    const feedbackTextBox = document.createElement("div");
+                    feedbackTextBox.className = "feedback-text";
+                    feedbackTextBox.textContent = feedbackText;
+                    feedbackTextBox.style.margin = "0";
+                    feedbackTextBox.style.flex = "1";
+                    feedbackTextBox.style.overflow = "auto";
+                    feedbackTextBox.style.whiteSpace = "pre-wrap";
+                    feedbackTextBox.style.textAlign = "center";
+                    feedbackDiv.appendChild(feedbackTextBox);
+
+                    const feedbackImage = document.createElement("img");
+                    feedbackImage.style.width = "30px";
+                    feedbackImage.style.height = "30px";
+                    feedbackImage.style.marginLeft = "5px";
+                    feedbackImage.style.border = "0px solid";
+
+                    const endMessage4Block = document.querySelector(
+                        `#endMessage4-S3 .question-block-s3:nth-child(${index + 1})`,
+                    );
+                    let feedbackImageUrl;
+                    if (endMessage4Block) {
+                        if (endMessage4Block.classList.contains('correct-block')) {
+                            feedbackImageUrl = feedback.dogruCevapResim;
+                        } else if (endMessage4Block.classList.contains('incorrect-block')) {
+                            feedbackImageUrl = feedback.yanlisCevapResim;
+                        } else {
+                            feedbackImageUrl = feedback.cevaplanmamisResim;
+                        }
+                    } else {
+                        feedbackImageUrl = feedback.cevaplanmamisResim;
+                    }
+
+                    feedbackImage.src = feedbackImageUrl;
+                    feedbackDiv.appendChild(feedbackImage);
+
+                    const answersElement = question.querySelector(".answers");
+                    if (answersElement) {
+                        answersElement.appendChild(feedbackDiv);
+                    } else {
+                        question.appendChild(feedbackDiv);
+                    }
                 }
-            }
-        });
+            });
 
-        // Number inputlarını devre dışı bırak
-        const numberInputs = question.querySelectorAll(
-            'input[type="number"]',
-        );
-        numberInputs.forEach((input) => {
-            input.disabled = true;
-        });
-
-        // Feedback kutusunu ekle
-        const questionIndex = parseInt(question.id.split("-")[1]) - 1;
-        const feedback = allQuestionsS3[questionIndex].feedback;
-
-        if (feedback) {
-            const feedbackDiv = document.createElement("div");
-            feedbackDiv.className = "feedback-container";
-            feedbackDiv.style.border = "1px solid #848586";
-            feedbackDiv.style.padding = "10px";
-            feedbackDiv.style.display = "flex";
-            feedbackDiv.style.alignItems = "center";
-            feedbackDiv.style.width = "93%";
-            feedbackDiv.style.maxWidth = "100%";
-            feedbackDiv.style.borderRadius = "10px";
-            feedbackDiv.style.boxShadow =
-                "0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)";
-            feedbackDiv.style.margin = "0 auto";
-            feedbackDiv.style.justifyContent = "center";
-            feedbackDiv.id = `feedback-${index + 1}`;
-
-            if (isDragDropQuestion) {
-                const parentGridCell = question.closest(".grid-cell");
-                if (parentGridCell) {
-                    const gridWidth = parentGridCell.getBoundingClientRect().width;
-                    feedbackDiv.style.width = `${gridWidth * 0.9}px`;
-                }
-            }
-
-            const feedbackText = feedback.metin;
-
-            const feedbackTextBox = document.createElement("div");
-            feedbackTextBox.className = "feedback-text";
-            feedbackTextBox.textContent = feedbackText;
-            feedbackTextBox.style.margin = "0";
-            feedbackTextBox.style.flex = "1";
-            feedbackTextBox.style.overflow = "auto";
-            feedbackTextBox.style.whiteSpace = "pre-wrap";
-            feedbackTextBox.style.textAlign = "center";
-            feedbackDiv.appendChild(feedbackTextBox);
-
-            const feedbackImage = document.createElement("img");
-            feedbackImage.style.width = "30px";
-            feedbackImage.style.height = "30px";
-            feedbackImage.style.marginLeft = "5px";
-            feedbackImage.style.border = "0px solid";
-
-            const endMessage4Block = document.querySelector(
-                `#endMessage4-S3 .question-block-s3:nth-child(${index + 1})`,
-            );
-            let feedbackImageUrl; 
-            if (endMessage4Block) {
-                if (endMessage4Block.classList.contains('correct-block')) {
-                    feedbackImageUrl = feedback.dogruCevapResim;
-                } else if (endMessage4Block.classList.contains('incorrect-block')) {
-                    feedbackImageUrl = feedback.yanlisCevapResim;
-                } else {
-                    feedbackImageUrl = feedback.cevaplanmamisResim;
-                }
-            } else {
-                feedbackImageUrl = feedback.cevaplanmamisResim;
+            const timerDiv = document.getElementById("timerDiv");
+            if (timerDiv) {
+                timerDiv.style.display = "none";
             }
 
-            feedbackImage.src = feedbackImageUrl;
-            feedbackDiv.appendChild(feedbackImage);
+            const soruAlanlari = document.querySelectorAll(".questionS3");
+            soruAlanlari.forEach((soruAlani) => {
+                soruAlani.style.top = "0px";
+            });
 
-            const answersElement = question.querySelector(".answers");
-            if (answersElement) {
-                answersElement.appendChild(feedbackDiv);
-            } else {
-                question.appendChild(feedbackDiv);
+            const overlay = document.querySelector(".overlay");
+            if (overlay) {
+                overlay.classList.add("overlay-thin-top");
             }
         }
-    });
-
-    const timerDiv = document.getElementById("timerDiv");
-    if (timerDiv) {
-        timerDiv.style.display = "none";
-    }
-
-    const soruAlanlari = document.querySelectorAll(".questionS3");
-    soruAlanlari.forEach((soruAlani) => {
-        soruAlani.style.top = "0px";
-    });
-
-    const overlay = document.querySelector(".overlay");
-    if (overlay) {
-        overlay.classList.add("overlay-thin-top");
-    }
-}
 
 
         /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
@@ -6396,21 +6374,21 @@ function lockQuizQuestionsS3() {
 
         // Mesaj dinleyicisi
         window.addEventListener("message", function (event) {
-        // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
-        if (event.origin !== "https://www.examtheorie.nl") return;
+            // Mesajın güvenilir bir kaynaktan geldiğinden emin ol
+            if (event.origin !== "https://www.examtheorie.nl") return;
 
-        const message = event.data;
-        console.log("Iframe'e mesaj alındı:", message);
+            const message = event.data;
+            console.log("Iframe'e mesaj alındı:", message);
 
-        // Mesaj bir nesne ise ve action özelliği "updateButtons" ise
-        if (typeof message === "object" && message.action === "updateButtons") {
-          const progress = message.progress; // Tamamlanan testlerin listesi
-          console.log("Progress bilgileri alındı:", progress);
+            // Mesaj bir nesne ise ve action özelliği "updateButtons" ise
+            if (typeof message === "object" && message.action === "updateButtons") {
+                const progress = message.progress; // Tamamlanan testlerin listesi
+                console.log("Progress bilgileri alındı:", progress);
 
-          // QUIZ-50 butonunu kontrol et ve güncelle
-          updateQuiz50Button(progress);
-        }
-      });
+                // QUIZ-50 butonunu kontrol et ve güncelle
+                updateQuiz50Button(progress);
+            }
+        });
 
         // QUIZ-3 butonunu güncelleme fonksiyonu
         function updateQuiz3Button(progress) {
@@ -6488,26 +6466,26 @@ function lockQuizQuestionsS3() {
             }
 
             // URL paramlarından oku
-        var idx = parseInt((window.__qs && window.__qs.get("idx")) || "1", 10); // 1..50
-        if (!Number.isFinite(idx) || idx < 1) idx = 1;
-        var tnParam = parseInt(
-          (window.__qs && window.__qs.get("tn")) || "0",
-          10,
-        );
-        var TEST_NUMBER =
-          Number.isFinite(tnParam) && tnParam > 0 ? tnParam : 1000 + idx;
-        var status = (window.__qs && window.__qs.get("status")) || "avail"; // 'done' | 'avail'
+            var idx = parseInt((window.__qs && window.__qs.get("idx")) || "1", 10); // 1..50
+            if (!Number.isFinite(idx) || idx < 1) idx = 1;
+            var tnParam = parseInt(
+                (window.__qs && window.__qs.get("tn")) || "0",
+                10,
+            );
+            var TEST_NUMBER =
+                Number.isFinite(tnParam) && tnParam > 0 ? tnParam : 1000 + idx;
+            var status = (window.__qs && window.__qs.get("status")) || "avail"; // 'done' | 'avail'
 
-        // Mevcut buton metnini koru (QUIZ-2, QUIZ-3…)
-        var baseLabel = (btn.textContent || "QUIZ-" + idx).trim();
+            // Mevcut buton metnini koru (QUIZ-2, QUIZ-3…)
+            var baseLabel = (btn.textContent || "QUIZ-" + idx).trim();
 
-        function setCompleted() {
-          btn.disabled = true;
-          btn.classList.add("deactivated");
-          btn.textContent = baseLabel + " (Completed)";
-          btn.onclick = null;
-          btn.setAttribute("aria-disabled", "true");
-        }
+            function setCompleted() {
+                btn.disabled = true;
+                btn.classList.add("deactivated");
+                btn.textContent = baseLabel + " (Completed)";
+                btn.onclick = null;
+                btn.setAttribute("aria-disabled", "true");
+            }
 
             function setAvailable() {
                 btn.disabled = false;
@@ -6540,18 +6518,27 @@ function lockQuizQuestionsS3() {
             if (viewBtn) {
                 var old = viewBtn.onclick;
                 viewBtn.onclick = function (ev) {
+                    // Eski davranış: sonuç ekranını açan fonksiyon (finalResultShow)
                     if (old) old(ev);
+
+                    // 🔹 Yeni davranış: Wix ana sayfaya quizCompleted mesajı gönder
                     try {
                         window.parent.postMessage(
-                            { action: "updateProgress", testNumber: TEST_NUMBER },
-                            ORIGIN,
+                            {
+                                action: "quizCompleted",
+                                testNumber: TEST_NUMBER, // Quiz-50 için 1050
+                                lang: "en"               // Bu sayfa İngilizce olduğu için
+                            },
+                            ORIGIN
                         );
                     } catch (e) { }
-                    // iyimser UI
+
+                    // Butonu "Completed" yapmaya devam et (istersen bırakabiliriz)
                     setCompleted();
                 };
             }
         })();
+
 
 
 
