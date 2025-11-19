@@ -6819,21 +6819,3 @@ function lockQuizQuestionsS3() {
 
 </html>
 
-function updateQuiz1Button(progress) {
-        // QUIZ-1 butonunu seç
-        const quiz1Button = document.getElementById("quizButton1");
-
-        if (quiz1Button) {
-          // Eğer progress dizisinde 1 varsa, butonu devre dışı bırak
-          if (progress.includes(1)) {
-            quiz1Button.disabled = true;
-            quiz1Button.textContent = "QUIZ-1 (Tamamlandı)";
-            quiz1Button.classList.add("deactivated");
-          } else {
-            // Eğer progress dizisinde 1 yoksa, butonu aktif bırak
-            quiz1Button.disabled = false;
-            quiz1Button.textContent = "QUIZ-1";
-            quiz1Button.classList.remove("deactivated");
-          }
-        }
-      }
