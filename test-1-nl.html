@@ -3303,32 +3303,7 @@
         /////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////
 
-        // Mevcut onclick olayını saklayın
-        const oldOnClick = document.getElementById("viewResult").onclick;
-
-        // Yeni onclick olayını tanımlayın
-        document.getElementById("viewResult").onclick = function (event) {
-            // Mevcut işlevselliği çağırın (finalResultShow fonksiyonu)
-            if (oldOnClick) {
-                oldOnClick(event);
-            }
-
-            // Yeni işlevselliği buraya ekleyin
-        const completedTestNumber = 3001; // TEST1 tamamlandı
-
-            // Frontend'e mesaj gönderme işlemi
-            const wixOrigin = "https://www.examtheorie.nl";
-            try {
-                window.parent.postMessage(
-                    { action: "updateProgress", testNumber: completedTestNumber },
-                    wixOrigin,
-                );
-                console.log("Frontend'e mesaj gönderildi.");
-            } catch (error) {
-                console.error("Mesaj gönderilirken hata oluştu:", error);
-            }
-        };
-
+       
         ////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////
@@ -6542,20 +6517,19 @@
 
             // View Result override'ını dinamikleştir (testNumber = tn)
             var viewBtn = document.getElementById("viewResult");
-            if (viewBtn) {
-                var old = viewBtn.onclick;
-                viewBtn.onclick = function (ev) {
-                    if (old) old(ev);
-                    try {
-                        window.parent.postMessage(
-                            { action: "updateProgress", testNumber: TEST_NUMBER },
-                            ORIGIN,
-                        );
-                    } catch (e) { }
-                    // iyimser UI
-                    setCompleted();
-                };
-            }
+if (viewBtn) {
+    var old = viewBtn.onclick;
+    viewBtn.onclick = function (ev) {
+        if (old) old(ev);
+        try {
+            window.parent.postMessage(
+                { action: "updateProgress", testNumber: TEST_NUMBER, lang: "en" },
+                "https://www.examtheorie.nl"
+            );
+        } catch (e) { }
+        setCompleted();
+    };
+}
         })();
 
 
@@ -6823,6 +6797,3 @@
 </body>
 
 </html>
-
-
-
