@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -2848,7 +2848,17 @@
         .toggle-fullscreen-btn.on .icon-fullscreen-enter {
             display: none;
         }
-    </style>
+        /* --- SECTION 3 ARAPÇA METİN DÜZENLEMESİ --- */
+    .questionS3 p { direction: rtl !important; text-align: right !important; unicode-bidi: plaintext !important; padding-right: 15px !important; }
+    .cevapSecenegi-s3 { direction: rtl !important; text-align: right !important; display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; padding: 10px 15px !important; }
+    .cevapSecenegi-s3 input[type="radio"], .cevapSecenegi-s3 input[type="checkbox"] { margin-left: 10px !important; margin-right: 0px !important; flex-shrink: 0; }
+    .box, .target { direction: rtl !important; text-align: center !important; }
+    #soruNumarasiS3, #proceedSection3End, #finalResultContainerId { direction: rtl !important; }
+    #startMessage { direction: rtl !important; text-align: right !important; }
+    #startMessage h4, #startMessage p { text-align: right !important; margin-right: 20px; }
+    .answer-input::placeholder { text-align: right !important; direction: rtl !important; }
+    .answer-input { direction: rtl !important; text-align: center !important; }
+</style>
 </head>
 
 <body>
@@ -3026,25 +3036,23 @@
 
     <!-- 3. Bölümü Başlatan Mesaj ve Yeni Düğme -->
     <div id="startMessage" style="display: none">
-      <h4>فحص النظري - سيارة ركّاب</h4>
-      <p class="start-insight">
-        فينيك تتنقل بين الأسئلة لقدّام ولورا. عندك ٣٠ دقيقة لهالقسم. طالما شريط
-        الوقت عم يشتغل، فيك تتنقل بين الأسئلة، تتجاوز، تجاوب أو تعدّل إجابتك.
-      </p>
-      <p class="start-insight">
-        إذا كنت عم تعمل فحص موسّع أو فحص فردي، فبيصير معك ٤٥ دقيقة. وإذا طلع
-        قدامك صورة سيارة تعليم، فإنت السائق.
-      </p>
-      <p class="start-insight">
-        بهالقسم رح يجيك ٥٠ سؤال، ولازم تجاوب صح على أقل شي ٤٤ سؤال لتنجح. أي
-        سؤال ما نجاوب عليه أو ما اكتمل الجواب عليه، بينحسب غلط.
-      </p>
-      <h4 class="start-insight">بالتوفيق!</h4>
-      <div class="button-container">
+    <h4>اختبار نظري - سيارة ركب</h4>
+    <p class="start-insight">
+        يمكنك التنقل بين الأسئلة للأمام وللخلف. لديك 30 دقيقة لهذا القسم. طالما أن مؤقت الوقت يعمل، يمكنك التنقل بين الأسئلة، أو تجاوزها، أو الإجابة عليها، أو تعديل إجابتك.
+    </p>
+    <p class="start-insight">
+        إذا كنت تجري اختباراً موسعاً أو اختباراً فردياً، فسيكون لديك 45 دقيقة. وإذا ظهرت أمامك صورة سيارة تعليم، فأنت السائق.
+    </p>
+    <p class="start-insight">
+        يتكون هذا القسم من 50 سؤالاً، ويجب عليك الإجابة بشكل صحيح على 44 سؤالاً على الأقل للنجاح. أي سؤال لم يتم الإجابة عليه أو لم تكتمل الإجابة عليه سيُعتبر خاطئاً.
+    </p>
+    <h4 class="start-insight">بالتوفيق!</h4>
+    <div class="button-container">
         <button id="startSection3Button" onclick="startQuizS3()">
-          روح لأول سؤال
+            الانتقال إلى السؤال الأول
         </button>
-      </div>
+    </div>
+</div>
     </div>
 
     <!-- Section 3 -->
@@ -3119,88 +3127,61 @@
 
 
 
-    <div
-      id="proceedSection3End"
-      class="center-button hidden"
-      style="flex-direction: column; gap: 10px"
-    >
-      <div class="button-container">
+    <div id="proceedSection3End" class="center-button hidden" style="flex-direction: column; gap: 10px">
+    <div class="button-container">
         <h2>المرحلة الأخيرة من الامتحان</h2>
-      </div>
-      <p id="answeredQuestionsS3End"></p>
-      <p id="unAnsweredQuestionsS3End"></p>
-      <div id="endMessage3-S3" style="display: flex; flex-wrap: wrap"></div>
-      <div class="button-container">
-        <button id="proceedToResultDivBtn" onclick="proceedToResultDiv()">
-          تابع
-        </button>
-      </div>
     </div>
+    <p id="answeredQuestionsS3End"></p>
+    <p id="unAnsweredQuestionsS3End"></p>
+    <div id="endMessage3-S3" style="display: flex; flex-wrap: wrap; justify-content: center;"></div>
+    <div class="button-container">
+        <button id="proceedToResultDivBtn" onclick="proceedToResultDiv()">متابعة</button>
+    </div>
+</div>
 
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="noButtonClicked('section2')">&times;</span>
-            <h2>Proceed?</h2>
-            <p>You can not go back after this.</p>
-            <button class="popup-btn" onclick="yesButtonClicked('section2')" id="yesBtn">
-                Yes
-            </button>
-            <button class="popup-btn" onclick="noButtonClicked('section2')" id="noBtn">
-                No
-            </button>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="noButtonClicked('section2')">&times;</span>
+        <h2>هل تريد المتابعة؟</h2>
+        <p>لا يمكنك الرجوع بعد هذه المرحلة.</p>
+        <div class="modal-buttons">
+            <button class="popup-btn" onclick="yesButtonClicked('section2')" id="yesBtn">نعم</button>
+            <button class="popup-btn" onclick="noButtonClicked('section2')" id="noBtn">لا</button>
         </div>
     </div>
+</div>
 
-    <div id="myModalS3" class="modal">
-      <div class="modal-content">
+<div id="myModalS3" class="modal">
+    <div class="modal-content">
         <span class="close" onclick="noButtonClicked('section3')">&times;</span>
         <h2>هل تريد المتابعة؟</h2>
-        <p>ما فيك ترجع بعد هالمرحلة.</p>
-        <button
-          class="popup-btn"
-          onclick="yesButtonClicked('section3')"
-          id="yesBtn"
-        >
-          نعم
-        </button>
-        <button
-          class="popup-btn"
-          onclick="noButtonClicked('section3')"
-          id="noBtn"
-        >
-          لا
-        </button>
-      </div>
+        <p>لا يمكنك الرجوع بعد هذه المرحلة.</p>
+        <div class="modal-buttons">
+            <button class="popup-btn" onclick="yesButtonClicked('section3')" id="yesBtn">نعم</button>
+            <button class="popup-btn" onclick="noButtonClicked('section3')" id="noBtn">لا</button>
+        </div>
     </div>
+</div>
 
-    <div id="viewResultContainerId" class="viewResultContainer hidden">
-      <p>شكراً لتقديمك الامتحان!</p>
-      <hr />
-      <h2 id="failOrPass"></h2>
-      <div>
-        <img id="failOrPassIcon" alt="failOrPass" src="" />
-      </div>
-      <h3 id="endResult"></h3>
-      <button id="viewResult" onclick="finalResultShow()">شاهد نتيجتي!</button>
+<div id="viewResultContainerId" class="viewResultContainer hidden">
+    <p>شكراً لتقديمكم الامتحان!</p>
+    <hr />
+    <h2 id="failOrPass"></h2>
+    <div class="status-icon">
+        <img id="failOrPassIcon" alt="Result Icon" src="" style="max-height: 80px;" />
     </div>
+    <h3 id="endResult"></h3>
+    <button id="viewResult" onclick="finalResultShow()">عرض النتيجة</button>
+</div>
 
-    <div id="finalResultContainerId" class="finalResultContainer hidden">
-      <h2>راجع الإجابات</h2>
-      <p>
-        تحت بتلاقي نتائج الامتحان. فيك تكبِس على أي مربع لتروح للسؤال المُرتبط
-        وتراجع إجابتك.
-      </p>
-
-      <div id="resultS3">
-        <h2>تأكّد من إجاباتك</h2>
-        <img
-          id="failOrPassEndS3"
-          alt="failOrPassEnd"
-          style="height: 50px"
-          src=""
-        />
-      </div>
+<div id="finalResultContainerId" class="finalResultContainer hidden">
+    <h2>مراجعة الإجابات</h2>
+    <p>تجدون أدناه نتائج الامتحان. يمكنكم الضغط على أي مربع للذهاب إلى السؤال المرتبط ومراجعة إجابتكم.</p>
+    <div id="resultS3">
+        <h2>تأكد من إجاباتك</h2>
+        <img id="failOrPassEndS3" alt="Final Status" style="height: 50px" src="" />
     </div>
+</div>
 
     <!-- HTTP -->
     <script src="http://js.moatads.com/triplelift879988051105/moatad.js"></script>
@@ -4372,7 +4353,7 @@
               <input type="checkbox" name="answer${index + 1}[]" value="${cevap}"> ${cevap}<br></label>`;
                     });
                 } else if (question.onlyNumbers) {
-                    html += `<input type="number" name="answer${index + 1}" class="answer-input" placeholder="Answer here" oninput="handleTextInput(${index + 1}, this)" inputmode="numeric"><br>`;
+                    html += `<input type="number" name="answer${index + 1}" class="answer-input" placeholder="أدخل الإجابة هنا" oninput="handleTextInput(${index + 1}, this)" inputmode="numeric"><br>`;
                 }
 
                 // Feedback için alan ekleme
@@ -5624,7 +5605,7 @@
                              </label>`;
               });
             } else if (question.onlyNumbers) {
-              html += `<input type="number" name="answer${index + 1}" class="answer-input" placeholder="Answer here" oninput="handleTextInputS3(${index + 1}, this)" inputmode="numeric"><br>`;
+              html += `<input type="number" name="answer${index + 1}" class="answer-input" placeholder="أدخل الإجابة هنا" oninput="handleTextInputS3(${index + 1}, this)" inputmode="numeric"><br>`;
             }
 
             // Feedback için alan ekleme
