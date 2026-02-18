@@ -600,6 +600,22 @@
         .m-foot a { color:var(--cyan); font-weight:600; cursor:pointer; }
         .m-foot a:hover { text-decoration:underline; }
 
+        /* Auth mesaj kutusu */
+        .auth-msg {
+            display:none; padding:11px 14px; border-radius:11px;
+            font-size:13px; font-weight:500; margin-bottom:16px;
+            text-align:center; line-height:1.45;
+        }
+        .auth-msg.error   { background:rgba(255,60,60,0.15); border:1px solid rgba(255,60,60,0.35); color:#ff8080; display:block; }
+        .auth-msg.success { background:rgba(0,212,100,0.15); border:1px solid rgba(0,212,100,0.35); color:#4dffaa; display:block; }
+        .auth-msg.info    { background:rgba(0,180,255,0.15); border:1px solid rgba(0,180,255,0.35); color:#7dd8ff; display:block; }
+
+        /* Google butonu */
+        .google-btn {
+            display:flex; align-items:center; justify-content:center; gap:8px;
+            font-size:14px !important; font-weight:600 !important;
+        }
+
         @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
         @keyframes slideUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
 
@@ -1034,16 +1050,15 @@
     <div class="auth-box glass-strong">
         <div class="m-close" onclick="closeModal('si')">×</div>
         <h2 class="m-title" data-i18n="si_title"></h2>
-        <form onsubmit="return false">
-            <div class="f-grp"><label class="f-lbl" data-i18n="f_email"></label><input type="email" class="f-inp" data-i18n-ph="f_email_ph"></div>
-            <div class="f-grp"><label class="f-lbl" data-i18n="f_pass"></label><input type="password" class="f-inp" placeholder="••••••••"></div>
-            <button type="submit" class="btn-submit" data-i18n="si_title"></button>
+        <div class="auth-msg" id="si-msg"></div>
+        <form onsubmit="handleSignIn(event)">
+            <div class="f-grp"><label class="f-lbl" data-i18n="f_email"></label><input type="email" id="si-email" class="f-inp" data-i18n-ph="f_email_ph" required></div>
+            <div class="f-grp"><label class="f-lbl" data-i18n="f_pass"></label><input type="password" id="si-pass" class="f-inp" placeholder="••••••••" required></div>
+            <button type="submit" class="btn-submit" id="si-btn" data-i18n="si_title"></button>
         </form>
         <div class="m-div" data-i18n="f_or"></div>
         <div class="soc-row">
-            <button class="soc-btn" onclick="signInWithGoogle()">G</button>
-            <button class="soc-btn">f</button>
-            <button class="soc-btn">in</button>
+            <button class="soc-btn google-btn" onclick="signInWithGoogle()"><svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> Google</button>
         </div>
         <div class="m-foot"><span data-i18n="si_no_acc"></span> <a onclick="switchModal('si','su')" data-i18n="nav_signup"></a></div>
     </div>
@@ -1052,17 +1067,16 @@
     <div class="auth-box glass-strong">
         <div class="m-close" onclick="closeModal('su')">×</div>
         <h2 class="m-title" data-i18n="su_title"></h2>
-        <form onsubmit="return false">
-            <div class="f-grp"><label class="f-lbl" data-i18n="f_name"></label><input type="text" class="f-inp" data-i18n-ph="f_name_ph"></div>
-            <div class="f-grp"><label class="f-lbl" data-i18n="f_email"></label><input type="email" class="f-inp" data-i18n-ph="f_email_ph"></div>
-            <div class="f-grp"><label class="f-lbl" data-i18n="f_pass"></label><input type="password" class="f-inp" placeholder="••••••••"></div>
-            <button type="submit" class="btn-submit" data-i18n="su_title"></button>
+        <div class="auth-msg" id="su-msg"></div>
+        <form onsubmit="handleSignUp(event)">
+            <div class="f-grp"><label class="f-lbl" data-i18n="f_name"></label><input type="text" id="su-name" class="f-inp" data-i18n-ph="f_name_ph" required></div>
+            <div class="f-grp"><label class="f-lbl" data-i18n="f_email"></label><input type="email" id="su-email" class="f-inp" data-i18n-ph="f_email_ph" required></div>
+            <div class="f-grp"><label class="f-lbl" data-i18n="f_pass"></label><input type="password" id="su-pass" class="f-inp" placeholder="••••••••" minlength="6" required></div>
+            <button type="submit" class="btn-submit" id="su-btn" data-i18n="su_title"></button>
         </form>
         <div class="m-div" data-i18n="f_or"></div>
         <div class="soc-row">
-            <button class="soc-btn" onclick="signInWithGoogle()">G</button>
-            <button class="soc-btn">f</button>
-            <button class="soc-btn">in</button>
+            <button class="soc-btn google-btn" onclick="signInWithGoogle()"><svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> Google</button>
         </div>
         <div class="m-foot"><span data-i18n="su_have_acc"></span> <a onclick="switchModal('su','si')" data-i18n="nav_signin"></a></div>
     </div>
@@ -1074,7 +1088,7 @@
         <div class="m-close" onclick="closePaywall()">×</div>
         <div style="font-size:48px;margin-bottom:16px;">🔒</div>
         <h2 style="font-size:22px;font-weight:800;margin-bottom:10px;" data-i18n="paywall_title">Premium Access Required</h2>
-        <p style="color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:28px;" data-i18n="paywall_desc">To access tests and theory materials, you need an active plan. Choose a package to get started.</p>
+        <p id="paywall-group-msg" style="color:rgba(255,255,255,0.7);font-size:14px;margin-bottom:28px;" data-i18n="paywall_desc"></p>
         <button class="btn-signup" style="width:100%;padding:14px;font-size:15px;border-radius:14px;" onclick="closePaywall();openPricing();" data-i18n="paywall_btn">View Packages</button>
         <p style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.4);" data-i18n="paywall_note">One-time payment • No subscription</p>
     </div>
@@ -1120,8 +1134,13 @@ const I18N = {
     f_email_ph:"your@email.com", f_pass:"Password", f_or:"or continue with",
     si_no_acc:"No account yet?", su_have_acc:"Already have an account?",
     paywall_title:"Premium Access Required",
-    paywall_desc:"To access tests and theory materials, you need an active plan.",
+    paywall_desc:"To access this content, you need an active plan.",
+    paywall_desc_tests:"To take CBR practice tests, you need an active plan.",
+    paywall_desc_theory:"To access theory materials, you need a Premium plan or higher.",
     paywall_btn:"View Packages", paywall_note:"One-time payment • No subscription",
+    err_wrong_pass:"Incorrect email or password. Please try again.",
+    err_already_member:"✉️ This email is already registered. Try signing in instead.",
+    msg_verify_email:"✅ Registration successful! Check your email and click the verification link.",
     a1:"Legislation", a2:"Vehicle Knowledge", a3:"Using the Road",
     a4:"Priority and Giving Way",
     a5:"Special Roads, Road Sections, Road Users and Manoeuvres",
@@ -1205,8 +1224,13 @@ const I18N = {
     f_email_ph:"email@adresiniz.com", f_pass:"Şifre", f_or:"veya şununla devam et",
     si_no_acc:"Hesabın yok mu?", su_have_acc:"Zaten hesabın var mı?",
     paywall_title:"Premium Erişim Gerekli",
-    paywall_desc:"Testlere ve teori materyallerine erişmek için aktif bir planınız olması gerekiyor.",
+    paywall_desc:"Bu içeriğe erişmek için aktif bir planınız olması gerekiyor.",
+    paywall_desc_tests:"CBR deneme testlerini çözmek için aktif bir planınız olması gerekiyor.",
+    paywall_desc_theory:"Teori içeriklerine erişmek için Premium veya üstü bir plan gerekiyor.",
     paywall_btn:"Paketleri Gör", paywall_note:"Tek seferlik ödeme • Abonelik yok",
+    err_wrong_pass:"E-posta veya şifre hatalı. Lütfen tekrar deneyin.",
+    err_already_member:"✉️ Bu e-posta zaten kayıtlı. Giriş yapmayı deneyin.",
+    msg_verify_email:"✅ Kayıt başarılı! E-postanı kontrol et ve doğrulama linkine tıkla.",
     a1:"Mevzuat", a2:"Araç Bilgisi", a3:"Yolda Kullanım",
     a4:"Öncelik ve Yol Verme",
     a5:"Özel Yollar, Yol Kesimleri, Yol Kullanıcıları ve Manevralar",
@@ -1283,8 +1307,13 @@ const I18N = {
     f_email_ph:"uw@email.nl", f_pass:"Wachtwoord", f_or:"of ga verder met",
     si_no_acc:"Nog geen account?", su_have_acc:"Heb je al een account?",
     paywall_title:"Premium Toegang Vereist",
-    paywall_desc:"Om toegang te krijgen tot toetsen en theoriemateriaal heb je een actief abonnement nodig.",
+    paywall_desc:"Om toegang te krijgen tot dit materiaal heb je een actief abonnement nodig.",
+    paywall_desc_tests:"Om CBR oefentoetsen te maken heb je een actief abonnement nodig.",
+    paywall_desc_theory:"Voor theoriemateriaal heb je een Premium abonnement of hoger nodig.",
     paywall_btn:"Bekijk Pakketten", paywall_note:"Eenmalige betaling • Geen abonnement",
+    err_wrong_pass:"Onjuist e-mailadres of wachtwoord. Probeer het opnieuw.",
+    err_already_member:"✉️ Dit e-mailadres is al geregistreerd. Probeer in te loggen.",
+    msg_verify_email:"✅ Registratie geslaagd! Controleer je e-mail en klik op de verificatielink.",
     a1:"Wetgeving", a2:"Voertuigkennis", a3:"Weggebruik",
     a4:"Voorrang en Doorlaten",
     a5:"Bijzondere Wegen, Weggedeelten en Manoeuvres",
@@ -1362,8 +1391,13 @@ const I18N = {
     f_email_ph:"بريدك@الإلكتروني.com", f_pass:"كلمة المرور", f_or:"أو تابع باستخدام",
     si_no_acc:"ليس لديك حساب؟", su_have_acc:"هل لديك حساب بالفعل؟",
     paywall_title:"يلزم وصول بريميوم",
-    paywall_desc:"للوصول إلى الاختبارات ومواد النظرية، تحتاج إلى باقة نشطة.",
+    paywall_desc:"للوصول إلى هذا المحتوى، تحتاج إلى باقة نشطة.",
+    paywall_desc_tests:"لإجراء اختبارات CBR التجريبية، تحتاج إلى باقة نشطة.",
+    paywall_desc_theory:"للوصول إلى مواد النظرية، تحتاج إلى باقة بريميوم أو أعلى.",
     paywall_btn:"عرض الباقات", paywall_note:"دفعة واحدة • بدون اشتراك",
+    err_wrong_pass:"البريد الإلكتروني أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.",
+    err_already_member:"✉️ هذا البريد الإلكتروني مسجل بالفعل. جرّب تسجيل الدخول.",
+    msg_verify_email:"✅ تم التسجيل بنجاح! تحقق من بريدك الإلكتروني وانقر على رابط التحقق.",
     a1:"التشريعات", a2:"معرفة المركبة", a3:"استخدام الطريق",
     a4:"الأولوية والتنازل",
     a5:"الطرق الخاصة والمناورات",
@@ -1434,75 +1468,6 @@ function getNextTest(lang) {
     }
     return null;
 }
-
-/* ═══════════════════════════════════════════════════════
-   ÖDEME / PLAN SİSTEMİ
-   Supabase tablosu: user_plans (user_id, plan_type, expires_at)
-   plan_type: 'free' | '14day' | '30day' | '60day' | '1year'
-═══════════════════════════════════════════════════════ */
-
-let currentPlan = null; // null = free/no plan
-
-/* ── Kullanıcının planını Supabase'den çek ── */
-async function fetchUserPlan() {
-    if (!currentUser) { currentPlan = null; return; }
-
-    const { data, error } = await _supabase
-        .from('user_plans')
-        .select('plan_type, expires_at')
-        .eq('user_id', currentUser.id)
-        .order('expires_at', { ascending: false })
-        .limit(1)
-        .maybeSingle();
-
-    if (error) { console.error('Plan çekilemedi:', error); currentPlan = null; return; }
-
-    if (data && data.expires_at && new Date(data.expires_at) > new Date()) {
-        currentPlan = data.plan_type;
-        console.log('✅ Aktif plan:', currentPlan, '- Bitiş:', data.expires_at);
-    } else {
-        currentPlan = null;
-        console.log('ℹ️ Aktif plan yok');
-    }
-}
-
-/* ── Erişim kontrolü ── */
-function hasActiveplan() {
-    return currentPlan !== null && currentPlan !== 'free';
-}
-
-/* ── Ödeme gerektiğinde paywall modal göster ── */
-function showPaywall() {
-    document.getElementById('paywall-modal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-function closePaywall() {
-    document.getElementById('paywall-modal').classList.remove('active');
-    document.body.style.overflow = '';
-}
-
-/* ── Test açma — plan kontrolü ile ── */
-function openTest(testNum) {
-    const lang = currentLang || 'en';
-    if (!currentUser) {
-        openModal('si'); // Giriş yap
-        return;
-    }
-    if (!hasActiveplan()) {
-        showPaywall(); // Ödeme gerekiyor
-        return;
-    }
-    window.open(`${QUIZ_BASE}/test-${testNum}-${lang}.html`, '_blank');
-}
-
-/* ── Teori linki açma — plan kontrolü ile ── */
-function openTheoryLink(url) {
-    if (!currentUser) { openModal('si'); return; }
-    if (!hasActiveplan()) { showPaywall(); return; }
-    window.open(url, '_blank');
-}
-
-
 
 /* ─── TEST BUTTONS ─── */
 function buildTestButtons() {
@@ -1592,10 +1557,6 @@ function openModal(id)        { document.getElementById(id+'-modal').classList.a
 function closeModal(id)       { document.getElementById(id+'-modal').classList.remove('active'); document.body.style.overflow=''; }
 function switchModal(a,b)     { closeModal(a); setTimeout(()=>openModal(b),100); }
 
-document.querySelectorAll('.modal-bg').forEach(bg =>
-    bg.addEventListener('click', e => { if(e.target===bg) closeModal(bg.id.replace('-modal','')); })
-);
-
 function toggleMenu() {
     document.getElementById('hbg').classList.toggle('open');
     document.getElementById('mob-menu').classList.toggle('open');
@@ -1622,116 +1583,142 @@ document.addEventListener('keydown', e => {
 });
 
 /* ═══════════════════════════════════════════════════════
-   SUPABASE
+   SUPABASE — TAM SİSTEM
 ═══════════════════════════════════════════════════════ */
 const supabaseUrl = 'https://rvbcsakzfadhtlfeigus.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2YmNzYWt6ZmFkaHRsZmVpZ3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzNjE0NTAsImV4cCI6MjA4NjkzNzQ1MH0.jU0Yt5pMurD9vhZeDTQCasQLkz-saZlhWekXDgUegRs';
 const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 let currentUser = null;
+let currentPlanId = null;        // Kullanıcının aktif plan id'si
+let accessibleGroups = [];       // Kullanıcının erişebildiği grup id'leri: ['tests','theory']
 
-/* ── FIX 2: updateNavbarUser — tüm elementleri doğru yönet ── */
+/* ─── NAVBAR GÜNCELLE ─── */
 function updateNavbarUser() {
-    const chip       = document.getElementById('userChip');
-    const nameSpan   = document.getElementById('userName');
-    const signinBtn  = document.getElementById('signinBtn');
-    const signupBtn  = document.getElementById('signupBtn');
-    const mobSignin  = document.getElementById('mobSigninBtn');
-    const mobSignup  = document.getElementById('mobSignupBtn');
+    const chip      = document.getElementById('userChip');
+    const nameSpan  = document.getElementById('userName');
+    const signinBtn = document.getElementById('signinBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    const mobSignin = document.getElementById('mobSigninBtn');
+    const mobSignup = document.getElementById('mobSignupBtn');
 
     if (currentUser) {
-        const name = (currentUser.email || '').split('@')[0];
+        const name = (currentUser.user_metadata?.full_name || currentUser.email || '').split('@')[0];
         nameSpan.textContent = name;
-
         chip.classList.add('visible');
-
-        // Desktop: Sign In → Sign Out butonu (dile göre)
         signinBtn.textContent = I18N[currentLang]?.nav_signout || 'Sign Out';
         signinBtn.onclick = signOut;
         if (signupBtn) signupBtn.style.display = 'none';
-
-        // Mobile
         if (mobSignin) { mobSignin.textContent = I18N[currentLang]?.nav_signout || 'Sign Out'; mobSignin.onclick = signOut; }
         if (mobSignup) mobSignup.style.display = 'none';
     } else {
         chip.classList.remove('visible');
         nameSpan.textContent = '';
-
         signinBtn.textContent = I18N[currentLang]?.nav_signin || 'Sign In';
         signinBtn.onclick = () => openModal('si');
         if (signupBtn) signupBtn.style.display = '';
-
         if (mobSignin) { mobSignin.textContent = I18N[currentLang]?.nav_signin || 'Sign In'; mobSignin.onclick = () => { openModal('si'); closeMob(); }; }
         if (mobSignup) mobSignup.style.display = '';
     }
 }
 
-/* ── Auth kontrolü ── */
-async function checkAuth() {
-    const { data: { session } } = await _supabase.auth.getSession();
-    if (session?.user) {
-        currentUser = session.user;
-        await fetchProgressFromSupabase();
-        await fetchUserPlan();
-        buildTestButtons();
-    } else {
-        currentUser = null;
+/* ─── AUTH MESAJ YARDIMCILARI ─── */
+function setMsg(modalId, text, type) { // type: 'error' | 'success' | 'info'
+    const el = document.getElementById(modalId + '-msg');
+    if (!el) return;
+    el.textContent = text;
+    el.className = 'auth-msg ' + type;
+}
+function clearMsg(modalId) {
+    const el = document.getElementById(modalId + '-msg');
+    if (el) { el.textContent = ''; el.className = 'auth-msg'; }
+}
+function setBtnLoading(btnId, loading) {
+    const btn = document.getElementById(btnId);
+    if (!btn) return;
+    btn.disabled = loading;
+    btn.style.opacity = loading ? '0.7' : '1';
+}
+
+/* ─── E-POSTA İLE GİRİŞ YAP ─── */
+async function handleSignIn(e) {
+    e.preventDefault();
+    clearMsg('si');
+    const email = document.getElementById('si-email').value.trim();
+    const pass  = document.getElementById('si-pass').value;
+    if (!email || !pass) return;
+
+    setBtnLoading('si-btn', true);
+    const { error } = await _supabase.auth.signInWithPassword({ email, password: pass });
+    setBtnLoading('si-btn', false);
+
+    if (error) {
+        // Hata mesajlarını kullanıcı dostu çevir
+        const msg = error.message.includes('Invalid login') || error.message.includes('invalid_credentials')
+            ? (I18N[currentLang]?.err_wrong_pass || 'E-posta veya şifre hatalı.')
+            : error.message;
+        setMsg('si', msg, 'error');
     }
-    updateNavbarUser();
+    // Başarılı ise onAuthStateChange halleder
 }
 
-/* ── Supabase'den progress çek ── */
-async function fetchProgressFromSupabase() {
-    if (!currentUser) return;
-    const lang = currentLang || 'en';
+/* ─── E-POSTA İLE KAYIT OL ─── */
+async function handleSignUp(e) {
+    e.preventDefault();
+    clearMsg('su');
+    const name  = document.getElementById('su-name').value.trim();
+    const email = document.getElementById('su-email').value.trim();
+    const pass  = document.getElementById('su-pass').value;
+    if (!name || !email || !pass) return;
 
-    const { data, error } = await _supabase
-        .from('user_progress')
-        .select('test_number')
-        .eq('user_id', currentUser.id)
-        .eq('language', lang);
+    setBtnLoading('su-btn', true);
+    const { data, error } = await _supabase.auth.signUp({
+        email, password: pass,
+        options: { data: { full_name: name } }
+    });
+    setBtnLoading('su-btn', false);
 
-    if (error) { console.error('❌ Progress çekilemedi:', error); return; }
+    if (error) {
+        // Zaten kayıtlı kullanıcı kontrolü
+        if (error.message.includes('already registered') || error.message.includes('User already registered')) {
+            setMsg('su',
+                I18N[currentLang]?.err_already_member || '✉️ Bu e-posta zaten kayıtlı. Giriş yapmayı deneyin.',
+                'info'
+            );
+            setTimeout(() => switchModal('su','si'), 2200);
+        } else {
+            setMsg('su', error.message, 'error');
+        }
+        return;
+    }
 
-    const completedTests = (data || []).map(r => r.test_number);
-    localStorage.setItem(
-        `et_completed_${lang}`,
-        JSON.stringify(completedTests.map(n => LANG_OFFSET[lang] + n))
-    );
-    console.log(`✅ Progress yüklendi (${lang}):`, completedTests);
+    // Supabase bazen e-posta doğrulama gönderiyor
+    if (data?.user && !data.session) {
+        setMsg('su',
+            I18N[currentLang]?.msg_verify_email || '✅ Kayıt başarılı! E-postanı kontrol et ve doğrulama linkine tıkla.',
+            'success'
+        );
+    }
+    // Session varsa onAuthStateChange halleder
 }
 
-/* ── Supabase'e progress kaydet ── */
-async function saveProgressToSupabase(testNum, lang) {
-    if (!currentUser) return false;
-    lang = lang || currentLang || 'en';
-
-    const { error } = await _supabase
-        .from('user_progress')
-        .upsert({ user_id: currentUser.id, test_number: testNum, language: lang },
-                 { onConflict: 'user_id,test_number,language' });
-
-    if (error) { console.error('❌ Progress kaydedilemedi:', error); return false; }
-    console.log(`✅ Test ${testNum} (${lang}) Supabase'e kaydedildi`);
-    return true;
-}
-
-/* ── Google ile giriş ── */
+/* ─── GOOGLE İLE GİRİŞ ─── */
 async function signInWithGoogle() {
     const cleanUrl = window.location.origin + window.location.pathname;
     const { error } = await _supabase.auth.signInWithOAuth({
         provider: 'google',
         options: { redirectTo: cleanUrl }
     });
-    if (error) alert('❌ Giriş hatası: ' + error.message);
+    if (error) alert('❌ Google giriş hatası: ' + error.message);
 }
 
-/* ── Çıkış ── */
+/* ─── ÇIKIŞ ─── */
 async function signOut() {
     await _supabase.auth.signOut();
     currentUser = null;
+    currentPlanId = null;
+    accessibleGroups = [];
     Object.keys(localStorage).forEach(k => { if(k.startsWith('et_')) localStorage.removeItem(k); });
-    // URL'yi temizle
     if (window.location.hash || window.location.search.includes('token')) {
         window.history.replaceState(null, '', window.location.pathname);
     }
@@ -1739,66 +1726,176 @@ async function signOut() {
     buildTestButtons();
 }
 
-/* ── FIX 3: TEK postMessage listener (eski ikisi birleştirildi) ── */
-window.addEventListener('message', async function(e) {
-    // Güvenlik: sadece kendi quiz domaininden gelen mesajları kabul et
-    // Geliştirme sırasında origin kontrolünü gevşetebilirsin
-    if (e.origin !== 'https://azerpashazadeh.github.io') {
-        // Debug için: console.log('postMessage origin:', e.origin);
-        return;
+/* ─── AUTH KONTROLÜ ─── */
+async function checkAuth() {
+    const { data: { session } } = await _supabase.auth.getSession();
+    if (session?.user) {
+        currentUser = session.user;
+        await Promise.all([fetchProgressFromSupabase(), fetchUserAccess()]);
+        buildTestButtons();
+    } else {
+        currentUser = null;
     }
+    updateNavbarUser();
+}
 
+/* ─── KULLANICININ ERİŞİM BİLGİSİNİ ÇEK ─── */
+async function fetchUserAccess() {
+    if (!currentUser) { currentPlanId = null; accessibleGroups = []; return; }
+
+    // Aktif planı ve erişebildiği grupları çek (user_access view'ından)
+    const { data, error } = await _supabase
+        .from('user_access')
+        .select('plan_id, plan_name, expires_at, group_id')
+        .eq('user_id', currentUser.id);
+
+    if (error) { console.error('❌ Erişim bilgisi alınamadı:', error); return; }
+
+    if (data && data.length > 0) {
+        currentPlanId    = data[0].plan_id;
+        accessibleGroups = [...new Set(data.map(r => r.group_id))];
+        console.log('✅ Aktif plan:', data[0].plan_name, '| Erişim:', accessibleGroups);
+    } else {
+        currentPlanId    = null;
+        accessibleGroups = [];
+        console.log('ℹ️ Aktif plan yok');
+    }
+}
+
+/* ─── İÇERİĞE ERİŞİM KONTROLÜ ─── */
+// groupId: 'tests' | 'theory' | 'all'
+function canAccess(groupId) {
+    if (accessibleGroups.includes('all')) return true;
+    return accessibleGroups.includes(groupId);
+}
+
+/* ─── TEST AÇ — ERİŞİM KONTROLLÜ ─── */
+function openTest(testNum) {
+    const lang = currentLang || 'en';
+    if (!currentUser) { openModal('si'); return; }
+    if (!canAccess('tests')) { showPaywall('tests'); return; }
+    window.open(`${QUIZ_BASE}/test-${testNum}-${lang}.html`, '_blank');
+}
+
+/* ─── TEORİ LİNKİ AÇ — ERİŞİM KONTROLLÜ ─── */
+function openTheoryLink(url) {
+    if (!currentUser) { openModal('si'); return; }
+    if (!canAccess('theory')) { showPaywall('theory'); return; }
+    window.open(url, '_blank');
+}
+
+/* ─── PAYWALL ─── */
+function showPaywall(groupId) {
+    // Paywall mesajını gruba göre özelleştir
+    const msgEl = document.getElementById('paywall-group-msg');
+    if (msgEl) {
+        const isTests  = groupId === 'tests';
+        const T = I18N[currentLang] || I18N['en'];
+        msgEl.textContent = isTests
+            ? (T.paywall_desc_tests  || T.paywall_desc)
+            : (T.paywall_desc_theory || T.paywall_desc);
+    }
+    document.getElementById('paywall-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closePaywall() {
+    document.getElementById('paywall-modal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+/* ─── PROGRESS — SUPABASE'DEN ÇEK ─── */
+async function fetchProgressFromSupabase() {
+    if (!currentUser) return;
+    const lang = currentLang || 'en';
+    const { data, error } = await _supabase
+        .from('user_progress')
+        .select('test_number')
+        .eq('user_id', currentUser.id)
+        .eq('language', lang);
+    if (error) { console.error('❌ Progress çekilemedi:', error); return; }
+    const completedTests = (data || []).map(r => r.test_number);
+    localStorage.setItem(
+        `et_completed_${lang}`,
+        JSON.stringify(completedTests.map(n => LANG_OFFSET[lang] + n))
+    );
+    console.log(`✅ Progress (${lang}):`, completedTests);
+}
+
+/* ─── PROGRESS — SUPABASE'E KAYDET ─── */
+async function saveProgressToSupabase(testNum, lang) {
+    if (!currentUser) return false;
+    lang = lang || currentLang || 'en';
+    const { error } = await _supabase
+        .from('user_progress')
+        .upsert({ user_id: currentUser.id, test_number: testNum, language: lang },
+                 { onConflict: 'user_id,test_number,language' });
+    if (error) { console.error('❌ Progress kaydedilemedi:', error); return false; }
+    console.log(`✅ Test ${testNum} (${lang}) kaydedildi`);
+    return true;
+}
+
+/* ─── POSTMESSAGE (Quiz tamamlandı) ─── */
+window.addEventListener('message', async function(e) {
+    if (e.origin !== 'https://azerpashazadeh.github.io') return;
     const d = e.data || {};
     if (d.action !== 'testCompleted' || !d.testNumber || !d.lang) return;
-
     console.log(`📩 Test ${d.testNumber} (${d.lang}) tamamlandı`);
-
-    // 1. localStorage güncelle (anında UI yansısın)
     markCompleted(d.lang, d.testNumber);
-
-    // 2. Supabase'e kaydet (giriş yapılmışsa)
     if (currentUser) {
         await saveProgressToSupabase(d.testNumber, d.lang);
-        await fetchProgressFromSupabase(); // sunucudan teyit al
+        await fetchProgressFromSupabase();
     }
-
-    // 3. Butonları yenile
     buildTestButtons();
 });
 
-/* ── Auth state dinle ── */
+/* ─── AUTH STATE DEĞİŞİKLİKLERİ ─── */
 _supabase.auth.onAuthStateChange(async (event, session) => {
     console.log('🔄 Auth event:', event);
     if (event === 'SIGNED_IN' && session?.user) {
         currentUser = session.user;
-        // URL'deki token hash'ini temizle (#access_token=... gibi)
         if (window.location.hash) {
             window.history.replaceState(null, '', window.location.pathname + window.location.search);
         }
-        await fetchProgressFromSupabase();
-        await fetchUserPlan();
+        await Promise.all([fetchProgressFromSupabase(), fetchUserAccess()]);
         buildTestButtons();
         updateNavbarUser();
         closeModal('si');
         closeModal('su');
     } else if (event === 'SIGNED_OUT') {
-        currentUser = null;
+        currentUser      = null;
+        currentPlanId    = null;
+        accessibleGroups = [];
         updateNavbarUser();
         buildTestButtons();
     }
 });
 
-/* ── Sekmeye dönünce progress yenile ── */
-window.addEventListener('focus', () => {
-    if (currentUser) fetchProgressFromSupabase().then(() => buildTestButtons());
-    else buildTestButtons();
+/* ─── SEKMEYE DÖNÜNCE GÜNCELLE ─── */
+window.addEventListener('focus', async () => {
+    if (currentUser) {
+        await Promise.all([fetchProgressFromSupabase(), fetchUserAccess()]);
+        buildTestButtons();
+    } else {
+        buildTestButtons();
+    }
 });
 
-/* ── INIT ── */
+/* ─── MODAL KAPANINCA FORMU TEMİZLE ─── */
+document.querySelectorAll('.modal-bg').forEach(bg => {
+    bg.addEventListener('click', e => {
+        if (e.target === bg) {
+            const id = bg.id.replace('-modal','');
+            closeModal(id);
+            clearMsg(id);
+        }
+    });
+});
+
+/* ─── INIT ─── */
 window.addEventListener('DOMContentLoaded', async () => {
     const savedLang = localStorage.getItem('et_lang') || 'en';
     applyLang(savedLang);
-    await checkAuth(); // auth bittikten sonra UI güncellenir
+    await checkAuth();
 });
 </script>
 </body>
