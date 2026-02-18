@@ -297,9 +297,7 @@
         }
         .p-features li::before { content:'✓'; color:var(--cyan); font-weight:700; flex-shrink:0; margin-top:1px; }
 
-        /* ══════════════════════════════════════════
-           PASSENGER CAR OVERLAY — YENİ LAYOUT
-        ══════════════════════════════════════════ */
+        /* ══ PASSENGER CAR OVERLAY ══ */
         .pc-overlay {
             position:fixed; inset:0;
             background:url('https://azerpashazadeh.github.io/sorularveresimler/2151021132.jpg') no-repeat center center;
@@ -328,9 +326,7 @@
             margin:0 auto; padding:100px 24px 80px;
         }
 
-        .pc-header {
-            text-align:center; margin-bottom:36px;
-        }
+        .pc-header { text-align:center; margin-bottom:36px; }
         .pc-header h2 {
             font-family:'Playfair Display',serif;
             font-size:clamp(28px,4vw,46px); font-weight:900;
@@ -339,11 +335,8 @@
             margin-bottom:8px;
         }
         body.ar .pc-header h2 { font-family:'Noto Sans Arabic',serif; }
-        .pc-header p {
-            color:rgba(255,255,255,0.6); font-size:14px;
-        }
+        .pc-header p { color:rgba(255,255,255,0.6); font-size:14px; }
 
-        /* Two-column layout */
         .pc-layout {
             display:grid;
             grid-template-columns:1fr 340px;
@@ -351,13 +344,7 @@
             align-items:start;
         }
 
-        /* ── LEFT: Accordion ── */
-        .pc-left {}
-
-        /* ── RIGHT: Test Buttons Panel ── */
-        .pc-right {
-            position:sticky; top:100px;
-        }
+        .pc-right { position:sticky; top:100px; }
 
         .test-panel {
             border-radius:22px; padding:22px 18px;
@@ -373,15 +360,12 @@
             margin-bottom:6px;
             display:flex; align-items:center; gap:8px;
         }
-        .test-panel-title span {
-            font-size:18px;
-        }
+        .test-panel-title span { font-size:18px; }
         .test-panel-sub {
             font-size:11.5px; color:rgba(255,255,255,0.4);
             margin-bottom:16px; line-height:1.5;
         }
 
-        /* Test buttons grid: 5 columns */
         .test-btn-grid {
             display:grid;
             grid-template-columns:repeat(5,1fr);
@@ -405,7 +389,6 @@
             overflow:hidden;
         }
 
-        /* LOCKED state */
         .test-btn.locked {
             background:rgba(255,255,255,0.05);
             border:1px solid rgba(255,255,255,0.08);
@@ -413,14 +396,10 @@
             cursor:not-allowed;
         }
         .test-btn.locked::after {
-            content:'🔒';
-            font-size:9px;
-            position:absolute;
-            bottom:3px;
-            right:3px;
+            content:'🔒'; font-size:9px;
+            position:absolute; bottom:3px; right:3px;
         }
 
-        /* ACTIVE state (current) */
         .test-btn.active-test {
             background:linear-gradient(135deg,var(--cyan),var(--blue));
             color:white;
@@ -433,7 +412,6 @@
             box-shadow:0 6px 22px rgba(0,100,255,0.7);
         }
 
-        /* COMPLETED state */
         .test-btn.completed {
             background:rgba(0,212,255,0.1);
             border:1px solid rgba(0,212,255,0.3);
@@ -441,12 +419,8 @@
             cursor:default;
         }
         .test-btn.completed::after {
-            content:'✓';
-            font-size:8px;
-            position:absolute;
-            bottom:2px;
-            right:4px;
-            color:var(--cyan);
+            content:'✓'; font-size:8px;
+            position:absolute; bottom:2px; right:4px; color:var(--cyan);
         }
 
         @keyframes pulsebtn {
@@ -539,7 +513,6 @@
         }
         .cell-label { font-size:12px; color:rgba(255,255,255,0.82); line-height:1.3; }
 
-        /* Color per group */
         .g1 .acc-num { background:rgba(238,46,48,0.3); color:#ff8080; }
         .g2 .acc-num { background:rgba(255,206,13,0.22); color:#ffe066; }
         .g3 .acc-num { background:rgba(140,198,63,0.22); color:#aedd60; }
@@ -557,29 +530,15 @@
         .g7 .cell-num { color:#dd88ff; }
         .g8 .cell-num { color:#ff88cc; }
 
-        /* Mobile: stack layout */
         @media(max-width:900px) {
-            .pc-layout {
-                grid-template-columns:1fr;
-            }
-            .pc-right {
-                position:relative; top:0;
-                order:-1;
-            }
-            .test-btn-grid {
-                grid-template-columns:repeat(10,1fr);
-            }
-            .acc-grid {
-                grid-template-columns:repeat(2,1fr);
-            }
+            .pc-layout { grid-template-columns:1fr; }
+            .pc-right { position:relative; top:0; order:-1; }
+            .test-btn-grid { grid-template-columns:repeat(10,1fr); }
+            .acc-grid { grid-template-columns:repeat(2,1fr); }
         }
         @media(max-width:600px) {
-            .test-btn-grid {
-                grid-template-columns:repeat(5,1fr);
-            }
-            .acc-grid {
-                grid-template-columns:1fr;
-            }
+            .test-btn-grid { grid-template-columns:repeat(5,1fr); }
+            .acc-grid { grid-template-columns:1fr; }
         }
 
         /* ══ AUTH MODALS ══ */
@@ -664,7 +623,16 @@
             padding:36px 20px; color:rgba(255,255,255,0.4); font-size:13px;
         }
 
-        /* Quiz modal CSS kaldırıldı — testler yeni sekmede açılıyor */
+        /* ── User display in navbar ── */
+        .user-chip {
+            display:none; align-items:center; gap:8px;
+            padding:6px 14px; border-radius:13px;
+            background:rgba(0,212,255,0.15);
+            border:1px solid rgba(0,212,255,0.3);
+            font-size:13px; font-weight:600; color:var(--cyan);
+            white-space:nowrap;
+        }
+        .user-chip.visible { display:flex; }
     </style>
 </head>
 <body>
@@ -686,14 +654,13 @@
             <span class="lang-opt"        data-lang="ar">AR</span>
         </div>
 
-<!-- Sign In butonundan önce -->
-<span id="userDisplay" style="display:none; color:rgba(255,255,255,0.8); font-size:13px; margin-right:8px;">
-    👤 <span id="userName"></span>
-</span>
-<button class="btn-signin" data-i18n="nav_signin" onclick="openModal('si')" id="signinBtn">Sign In</button>
+        <!-- ✅ FIX 1: Sadece tek bir kullanıcı chip + tek Sign In butonu -->
+        <div class="user-chip" id="userChip">
+            👤 <span id="userName"></span>
+        </div>
+        <button class="btn-signin" id="signinBtn" onclick="openModal('si')">Sign In</button>
+        <button class="btn-signup" id="signupBtn" data-i18n="nav_signup" onclick="openModal('su')">Sign Up</button>
 
-        <button class="btn-signin" data-i18n="nav_signin" onclick="openModal('si')">Sign In</button>
-        <button class="btn-signup" data-i18n="nav_signup" onclick="openModal('su')">Sign Up</button>
         <div class="hamburger" id="hbg" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </div>
@@ -712,9 +679,9 @@
     <button class="mob-link" data-i18n="nav_prices" onclick="openPricing();closeMob()">💰 Package Prices</button>
     <button class="mob-link" data-i18n="nav_refer"  onclick="closeMob()">🎁 Refer Friends</button>
     <button class="mob-link" data-i18n="nav_how"    onclick="scrollToSec('how-sec');closeMob()">❓ How It Works?</button>
-    <div class="mob-auth">
-        <button class="btn-signin" data-i18n="nav_signin" onclick="openModal('si');closeMob()">Sign In</button>
-        <button class="btn-signup" data-i18n="nav_signup" onclick="openModal('su');closeMob()">Sign Up</button>
+    <div class="mob-auth" id="mobAuthRow">
+        <button class="btn-signin" id="mobSigninBtn" onclick="openModal('si');closeMob()">Sign In</button>
+        <button class="btn-signup" id="mobSignupBtn" data-i18n="nav_signup" onclick="openModal('su');closeMob()">Sign Up</button>
     </div>
 </div>
 
@@ -857,14 +824,11 @@
             <p data-i18n="pc_sub">Select a chapter below to study theory or start a practice test.</p>
         </div>
 
-        <!-- TWO-COLUMN LAYOUT -->
         <div class="pc-layout">
-
             <!-- LEFT: Accordion -->
             <div class="pc-left">
                 <div class="acc-container" id="accordion">
 
-                    <!-- 1 Legislation -->
                     <div class="acc-item g1">
                         <button class="acc-header" onclick="toggleAcc(this)">
                             <div class="acc-num">1</div>
@@ -889,7 +853,6 @@
                         </div>
                     </div>
 
-                    <!-- 2 Vehicle knowledge -->
                     <div class="acc-item g2">
                         <button class="acc-header" onclick="toggleAcc(this)">
                             <div class="acc-num">2</div>
@@ -910,7 +873,6 @@
                         </div>
                     </div>
 
-                    <!-- 3 Using the road -->
                     <div class="acc-item g3">
                         <button class="acc-header" onclick="toggleAcc(this)">
                             <div class="acc-num">3</div>
@@ -932,7 +894,6 @@
                         </div>
                     </div>
 
-                    <!-- 4 Priority -->
                     <div class="acc-item g4">
                         <button class="acc-header" onclick="toggleAcc(this)">
                             <div class="acc-num">4</div>
@@ -948,7 +909,6 @@
                         </div>
                     </div>
 
-                    <!-- 5 Special roads -->
                     <div class="acc-item g5">
                         <button class="acc-header" onclick="toggleAcc(this)">
                             <div class="acc-num">5</div>
@@ -967,7 +927,6 @@
                         </div>
                     </div>
 
-                    <!-- 6 Safe driving -->
                     <div class="acc-item g6">
                         <button class="acc-header" onclick="toggleAcc(this)">
                             <div class="acc-num">6</div>
@@ -988,7 +947,6 @@
                         </div>
                     </div>
 
-                    <!-- 7 Traffic signs -->
                     <div class="acc-item g7">
                         <button class="acc-header" onclick="toggleAcc(this)">
                             <div class="acc-num">7</div>
@@ -1021,7 +979,6 @@
                         </div>
                     </div>
 
-                    <!-- 8 Eco-safe driving -->
                     <div class="acc-item g8">
                         <button class="acc-header" onclick="toggleAcc(this)">
                             <div class="acc-num">8</div>
@@ -1047,8 +1004,8 @@
                         </div>
                     </div>
 
-                </div><!-- /accordion -->
-            </div><!-- /pc-left -->
+                </div>
+            </div>
 
             <!-- RIGHT: Test Buttons Panel -->
             <div class="pc-right">
@@ -1060,22 +1017,17 @@
                     <div class="test-panel-sub" data-i18n="test_panel_sub">
                         Complete tests in order. Each test unlocks the next one.
                     </div>
-
-                    <!-- Progress bar -->
                     <div class="test-progress-bar">
                         <div class="test-progress-fill" id="testProgressFill" style="width:2%"></div>
                     </div>
                     <div class="test-progress-label" id="testProgressLabel">1 / 50 completed</div>
-
-                    <!-- 50 test buttons (5 cols × 10 rows) -->
                     <div class="test-btn-grid" id="testBtnGrid"></div>
-
                 </div>
-            </div><!-- /pc-right -->
+            </div>
 
-        </div><!-- /pc-layout -->
-    </div><!-- /pc-inner -->
-</div><!-- /pc-overlay -->
+        </div>
+    </div>
+</div>
 
 <!-- ═══════════ AUTH MODALS ═══════════ -->
 <div class="modal-bg" id="si-modal">
@@ -1088,7 +1040,11 @@
             <button type="submit" class="btn-submit" data-i18n="si_title"></button>
         </form>
         <div class="m-div" data-i18n="f_or"></div>
-        <div class="soc-row"><button class="soc-btn" onclick="signInWithGoogle()">G</button><button class="soc-btn">f</button><button class="soc-btn">in</button></div>
+        <div class="soc-row">
+            <button class="soc-btn" onclick="signInWithGoogle()">G</button>
+            <button class="soc-btn">f</button>
+            <button class="soc-btn">in</button>
+        </div>
         <div class="m-foot"><span data-i18n="si_no_acc"></span> <a onclick="switchModal('si','su')" data-i18n="nav_signup"></a></div>
     </div>
 </div>
@@ -1103,20 +1059,17 @@
             <button type="submit" class="btn-submit" data-i18n="su_title"></button>
         </form>
         <div class="m-div" data-i18n="f_or"></div>
-        <div class="soc-row"><button class="soc-btn" onclick="signInWithGoogle()">G</button><button class="soc-btn">f</button><button class="soc-btn">in</button></div>
+        <div class="soc-row">
+            <button class="soc-btn" onclick="signInWithGoogle()">G</button>
+            <button class="soc-btn">f</button>
+            <button class="soc-btn">in</button>
+        </div>
         <div class="m-foot"><span data-i18n="su_have_acc"></span> <a onclick="switchModal('su','si')" data-i18n="nav_signin"></a></div>
     </div>
 </div>
 
-<!-- Quiz yeni sekmede açılıyor: azerpashazadeh.github.io/sayfa1/test-{n}-{lang}.html -->
-
-<!-- ═══════════════════════════════════════════════════════
-     TRANSLATIONS & LOGIC
-═══════════════════════════════════════════════════════ -->
 <script>
-/* ─────────────────────────────────────────
-   TRANSLATIONS
-───────────────────────────────────────── */
+/* ─── TRANSLATIONS ─── */
 const I18N = {
   en:{
     nav_car:"Passenger Car", nav_prices:"Package Prices",
@@ -1429,98 +1382,56 @@ const I18N = {
   }
 };
 
-/* ═══════════════════════════════════════════════════════
-   TEST PROGRESS — dil bazlı localStorage
-   EN: 1001-1050 | TR: 2001-2050 | NL: 3001-3050 | AR: 4001-4050
-═══════════════════════════════════════════════════════ */
+/* ─── TEST PROGRESS ─── */
 const TOTAL_TESTS = 50;
-
 const LANG_OFFSET = { en: 1000, tr: 2000, nl: 3000, ar: 4000 };
 const QUIZ_BASE   = 'https://azerpashazadeh.github.io/sayfa1';
 
-/* localStorage key per language */
-function lsKey(lang) {
-    return `et_completed_${lang}`;
-}
+function lsKey(lang) { return `et_completed_${lang}`; }
 
-/* Get completed test numbers for current language (e.g. [1001,1002]) */
 function getCompleted(lang) {
     return JSON.parse(localStorage.getItem(lsKey(lang)) || '[]');
 }
-
-/* Mark test as completed for current language */
 function markCompleted(lang, testNum) {
-    const key    = lsKey(lang);
-    const offset = LANG_OFFSET[lang] || 1000;
-    const stored = getCompleted(lang);
-    const code   = offset + testNum;          // e.g. EN test-3 → 1003
+    const offset  = LANG_OFFSET[lang] || 1000;
+    const stored  = getCompleted(lang);
+    const code    = offset + testNum;
     if (!stored.includes(code)) {
         stored.push(code);
-        localStorage.setItem(key, JSON.stringify(stored));
+        localStorage.setItem(lsKey(lang), JSON.stringify(stored));
     }
 }
-
-/* Is a specific test completed for a language? */
 function isCompleted(lang, testNum) {
-    const offset = LANG_OFFSET[lang] || 1000;
-    return getCompleted(lang).includes(offset + testNum);
+    return getCompleted(lang).includes((LANG_OFFSET[lang] || 1000) + testNum);
 }
-
-/* First uncompleted test number (1-50) */
 function getNextTest(lang) {
     for (let i = 1; i <= TOTAL_TESTS; i++) {
         if (!isCompleted(lang, i)) return i;
     }
-    return null; // all done
+    return null;
 }
 
-/* ═══════════════════════════════════════════════════════
-   QUIZ URL — dile göre doğru sayfayı aç
-═══════════════════════════════════════════════════════ */
 function openTest(testNum) {
     const lang = currentLang || 'en';
-    const url  = `${QUIZ_BASE}/test-${testNum}-${lang}.html`;
-    window.open(url, '_blank');
+    window.open(`${QUIZ_BASE}/test-${testNum}-${lang}.html`, '_blank');
 }
 
-/* ═══════════════════════════════════════════════════════
-   Quiz sayfasından gelen "tamamlandı" mesajını dinle
-   Quiz sayfası bitince postMessage gönderecek:
-   { action: 'testCompleted', testNumber: 3, lang: 'en' }
-═══════════════════════════════════════════════════════ */
-window.addEventListener('message', function(e) {
-    if (e.origin !== 'https://azerpashazadeh.github.io') return;
-    const d = e.data || {};
-    if (d.action === 'testCompleted' && d.testNumber && d.lang) {
-        markCompleted(d.lang, d.testNumber);
-        buildTestButtons();
-    }
-});
-
-/* ═══════════════════════════════════════════════════════
-   BUILD TEST BUTTONS
-═══════════════════════════════════════════════════════ */
-/* ═══════════════════════════════════════════════════════
-   BUILD TEST BUTTONS
-═══════════════════════════════════════════════════════ */
+/* ─── TEST BUTTONS ─── */
 function buildTestButtons() {
     const lang = currentLang || 'en';
     const grid = document.getElementById('testBtnGrid');
     if (!grid) return;
     grid.innerHTML = '';
-
     const next = getNextTest(lang);
 
     for (let i = 1; i <= TOTAL_TESTS; i++) {
-        const btn       = document.createElement('button');
+        const btn = document.createElement('button');
         btn.className   = 'test-btn';
         btn.textContent = i;
-        btn.setAttribute('data-test', i);
 
         if (isCompleted(lang, i)) {
             btn.classList.add('completed');
-            btn.title   = `Test ${i} — Completed ✓`;
-            btn.onclick = null;
+            btn.title = `Test ${i} — Completed ✓`;
         } else if (i === next) {
             btn.classList.add('active-test');
             btn.title   = `Test ${i} — Click to start!`;
@@ -1528,32 +1439,23 @@ function buildTestButtons() {
         } else {
             btn.classList.add('locked');
             btn.title   = `Test ${i} — Complete Test ${i-1} first`;
-            btn.onclick = () => showLockedMsg(i);
+            btn.onclick = () => alert(`🔒 Test ${i} kilitli. Önce Test ${i-1}'i tamamlayın.`);
         }
-
         grid.appendChild(btn);
     }
-
     updateProgress(lang);
 }
 
 function updateProgress(lang) {
-    lang = lang || currentLang || 'en';
-    const done = getCompleted(lang).length;
-    const pct  = Math.max(2, Math.round((done / TOTAL_TESTS) * 100));
+    const done  = getCompleted(lang || currentLang || 'en').length;
+    const pct   = Math.max(2, Math.round((done / TOTAL_TESTS) * 100));
     const fill  = document.getElementById('testProgressFill');
     const label = document.getElementById('testProgressLabel');
-    if (fill)  fill.style.width   = pct + '%';
-    if (label) label.textContent  = `${done} / ${TOTAL_TESTS} completed`;
+    if (fill)  fill.style.width  = pct + '%';
+    if (label) label.textContent = `${done} / ${TOTAL_TESTS} completed`;
 }
 
-function showLockedMsg(num) {
-    alert(`🔒 Test ${num} is locked.\nPlease complete Test ${num - 1} first.`);
-}
-
-/* ─────────────────────────────────────────
-   LANGUAGE
-───────────────────────────────────────── */
+/* ─── LANGUAGE ─── */
 let currentLang = 'en';
 
 function applyLang(lang) {
@@ -1561,83 +1463,49 @@ function applyLang(lang) {
     const T = I18N[lang];
     if (!T) return;
 
-    if (lang === 'ar') document.body.classList.add('ar');
-    else               document.body.classList.remove('ar');
+    document.body.classList.toggle('ar', lang === 'ar');
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (T[key] !== undefined) el.textContent = T[key];
+        const k = el.getAttribute('data-i18n');
+        if (T[k] !== undefined) el.textContent = T[k];
     });
     document.querySelectorAll('[data-i18n-html]').forEach(el => {
-        const key = el.getAttribute('data-i18n-html');
-        if (T[key] !== undefined) el.innerHTML = T[key];
+        const k = el.getAttribute('data-i18n-html');
+        if (T[k] !== undefined) el.innerHTML = T[k];
     });
     document.querySelectorAll('[data-i18n-ph]').forEach(el => {
-        const key = el.getAttribute('data-i18n-ph');
-        if (T[key] !== undefined) el.placeholder = T[key];
+        const k = el.getAttribute('data-i18n-ph');
+        if (T[k] !== undefined) el.placeholder = T[k];
     });
-    document.querySelectorAll('.lang-opt').forEach(o => {
-        o.classList.toggle('active', o.getAttribute('data-lang') === lang);
-    });
-
+    document.querySelectorAll('.lang-opt').forEach(o =>
+        o.classList.toggle('active', o.getAttribute('data-lang') === lang)
+    );
     localStorage.setItem('et_lang', lang);
-
-    // Dil değişince butonları yeniden çiz (her dilin progress'i bağımsız)
     buildTestButtons();
 }
 
-document.querySelectorAll('.lang-opt').forEach(opt => {
-    opt.addEventListener('click', () => applyLang(opt.getAttribute('data-lang')));
-});
+document.querySelectorAll('.lang-opt').forEach(opt =>
+    opt.addEventListener('click', () => applyLang(opt.getAttribute('data-lang')))
+);
 
-/* ─────────────────────────────────────────
-   ACCORDION
-───────────────────────────────────────── */
+/* ─── ACCORDION ─── */
 function toggleAcc(btn) {
-    const item = btn.closest('.acc-item');
-    item.classList.toggle('open');
+    btn.closest('.acc-item').classList.toggle('open');
 }
 
-/* ─────────────────────────────────────────
-   OVERLAYS & MODALS
-───────────────────────────────────────── */
-function openPricing() {
-    document.getElementById('pricing-ol').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-function closePricing() {
-    document.getElementById('pricing-ol').classList.remove('active');
-    document.body.style.overflow = '';
-}
-function openPassengerCar() {
-    document.getElementById('pc-ol').classList.add('active');
-    document.body.style.overflow = 'hidden';
-    buildTestButtons();
-}
-function closePassengerCar() {
-    document.getElementById('pc-ol').classList.remove('active');
-    document.body.style.overflow = '';
-}
-function openModal(id) {
-    document.getElementById(id+'-modal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-function closeModal(id) {
-    document.getElementById(id+'-modal').classList.remove('active');
-    document.body.style.overflow = '';
-}
-function switchModal(a, b) {
-    closeModal(a); setTimeout(() => openModal(b), 100);
-}
-document.querySelectorAll('.modal-bg').forEach(bg => {
-    bg.addEventListener('click', e => {
-        if (e.target === bg) closeModal(bg.id.replace('-modal',''));
-    });
-});
+/* ─── OVERLAYS & MODALS ─── */
+function openPricing()        { document.getElementById('pricing-ol').classList.add('active'); document.body.style.overflow='hidden'; }
+function closePricing()       { document.getElementById('pricing-ol').classList.remove('active'); document.body.style.overflow=''; }
+function openPassengerCar()   { document.getElementById('pc-ol').classList.add('active'); document.body.style.overflow='hidden'; buildTestButtons(); }
+function closePassengerCar()  { document.getElementById('pc-ol').classList.remove('active'); document.body.style.overflow=''; }
+function openModal(id)        { document.getElementById(id+'-modal').classList.add('active'); document.body.style.overflow='hidden'; }
+function closeModal(id)       { document.getElementById(id+'-modal').classList.remove('active'); document.body.style.overflow=''; }
+function switchModal(a,b)     { closeModal(a); setTimeout(()=>openModal(b),100); }
 
-/* ─────────────────────────────────────────
-   HAMBURGER
-───────────────────────────────────────── */
+document.querySelectorAll('.modal-bg').forEach(bg =>
+    bg.addEventListener('click', e => { if(e.target===bg) closeModal(bg.id.replace('-modal','')); })
+);
+
 function toggleMenu() {
     document.getElementById('hbg').classList.toggle('open');
     document.getElementById('mob-menu').classList.toggle('open');
@@ -1652,262 +1520,184 @@ document.addEventListener('click', e => {
     if (!nav.contains(e.target) && !mob.contains(e.target)) closeMob();
 });
 
-function scrollToSec(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior:'smooth' });
-}
+function scrollToSec(id) { document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
 
-/* ─────────────────────────────────────────
-   KEYBOARD
-───────────────────────────────────────── */
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
-        closePricing();
-        closePassengerCar();
-        closeQuiz();
-        closeModal('si');
-        closeModal('su');
+        closePricing(); closePassengerCar();
+        closeModal('si'); closeModal('su');
         document.body.style.overflow = '';
     }
 });
 
-/* ─────────────────────────────────────────
-   INIT
-───────────────────────────────────────── */
-const savedLang = localStorage.getItem('et_lang') || 'en';
-applyLang(savedLang); // buildTestButtons() applyLang içinde çağrılıyor
-
-// Kullanıcı quiz sekmesinden bu sekmeye döndüğünde progress yenile
-// (Quiz sayfası postMessage gönderse bile bu bir güvenlik ağı)
-window.addEventListener('focus', () => {
-    buildTestButtons();
-});
-
-// Quiz sayfasından gelen tamamlanma mesajı
-// (Quiz sayfasında: window.opener.postMessage({action:'testCompleted', testNumber:3, lang:'en'}, '*'))
-window.addEventListener('message', function(e) {
-    const d = e.data || {};
-    if (d.action === 'testCompleted' && d.testNumber && d.lang) {
-        markCompleted(d.lang, d.testNumber);
-        buildTestButtons();
-    }
-});
-
-
-
-
-// ═══════════════════════════════════════════════════════
-//  SUPABASE ENTEGRASYONU
-// ═══════════════════════════════════════════════════════
-
+/* ═══════════════════════════════════════════════════════
+   SUPABASE
+═══════════════════════════════════════════════════════ */
 const supabaseUrl = 'https://rvbcsakzfadhtlfeigus.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2YmNzYWt6ZmFkaHRsZmVpZ3VzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzNjE0NTAsImV4cCI6MjA4NjkzNzQ1MH0.jU0Yt5pMurD9vhZeDTQCasQLkz-saZlhWekXDgUegRs';
 const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 let currentUser = null;
 
-// ── Kullanıcı oturum kontrolü
-// ── Kullanıcı oturum kontrolü
-async function checkAuth() {
-    const { data: { session } } = await _supabase.auth.getSession();
-    
-    if (session?.user) {
-        currentUser = session.user;
-        console.log('✅ Kullanıcı giriş yapmış:', currentUser.email);
-        
-        // Progress'i Supabase'den çek
-        await fetchProgressFromSupabase();
-        
-        // Butonları güncelle
-        buildTestButtons();
-    } else {
-        console.log('❌ Kullanıcı giriş yapmamış');
-        currentUser = null;
-    }
-    
-    // Navbar'daki kullanıcı bilgisini güncelle
-    updateNavbarUser();
-}
-
-// ── Navbar kullanıcı bilgisi güncelleme
+/* ── FIX 2: updateNavbarUser — tüm elementleri doğru yönet ── */
 function updateNavbarUser() {
-    const userDisplay = document.getElementById('userDisplay');
-    const userName    = document.getElementById('userName');
-    const signinBtn   = document.getElementById('signinBtn');
-    const signupBtn   = document.querySelector('.btn-signup');
-    
+    const chip       = document.getElementById('userChip');
+    const nameSpan   = document.getElementById('userName');
+    const signinBtn  = document.getElementById('signinBtn');
+    const signupBtn  = document.getElementById('signupBtn');
+    const mobSignin  = document.getElementById('mobSigninBtn');
+    const mobSignup  = document.getElementById('mobSignupBtn');
+
     if (currentUser) {
-        userName.textContent = displayUserInfo();
-        userDisplay.style.display = 'inline-flex';
+        const name = (currentUser.email || '').split('@')[0];
+        nameSpan.textContent = name;
+
+        chip.classList.add('visible');
+
+        // Desktop: Sign In → Sign Out butonu
         signinBtn.textContent = 'Sign Out';
         signinBtn.onclick = signOut;
         if (signupBtn) signupBtn.style.display = 'none';
+
+        // Mobile
+        if (mobSignin) { mobSignin.textContent = 'Sign Out'; mobSignin.onclick = signOut; }
+        if (mobSignup) mobSignup.style.display = 'none';
     } else {
-        userDisplay.style.display = 'none';
-        signinBtn.textContent = 'Sign In';
+        chip.classList.remove('visible');
+        nameSpan.textContent = '';
+
+        signinBtn.textContent = I18N[currentLang]?.nav_signin || 'Sign In';
         signinBtn.onclick = () => openModal('si');
-        if (signupBtn) signupBtn.style.display = 'inline-block';
+        if (signupBtn) signupBtn.style.display = '';
+
+        if (mobSignin) { mobSignin.textContent = I18N[currentLang]?.nav_signin || 'Sign In'; mobSignin.onclick = () => { openModal('si'); closeMob(); }; }
+        if (mobSignup) mobSignup.style.display = '';
     }
 }
 
+/* ── Auth kontrolü ── */
+async function checkAuth() {
+    const { data: { session } } = await _supabase.auth.getSession();
+    if (session?.user) {
+        currentUser = session.user;
+        await fetchProgressFromSupabase();
+        buildTestButtons();
+    } else {
+        currentUser = null;
+    }
+    updateNavbarUser();
+}
 
-
-
-
-// ── Progress'i Supabase'den çek
+/* ── Supabase'den progress çek ── */
 async function fetchProgressFromSupabase() {
     if (!currentUser) return;
-    
     const lang = currentLang || 'en';
-    
+
     const { data, error } = await _supabase
         .from('user_progress')
         .select('test_number')
         .eq('user_id', currentUser.id)
         .eq('language', lang);
-    
-    if (error) {
-        console.error('❌ Progress çekilemedi:', error);
-        return;
-    }
-    
-    // localStorage'i temizle ve Supabase'den gelen veriyi kullan
-    const completedTests = (data || []).map(row => row.test_number);
-    
-    // Geçici localStorage'e yaz (buildTestButtons fonksiyonu için)
-    localStorage.setItem(`et_completed_${lang}`, JSON.stringify(
-        completedTests.map(n => LANG_OFFSET[lang] + n)
-    ));
-    
-    console.log(`✅ ${lang.toUpperCase()} Progress yüklendi:`, completedTests);
+
+    if (error) { console.error('❌ Progress çekilemedi:', error); return; }
+
+    const completedTests = (data || []).map(r => r.test_number);
+    localStorage.setItem(
+        `et_completed_${lang}`,
+        JSON.stringify(completedTests.map(n => LANG_OFFSET[lang] + n))
+    );
+    console.log(`✅ Progress yüklendi (${lang}):`, completedTests);
 }
 
-// ── Test tamamlandığında Supabase'e kaydet
-async function saveProgressToSupabase(testNum) {
-    if (!currentUser) {
-        alert('❌ İlerlemeyi kaydetmek için giriş yapmalısınız!');
-        return false;
-    }
-    
-    const lang = currentLang || 'en';
-    
+/* ── Supabase'e progress kaydet ── */
+async function saveProgressToSupabase(testNum, lang) {
+    if (!currentUser) return false;
+    lang = lang || currentLang || 'en';
+
     const { error } = await _supabase
         .from('user_progress')
-        .insert({
-            user_id: currentUser.id,
-            test_number: testNum,
-            language: lang
-        })
-        .select();
-    
-    if (error) {
-        // UNIQUE constraint hatası normal (zaten tamamlanmışsa)
-        if (error.code === '23505') {
-            console.log('ℹ️ Test zaten tamamlanmış');
-            return true;
-        }
-        console.error('❌ Progress kaydedilemedi:', error);
-        return false;
-    }
-    
+        .upsert({ user_id: currentUser.id, test_number: testNum, language: lang },
+                 { onConflict: 'user_id,test_number,language' });
+
+    if (error) { console.error('❌ Progress kaydedilemedi:', error); return false; }
     console.log(`✅ Test ${testNum} (${lang}) Supabase'e kaydedildi`);
     return true;
 }
 
-// ── Google ile Giriş
+/* ── Google ile giriş ── */
 async function signInWithGoogle() {
-    const currentHash = window.location.hash || '#passenger-car';
-    const redirectUrl = `${window.location.origin}${window.location.pathname}${currentHash}`;
-    
     const { error } = await _supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: {
-            redirectTo: redirectUrl,
-            queryParams: {
-                lang: currentLang || 'en'
-            }
-        }
+        options: { redirectTo: window.location.href }
     });
-    
-    if (error) {
-        alert('❌ Giriş hatası: ' + error.message);
-    }
+    if (error) alert('❌ Giriş hatası: ' + error.message);
 }
 
-// ── Çıkış
+/* ── Çıkış ── */
 async function signOut() {
     await _supabase.auth.signOut();
     currentUser = null;
-    localStorage.clear();
-    window.location.reload();
+    Object.keys(localStorage).forEach(k => { if(k.startsWith('et_')) localStorage.removeItem(k); });
+    updateNavbarUser();
+    buildTestButtons();
 }
 
-// ── PostMessage listener (Quiz sayfasından gelen bildirim)
+/* ── FIX 3: TEK postMessage listener (eski ikisi birleştirildi) ── */
 window.addEventListener('message', async function(e) {
-    if (e.origin !== 'https://azerpashazadeh.github.io') return;
-    
+    // Güvenlik: sadece kendi quiz domaininden gelen mesajları kabul et
+    // Geliştirme sırasında origin kontrolünü gevşetebilirsin
+    if (e.origin !== 'https://azerpashazadeh.github.io') {
+        // Debug için: console.log('postMessage origin:', e.origin);
+        return;
+    }
+
     const d = e.data || {};
-    
-    if (d.action === 'testCompleted' && d.testNumber && d.lang) {
-        console.log(`📩 Quiz'den bildirim: Test ${d.testNumber} (${d.lang}) tamamlandı`);
-        
-        // Supabase'e kaydet
-        const saved = await saveProgressToSupabase(d.testNumber);
-        
-        if (saved) {
-            // localStorage'i güncelle (eski fonksiyon için)
-            markCompleted(d.lang, d.testNumber);
-            
-            // Progress'i yeniden çek
-            await fetchProgressFromSupabase();
-            
-            // Butonları güncelle
-            buildTestButtons();
-        }
-    }
-});
+    if (d.action !== 'testCompleted' || !d.testNumber || !d.lang) return;
 
-// ── Auth state değişikliklerini dinle
-_supabase.auth.onAuthStateChange((event, session) => {
-    console.log('🔄 Auth event:', event);
-    
-    if (event === 'SIGNED_IN') {
-        checkAuth();
-        
-        // URL'deki hash'e göre modal aç
-        if (window.location.hash === '#passenger-car') {
-            setTimeout(() => openPassengerCar(), 300);
-        }
-    } else if (event === 'SIGNED_OUT') {
-        currentUser = null;
-        localStorage.clear();
-    }
-});
+    console.log(`📩 Test ${d.testNumber} (${d.lang}) tamamlandı`);
 
-// ── Sayfa yüklendiğinde auth kontrolü
-window.addEventListener('DOMContentLoaded', () => {
-    checkAuth();
-});
+    // 1. localStorage güncelle (anında UI yansısın)
+    markCompleted(d.lang, d.testNumber);
 
-// ── Dil değiştiğinde progress'i yeniden çek
-const originalApplyLang = applyLang;
-applyLang = async function(lang) {
-    originalApplyLang(lang);
+    // 2. Supabase'e kaydet (giriş yapılmışsa)
     if (currentUser) {
+        await saveProgressToSupabase(d.testNumber, d.lang);
+        await fetchProgressFromSupabase(); // sunucudan teyit al
+    }
+
+    // 3. Butonları yenile
+    buildTestButtons();
+});
+
+/* ── Auth state dinle ── */
+_supabase.auth.onAuthStateChange(async (event, session) => {
+    console.log('🔄 Auth event:', event);
+    if (event === 'SIGNED_IN' && session?.user) {
+        currentUser = session.user;
         await fetchProgressFromSupabase();
         buildTestButtons();
+        updateNavbarUser();
+        closeModal('si');
+        closeModal('su');
+    } else if (event === 'SIGNED_OUT') {
+        currentUser = null;
+        updateNavbarUser();
+        buildTestButtons();
     }
-};
+});
 
-// ── Kullanıcı bilgisi göster (navbar'a eklenebilir)
-function displayUserInfo() {
-    if (!currentUser) return '';
-    const email = currentUser.email || '';
-    return email.split('@')[0]; // sadece kullanıcı adı
-}
+/* ── Sekmeye dönünce progress yenile ── */
+window.addEventListener('focus', () => {
+    if (currentUser) fetchProgressFromSupabase().then(() => buildTestButtons());
+    else buildTestButtons();
+});
 
-
-
-
+/* ── INIT ── */
+window.addEventListener('DOMContentLoaded', async () => {
+    const savedLang = localStorage.getItem('et_lang') || 'en';
+    applyLang(savedLang);
+    await checkAuth(); // auth bittikten sonra UI güncellenir
+});
 </script>
 </body>
 </html>
