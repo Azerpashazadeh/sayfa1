@@ -104,7 +104,7 @@
             display:none; flex-direction:column; gap:5px; cursor:pointer;
             padding:8px; border-radius:10px;
             background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15);
-            flex-shrink:0;
+            flex-shrink:0; z-index:1001;
         }
         .hamburger span {
             display:block; width:20px; height:2px;
@@ -114,9 +114,10 @@
         .hamburger.open span:nth-child(2) { opacity:0; }
         .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
         .mobile-menu {
-            position:fixed; top:96px; left:14px; right:14px;
-            border-radius:18px; z-index:999; padding:18px;
+            position:fixed; top:88px; left:10px; right:10px;
+            border-radius:18px; z-index:999; padding:16px;
             display:none; flex-direction:column; gap:7px;
+            max-height:calc(100vh - 100px); overflow-y:auto;
         }
         .mobile-menu.open { display:flex; }
         .mob-link {
@@ -124,6 +125,7 @@
             background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
             color:rgba(255,255,255,0.85); font-size:14px; font-weight:500;
             cursor:pointer; transition:all .2s; font-family:inherit; text-align:left;
+            width:100%;
         }
         body.ar .mob-link { text-align:right; }
         .mob-link:hover { background:rgba(255,255,255,0.12); color:#fff; }
@@ -134,7 +136,7 @@
             border-radius:11px; padding:9px 6px;
         }
         .mob-auth { display:flex; gap:8px; margin-top:4px; }
-        .mob-auth button { flex:1; padding:12px; font-size:13px; }
+        .mob-auth button { flex:1; padding:12px; font-size:13px; border-radius:12px; }
 
         /* ══ HERO ══ */
         .hero {
@@ -623,15 +625,23 @@
             .nav-center { display:none; }
             .hamburger  { display:flex; }
             .btn-signin,.btn-signup { display:none; }
+            .navbar { overflow:visible; }
         }
         @media(max-width:700px) {
             .stats-grid   { grid-template-columns:repeat(2,1fr); }
             .pricing-grid { grid-template-columns:repeat(2,1fr); }
+            .navbar { 
+                width:calc(100% - 20px); 
+                padding:0 12px; 
+                overflow:visible;
+            }
+            .nav-right { gap:6px; overflow:visible; }
+            .lang-switcher { display:none; }
         }
         @media(max-width:480px) {
             .pricing-grid { grid-template-columns:1fr; max-width:360px; margin:0 auto; }
-            .navbar { padding:0 14px; height:64px; top:8px; }
-            .logo   { font-size:20px; }
+            .navbar { padding:0 12px; height:60px; top:8px; }
+            .logo   { font-size:18px; }
         }
 
         .footer {
@@ -652,6 +662,32 @@
     </style>
 </head>
 <body>
+
+<!-- ═══════════ NOSCRIPT UYARISI ═══════════ -->
+<noscript>
+    <div style="
+        position:fixed; inset:0; z-index:99999;
+        background:rgba(0,8,25,0.97);
+        display:flex; align-items:center; justify-content:center;
+        font-family:'Poppins',sans-serif; text-align:center; padding:30px;
+    ">
+        <div style="max-width:480px;">
+            <div style="font-size:64px; margin-bottom:20px;">⚠️</div>
+            <h2 style="color:#fff; font-size:24px; font-weight:800; margin-bottom:16px;">
+                JavaScript Required
+            </h2>
+            <p style="color:rgba(255,255,255,0.7); font-size:15px; line-height:1.7; margin-bottom:24px;">
+                This site requires JavaScript to work properly. 
+                Please enable JavaScript in your browser settings and refresh the page.
+            </p>
+            <p style="color:rgba(255,255,255,0.4); font-size:13px;">
+                🇹🇷 Bu site JavaScript gerektiriyor. Lütfen tarayıcı ayarlarından JavaScript'i etkinleştirin.<br>
+                🇳🇱 Deze site vereist JavaScript. Schakel JavaScript in via uw browserinstellingen.<br>
+                🇸🇦 يتطلب هذا الموقع JavaScript. يرجى تفعيله من إعدادات المتصفح.
+            </p>
+        </div>
+    </div>
+</noscript>
 
 <!-- ═══════════ NAVBAR ═══════════ -->
 <nav class="navbar glass" id="navbar">
@@ -690,6 +726,10 @@
         <span class="lang-opt"        data-lang="tr">TR</span>
         <span class="lang-opt"        data-lang="nl">NL</span>
         <span class="lang-opt"        data-lang="ar">AR</span>
+    </div>
+    <!-- Giriş yapılmışsa kullanıcı adı göster -->
+    <div id="mobUserInfo" style="display:none; padding:10px 14px; border-radius:12px; background:rgba(0,212,255,0.1); border:1px solid rgba(0,212,255,0.2); color:var(--cyan); font-size:13px; font-weight:600;">
+        👤 <span id="mobUserName"></span>
     </div>
     <button class="mob-link" data-i18n="nav_car"    onclick="openPassengerCar();closeMob()">🚗 Passenger Car</button>
     <button class="mob-link" data-i18n="nav_prices" onclick="openPricing();closeMob()">💰 Package Prices</button>
@@ -1595,30 +1635,52 @@ let accessibleGroups = [];       // Kullanıcının erişebildiği grup id'leri:
 
 /* ─── NAVBAR GÜNCELLE ─── */
 function updateNavbarUser() {
-    const chip      = document.getElementById('userChip');
-    const nameSpan  = document.getElementById('userName');
-    const signinBtn = document.getElementById('signinBtn');
-    const signupBtn = document.getElementById('signupBtn');
-    const mobSignin = document.getElementById('mobSigninBtn');
-    const mobSignup = document.getElementById('mobSignupBtn');
+    const chip         = document.getElementById('userChip');
+    const nameSpan     = document.getElementById('userName');
+    const signinBtn    = document.getElementById('signinBtn');
+    const signupBtn    = document.getElementById('signupBtn');
+    const mobSignin    = document.getElementById('mobSigninBtn');
+    const mobSignup    = document.getElementById('mobSignupBtn');
+    const mobUserInfo  = document.getElementById('mobUserInfo');
+    const mobUserName  = document.getElementById('mobUserName');
 
     if (currentUser) {
         const name = (currentUser.user_metadata?.full_name || currentUser.email || '').split('@')[0];
+
+        // Desktop
         nameSpan.textContent = name;
         chip.classList.add('visible');
         signinBtn.textContent = I18N[currentLang]?.nav_signout || 'Sign Out';
         signinBtn.onclick = signOut;
         if (signupBtn) signupBtn.style.display = 'none';
-        if (mobSignin) { mobSignin.textContent = I18N[currentLang]?.nav_signout || 'Sign Out'; mobSignin.onclick = signOut; }
-        if (mobSignup) mobSignup.style.display = 'none';
+
+        // Mobil — kullanıcı adı göster, Sign In/Up gizle
+        if (mobUserInfo) { mobUserInfo.style.display = 'block'; }
+        if (mobUserName) { mobUserName.textContent = name; }
+        if (mobSignin)   { 
+            mobSignin.textContent = I18N[currentLang]?.nav_signout || 'Sign Out'; 
+            mobSignin.onclick = () => { signOut(); closeMob(); };
+            mobSignin.style.display = '';
+        }
+        if (mobSignup)   { mobSignup.style.display = 'none'; }
+
     } else {
+        // Desktop
         chip.classList.remove('visible');
         nameSpan.textContent = '';
         signinBtn.textContent = I18N[currentLang]?.nav_signin || 'Sign In';
         signinBtn.onclick = () => openModal('si');
         if (signupBtn) signupBtn.style.display = '';
-        if (mobSignin) { mobSignin.textContent = I18N[currentLang]?.nav_signin || 'Sign In'; mobSignin.onclick = () => { openModal('si'); closeMob(); }; }
-        if (mobSignup) mobSignup.style.display = '';
+
+        // Mobil
+        if (mobUserInfo) { mobUserInfo.style.display = 'none'; }
+        if (mobUserName) { mobUserName.textContent = ''; }
+        if (mobSignin)   { 
+            mobSignin.textContent = I18N[currentLang]?.nav_signin || 'Sign In'; 
+            mobSignin.onclick = () => { openModal('si'); closeMob(); };
+            mobSignin.style.display = '';
+        }
+        if (mobSignup)   { mobSignup.style.display = ''; }
     }
 }
 
@@ -1777,11 +1839,39 @@ function openTest(testNum) {
     window.open(`${QUIZ_BASE}/test-${testNum}-${lang}.html`, '_blank');
 }
 
-/* ─── TEORİ LİNKİ AÇ — ERİŞİM KONTROLLÜ ─── */
+/* ─── TEORİ LİNKİ AÇ — DİL + ERİŞİM KONTROLLÜ ─── */
 function openTheoryLink(url) {
     if (!currentUser) { openModal('si'); return; }
     if (!canAccess('theory')) { showPaywall('theory'); return; }
-    window.open(url, '_blank');
+
+    // Dile göre URL'yi dinamik olarak güncelle
+    // EN: /ingilizce-teori/code-of-conduct-1-1.html
+    // TR: /ingilizce-teori/tr-code-of-conduct-1-1.html
+    // NL: /ingilizce-teori/nl-code-of-conduct-1-1.html
+    // AR: /ingilizce-teori/ar-code-of-conduct-1-1.html
+    const lang = currentLang || 'en';
+    let finalUrl = url;
+
+    if (lang !== 'en') {
+        // URL'den dosya adını al ve önüne dil kodu ekle
+        finalUrl = url.replace(
+            /\/ingilizce-teori\/((?:tr-|nl-|ar-)?.+\.html)$/,
+            `/ingilizce-teori/${lang}-$1`
+        );
+        // Eğer zaten bir dil öneki varsa temizle, doğrusunu ekle
+        finalUrl = url.replace(
+            /\/ingilizce-teori\/((?:tr-|nl-|ar-)?)(.+\.html)$/,
+            `/ingilizce-teori/${lang}-$2`
+        );
+    } else {
+        // İngilizce için dil önekini kaldır (varsa)
+        finalUrl = url.replace(
+            /\/ingilizce-teori\/(?:tr-|nl-|ar-)(.+\.html)$/,
+            '/ingilizce-teori/$1'
+        );
+    }
+
+    window.open(finalUrl, '_blank');
 }
 
 /* ─── PAYWALL ─── */
