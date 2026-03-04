@@ -1,7 +1,7 @@
 name: HTML Link Guncelleyici
 
 on:
-  workflow_dispatch: # Bu sayede sen "Run workflow" butonuna basınca çalışır.
+  workflow_dispatch:
 
 jobs:
   update-links:
@@ -19,60 +19,38 @@ jobs:
 
       - name: Linkleri Guncelle
         run: |
+          python -c "
           import os
           import re
 
-          base_url = "https://azerpashazadeh.github.io/sorularveresimler"
-          
-          # Dil haritalama
-          dil_map = {
-              'en': 'englishjsons',
-              'tr': 'turkishjsons',
-              'nl': 'dutchjsons',
-              'ar': 'arabicjsons'
-          }
-
-          # Soru tipleri sirasiyla
+          base_url = 'https://azerpashazadeh.github.io/sorularveresimler'
+          dil_map = {'en': 'englishjsons', 'tr': 'turkishjsons', 'nl': 'dutchjsons', 'ar': 'arabicjsons'}
           tipler = ['radio', 'fillblank', 'checkbox', 'resimsech', 'dragdrop']
 
-          # Dosya tarama
           for filename in os.listdir('.'):
-              # Sadece test-X-dil.html formatindaki dosyalari bul
-              match = re.match(r"test-(\d+)-(en|tr|nl|ar)\.html", filename)
+              match = re.match(r'test-(\d+)-(en|tr|nl|ar)\.html', filename)
               if match:
                   test_no = int(match.group(1))
                   dil_kodu = match.group(2)
                   
-                  # Sadece test-7 ve sonrasini guncelle
                   if test_no >= 7:
-                      print(f"Guncelleniyor: {filename}")
-                      
+                      print(f'Guncelleniyor: {filename}')
                       with open(filename, 'r', encoding='utf-8') as f:
                           content = f.read()
 
                       klasor = dil_map[dil_kodu]
                       
-                      # loadQuizS3 fonksiyonu icindeki fetch linklerini bul
-                      # Bu regex fonksiyonun icindeki linkleri yakalar
-                      def replacement(m):
-                          # Fonksiyonun baslangicini koru
-                          new_func = "async function loadQuizS3() {"
-                          # 5 adet linki olustur
-                          for i, tip in enumerate(tipler):
-                              new_link = f"{base_url}/test{test_no}/{klasor}/test{test_no}-{tip}{dil_kodu}.json"
-                              # t1, t2... degisken isimlerini ve formatini koruyarak linki degistir
-                              line_pattern = rf"const t{i+1}Questions = await fetchQuestionsS3\(\s*\"[^\"]*\""
-                              new_line = f"\n        const t{i+1}Questions = await fetchQuestionsS3(\n          \"{new_link}\""
-                              new_func += new_line + "," # Virgulu ve sonrasini korumak icin
-                          return new_func
-
-                      # Sadece ilgili fonksiyon blogunu hedef al
-                      updated_content = re.sub(r"async function loadQuizS3\(\) \{[\s\S]*?const t5Questions = await fetchQuestionsS3\(\s*\"[^\"]*\"", replacement, content)
+                      # 5 linki sirayla degistiren mantik
+                      for i, tip in enumerate(tipler):
+                          new_link = f'{base_url}/test{test_no}/{klasor}/test{test_no}-{tip}{dil_kodu}.json'
+                          # fetchQuestionsS3 icindeki eski linki yakalayan regex (en genis haliyle)
+                          pattern = r'(const t' + str(i+1) + r'Questions\s*=\s*await\s*fetchQuestionsS3\(\s*\")[^\"]+(\",\s*\d+\s*,?\s*\);)'
+                          replacement = r'\1' + new_link + r'\2'
+                          content = re.sub(pattern, replacement, content)
 
                       with open(filename, 'w', encoding='utf-8') as f:
-                          f.write(updated_content)
-
-          shell: python
+                          f.write(content)
+          "
 
       - name: Degisiklikleri Commit Et ve Pushla
         run: |
