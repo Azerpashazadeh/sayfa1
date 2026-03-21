@@ -44,9 +44,19 @@
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
-            background: url('https://azerpashazadeh.github.io/sorularveresimler/2151021132.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background: none;
             color: white;
+        }
+
+        /* Background image — fixed pseudo-element mobilde scroll bug'ını önler */
+        html::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url('https://azerpashazadeh.github.io/sorularveresimler/2151021132.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -2;
+            will-change: transform;
         }
 
         body.ar {
@@ -59,7 +69,7 @@
             position: fixed;
             inset: 0;
             background: rgba(0, 8, 25, 0.55);
-            z-index: 0;
+            z-index: -1;
         }
 
         .glass {
@@ -4241,7 +4251,7 @@
         }
     </script>
 
-   
+    
 </body>
 
 </html>
