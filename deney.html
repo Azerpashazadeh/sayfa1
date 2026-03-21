@@ -2115,7 +2115,7 @@
             <h1 class="hero-title" data-i18n="hero_title"></h1>
             <p class="hero-slogan" data-i18n-html="hero_slogan"></p>
             <div class="hero-cta">
-                <button class="btn-hero-p" data-i18n="btn_start"></button>
+                <button class="btn-hero-p" data-i18n="btn_start" onclick="openDenemeTest()"></button>
                 <button class="btn-hero-s" data-i18n="btn_prices" onclick="openPricing()"></button>
             </div>
         </div>
@@ -3086,7 +3086,7 @@
                 badge: "Netherlands Driving Theory",
                 hero_title: "LEARN DUTCH CBR THEORY",
                 hero_slogan: 'WITH <strong>REAL PRACTICE TESTS</strong> and get fully prepared for the <strong>CBR exam.</strong>',
-                btn_start: "Start Free Today", btn_prices: "View Prices",
+                btn_start: "Try Free Test", btn_prices: "View Prices",
                 s1: "Active Students", s2: "Pass Rate", s3: "CBR Exam Tests", s4: "Languages",
                 feat_head: "Why Choose ExamTheorie?",
                 f1t: "Real CBR Exam Tests", f1d: "Practice with 50+ real CBR exam questions updated for 2026.",
@@ -3193,7 +3193,7 @@
                 badge: "Hollanda Ehliyet Teorisi",
                 hero_title: "HOLLANDA CBR TEORİSİ",
                 hero_slogan: '<strong>GERÇEK SORULARLA</strong> çalış, <strong>CBR sınavına</strong> hazır gir.',
-                btn_start: "Ücretsiz Başla", btn_prices: "Fiyatları Gör",
+                btn_start: "Ücretsiz Deneme Testi", btn_prices: "Fiyatları Gör",
                 s1: "Aktif Öğrenci", s2: "Geçiş Oranı", s3: "CBR Sınav Sorusu", s4: "Dil",
                 feat_head: "Neden ExamTheorie?",
                 f1t: "Gerçek CBR Soruları", f1d: "2026 güncel 50+ CBR sınav sorusuyla pratik yap.",
@@ -3293,7 +3293,7 @@
                 badge: "Nederlandse Rijtheorie",
                 hero_title: "LEER NEDERLANDSE CBR THEORIE",
                 hero_slogan: 'Met <strong>ECHTE OEFENTOETSEN</strong> en wees volledig voorbereid op het <strong>CBR examen.</strong>',
-                btn_start: "Begin Gratis", btn_prices: "Bekijk Prijzen",
+                btn_start: "Gratis Oefentest", btn_prices: "Bekijk Prijzen",
                 s1: "Actieve Studenten", s2: "Slagingspercentage", s3: "CBR Examenvragen", s4: "Talen",
                 feat_head: "Waarom ExamTheorie?",
                 f1t: "Echte CBR Examenvragen", f1d: "Oefen met 50+ echte CBR-examenvragen bijgewerkt voor 2026.",
@@ -3394,7 +3394,7 @@
                 badge: "نظرية القيادة الهولندية",
                 hero_title: "تعلَّم نظرية CBR الهولندية",
                 hero_slogan: 'مع <strong>اختبارات تدريبية حقيقية</strong> واستعد تماماً لـ <strong>اختبار CBR.</strong>',
-                btn_start: "ابدأ مجاناً", btn_prices: "عرض الأسعار",
+                btn_start: "اختبار تجريبي مجاني", btn_prices: "عرض الأسعار",
                 s1: "طالب نشط", s2: "معدل النجاح", s3: "أسئلة CBR", s4: "لغات",
                 feat_head: "لماذا ExamTheorie؟",
                 f1t: "أسئلة CBR الحقيقية", f1d: "تدرّب على أكثر من 50 سؤال CBR حقيقي محدّث لعام 2026.",
@@ -3493,6 +3493,11 @@
         /* ─── TEST PROGRESS ─── */
         const TOTAL_TESTS = 50;
         const QUIZ_BASE = 'https://examtheorie.nl';
+
+        function openDenemeTest() {
+            const lang = currentLang || 'en';
+            window.open(`${QUIZ_BASE}/deneme-${lang}.html`, '_blank');
+        }
 
         function lsKey(lang) { return `et_completed_${lang}`; }
         function getCompleted(lang) { return JSON.parse(localStorage.getItem(lsKey(lang)) || '[]'); }
