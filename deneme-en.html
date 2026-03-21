@@ -15,6 +15,24 @@
     })();
   </script>
   <style>
+
+    /* Fixed bottom overlay - always aligned with button container */
+    #bottom-overlay {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background-color: #085dc4;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      #bottom-overlay {
+        height: 11.75vh;
+      }
+    }
     /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
     /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
     /*Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat Müveqqeti kordinat */
@@ -162,8 +180,6 @@
       box-shadow:
         inset 0 60px 0 0 #085dc4,
         /* Üst kenar için 50px kalınlık */
-        inset 0 -60px 0 0 #085dc4,
-        /* Alt kenar için 60px kalınlık */
         inset 50px 0 0 0 #085dc4,
         /* Sol kenar için 10px kalınlık */
         inset -50px 0 0 0 #085dc4;
@@ -180,10 +196,8 @@
           /* Üst kenar */
           inset 5px 0 0 0 #085dc4,
           /* Sol kenar */
-          inset -5px 0 0 0 #085dc4,
-          /* Sağ kenar */
-          inset 0 calc(-11.75vh) 0 0 #085dc4;
-        /* Alt kenar */
+          inset -5px 0 0 0 #085dc4;
+        /* Sağ kenar */
       }
     }
 
@@ -199,8 +213,6 @@
       box-shadow:
         inset 0 10px 0 0 #085dc4,
         /* Üst kenar 5px */
-        inset 0 -60px 0 0 #085dc4,
-        /* Alt kenar */
         inset 50px 0 0 0 #085dc4,
         /* Sol kenar */
         inset -50px 0 0 0 #085dc4;
@@ -213,8 +225,6 @@
         box-shadow:
           inset 0 10px 0 0 #085dc4,
           /* Üst kenar 5px */
-          inset 0 calc(-11.75vh) 0 0 #085dc4,
-          /* Alt kenar */
           inset 5px 0 0 0 #085dc4,
           /* Sol kenar */
           inset -5px 0 0 0 #085dc4;
@@ -2853,6 +2863,7 @@
 
 <body>
   <div class="overlay"></div>
+  <div id="bottom-overlay"></div>
 
   <!-- Fullscreen Toggle Button -->
   <button class="js-toggle-fullscreen-btn toggle-fullscreen-btn" aria-label="Enter fullscreen mode" hidden>
@@ -6769,6 +6780,7 @@
       }
     }
   </script>
+<script src="https://examtheorie.nl/auth-guard.js"></script>
 </body>
 
 </html>
