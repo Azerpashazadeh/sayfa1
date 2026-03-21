@@ -36,27 +36,36 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
         html {
             scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-            background: none;
             color: white;
         }
 
-        /* Background image — fixed pseudo-element mobilde scroll bug'ını önler */
-        html::before {
-            content: '';
+        /* Arka plan: fixed div — iOS Safari scroll bug'ını önler */
+        #bg-layer {
             position: fixed;
             inset: 0;
+            z-index: -2;
             background: url('https://azerpashazadeh.github.io/sorularveresimler/2151021132.jpg') no-repeat center center;
             background-size: cover;
-            z-index: -2;
-            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        /* Scroll artık body'de değil bu div'de oluyor */
+        #scroll-container {
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
         }
 
         body.ar {
@@ -70,6 +79,7 @@
             inset: 0;
             background: rgba(0, 8, 25, 0.55);
             z-index: -1;
+            pointer-events: none;
         }
 
         .glass {
@@ -2023,6 +2033,11 @@
 
 <body>
 
+    <!-- Sabit arka plan katmanı — iOS scroll bug fix -->
+    <div id="bg-layer"></div>
+
+    <div id="scroll-container">
+
     <noscript>
         <div
             style="position:fixed;inset:0;z-index:99999;background:rgba(0,8,25,0.97);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;text-align:center;padding:30px;">
@@ -3634,7 +3649,13 @@
             const mob = document.getElementById('mob-menu');
             if (!nav.contains(e.target) && !mob.contains(e.target)) closeMob();
         });
-        function scrollToSec(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
+        function scrollToSec(id) {
+            const el = document.getElementById(id);
+            const container = document.getElementById('scroll-container');
+            if (!el || !container) return;
+            const elTop = el.getBoundingClientRect().top + container.scrollTop - container.getBoundingClientRect().top;
+            container.scrollTo({ top: elTop, behavior: 'smooth' });
+        }
 
         /* ESC tuşu — reset banner kapatma eklendi */
         document.addEventListener('keydown', e => {
@@ -4251,7 +4272,8 @@
         }
     </script>
 
-    
+        </div><!-- /#scroll-container -->
+
 </body>
 
 </html>
