@@ -53,7 +53,7 @@
         /* lvh fallback: eski Safari için */
         @supports not (height: 100lvh) {
             #bg-layer, .pc-overlay-bg, body::before,
-            .pricing-overlay, .pc-overlay, .pc-scroll,
+            .pricing-overlay, .pc-overlay,
             .modal-bg, .reset-banner-overlay {
                 height: 100vh;
             }
@@ -1049,15 +1049,14 @@
 
         /* ══ PASSENGER CAR OVERLAY ══ */
         .pc-overlay {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100lvh;
+            min-height: 100%;
             z-index: 2000;
             display: none;
             flex-direction: column;
-            overflow: hidden;
         }
 
         /* Arka plan: fixed — iOS titreme önlemi */
@@ -1081,14 +1080,12 @@
             background: rgba(0, 8, 25, 0.65);
         }
 
-        /* Scroll iç div'de — iOS Safari toolbar bug önlenir */
+        /* pc-scroll: içeriği saran wrapper, scroll body'de */
         .pc-scroll {
             position: relative;
             z-index: 1;
-            height: 100lvh;
-            overflow-y: auto;
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
+            min-height: 100%;
+            width: 100%;
         }
 
         .pc-overlay.active {
@@ -1096,9 +1093,11 @@
         }
 
         .pc-close {
-            position: fixed;
-            top: 22px;
-            right: 26px;
+            position: sticky;
+            top: 16px;
+            align-self: flex-end;
+            margin-right: 16px;
+            margin-top: 16px;
             font-size: 28px;
             color: white;
             cursor: pointer;
@@ -1131,7 +1130,7 @@
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 100px 24px 80px;
+            padding: 100px 24px 120px;
         }
 
         .pc-header {
@@ -3741,8 +3740,18 @@
             }
         }
 
-        function openPassengerCar() { document.getElementById('pc-ol').classList.add('active'); document.body.style.overflow = 'hidden'; buildTestButtons(); }
-        function closePassengerCar() { document.getElementById('pc-ol').classList.remove('active'); document.body.style.overflow = ''; }
+        function openPassengerCar() {
+            const ol = document.getElementById('pc-ol');
+            ol.classList.add('active');
+            // body scroll sıfırla — toolbar gizlenebilsin
+            window.scrollTo(0, 0);
+            document.body.style.overflow = '';
+            buildTestButtons();
+        }
+        function closePassengerCar() {
+            document.getElementById('pc-ol').classList.remove('active');
+            window.scrollTo(0, 0);
+        }
         function openModal(id) { if (id === 'refer') { alert('Refer Friends feature coming soon!'); return; } document.getElementById(id + '-modal').classList.add('active'); document.body.style.overflow = 'hidden'; }
         function closeModal(id) { document.getElementById(id + '-modal').classList.remove('active'); document.body.style.overflow = ''; }
         function switchModal(a, b) { closeModal(a); setTimeout(() => openModal(b), 100); }
