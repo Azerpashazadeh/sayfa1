@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "vz9ccypxk4");
+    </script>
+
     <title>ExamTheorie — CBR Theory</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&family=Noto+Sans+Arabic:wght@300;400;600;700;900&display=swap"
@@ -1276,7 +1285,8 @@
         .acc-header {
             width: 100%;
             padding: 0 20px;
-            height: 66px;
+            min-height: 66px;
+            height: auto;
             display: flex;
             align-items: center;
             gap: 14px;
@@ -1285,8 +1295,8 @@
             background: transparent;
             color: white;
             font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 12.5px;
+            font-weight: 400;
             text-align: left;
             transition: background .25s;
         }
@@ -1315,6 +1325,12 @@
 
         .acc-label {
             flex: 1;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            line-height: 1.4;
+            padding: 10px 0;
         }
 
         .acc-arrow {
@@ -1990,6 +2006,26 @@
             }
         }
 
+        .terms-consent-text {
+            font-size: 10.5px;
+            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.5;
+            margin: 8px 0 0 0;
+            text-align: center;
+            display: block;
+        }
+
+        .terms-consent-text a {
+            color: rgba(255, 255, 255, 0.38);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color .2s;
+        }
+
+        .terms-consent-text a:hover {
+            color: rgba(255, 255, 255, 0.65);
+        }
+
         .footer {
             position: relative;
             z-index: 1;
@@ -2021,14 +2057,6 @@
             display: flex;
         }
     </style>
-<!-- Microsoft Clarity -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "vz9ccypxk4");
-</script>
 </head>
 
 <body>
@@ -2236,6 +2264,7 @@
                 <button class="btn-daily-buy" id="btnDailyBuy" data-i18n="daily_btn"
                     onclick="startDailyPayment(event)">Buy Now</button>
             </div>
+            <p class="terms-consent-text" data-i18n-html="terms_consent"></p>
         </div>
         <div class="daily-divider">
             <span class="daily-divider-text" data-i18n="daily_or">— or choose a standard package —</span>
@@ -2251,6 +2280,7 @@
                         onclick="startPayment(1,'Basic','14.99')">Buy now</button>
                     <div class="ideal">iD</div>
                 </div>
+                <p class="terms-consent-text" data-i18n-html="terms_consent"></p>
                 <div class="p-divider"></div>
                 <ul class="p-features">
                     <li data-i18n="pf_1"></li>
@@ -2272,6 +2302,7 @@
                         onclick="startPayment(2,'Premium','24.99')">Buy now</button>
                     <div class="ideal">iD</div>
                 </div>
+                <p class="terms-consent-text" data-i18n-html="terms_consent"></p>
                 <div class="p-divider"></div>
                 <ul class="p-features">
                     <li data-i18n="pf_1"></li>
@@ -2292,6 +2323,7 @@
                         now</button>
                     <div class="ideal">iD</div>
                 </div>
+                <p class="terms-consent-text" data-i18n-html="terms_consent"></p>
                 <div class="p-divider"></div>
                 <ul class="p-features">
                     <li data-i18n="pf_1"></li>
@@ -2312,6 +2344,7 @@
                         onclick="startPayment(4,'Ultimate','58.99')">Buy now</button>
                     <div class="ideal">iD</div>
                 </div>
+                <p class="terms-consent-text" data-i18n-html="terms_consent"></p>
                 <div class="p-divider"></div>
                 <ul class="p-features">
                     <li data-i18n="pf_1"></li>
@@ -2346,51 +2379,51 @@
                             <div class="acc-body">
                                 <div class="acc-grid">
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/code-of-conduct-1-1.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/code-of-conduct-1-1.html`);return false;"><span
                                             class="cell-num">1.1</span><span class="cell-label" data-i18n="a1_1">Code of
                                             conduct</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/driving-under-the-influence-1-2.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/driving-under-the-influence-1-2.html`);return false;"><span
                                             class="cell-num">1.2</span><span class="cell-label" data-i18n="a1_2">Driving
                                             under the influence</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/driving-skills-and-fitness-1-3.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/driving-skills-and-fitness-1-3.html`);return false;"><span
                                             class="cell-num">1.3</span><span class="cell-label" data-i18n="a1_3">Driving
                                             skills and fitness</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/vehicle-requirements-1-4.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/vehicle-requirements-1-4.html`);return false;"><span
                                             class="cell-num">1.4</span><span class="cell-label" data-i18n="a1_4">Vehicle
                                             requirements</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/registration-requirement-1-5.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/registration-requirement-1-5.html`);return false;"><span
                                             class="cell-num">1.5</span><span class="cell-label"
                                             data-i18n="a1_5">Registration requirement</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/periodic-general-inspection-1-6.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/periodic-general-inspection-1-6.html`);return false;"><span
                                             class="cell-num">1.6</span><span class="cell-label"
                                             data-i18n="a1_6">Periodic general inspection</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/motor-carriage-mandatory-insurance-1-7.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/motor-carriage-mandatory-insurance-1-7.html`);return false;"><span
                                             class="cell-num">1.7</span><span class="cell-label"
                                             data-i18n="a1_7">Mandatory insurance</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/driving-licence-requirement-1-8.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/driving-licence-requirement-1-8.html`);return false;"><span
                                             class="cell-num">1.8</span><span class="cell-label" data-i18n="a1_8">Driving
                                             licence requirement</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/driving-licence-validity-1-9.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/driving-licence-validity-1-9.html`);return false;"><span
                                             class="cell-num">1.9</span><span class="cell-label" data-i18n="a1_9">Driving
                                             licence validity</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/2-to-drive-scheme-1-10.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/2-to-drive-scheme-1-10.html`);return false;"><span
                                             class="cell-num">1.10</span><span class="cell-label"
                                             data-i18n="a1_10">2toDrive scheme</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/scope-of-driving-licence-b-1-11.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/scope-of-driving-licence-b-1-11.html`);return false;"><span
                                             class="cell-num">1.11</span><span class="cell-label" data-i18n="a1_11">Scope
                                             of driving licence B</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/how-does-the-final-test-work-1-12.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/how-does-the-final-test-work-1-12.html`);return false;"><span
                                             class="cell-num">1.12</span><span class="cell-label" data-i18n="a1_12">How
                                             does the final test work?</span></a>
                                 </div>
@@ -2405,35 +2438,35 @@
                             <div class="acc-body">
                                 <div class="acc-grid">
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/vehicle-requirements-2-1.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/vehicle-requirements-2-1.html`);return false;"><span
                                             class="cell-num">2.1</span><span class="cell-label" data-i18n="a2_1">Vehicle
                                             requirements</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/general-requirements-part-1-2-2.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/general-requirements-part-1-2-2.html`);return false;"><span
                                             class="cell-num">2.2</span><span class="cell-label" data-i18n="a2_2">General
                                             requirements – part 1</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/general-requirements-part-2-2-3.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/general-requirements-part-2-2-3.html`);return false;"><span
                                             class="cell-num">2.3</span><span class="cell-label" data-i18n="a2_3">General
                                             requirements – part 2</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/general-requirements-part-3-2-4.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/general-requirements-part-3-2-4.html`);return false;"><span
                                             class="cell-num">2.4</span><span class="cell-label" data-i18n="a2_4">General
                                             requirements – part 3</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/general-requirements-part-4-2-5.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/general-requirements-part-4-2-5.html`);return false;"><span
                                             class="cell-num">2.5</span><span class="cell-label" data-i18n="a2_5">General
                                             requirements – part 4</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/use-requirements-2-6.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/use-requirements-2-6.html`);return false;"><span
                                             class="cell-num">2.6</span><span class="cell-label" data-i18n="a2_6">Use
                                             requirements</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/permanent-requirements-for-trailers-2-7.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/permanent-requirements-for-trailers-2-7.html`);return false;"><span
                                             class="cell-num">2.7</span><span class="cell-label"
                                             data-i18n="a2_7">Permanent requirements for trailers</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/trailer-use-requirements-2-8.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/trailer-use-requirements-2-8.html`);return false;"><span
                                             class="cell-num">2.8</span><span class="cell-label" data-i18n="a2_8">Trailer
                                             use requirements</span></a>
                                 </div>
@@ -2448,39 +2481,39 @@
                             <div class="acc-body">
                                 <div class="acc-grid">
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/road-users-3-1.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/road-users-3-1.html`);return false;"><span
                                             class="cell-num">3.1</span><span class="cell-label" data-i18n="a3_1">Road
                                             users</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/roads-section-3-2.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/roads-section-3-2.html`);return false;"><span
                                             class="cell-num">3.2</span><span class="cell-label" data-i18n="a3_2">Road
                                             sections</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/overtaking-3-3.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/overtaking-3-3.html`);return false;"><span
                                             class="cell-num">3.3</span><span class="cell-label"
                                             data-i18n="a3_3">Overtaking</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/ai-jac-3-4.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/ai-jac-3-4.html`);return false;"><span
                                             class="cell-num">3.4</span><span class="cell-label"
                                             data-i18n="a3_4">Approaching intersections</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/pre-sorting-aiwt-3-5.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/pre-sorting-aiwt-3-5.html`);return false;"><span
                                             class="cell-num">3.5</span><span class="cell-label"
                                             data-i18n="a3_5">Pre-sorting and indicating</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/speed-limits-3-6.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/speed-limits-3-6.html`);return false;"><span
                                             class="cell-num">3.6</span><span class="cell-label" data-i18n="a3_6">Speed
                                             limits</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/stopping-and-parking-part1-3-7.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/stopping-and-parking-part1-3-7.html`);return false;"><span
                                             class="cell-num">3.7</span><span class="cell-label"
                                             data-i18n="a3_7">Stopping and parking – part 1</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/stopping-and-parking-part-2-3-8.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/stopping-and-parking-part-2-3-8.html`);return false;"><span
                                             class="cell-num">3.8</span><span class="cell-label"
                                             data-i18n="a3_8">Stopping and parking – part 2</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/driving-with-a-trailer-3-9.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/driving-with-a-trailer-3-9.html`);return false;"><span
                                             class="cell-num">3.9</span><span class="cell-label" data-i18n="a3_9">Driving
                                             with a trailer</span></a>
                                 </div>
@@ -2495,15 +2528,15 @@
                             <div class="acc-body">
                                 <div class="acc-grid">
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/driving-behaviour-at-intersections-4-1.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/driving-behaviour-at-intersections-4-1.html`);return false;"><span
                                             class="cell-num">4.1</span><span class="cell-label" data-i18n="a4_1">Driving
                                             behaviour at intersections</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/turning-off-4-2.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/turning-off-4-2.html`);return false;"><span
                                             class="cell-num">4.2</span><span class="cell-label" data-i18n="a4_2">Turning
                                             off</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/vulnerable-road-users-4-3.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/vulnerable-road-users-4-3.html`);return false;"><span
                                             class="cell-num">4.3</span><span class="cell-label"
                                             data-i18n="a4_3">Vulnerable road users</span></a>
                                 </div>
@@ -2518,27 +2551,27 @@
                             <div class="acc-body">
                                 <div class="acc-grid">
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/special-roads-5-1.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/special-roads-5-1.html`);return false;"><span
                                             class="cell-num">5.1</span><span class="cell-label" data-i18n="a5_1">Special
                                             roads</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/roundabouts-5-2.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/roundabouts-5-2.html`);return false;"><span
                                             class="cell-num">5.2</span><span class="cell-label"
                                             data-i18n="a5_2">Roundabouts</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/special-manoeuvres-5-3.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/special-manoeuvres-5-3.html`);return false;"><span
                                             class="cell-num">5.3</span><span class="cell-label" data-i18n="a5_3">Special
                                             manoeuvres</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/special-vehicles-part-1-5-4.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/special-vehicles-part-1-5-4.html`);return false;"><span
                                             class="cell-num">5.4</span><span class="cell-label" data-i18n="a5_4">Special
                                             vehicles – part 1</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/special-vehicles-part-2-5-5.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/special-vehicles-part-2-5-5.html`);return false;"><span
                                             class="cell-num">5.5</span><span class="cell-label" data-i18n="a5_5">Special
                                             vehicles – part 2</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/special-vehicles-part-3-5-6.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/special-vehicles-part-3-5-6.html`);return false;"><span
                                             class="cell-num">5.6</span><span class="cell-label" data-i18n="a5_6">Special
                                             vehicles – part 3</span></a>
                                 </div>
@@ -2553,35 +2586,35 @@
                             <div class="acc-body">
                                 <div class="acc-grid">
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/communication-in-traffic-6-1.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/communication-in-traffic-6-1.html`);return false;"><span
                                             class="cell-num">6.1</span><span class="cell-label"
                                             data-i18n="a6_1">Communication in traffic</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/use-of-lighting-while-driving-6-2.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/use-of-lighting-while-driving-6-2.html`);return false;"><span
                                             class="cell-num">6.2</span><span class="cell-label" data-i18n="a6_2">Use of
                                             lighting while driving</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/use-of-lighting-when-stopped-6-3.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/use-of-lighting-when-stopped-6-3.html`);return false;"><span
                                             class="cell-num">6.3</span><span class="cell-label" data-i18n="a6_3">Use of
                                             lighting when stopped</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/safe-transport-6-4.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/safe-transport-6-4.html`);return false;"><span
                                             class="cell-num">6.4</span><span class="cell-label" data-i18n="a6_4">Safe
                                             transport</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/the-use-of-mobile-6-5.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/the-use-of-mobile-6-5.html`);return false;"><span
                                             class="cell-num">6.5</span><span class="cell-label" data-i18n="a6_5">Use of
                                             mobile devices</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/dealing-with-6-6.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/dealing-with-6-6.html`);return false;"><span
                                             class="cell-num">6.6</span><span class="cell-label"
                                             data-i18n="a6_6">Accidents and breakdowns</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/towing-vehicles-6-7.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/towing-vehicles-6-7.html`);return false;"><span
                                             class="cell-num">6.7</span><span class="cell-label" data-i18n="a6_7">Towing
                                             vehicles</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/driving-through-tunnels-6-8.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/driving-through-tunnels-6-8.html`);return false;"><span
                                             class="cell-num">6.8</span><span class="cell-label" data-i18n="a6_8">Driving
                                             through tunnels</span></a>
                                 </div>
@@ -2596,83 +2629,83 @@
                             <div class="acc-body">
                                 <div class="acc-grid">
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/traffic-signage-7-1.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/traffic-signage-7-1.html`);return false;"><span
                                             class="cell-num">7.1</span><span class="cell-label" data-i18n="a7_1">Traffic
                                             signage</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/use-of-traffic-signs-7-2.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/use-of-traffic-signs-7-2.html`);return false;"><span
                                             class="cell-num">7.2</span><span class="cell-label" data-i18n="a7_2">Use of
                                             traffic signs</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/traffic-lights-7-3.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/traffic-lights-7-3.html`);return false;"><span
                                             class="cell-num">7.3</span><span class="cell-label" data-i18n="a7_3">Traffic
                                             lights</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/road-surface-markings-7-4.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/road-surface-markings-7-4.html`);return false;"><span
                                             class="cell-num">7.4</span><span class="cell-label" data-i18n="a7_4">Road
                                             surface markings</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/following-directives-7-5.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/following-directives-7-5.html`);return false;"><span
                                             class="cell-num">7.5</span><span class="cell-label"
                                             data-i18n="a7_5">Following directives</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/traffic-signs-7-6.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/traffic-signs-7-6.html`);return false;"><span
                                             class="cell-num">7.6</span><span class="cell-label" data-i18n="a7_6">Traffic
                                             signs</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/meaning-per-category-a-7-7.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/meaning-per-category-a-7-7.html`);return false;"><span
                                             class="cell-num">7.7</span><span class="cell-label"
                                             data-i18n="a7_7">Category A</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/meaning-per-category-b-7-8.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/meaning-per-category-b-7-8.html`);return false;"><span
                                             class="cell-num">7.8</span><span class="cell-label"
                                             data-i18n="a7_8">Category B</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/meaning-per-category-c-7-9.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/meaning-per-category-c-7-9.html`);return false;"><span
                                             class="cell-num">7.9</span><span class="cell-label"
                                             data-i18n="a7_9">Category C</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/meaning-per-category-d-7-10.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/meaning-per-category-d-7-10.html`);return false;"><span
                                             class="cell-num">7.10</span><span class="cell-label"
                                             data-i18n="a7_10">Category D</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/meaning-per-category-e-7-11.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/meaning-per-category-e-7-11.html`);return false;"><span
                                             class="cell-num">7.11</span><span class="cell-label"
                                             data-i18n="a7_11">Category E</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/meaning-per-category-f-7-12.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/meaning-per-category-f-7-12.html`);return false;"><span
                                             class="cell-num">7.12</span><span class="cell-label"
                                             data-i18n="a7_12">Category F</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/meaning-per-category-g-7-13.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/meaning-per-category-g-7-13.html`);return false;"><span
                                             class="cell-num">7.13</span><span class="cell-label"
                                             data-i18n="a7_13">Category G</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/meaning-per-category-h-7-14.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/meaning-per-category-h-7-14.html`);return false;"><span
                                             class="cell-num">7.14</span><span class="cell-label"
                                             data-i18n="a7_14">Category H</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/meaning-per-category-j-7-15.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/meaning-per-category-j-7-15.html`);return false;"><span
                                             class="cell-num">7.15</span><span class="cell-label"
                                             data-i18n="a7_15">Category J</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/meaning-per-category-k-7-16.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/meaning-per-category-k-7-16.html`);return false;"><span
                                             class="cell-num">7.16</span><span class="cell-label"
                                             data-i18n="a7_16">Category K</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/meaning-per-category-l-7-17.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/meaning-per-category-l-7-17.html`);return false;"><span
                                             class="cell-num">7.17</span><span class="cell-label"
                                             data-i18n="a7_17">Category L</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/supplementary-plates-7-18.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/supplementary-plates-7-18.html`);return false;"><span
                                             class="cell-num">7.18</span><span class="cell-label"
                                             data-i18n="a7_18">Supplementary plates</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/beaconing-7-19.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/beaconing-7-19.html`);return false;"><span
                                             class="cell-num">7.19</span><span class="cell-label"
                                             data-i18n="a7_19">Beaconing</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/directives-7-20.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/directives-7-20.html`);return false;"><span
                                             class="cell-num">7.20</span><span class="cell-label"
                                             data-i18n="a7_20">Directives</span></a>
                                 </div>
@@ -2687,55 +2720,55 @@
                             <div class="acc-body">
                                 <div class="acc-grid">
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/traffic-insight-and-driving-behaviour-8-1.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/traffic-insight-and-driving-behaviour-8-1.html`);return false;"><span
                                             class="cell-num">8.1</span><span class="cell-label" data-i18n="a8_1">Traffic
                                             insight and behaviour</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/traffic-behaviour-and-safety-8-2.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/traffic-behaviour-and-safety-8-2.html`);return false;"><span
                                             class="cell-num">8.2</span><span class="cell-label" data-i18n="a8_2">Traffic
                                             behaviour and safety</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/maintaining-distance-8-3.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/maintaining-distance-8-3.html`);return false;"><span
                                             class="cell-num">8.3</span><span class="cell-label"
                                             data-i18n="a8_3">Maintaining distance</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/weather-conditions-8-4.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/weather-conditions-8-4.html`);return false;"><span
                                             class="cell-num">8.4</span><span class="cell-label" data-i18n="a8_4">Weather
                                             conditions</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/obstacles-to-visibility-8-5.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/obstacles-to-visibility-8-5.html`);return false;"><span
                                             class="cell-num">8.5</span><span class="cell-label"
                                             data-i18n="a8_5">Obstacles to visibility</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/limitations-to-field-of-view-8-6.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/limitations-to-field-of-view-8-6.html`);return false;"><span
                                             class="cell-num">8.6</span><span class="cell-label"
                                             data-i18n="a8_6">Limitations to field of view</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/road-types-8-7.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/road-types-8-7.html`);return false;"><span
                                             class="cell-num">8.7</span><span class="cell-label" data-i18n="a8_7">Road
                                             types</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/inexperienced-vulnerable-road-users-large-vehicles-8-8.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/inexperienced-vulnerable-road-users-large-vehicles-8-8.html`);return false;"><span
                                             class="cell-num">8.8</span><span class="cell-label"
                                             data-i18n="a8_8">Vulnerable road users</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/environment-8-9.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/environment-8-9.html`);return false;"><span
                                             class="cell-num">8.9</span><span class="cell-label"
                                             data-i18n="a8_9">Environment</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/maintenance-and-periodic-checking-8-10.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/maintenance-and-periodic-checking-8-10.html`);return false;"><span
                                             class="cell-num">8.10</span><span class="cell-label"
                                             data-i18n="a8_10">Maintenance and checking</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/warning-lights-and-symbols-8-11.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/warning-lights-and-symbols-8-11.html`);return false;"><span
                                             class="cell-num">8.11</span><span class="cell-label"
                                             data-i18n="a8_11">Warning lights and symbols</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/general-safety-requirements-8-12.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/general-safety-requirements-8-12.html`);return false;"><span
                                             class="cell-num">8.12</span><span class="cell-label"
                                             data-i18n="a8_12">General safety requirements</span></a>
                                     <a class="acc-cell" href="#"
-                                        onclick="openTheoryLink(`https://examtheorie.nl/advanced-driver-assistance-systems-(ADAS)-8-13.html`);return false;"><span
+                                        onclick="openTheoryLink(`https://oefenen.examtheorie.nl/advanced-driver-assistance-systems-(ADAS)-8-13.html`);return false;"><span
                                             class="cell-num">8.13</span><span class="cell-label"
                                             data-i18n="a8_13">ADAS</span></a>
                                 </div>
@@ -3086,7 +3119,7 @@
                 badge: "Netherlands Driving Theory",
                 hero_title: "LEARN DUTCH CBR THEORY",
                 hero_slogan: 'WITH <strong>REAL PRACTICE TESTS</strong> and get fully prepared for the <strong>CBR exam.</strong>',
-                btn_start: "Try Free Test", btn_prices: "View Prices",
+                btn_start: "Start Free Today", btn_prices: "View Prices",
                 s1: "Active Students", s2: "Pass Rate", s3: "CBR Exam Tests", s4: "Languages",
                 feat_head: "Why Choose ExamTheorie?",
                 f1t: "Real CBR Exam Tests", f1d: "Practice with 50+ real CBR exam questions updated for 2026.",
@@ -3184,7 +3217,8 @@
                 a8_9: "Environment", a8_10: "Maintenance and periodic checking",
                 a8_11: "Warning lights and symbols", a8_12: "General safety requirements",
                 a8_13: "Advanced Driver Assistance Systems (ADAS)",
-                footer_privacy: "Privacy Policy", footer_terms: "Terms and Conditions"
+                footer_privacy: "Privacy Policy", footer_terms: "Terms and Conditions",
+                terms_consent: 'By purchasing, you agree to our <a href="https://www.examtheorie.nl/terms-conditions" target="_blank" rel="noopener">Terms and Conditions</a> and <a href="https://www.examtheorie.nl/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.'
             },
             tr: {
                 nav_car: "Binek Araç", nav_prices: "Paket Fiyatları",
@@ -3193,7 +3227,7 @@
                 badge: "Hollanda Ehliyet Teorisi",
                 hero_title: "HOLLANDA CBR TEORİSİ",
                 hero_slogan: '<strong>GERÇEK SORULARLA</strong> çalış, <strong>CBR sınavına</strong> hazır gir.',
-                btn_start: "Ücretsiz Deneme Testi", btn_prices: "Fiyatları Gör",
+                btn_start: "Ücretsiz Başla", btn_prices: "Fiyatları Gör",
                 s1: "Aktif Öğrenci", s2: "Geçiş Oranı", s3: "CBR Sınav Sorusu", s4: "Dil",
                 feat_head: "Neden ExamTheorie?",
                 f1t: "Gerçek CBR Soruları", f1d: "2026 güncel 50+ CBR sınav sorusuyla pratik yap.",
@@ -3284,7 +3318,8 @@
                 a8_9: "Çevre", a8_10: "Bakım ve periyodik kontrol",
                 a8_11: "Uyarı lambaları ve sembolleri", a8_12: "Genel güvenlik gereksinimleri",
                 a8_13: "Gelişmiş Sürücü Destek Sistemleri (ADAS)",
-                footer_privacy: "Gizlilik Politikası", footer_terms: "Kullanım Koşulları"
+                footer_privacy: "Gizlilik Politikası", footer_terms: "Kullanım Koşulları",
+                terms_consent: 'Satın alarak <a href="https://www.examtheorie.nl/terms-conditions" target="_blank" rel="noopener">Kullanım Koşulları</a>\'nı ve <a href="https://www.examtheorie.nl/privacy-policy" target="_blank" rel="noopener">Gizlilik Politikası</a>\'nı kabul etmiş sayılırsınız.'
             },
             nl: {
                 nav_car: "Personenwagen", nav_prices: "Pakketprijzen",
@@ -3293,7 +3328,7 @@
                 badge: "Nederlandse Rijtheorie",
                 hero_title: "LEER NEDERLANDSE CBR THEORIE",
                 hero_slogan: 'Met <strong>ECHTE OEFENTOETSEN</strong> en wees volledig voorbereid op het <strong>CBR examen.</strong>',
-                btn_start: "Gratis Oefentest", btn_prices: "Bekijk Prijzen",
+                btn_start: "Begin Gratis", btn_prices: "Bekijk Prijzen",
                 s1: "Actieve Studenten", s2: "Slagingspercentage", s3: "CBR Examenvragen", s4: "Talen",
                 feat_head: "Waarom ExamTheorie?",
                 f1t: "Echte CBR Examenvragen", f1d: "Oefen met 50+ echte CBR-examenvragen bijgewerkt voor 2026.",
@@ -3385,7 +3420,8 @@
                 a8_9: "Milieu", a8_10: "Onderhoud en controle",
                 a8_11: "Waarschuwingslampjes", a8_12: "Algemene veiligheidseisen",
                 a8_13: "ADAS",
-                footer_privacy: "Privacybeleid", footer_terms: "Algemene Voorwaarden"
+                footer_privacy: "Privacybeleid", footer_terms: "Algemene Voorwaarden",
+                terms_consent: 'Door te kopen gaat u akkoord met onze <a href="https://www.examtheorie.nl/terms-conditions" target="_blank" rel="noopener">Algemene Voorwaarden</a> en <a href="https://www.examtheorie.nl/privacy-policy" target="_blank" rel="noopener">Privacybeleid</a>.'
             },
             ar: {
                 nav_car: "السيارة الخاصة", nav_prices: "أسعار الباقات",
@@ -3394,7 +3430,7 @@
                 badge: "نظرية القيادة الهولندية",
                 hero_title: "تعلَّم نظرية CBR الهولندية",
                 hero_slogan: 'مع <strong>اختبارات تدريبية حقيقية</strong> واستعد تماماً لـ <strong>اختبار CBR.</strong>',
-                btn_start: "اختبار تجريبي مجاني", btn_prices: "عرض الأسعار",
+                btn_start: "ابدأ مجاناً", btn_prices: "عرض الأسعار",
                 s1: "طالب نشط", s2: "معدل النجاح", s3: "أسئلة CBR", s4: "لغات",
                 feat_head: "لماذا ExamTheorie؟",
                 f1t: "أسئلة CBR الحقيقية", f1d: "تدرّب على أكثر من 50 سؤال CBR حقيقي محدّث لعام 2026.",
@@ -3486,18 +3522,14 @@
                 a8_9: "البيئة", a8_10: "الصيانة والفحص الدوري",
                 a8_11: "أضواء التحذير والرموز", a8_12: "متطلبات السلامة العامة",
                 a8_13: "ADAS",
-                footer_privacy: "سياسة الخصوصية", footer_terms: "الشروط والأحكام"
+                footer_privacy: "سياسة الخصوصية", footer_terms: "الشروط والأحكام",
+                terms_consent: 'بإتمام الشراء، فإنك توافق على <a href="https://www.examtheorie.nl/terms-conditions" target="_blank" rel="noopener">الشروط والأحكام</a> و<a href="https://www.examtheorie.nl/privacy-policy" target="_blank" rel="noopener">سياسة الخصوصية</a>.'
             }
         };
 
         /* ─── TEST PROGRESS ─── */
         const TOTAL_TESTS = 50;
         const QUIZ_BASE = 'https://examtheorie.nl';
-
-        function openDenemeTest() {
-            const lang = currentLang || 'en';
-            window.open(`${QUIZ_BASE}/deneme-${lang}.html`, '_blank');
-        }
 
         function lsKey(lang) { return `et_completed_${lang}`; }
         function getCompleted(lang) { return JSON.parse(localStorage.getItem(lsKey(lang)) || '[]'); }
@@ -3548,7 +3580,6 @@
 
             /* 50 test tamamlandıysa — await ile bekle, sonra karar ver (race condition yok) */
             if (next === null && checkAllTestsCompleted(lang)) {
-                // Ödeme dönüşünde reset banner gösterme
                 if (localStorage.getItem('et_payment_pending') === '1') return;
                 await fetchResetUsed();
                 if (!resetUsed) showResetBanner();
@@ -3601,7 +3632,22 @@
         function toggleAcc(btn) { btn.closest('.acc-item').classList.toggle('open'); }
 
         /* ─── OVERLAYS & MODALS ─── */
-        function openPricing() { document.getElementById('pricing-ol').classList.add('active'); document.body.style.overflow = 'hidden'; buildDayButtons(); }
+        function openPricing() {
+            document.getElementById('pricing-ol').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            buildDayButtons();
+            // terms_consent gibi data-i18n-html elementlerini yenile
+            document.querySelectorAll('#pricing-ol [data-i18n-html]').forEach(el => {
+                const key = el.getAttribute('data-i18n-html');
+                const t = I18N[currentLang] || I18N['en'];
+                if (t[key]) el.innerHTML = t[key];
+            });
+            document.querySelectorAll('#pricing-ol [data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const t = I18N[currentLang] || I18N['en'];
+                if (t[key]) el.textContent = t[key];
+            });
+        }
         function closePricing() { document.getElementById('pricing-ol').classList.remove('active'); document.body.style.overflow = ''; }
 
         async function startPayment(planId, planName, amount, days) {
@@ -3620,7 +3666,6 @@
                 });
                 const data = await res.json();
                 if (data.paymentUrl) {
-                    localStorage.setItem('et_payment_pending', '1');
                     window.location.href = data.paymentUrl;
                 } else {
                     alert('❌ Payment error: ' + (data.error || 'Unknown error'));
@@ -3903,7 +3948,7 @@
                     body: JSON.stringify({ planId: 'daily', planName, amount: p.price, days: selectedDays, userId: currentUser.id, userEmail: currentUser.email })
                 });
                 const data = await res.json();
-                if (data.paymentUrl) { localStorage.setItem('et_payment_pending', '1'); window.location.href = data.paymentUrl; }
+                if (data.paymentUrl) { window.location.href = data.paymentUrl; }
                 else { alert('❌ Payment error: ' + (data.error || 'Unknown error')); btn.disabled = false; btn.textContent = originalText; }
             } catch (err) {
                 console.error('Daily payment error:', err);
@@ -4072,7 +4117,7 @@
 
         /* ─── POSTMESSAGE — reset banner kontrolü eklendi ─── */
         window.addEventListener('message', async function (e) {
-            const isAllowed = ['https://azerpashazadeh.github.io', 'https://examtheorie.nl', 'https://www.examtheorie.nl', 'https://examtheorie.nl'].includes(e.origin) || e.origin.includes('examtheorie.nl');
+            const isAllowed = ['https://azerpashazadeh.github.io', 'https://oefenen.examtheorie.nl', 'https://www.examtheorie.nl', 'https://examtheorie.nl'].includes(e.origin) || e.origin.includes('examtheorie.nl');
             if (!isAllowed) return;
             const d = e.data || {};
             if (d.action !== 'testCompleted' || !d.testNumber || !d.lang) return;
@@ -4276,7 +4321,6 @@
             return false;
         }
     </script>
-
         </div><!-- /#scroll-container -->
 
 </body>
