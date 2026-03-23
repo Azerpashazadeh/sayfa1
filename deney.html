@@ -37,18 +37,17 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            height: 100%;
-            overflow: hidden;
-        }
-
         html {
+            height: 100%;
             scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             color: white;
+            /* Scroll body'de — tarayıcı toolbar'ı otomatik gizler */
+            min-height: 100%;
+            overflow-x: hidden;
         }
 
         /* Arka plan: fixed div — iOS Safari scroll bug'ını önler */
@@ -61,12 +60,9 @@
             transform: translateZ(0);
         }
 
-        /* Scroll artık body'de değil bu div'de oluyor */
+        /* Scroll artık body'de — scroll-container sadece wrapper */
         #scroll-container {
-            height: 100%;
-            overflow-y: auto;
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
+            min-height: 100%;
         }
 
         body.ar {
@@ -1025,20 +1021,37 @@
         .pc-overlay {
             position: fixed;
             inset: 0;
-            background: url('https://azerpashazadeh.github.io/sorularveresimler/2151021132.jpg') no-repeat center center;
-            background-size: cover;
             z-index: 2000;
             display: none;
             flex-direction: column;
-            overflow-y: auto;
+            overflow: hidden;
         }
 
-        .pc-overlay::before {
-            content: '';
+        /* Arka plan: fixed — iOS titreme önlemi */
+        .pc-overlay-bg {
             position: fixed;
             inset: 0;
-            background: rgba(0, 8, 25, 0.65);
             z-index: 0;
+            background: url('https://azerpashazadeh.github.io/sorularveresimler/2151021132.jpg') no-repeat center center;
+            background-size: cover;
+            transform: translateZ(0);
+        }
+
+        .pc-overlay-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 8, 25, 0.65);
+        }
+
+        /* Scroll iç div'de — iOS Safari toolbar bug önlenir */
+        .pc-scroll {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
         }
 
         .pc-overlay.active {
@@ -2360,6 +2373,8 @@
 
     <!-- ═══════════ PASSENGER CAR OVERLAY ═══════════ -->
     <div class="pc-overlay" id="pc-ol">
+        <div class="pc-overlay-bg"></div>
+        <div class="pc-scroll">
         <div class="pc-close" onclick="closePassengerCar()">×</div>
         <div class="pc-inner">
             <div class="pc-header">
@@ -2792,6 +2807,7 @@
                 </div>
             </div>
         </div>
+        </div><!-- /.pc-scroll -->
     </div>
 
     <!-- ═══════════ AUTH MODALS ═══════════ -->
@@ -3701,10 +3717,9 @@
         });
         function scrollToSec(id) {
             const el = document.getElementById(id);
-            const container = document.getElementById('scroll-container');
-            if (!el || !container) return;
-            const elTop = el.getBoundingClientRect().top + container.scrollTop - container.getBoundingClientRect().top;
-            container.scrollTo({ top: elTop, behavior: 'smooth' });
+            if (!el) return;
+            const elTop = el.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: elTop, behavior: 'smooth' });
         }
 
         /* ESC tuşu — reset banner kapatma eklendi */
