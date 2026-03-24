@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Privacy Policy — ExamTheorie</title>
+    <title>Terms and Conditions — ExamTheorie</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&family=Noto+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root { --cyan: #00d4ff; --blue: #0066ff; --glass-blur: blur(22px) saturate(180%); }
@@ -12,7 +12,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
-            min-height: 100dvh; /* Fix for mobile dynamic viewport */
+            min-height: 100dvh;
             overflow-x: hidden;
             background: transparent;
             color: white;
@@ -25,16 +25,15 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh; /* Fallback */
-            height: 100dvh; /* Dynamic viewport height - key fix */
-            height: 100lvh; /* Large viewport height - most stable */
+            height: 100vh;
+            height: 100dvh;
+            height: 100lvh;
             background: url('https://azerpashazadeh.github.io/sorularveresimler/2151021132.jpg') no-repeat center center;
             background-size: cover;
             z-index: -2;
             will-change: transform;
             transform: translateZ(0);
             pointer-events: none;
-            /* Prevent any resize/reflow on scroll */
             contain: strict;
         }
         
@@ -56,7 +55,7 @@
         
         body.ar { font-family: 'Noto Sans Arabic', 'Poppins', sans-serif; direction: rtl; }
         
-        /* Navbar - fully responsive with no overlap */
+        /* Navbar - fully responsive with no overlap (Privacy Policy style) */
         .navbar { 
             position: fixed; 
             top: 14px; 
@@ -140,6 +139,7 @@
             justify-content: center;
         }
         .nav-back:hover { color: #fff; background: rgba(255,255,255,0.15); transform: scale(0.96); }
+        
         .page-wrap { 
             position: relative; 
             z-index: 2; 
@@ -191,66 +191,199 @@
         .intro-card p + p { margin-top: 12px; }
         .intro-card a { color: var(--cyan); text-decoration: none; font-weight: 500; }
         .intro-card a:hover { text-decoration: underline; }
+        .contents-card { 
+            background: rgba(255,255,255,0.06); 
+            backdrop-filter: blur(18px); 
+            -webkit-backdrop-filter: blur(18px); 
+            border: 1px solid rgba(255,255,255,0.13); 
+            border-radius: 28px; 
+            padding: 26px 30px; 
+            margin-bottom: 24px; 
+        }
+        .contents-card h2 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 17px; 
+            font-weight: 700; 
+            color: #fff; 
+            margin-bottom: 14px; 
+            padding-bottom: 10px; 
+            border-bottom: 1px solid rgba(255,255,255,0.08); 
+        }
+        body.ar .contents-card h2 { font-family: 'Noto Sans Arabic', serif; }
+        .contents-list { 
+            list-style: none; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 3px 20px; 
+        }
+        @media(max-width:560px){ .contents-list { grid-template-columns: 1fr; } }
+        .contents-list li { padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .contents-list li:last-child { border-bottom: none; }
+        .contents-list a { 
+            color: rgba(255,255,255,0.62); 
+            text-decoration: none; 
+            font-size: 13px; 
+            font-weight: 400; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: color .2s; 
+        }
+        .contents-list a:hover { color: var(--cyan); }
+        .art-num { 
+            font-size: 11px; 
+            font-weight: 700; 
+            color: var(--cyan); 
+            opacity: .6; 
+            min-width: 22px; 
+        }
         .article-card { 
             background: rgba(255,255,255,0.06); 
             backdrop-filter: blur(18px); 
             -webkit-backdrop-filter: blur(18px); 
-            border: 1px solid rgba(255,255,255,0.1); 
+            border: 1px solid rgba(255,255,255,0.11); 
             border-radius: 28px; 
-            padding: 26px 30px; 
-            margin-bottom: 20px; 
+            padding: 28px 32px; 
+            margin-bottom: 16px; 
             transition: all 0.2s; 
             scroll-margin-top: 100px; 
         }
-        .article-card:hover { border-color: rgba(0,212,255,0.3); background: rgba(255,255,255,0.08); }
-        .article-num { 
+        .article-card:hover { border-color: rgba(0,212,255,0.2); background: rgba(255,255,255,0.08); }
+        .article-label { 
             font-size: 11px; 
             font-weight: 700; 
             letter-spacing: .12em; 
             text-transform: uppercase; 
             color: var(--cyan); 
-            opacity: 0.75; 
-            margin-bottom: 8px; 
+            opacity: .7; 
+            margin-bottom: 5px; 
         }
         .article-card h2 { 
             font-family: 'Playfair Display', serif; 
             font-size: 20px; 
             font-weight: 700; 
             color: #fff; 
-            margin-bottom: 18px; 
-            padding-bottom: 12px; 
-            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            margin-bottom: 16px; 
+            padding-bottom: 10px; 
+            border-bottom: 1px solid rgba(255,255,255,0.08); 
         }
         body.ar .article-card h2 { font-family: 'Noto Sans Arabic', serif; }
-        .article-card p { font-size: 14px; line-height: 1.75; color: rgba(255,255,255,0.75); font-weight: 300; margin-bottom: 12px; }
-        .article-card ul { list-style: none; padding-left: 0; margin: 12px 0 8px; }
-        body.ar .article-card ul { padding-right: 0; }
+        .article-card p { 
+            font-size: 14px; 
+            line-height: 1.78; 
+            color: rgba(255,255,255,0.72); 
+            font-weight: 300; 
+            margin-bottom: 10px; 
+        }
+        .article-card p:last-child { margin-bottom: 0; }
+        .article-card p i { 
+            color: rgba(255,255,255,0.48); 
+            font-style: italic; 
+            display: block; 
+            margin: 10px 0 4px; 
+            font-size: 13px; 
+        }
+        .article-card ol { 
+            padding-left: 0; 
+            list-style: none; 
+            counter-reset: art-c; 
+        }
+        .article-card ol > li { 
+            font-size: 14px; 
+            line-height: 1.78; 
+            color: rgba(255,255,255,0.72); 
+            font-weight: 300; 
+            padding: 6px 0 6px 28px; 
+            position: relative; 
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+            counter-increment: art-c; 
+        }
+        body.ar .article-card ol > li { padding: 6px 28px 6px 0; }
+        .article-card ol > li:last-child { border-bottom: none; }
+        .article-card ol > li::before { 
+            content: counter(art-c)"."; 
+            position: absolute; 
+            left: 0; 
+            top: 6px; 
+            font-size: 12px; 
+            font-weight: 700; 
+            color: var(--cyan); 
+            opacity: .7; 
+            min-width: 20px; 
+        }
+        body.ar .article-card ol > li::before { left: auto; right: 0; }
+        .article-card ol ol { 
+            margin-top: 8px; 
+            counter-reset: sub-c; 
+            padding-left: 14px; 
+        }
+        body.ar .article-card ol ol { padding-left: 0; padding-right: 14px; }
+        .article-card ol ol > li { 
+            counter-increment: sub-c; 
+            padding-left: 24px; 
+            border-bottom: none; 
+        }
+        body.ar .article-card ol ol > li { padding-left: 0; padding-right: 24px; }
+        .article-card ol ol > li::before { content: counter(sub-c, lower-alpha)"."; }
+        .article-card ul { 
+            list-style: none; 
+            padding-left: 0; 
+            margin: 6px 0; 
+        }
         .article-card ul li { 
             font-size: 14px; 
-            line-height: 1.7; 
+            line-height: 1.75; 
             color: rgba(255,255,255,0.7); 
             font-weight: 300; 
-            padding: 6px 0 6px 24px; 
+            padding: 5px 0 5px 20px; 
             position: relative; 
-            border-bottom: 1px solid rgba(255,255,255,0.04); 
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
         }
-        body.ar .article-card ul li { padding: 6px 24px 6px 0; }
+        body.ar .article-card ul li { padding: 5px 20px 5px 0; }
         .article-card ul li:last-child { border-bottom: none; }
         .article-card ul li::before { 
-            content: '▹'; 
+            content: ''; 
             position: absolute; 
-            left: 2px; 
-            top: 7px; 
-            color: var(--cyan); 
-            font-size: 12px; 
-            opacity: 0.8; 
+            left: 0; 
+            top: 13px; 
+            width: 6px; 
+            height: 6px; 
+            border-radius: 50%; 
+            background: var(--cyan); 
+            opacity: .55; 
         }
-        body.ar .article-card ul li::before { left: auto; right: 2px; content: '◂'; }
+        body.ar .article-card ul li::before { left: auto; right: 0; }
         .article-card a { color: var(--cyan); text-decoration: none; }
         .article-card a:hover { text-decoration: underline; }
-        strong { color: rgba(255,255,255,0.92); font-weight: 600; }
-        
-        /* Fixed contact card with perfect centering */
+        strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+        .no-refund-note { 
+            background: rgba(255,160,50,0.1); 
+            border: 1px solid rgba(255,160,50,0.3); 
+            border-radius: 12px; 
+            padding: 14px 18px; 
+            margin-top: 10px; 
+            font-size: 13.5px; 
+            color: rgba(255,220,150,0.9); 
+            font-weight: 400; 
+            line-height: 1.65; 
+        }
+        .identity-box { 
+            background: rgba(0,212,255,0.07); 
+            border: 1px solid rgba(0,212,255,0.18); 
+            border-radius: 14px; 
+            padding: 14px 18px; 
+            margin: 10px 0; 
+            font-size: 14px; 
+            line-height: 1.8; 
+            color: rgba(255,255,255,0.75); 
+            font-weight: 300; 
+        }
+        .identity-box strong { 
+            display: block; 
+            font-size: 15px; 
+            margin-bottom: 4px; 
+            color: #fff; 
+        }
         .contact-box { 
             background: linear-gradient(135deg,rgba(0,212,255,0.12),rgba(0,102,255,0.1)); 
             border: 1px solid rgba(0,212,255,0.3); 
@@ -300,6 +433,18 @@
             box-shadow: 0 14px 28px rgba(0,100,255,0.5); 
             background: linear-gradient(135deg,var(--cyan),#1a75ff);
         }
+        .back-top { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 5px; 
+            margin-top: 8px; 
+            font-size: 12px; 
+            color: rgba(255,255,255,0.3); 
+            text-decoration: none; 
+            transition: color .2s; 
+        }
+        .back-top:hover { color: var(--cyan); }
+        
         footer { 
             position: relative; 
             z-index: 2; 
@@ -308,8 +453,14 @@
             color: rgba(255,255,255,0.4); 
             font-size: 12px; 
         }
-        footer a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color .2s; margin: 0 6px; }
+        footer a { 
+            color: rgba(255,255,255,0.5); 
+            text-decoration: none; 
+            transition: color .2s; 
+            margin: 0 6px; 
+        }
         footer a:hover { color: var(--cyan); }
+        
         @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
         
         /* perfect mobile refinement */
@@ -328,6 +479,7 @@
             .nav-back { padding: 5px 12px; font-size: 14px; }
             .page-wrap { padding: 100px 16px 50px; }
             .article-card { padding: 20px 18px; }
+            .contents-card { padding: 20px 18px; }
             .intro-card { padding: 20px 18px; }
             .contact-box { padding: 28px 20px; }
             .contact-btn { padding: 10px 26px; font-size: 14px; }
@@ -368,244 +520,112 @@
 
 <div class="page-wrap">
 
-<!-- ══ ENGLISH ══ -->
+    <!-- ══ ENGLISH ══ -->
 <div class="lang-section" id="lang-en">
-<div class="page-header"><div class="page-badge">📄 Legal</div><h1 class="page-title">Privacy Policy</h1><p class="page-meta">ExamTheorie · Last updated: January 2026</p></div>
-<div class="intro-card">
-    <p>ExamTheorie is registered with the Netherlands Chamber of Commerce (KvK) under number <strong>42011186</strong>, with address Voorsterallee 1, 7203 DN Zutphen, the Netherlands.</p>
-    <p>This privacy policy applies to all processing of personal data of our customers and users of our website and services at examtheorie.nl. We handle your personal data with care and ensure that all processing complies with applicable laws and regulations, including the General Data Protection Regulation (GDPR).</p>
-    <p>ExamTheorie reserves the right to amend this policy at any time. The most up-to-date version will always be published on this page. For privacy-related questions, please contact us at <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>.</p>
-</div>
-<div class="article-card"><div class="article-num">Article 1</div><h2>Privacy Policy Notice</h2>
-    <p>1.1 ExamTheorie provides this privacy policy to inform you about how we handle personal data and about the choices you can make regarding the collection and use of your information.</p>
-    <p>1.2 ExamTheorie respects and protects your privacy. We make reasonable efforts to ensure that personal data is treated confidentially and processed in accordance with the GDPR. Our website is structured so that in many cases you can visit without identifying yourself. However, to use our services you generally need an account, which involves the processing of personal data.</p>
-    <p>1.3 As a data subject, under the GDPR you have the following rights:</p>
-    <ul><li>Right of access (Art. 15 GDPR)</li><li>Right to rectification (Art. 16 GDPR)</li><li>Right to erasure (Art. 17 GDPR)</li><li>Right to restriction of processing (Art. 18 GDPR)</li><li>Right to data portability (Art. 20 GDPR)</li><li>Right to object (Art. 21 GDPR)</li><li>Right to lodge a complaint with the Dutch Data Protection Authority (Art. 77 GDPR)</li></ul>
-    <p>1.4 ExamTheorie retains agreements and data necessary for financial administration for at least 7 years in accordance with legal obligations. We do not retain other data longer than necessary for the purposes stated in this policy.</p>
-</div>
-<div class="article-card"><div class="article-num">Article 2</div><h2>Purpose of Data Collection</h2>
-    <p>2.1 ExamTheorie processes personal data in order to maintain relationships with customers and to provide our services.</p>
-    <p>2.2 We use personal data in particular for:</p>
-    <ul><li>Creating and managing an account</li><li>Providing the online learning environment and related functionalities</li><li>Processing purchases and payments</li><li>Customer support and communication, including service messages</li><li>Securing our systems and preventing fraud and misuse</li><li>Analysis and improvement of our website and services</li></ul>
-    <p>2.3 <strong>Study results and learning data.</strong> Within our learning environment we process data on study progress and results, such as completed practice exams, answers, scores and usage statistics. We use this data to ensure the learning environment functions, to display your progress, and to improve your learning experience.</p>
-    <p>2.4 <strong>Payment data.</strong> Bank account and payment details are used solely to process payments. ExamTheorie does not store full payment card details.</p>
-    <p>2.5 <strong>Legal basis.</strong> ExamTheorie processes personal data on the basis of one or more of the following grounds:</p>
-    <ul><li>Performance of a contract (e.g. providing a course or service)</li><li>Legal obligation (e.g. statutory tax retention obligations)</li><li>Legitimate interests (e.g. security, fraud prevention, improving services)</li><li>Consent, where required by law (e.g. certain cookies or marketing)</li></ul>
-    <p>2.6 <strong>Marketing.</strong> If we inform you about services and offers, we do so in accordance with the law. Where required, we request your consent in advance and you can unsubscribe at any time via <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>.</p>
-</div>
-<div class="article-card"><div class="article-num">Article 3</div><h2>Links to Third Parties and Data Sharing</h2>
-    <p>3.1 Links to third-party websites are displayed solely for your convenience. ExamTheorie does not manage these sites and accepts no responsibility for their content or privacy policy.</p>
-    <p>3.2 ExamTheorie does not sell or rent personal data to third parties. We may share personal data with third parties where necessary to deliver our services, to comply with a legal obligation, or where you have given consent.</p>
-    <p>3.3 We may share personal data with the following categories of service providers:</p>
-    <ul><li>Hosting and cloud providers</li><li>Payment service providers</li><li>IT and security service providers</li><li>Analytics and statistical service providers</li></ul>
-    <p>3.4 Where third parties act as processors on behalf of ExamTheorie, we enter into a data processing agreement where required and make arrangements regarding security and confidentiality.</p>
-    <p>3.5 Where we use service providers that process data outside the EEA, we ensure appropriate safeguards are in place, such as Standard Contractual Clauses or other legally permitted mechanisms.</p>
-</div>
-<div class="article-card"><div class="article-num">Article 4</div><h2>Security</h2>
-    <p>4.1 ExamTheorie takes appropriate technical and organisational measures to protect personal data against loss, misuse, unauthorised access, disclosure and alteration. Such measures include encryption, access control, logging, monitoring and secure connections (TLS).</p>
-    <p>4.2 When collecting or transmitting important data, we use encryption and secure connections where appropriate.</p>
-</div>
-<div class="article-card"><div class="article-num">Article 5</div><h2>Suspected Misuse</h2>
-    <p>5.1 ExamTheorie reserves the right to act proactively and correctively in the event of suspected misuse. This may include the temporary recording of relevant data and logs as possible evidence, insofar as necessary for security and fraud prevention. Where sufficient evidence exists, ExamTheorie may take appropriate measures, including exclusion from the service or reporting to the competent authorities.</p>
-</div>
-<div class="article-card"><div class="article-num">Article 6</div><h2>Cookies, Analytics and Retention Periods</h2>
-    <p>6.1 ExamTheorie may collect information via cookies and similar technologies, as well as technical data such as IP address, browser information, device characteristics and log data. We do this to ensure the website functions properly, to maintain security, and to improve our services.</p>
-    <p>6.2 Cookies may be functional, analytical and, where applicable, marketing cookies. Where required by law, we request consent in advance. You can also remove or block cookies via your browser settings, though this may affect website functionality.</p>
-    <p>6.3 ExamTheorie applies the following retention periods:</p>
-    <ul><li>Financial and invoice data: at least 7 years (statutory tax obligations)</li><li>Account data: for as long as the account is active, plus up to 12 months after deletion</li><li>Study progress and exam results: for as long as the account is active, plus up to 12 months</li><li>Technical log and security data: up to 6 months, unless longer retention is required for incident investigation</li><li>Analytical usage data: up to 14 months</li><li>Customer support communications: up to 24 months</li></ul>
-    <p>6.4 Where data has been fully anonymised and can no longer be linked to a natural person, it may be used for statistical analysis and improvement of our services.</p>
-</div>
-<div class="article-card"><div class="article-num">Article 7</div><h2>Changes to This Policy</h2>
-    <p>7.1 ExamTheorie reserves the right to amend this privacy policy. The most up-to-date version will always be published on this page. In the event of material changes, we may inform you via the website or by email where appropriate.</p>
-</div>
-<div class="article-card"><div class="article-num">Article 8</div><h2>Complaints</h2>
-    <p>8.1 If you believe this privacy policy is not being complied with, or if you have questions or complaints about the processing of personal data, please contact us at <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>. You also have the right to lodge a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens).</p>
-</div>
-<div class="article-card"><div class="article-num">Article 9</div><h2>Transitional and Final Provisions</h2>
-    <p>9.1 Without prejudice to any legal provisions, this policy applies for the entire duration of registrations and for as long as we process personal data in connection with our services.</p>
-    <p>9.2 <strong>Minors.</strong> Our services may be used by minors. If you are under 16 years old, consent from a parent or legal guardian may be required for certain processing activities. In that case, please contact us at <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>.</p>
-</div>
-<div class="contact-box"><h3>Questions or Concerns?</h3><p>ExamTheorie · KvK 42011186<br>Voorsterallee 1, 7203 DN Zutphen, the Netherlands</p><a href="mailto:examtheorie@gmail.com" class="contact-btn">✉️ examtheorie@gmail.com</a></div>
+<div class="page-header"><div class="page-badge">📋 Legal</div><h1 class="page-title">General Terms and Conditions</h1><p class="page-meta">ExamTheorie · Last updated: January 2026</p></div>
+<div class="intro-card"><p>These General Terms and Conditions apply to all offers made by ExamTheorie and to any distance contract concluded between ExamTheorie and the Consumer. By purchasing and using our services you agree to these terms. Questions? <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a></p></div>
+<div class="contents-card"><h2>Contents</h2><ol class="contents-list"><li><a href="#en-1"><span class="art-num">1</span> Definitions</a></li><li><a href="#en-2"><span class="art-num">2</span> Entrepreneur's Identity</a></li><li><a href="#en-3"><span class="art-num">3</span> Applicability</a></li><li><a href="#en-4"><span class="art-num">4</span> The Offer</a></li><li><a href="#en-4a"><span class="art-num">4a</span> Continuous Development</a></li><li><a href="#en-5"><span class="art-num">5</span> The Contract</a></li><li><a href="#en-6"><span class="art-num">6</span> Right of Withdrawal</a></li><li><a href="#en-7"><span class="art-num">7</span> Obligations During Reflection</a></li><li><a href="#en-8"><span class="art-num">8</span> Exercising Right of Withdrawal</a></li><li><a href="#en-9"><span class="art-num">9</span> Obligations on Withdrawal</a></li><li><a href="#en-10"><span class="art-num">10</span> Exclusion of Withdrawal</a></li><li><a href="#en-11"><span class="art-num">11</span> The Price</a></li><li><a href="#en-12"><span class="art-num">12</span> Compliance and Guarantee</a></li><li><a href="#en-13"><span class="art-num">13</span> Delivery and Execution</a></li><li><a href="#en-14"><span class="art-num">14</span> Continuing Performance</a></li><li><a href="#en-15"><span class="art-num">15</span> Payment</a></li><li><a href="#en-16"><span class="art-num">16</span> Complaints</a></li><li><a href="#en-17"><span class="art-num">17</span> Disputes</a></li><li><a href="#en-18"><span class="art-num">18</span> Additional Provisions</a></li></ol></div>
+<div class="article-card" id="en-1"><div class="article-label">Article 1</div><h2>Definitions</h2><ol><li><strong>Additional agreement:</strong> an agreement in which the Consumer acquires digital content and/or services in connection with a distance agreement.</li><li><strong>Reflection period:</strong> the period during which the Consumer may use his right of withdrawal.</li><li><strong>Consumer:</strong> the natural person who does not act for commercial, trade, craft or professional purposes.</li><li><strong>Day:</strong> calendar day.</li><li><strong>Digital content:</strong> data produced and delivered in digital form.</li><li><strong>Right of withdrawal:</strong> the Consumer's option not to proceed with the distance agreement within the cooling-off period.</li><li><strong>Entrepreneur:</strong> ExamTheorie, the legal person who provides digital content and/or services to Consumers at a distance.</li><li><strong>Distance contract:</strong> a contract concluded between ExamTheorie and the Consumer using one or more technologies of distance communication.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-2"><div class="article-label">Article 2</div><h2>Entrepreneur's Identity</h2><div class="identity-box"><strong>ExamTheorie</strong>Voorsterallee 1, 7203 DN Zutphen, the Netherlands<br>KvK: 42011186<br>Email: <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a></div><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-3"><div class="article-label">Article 3</div><h2>Applicability</h2><ol><li>These Terms and Conditions apply to any offer from ExamTheorie and to any distance contract concluded by ExamTheorie and the Consumer.</li><li>Before concluding a distance contract, ExamTheorie shall make the text of these Terms available free of charge.</li><li>In the event of contradictory terms, the Consumer may always appeal to the provision most favourable to him/her.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-4"><div class="article-label">Article 4</div><h2>The Offer</h2><ol><li>If an offer is of limited duration or subject to conditions, this shall be explicitly stated.</li><li>The offer contains a full and accurate description of the digital content and/or services offered. Obvious errors or mistakes do not bind ExamTheorie.</li><li>All offers contain information making clear to the Consumer what rights and obligations are attached to accepting the offer.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-4a"><div class="article-label">Article 4a</div><h2>Continuous Development</h2><ol><li>ExamTheorie may update and improve its digital content and services on an ongoing basis, including theory materials, practice tests, and platform features.</li><li>The Consumer will be informed of any material changes that affect purchased services, where possible in advance.</li><li>Minor improvements and updates may be made at any time without prior notice.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-5"><div class="article-label">Article 5</div><h2>The Contract</h2><ol><li>The contract becomes valid when the Consumer has accepted the offer and fulfilled the conditions set.</li><li>If the Consumer accepted the offer electronically, ExamTheorie shall promptly confirm receipt. Until confirmation, the Consumer may repudiate the contract.</li><li>ExamTheorie will take appropriate technical and organisational security measures for the electronic data transfer.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-6"><div class="article-label">Article 6</div><h2>Right of Withdrawal</h2><p><i>For digital content not delivered on a physical carrier:</i></p><ol><li>The Consumer may terminate an agreement for digital content without giving reasons during a reflection period of at least 14 days, starting the day after concluding the agreement.</li><li>If ExamTheorie has not provided the legally required information about the right of withdrawal, the reflection period expires twelve months after the end of the original reflection period.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-7"><div class="article-label">Article 7</div><h2>Consumer's Obligations During Reflection</h2><ol><li>During the reflection period, the Consumer shall handle the product with care, only to the extent necessary to assess it.</li><li>The Consumer is only liable for decrease in value caused by handling beyond what is described in sub-section 1.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-8"><div class="article-label">Article 8</div><h2>Exercising the Right of Withdrawal</h2><ol><li>If the Consumer exercises his right of withdrawal, he shall notify ExamTheorie unambiguously within the reflection period.</li><li>The risk and burden of proof for correct and timely exercise of the right of withdrawal fall on the Consumer.</li><li>If the Consumer exercises his right of withdrawal, all additional agreements end by operation of law.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-9"><div class="article-label">Article 9</div><h2>ExamTheorie's Obligations on Withdrawal</h2><ol><li>ExamTheorie shall promptly send a return receipt upon notification of withdrawal.</li><li>ExamTheorie shall reimburse all payments within 14 days following notification of withdrawal.</li><li>ExamTheorie shall use the same payment method the Consumer used. Reimbursement is free of charge.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-10"><div class="article-label">Article 10</div><h2>Exclusion of the Right of Withdrawal</h2><p>ExamTheorie can exclude the following from the right of withdrawal, provided the Consumer is clearly notified before concluding the agreement:</p><ol><li>Services agreements after full performance, if performance started with the Consumer's explicit prior consent and the Consumer acknowledged losing the right of withdrawal.</li><li>Delivery of digital content not on a physical carrier, if performance started with the Consumer's explicit prior consent and the Consumer acknowledged losing the right of withdrawal.</li><li>Access to CBR practice tests and theory materials is digital content delivered immediately upon purchase. <strong>Once the Consumer has accessed or used any part of the content, the right of withdrawal is forfeited.</strong> By completing the purchase, the Consumer explicitly consents to immediate access and acknowledges the loss of the right of withdrawal in accordance with Article 6:230p of the Dutch Civil Code.</li></ol><div class="no-refund-note">⚠️ <strong>No Refund After Use:</strong> Once you have accessed the practice tests or theory materials, no refund can be issued. Please review the free content on our website before purchasing.</div><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-11"><div class="article-label">Article 11</div><h2>The Price</h2><ol><li>Prices shall not be raised during the validity period given in the offer, subject to VAT changes.</li><li>Price increases within 3 months after concluding the contract are permitted only if resulting from new legislation.</li><li>Price increases from 3 months after the contract are permitted only if the Consumer may cancel before the increase starts.</li><li>All prices are inclusive of VAT.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-12"><div class="article-label">Article 12</div><h2>Compliance and Extra Guarantee</h2><ol><li>ExamTheorie guarantees that its digital content and services comply with the contract, with reasonable requirements of usability and reliability, and with statutory provisions on the day the contract was concluded.</li><li>An extra guarantee offered by ExamTheorie shall never affect the legal rights of the Consumer.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-13"><div class="article-label">Article 13</div><h2>Delivery and Execution</h2><ol><li>ExamTheorie shall exercise the best possible care when executing orders.</li><li>Access to digital content shall be provided promptly after confirmed payment. If delivery is delayed, the Consumer may repudiate the contract free of charge.</li><li>After repudiation, ExamTheorie shall return the payment within 30 days.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-14"><div class="article-label">Article 14</div><h2>Continuing Performance Agreements</h2><p><i>Termination</i></p><ol><li>The Consumer may terminate a contract for an indefinite period at any time with not more than one month's notice.</li><li>The Consumer may terminate a fixed-term contract at the end of the period with not more than one month's notice.</li></ol><p><i>Duration</i></p><ol><li>If the contract duration exceeds one year, the Consumer may terminate at any time after one year with not more than one month's notice.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-15"><div class="article-label">Article 15</div><h2>Payment</h2><ol><li>Amounts must be settled within 14 days after the reflection period, or within 14 days after concluding the agreement if there is no reflection period.</li><li>The Consumer must promptly report any inaccuracies in payment details.</li><li>In case of late payment, after notice and a 14-day period to comply, the Consumer shall pay statutory interest and extrajudicial collection costs (max 15% on amounts up to €2,500; 10% on next €2,500; 5% on next €5,000; minimum €40).</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-16"><div class="article-label">Article 16</div><h2>Complaints Procedure</h2><ol><li>ExamTheorie handles complaints in accordance with its complaints procedure.</li><li>Complaints must be submitted fully and clearly within a reasonable time after discovering the issue.</li><li>Complaints will be answered within 14 days of receipt.</li><li>Submit complaints to <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>.</li><li>Complaints may also be registered via the <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener nofollow">European ODR platform</a>.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-17"><div class="article-label">Article 17</div><h2>Disputes</h2><ol><li>Only Dutch law applies to agreements between ExamTheorie and the Consumer, even if the Consumer lives abroad.</li><li>The Vienna Sales Convention does not apply.</li></ol><a href="#" class="back-top">↑ Top</a></div>
+<div class="article-card" id="en-18"><div class="article-label">Article 18</div><h2>Additional or Different Provisions</h2><p>Additional provisions or deviations from these terms may not be to the detriment of the Consumer and must be recorded in writing or in such a way that the Consumer can store them on a durable medium.</p><a href="#" class="back-top">↑ Top</a></div>
+<div class="contact-box"><h3>Questions About These Terms?</h3><p>ExamTheorie · KvK 42011186<br>Voorsterallee 1, 7203 DN Zutphen, the Netherlands</p><a href="mailto:examtheorie@gmail.com" class="contact-btn">✉️ examtheorie@gmail.com</a></div>
 </div><!-- /en -->
 
 <!-- ══ TÜRKÇE ══ -->
 <div class="lang-section" id="lang-tr">
-<div class="page-header"><div class="page-badge">📄 Hukuki</div><h1 class="page-title">Gizlilik Politikası</h1><p class="page-meta">ExamTheorie · Son güncelleme: Ocak 2026</p></div>
-<div class="intro-card">
-    <p>ExamTheorie, <strong>42011186</strong> numarası ile Hollanda Ticaret Odası'na (KvK) kayıtlıdır. Adres: Voorsterallee 1, 7203 DN Zutphen, Hollanda.</p>
-    <p>Bu gizlilik politikası, examtheorie.nl web sitesi ve hizmetlerimizi kullanan tüm müşterilerimizin ve kullanıcılarımızın kişisel verilerinin işlenmesine uygulanır. Kişisel verilerinizi özenle yönetiyor ve tüm işlemlerin Genel Veri Koruma Tüzüğü (GDPR) dahil yürürlükteki mevzuata uygun olmasını sağlıyoruz.</p>
-    <p>ExamTheorie bu politikayı dilediği zaman güncelleme hakkını saklı tutar. Güncel versiyon her zaman bu sayfada yayımlanır. Gizlilikle ilgili sorularınız için: <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a></p>
-</div>
-<div class="article-card"><div class="article-num">Madde 1</div><h2>Gizlilik Politikası Bildirimi</h2>
-    <p>1.1 ExamTheorie, bu gizlilik politikasını kişisel verilerin nasıl işlendiği ve veri toplama ile kullanımına ilişkin tercihleriniz hakkında sizi bilgilendirmek amacıyla sunmaktadır.</p>
-    <p>1.2 ExamTheorie gizliliğinize saygı duyar ve onu korur. Kişisel verilerin gizli tutulmasını ve GDPR'ye uygun biçimde işlenmesini sağlamak için makul çabayı gösteriyoruz. Web sitemiz, pek çok durumda kendinizi tanıtmadan ziyaret edebileceğiniz şekilde yapılandırılmıştır. Ancak hizmetlerimizden yararlanmak için genellikle bir hesap açmanız gerekmekte olup bu durum kişisel veri işlenmesini beraberinde getirir.</p>
-    <p>1.3 GDPR kapsamında veri sahibi olarak aşağıdaki haklara sahipsiniz:</p>
-    <ul><li>Erişim hakkı (Madde 15 GDPR)</li><li>Düzeltme hakkı (Madde 16 GDPR)</li><li>Silme hakkı (Madde 17 GDPR)</li><li>İşlemenin kısıtlanması hakkı (Madde 18 GDPR)</li><li>Veri taşınabilirliği hakkı (Madde 20 GDPR)</li><li>İtiraz hakkı (Madde 21 GDPR)</li><li>Hollanda Veri Koruma Kurumu'na şikâyette bulunma hakkı (Madde 77 GDPR)</li></ul>
-    <p>1.4 ExamTheorie, yasal yükümlülükler gereği mali kayıt ve verileri en az 7 yıl saklar. Diğer veriler, bu politikada belirtilen amaçlar için gerekli olduğu süreden daha uzun tutulmaz.</p>
-</div>
-<div class="article-card"><div class="article-num">Madde 2</div><h2>Veri Toplama Amacı</h2>
-    <p>2.1 ExamTheorie, müşterilerle ilişki sürdürmek ve hizmetlerimizi sunmak amacıyla kişisel verileri işler.</p>
-    <p>2.2 Kişisel verileri özellikle şu amaçlarla kullanıyoruz:</p>
-    <ul><li>Hesap oluşturma ve yönetimi</li><li>Çevrimiçi öğrenme ortamı ve ilgili işlevlerin sağlanması</li><li>Satın alma ve ödemelerin işlenmesi</li><li>Müşteri desteği ve iletişim, hizmet mesajları dahil</li><li>Sistemlerimizin güvenliğini sağlama, sahtekârlık ve kötüye kullanımın önlenmesi</li><li>Web sitesi ve hizmetlerimizin analizi ve iyileştirilmesi</li></ul>
-    <p>2.3 <strong>Çalışma sonuçları ve öğrenme verileri.</strong> Öğrenme ortamımızda tamamlanan deneme sınavları, yanıtlar, puanlar ve kullanım istatistikleri gibi çalışma ilerlemesine ve sonuçlarına ilişkin veriler işlenir. Bu veriler öğrenme ortamının işlevselliğini sağlamak, ilerlemenizi görüntülemek ve öğrenme deneyiminizi geliştirmek amacıyla kullanılır.</p>
-    <p>2.4 <strong>Ödeme verileri.</strong> Banka hesabı ve ödeme bilgileri yalnızca ödemelerin işlenmesi için kullanılır. ExamTheorie, tam ödeme kartı bilgilerini saklamaz.</p>
-    <p>2.5 <strong>Hukuki dayanak.</strong> ExamTheorie, kişisel verileri aşağıdaki hukuki dayanakların bir veya birkaçına istinaden işler:</p>
-    <ul><li>Sözleşmenin ifası (örn. bir kurs veya hizmet sunulması)</li><li>Yasal yükümlülük (örn. vergi saklama yükümlülükleri)</li><li>Meşru çıkarlar (örn. güvenlik, sahtekârlığın önlenmesi, hizmetlerin geliştirilmesi)</li><li>Rıza — yasanın gerektirdiği hallerde (örn. belirli çerezler veya pazarlama)</li></ul>
-    <p>2.6 <strong>Pazarlama.</strong> Hizmetler ve teklifler hakkında bilgi sunmamız gerektiğinde bunu yasaya uygun biçimde yaparız. Gerektiğinde önceden rızanızı alırız; dilediğiniz zaman <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a> adresi üzerinden aboneliğinizi iptal edebilirsiniz.</p>
-</div>
-<div class="article-card"><div class="article-num">Madde 3</div><h2>Üçüncü Taraf Bağlantıları ve Veri Paylaşımı</h2>
-    <p>3.1 Üçüncü taraf web sitelerine bağlantılar yalnızca kolaylık amacıyla sunulmaktadır. ExamTheorie bu siteleri yönetmez ve içerikleri ile gizlilik politikaları konusunda herhangi bir sorumluluk kabul etmez.</p>
-    <p>3.2 ExamTheorie kişisel verileri üçüncü taraflara satmaz veya kiralamaz. Kişisel veriler; hizmetlerimizin sunulması için gerekli olduğu durumlarda, yasal bir yükümlülüğün yerine getirilmesinde veya rızanızın bulunması halinde üçüncü taraflarla paylaşılabilir.</p>
-    <p>3.3 Kişisel veriler aşağıdaki hizmet sağlayıcı kategorileriyle paylaşılabilir:</p>
-    <ul><li>Barındırma ve bulut sağlayıcıları</li><li>Ödeme hizmet sağlayıcıları</li><li>BT ve güvenlik hizmet sağlayıcıları</li><li>Analitik ve istatistik hizmet sağlayıcıları</li></ul>
-    <p>3.4 Üçüncü tarafların ExamTheorie adına veri işleyici sıfatıyla hareket ettiği durumlarda, gerekli hallerde bir veri işleme sözleşmesi yapılır ve güvenlik ile gizlilik konusunda gerekli düzenlemeler gerçekleştirilir.</p>
-    <p>3.5 Avrupa Ekonomik Alanı (AEA) dışında veri işleyen hizmet sağlayıcıların kullanılması halinde, Standart Sözleşme Maddeleri veya diğer hukuki mekanizmalar gibi uygun güvenceler sağlanır.</p>
-</div>
-<div class="article-card"><div class="article-num">Madde 4</div><h2>Güvenlik</h2>
-    <p>4.1 ExamTheorie, kişisel verileri kayıp, kötüye kullanım, yetkisiz erişim, ifşa ve değiştirmeye karşı korumak amacıyla uygun teknik ve organizasyonel önlemleri alır. Bu önlemler arasında şifreleme, erişim kontrolü, kayıt tutma, izleme ve güvenli bağlantılar (TLS) yer almaktadır.</p>
-    <p>4.2 Önemli verilerin toplanması veya iletilmesi sırasında uygun olduğu durumlarda şifreleme ve güvenli bağlantılar kullanılır.</p>
-</div>
-<div class="article-card"><div class="article-num">Madde 5</div><h2>Şüpheli Kötüye Kullanım</h2>
-    <p>5.1 ExamTheorie, şüpheli kötüye kullanım durumunda proaktif ve düzeltici önlem alma hakkını saklı tutar. Bu; güvenlik ve sahtekârlığın önlenmesi amacıyla gerekli ölçüde ilgili verilerin ve günlüklerin geçici olarak kaydedilmesini kapsayabilir. Yeterli kanıt bulunması halinde ExamTheorie, hizmetten men veya yetkili makamlara ihbar dahil uygun tedbirleri alabilir.</p>
-</div>
-<div class="article-card"><div class="article-num">Madde 6</div><h2>Çerezler, Analitik ve Saklama Süreleri</h2>
-    <p>6.1 ExamTheorie, çerezler ve benzeri teknolojiler ile IP adresi, tarayıcı bilgisi, cihaz özellikleri ve günlük verileri gibi teknik bilgiler toplayabilir. Bu bilgiler, web sitesinin doğru çalışmasını sağlamak, güvenliği korumak ve hizmetlerimizi geliştirmek amacıyla kullanılır.</p>
-    <p>6.2 Çerezler; işlevsel, analitik ve gerektiğinde pazarlama amaçlı olabilir. Yasanın gerektirdiği hallerde önceden rızanız alınır. Çerezleri tarayıcı ayarlarınızdan kaldırabilir veya engelleyebilirsiniz; ancak bu durum web sitesinin işlevselliğini olumsuz etkileyebilir.</p>
-    <p>6.3 ExamTheorie aşağıdaki saklama sürelerini esas alır:</p>
-    <ul><li>Mali ve fatura verileri: en az 7 yıl (yasal vergi yükümlülükleri gereği)</li><li>Hesap verileri: hesap aktif olduğu sürece ve silinmesinden itibaren 12 aya kadar</li><li>Çalışma ilerlemesi ve sınav sonuçları: hesap aktif olduğu sürece ve silinmesinden itibaren 12 aya kadar</li><li>Teknik günlük ve güvenlik verileri: 6 aya kadar; güvenlik olayları için uzatılabilir</li><li>Analitik kullanım verileri: 14 aya kadar</li><li>Müşteri destek iletişimleri: 24 aya kadar</li></ul>
-    <p>6.4 Veriler tamamen anonimleştirildiğinde ve artık bir gerçek kişiyle ilişkilendirilemediğinde, istatistiksel analiz ve hizmetlerin iyileştirilmesi amacıyla kullanılabilir.</p>
-</div>
-<div class="article-card"><div class="article-num">Madde 7</div><h2>Bu Politikadaki Değişiklikler</h2>
-    <p>7.1 ExamTheorie bu gizlilik politikasını değiştirme hakkını saklı tutar. Güncel versiyon her zaman bu sayfada yayımlanır. Önemli değişiklikler söz konusu olduğunda, uygun görüldüğü hallerde web sitesi veya e-posta yoluyla bilgilendirilirsiniz.</p>
-</div>
-<div class="article-card"><div class="article-num">Madde 8</div><h2>Şikâyetler</h2>
-    <p>8.1 Bu gizlilik politikasının ihlal edildiğini düşünüyorsanız ya da kişisel verilerin işlenmesine ilişkin sorularınız veya şikâyetleriniz varsa lütfen <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a> adresinden bizimle iletişime geçin. Ayrıca Hollanda Veri Koruma Kurumu'na (Autoriteit Persoonsgegevens) şikâyette bulunma hakkınız mevcuttur.</p>
-</div>
-<div class="article-card"><div class="article-num">Madde 9</div><h2>Geçici ve Son Hükümler</h2>
-    <p>9.1 Herhangi bir yasal hüküm saklı kalmak kaydıyla, bu politika kayıtların tüm süresi boyunca ve hizmetlerimizle bağlantılı olarak kişisel veri işlediğimiz sürece geçerlidir.</p>
-    <p>9.2 <strong>Küçükler.</strong> Hizmetlerimiz küçükler tarafından da kullanılabilir. 16 yaşın altındaysanız belirli veri işleme faaliyetleri için ebeveyn veya yasal vasi onayı gerekebilir. Bu durumda lütfen <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a> adresinden bizimle iletişime geçin.</p>
-</div>
-<div class="contact-box"><h3>Sorularınız mı Var?</h3><p>ExamTheorie · KvK 42011186<br>Voorsterallee 1, 7203 DN Zutphen, Hollanda</p><a href="mailto:examtheorie@gmail.com" class="contact-btn">✉️ examtheorie@gmail.com</a></div>
+<div class="page-header"><div class="page-badge">📋 Hukuki</div><h1 class="page-title">Genel Kullanım Koşulları</h1><p class="page-meta">ExamTheorie · Son güncelleme: Ocak 2026</p></div>
+<div class="intro-card"><p>Bu Genel Kullanım Koşulları, ExamTheorie'nin tüm tekliflerine ve ExamTheorie ile Tüketici arasında kurulan her mesafeli sözleşmeye uygulanır. Hizmetlerimizi satın alarak ve kullanarak bu koşulları kabul etmiş sayılırsınız. Sorular için: <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a></p></div>
+<div class="contents-card"><h2>İçindekiler</h2><ol class="contents-list"><li><a href="#tr-1"><span class="art-num">1</span> Tanımlar</a></li><li><a href="#tr-2"><span class="art-num">2</span> Girişimcinin Kimliği</a></li><li><a href="#tr-3"><span class="art-num">3</span> Uygulama Kapsamı</a></li><li><a href="#tr-4"><span class="art-num">4</span> Teklif</a></li><li><a href="#tr-4a"><span class="art-num">4a</span> Sürekli Geliştirme</a></li><li><a href="#tr-5"><span class="art-num">5</span> Sözleşme</a></li><li><a href="#tr-6"><span class="art-num">6</span> Cayma Hakkı</a></li><li><a href="#tr-7"><span class="art-num">7</span> Düşünme Süresi</a></li><li><a href="#tr-8"><span class="art-num">8</span> Cayma Hakkının Kullanımı</a></li><li><a href="#tr-9"><span class="art-num">9</span> Cayma Yükümlülükleri</a></li><li><a href="#tr-10"><span class="art-num">10</span> Cayma Hakkı İstisnaları</a></li><li><a href="#tr-11"><span class="art-num">11</span> Fiyat</a></li><li><a href="#tr-12"><span class="art-num">12</span> Uyumluluk ve Garanti</a></li><li><a href="#tr-13"><span class="art-num">13</span> Teslimat ve Uygulama</a></li><li><a href="#tr-14"><span class="art-num">14</span> Sürekli Performans Sözleşmeleri</a></li><li><a href="#tr-15"><span class="art-num">15</span> Ödeme</a></li><li><a href="#tr-16"><span class="art-num">16</span> Şikayet Prosedürü</a></li><li><a href="#tr-17"><span class="art-num">17</span> Uyuşmazlıklar</a></li><li><a href="#tr-18"><span class="art-num">18</span> Ek Hükümler</a></li></ol></div>
+<div class="article-card" id="tr-1"><div class="article-label">Madde 1</div><h2>Tanımlar</h2><ol><li><strong>Ek sözleşme:</strong> Tüketicinin bir mesafeli sözleşmeye bağlı olarak dijital içerik ve/veya hizmet edindiği sözleşme.</li><li><strong>Düşünme süresi:</strong> Tüketicinin cayma hakkını kullanabileceği süre.</li><li><strong>Tüketici:</strong> Ticari veya mesleki amaçlarla hareket etmeyen gerçek kişi.</li><li><strong>Gün:</strong> Takvim günü.</li><li><strong>Dijital içerik:</strong> Dijital formda üretilen ve teslim edilen veriler.</li><li><strong>Cayma hakkı:</strong> Tüketicinin soğuma süresi içinde mesafeli sözleşmeye devam etmeme seçeneği.</li><li><strong>Girişimci:</strong> Tüketicilere mesafeli yollarla dijital içerik ve/veya hizmet sağlayan ExamTheorie.</li><li><strong>Mesafeli sözleşme:</strong> ExamTheorie ile Tüketici arasında uzaktan iletişim teknolojisi kullanılarak kurulan sözleşme.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-2"><div class="article-label">Madde 2</div><h2>Girişimcinin Kimliği</h2><div class="identity-box"><strong>ExamTheorie</strong>Voorsterallee 1, 7203 DN Zutphen, Hollanda<br>KvK (Ticaret Sicil): 42011186<br>E-posta: <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a></div><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-3"><div class="article-label">Madde 3</div><h2>Uygulama Kapsamı</h2><ol><li>Bu Kullanım Koşulları, ExamTheorie'nin her teklifine ve ExamTheorie ile Tüketici arasında kurulan her mesafeli sözleşmeye uygulanır.</li><li>Mesafeli sözleşme kurulmadan önce ExamTheorie, bu Koşulların metnini ücretsiz olarak Tüketici'ye sunar.</li><li>Çelişen koşullar söz konusu olduğunda, Tüketici kendisine en avantajlı hükmü talep edebilir.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-4"><div class="article-label">Madde 4</div><h2>Teklif</h2><ol><li>Bir teklifin süresi sınırlıysa veya belirli koşullara tabiyse bu durum açıkça belirtilir.</li><li>Teklif, sunulan dijital içerik ve/veya hizmetlerin tam ve doğru açıklamasını içerir. Açık hatalar ExamTheorie'yi bağlamaz.</li><li>Tüm teklifler, Tüketici'ye teklifi kabul etmeye bağlı hak ve yükümlülükleri açıkça bildirir.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-4a"><div class="article-label">Madde 4a</div><h2>Sürekli Geliştirme ve Dijital İçerikteki Değişiklikler</h2><ol><li>ExamTheorie, teori materyalleri, deneme sınavları ve platform özellikleri dahil olmak üzere dijital içeriğini ve hizmetlerini sürekli güncelleyebilir.</li><li>Satın alınan hizmetleri etkileyen önemli değişiklikler için Tüketici mümkün olan durumlarda önceden bilgilendirilir.</li><li>Küçük iyileştirmeler ve güncellemeler önemli değişiklik sayılmaz; önceden bildirim yapılmaksızın gerçekleştirilebilir.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-5"><div class="article-label">Madde 5</div><h2>Sözleşme</h2><ol><li>Sözleşme, Tüketicinin teklifi kabul etmesi ve belirlenen koşulları yerine getirmesiyle geçerlilik kazanır.</li><li>Tüketici teklifi elektronik yollarla kabul ettiyse ExamTheorie kabulü derhal onaylar. Onay yapılana kadar Tüketici sözleşmeden cayabilir.</li><li>ExamTheorie, elektronik veri transferi için uygun teknik ve organizasyonel güvenlik önlemleri alır.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-6"><div class="article-label">Madde 6</div><h2>Cayma Hakkı</h2><p><i>Fiziksel taşıyıcıda teslim edilmeyen dijital içerikler için:</i></p><ol><li>Tüketici, sözleşmenin kurulduğu günü takip eden günden itibaren en az 14 günlük düşünme süresi boyunca dijital içerik sözleşmesini gerekçe göstermeksizin feshedebilir.</li><li>ExamTheorie, cayma hakkına ilişkin yasal bilgileri sağlamadıysa düşünme süresi orijinal sürenin bitiminden 12 ay sonra sona erer.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-7"><div class="article-label">Madde 7</div><h2>Düşünme Süresi Boyunca Tüketicinin Yükümlülükleri</h2><ol><li>Düşünme süresi boyunca Tüketici, ürünü yalnızca niteliğini ve etkisini değerlendirmek için gerekli olduğu ölçüde kullanabilir.</li><li>Tüketici, yalnızca bu sınırın ötesindeki kullanımdan kaynaklanan değer kaybından sorumludur.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-8"><div class="article-label">Madde 8</div><h2>Cayma Hakkının Kullanılması</h2><ol><li>Tüketici, cayma hakkını kullanmak istediğinde düşünme süresi içinde ExamTheorie'yi açıkça bildirir.</li><li>Cayma hakkının doğru ve zamanında kullanıldığını ispat yükümlülüğü Tüketiciye aittir.</li><li>Tüketici cayma hakkını kullandığında tüm ek sözleşmeler kendiliğinden sona erer.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-9"><div class="article-label">Madde 9</div><h2>Cayma Durumunda ExamTheorie'nin Yükümlülükleri</h2><ol><li>ExamTheorie, cayma bildirimini aldıktan sonra derhal makbuz gönderir.</li><li>ExamTheorie, cayma bildiriminden itibaren 14 gün içinde tüm ödemeleri iade eder.</li><li>ExamTheorie, Tüketicinin kullandığı ödeme yöntemini kullanır. İade ücretsizdir.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-10"><div class="article-label">Madde 10</div><h2>Cayma Hakkının İstisnaları</h2><p>ExamTheorie, Tüketici sözleşme kurulmadan önce açıkça bilgilendirilmek kaydıyla aşağıdaki durumlarda cayma hakkını hariç tutabilir:</p><ol><li>Tüketicinin açık önceden onayıyla başlayan ve cayma hakkını kaybedeceğini kabul ettiği hizmet sözleşmeleri, hizmetin tamamen ifasından sonra.</li><li>Tüketicinin açık onayıyla başlatılan ve cayma hakkını kaybedeceğini kabul ettiği fiziksel taşıyıcıda yer almayan dijital içeriklerin teslimi.</li><li>CBR deneme sınavlarına ve teori materyallerine erişim, satın alma anında teslim edilen dijital içerik olarak kabul edilir. <strong>Tüketici içeriğin herhangi bir bölümüne eriştiği anda cayma hakkı sona erer.</strong> Satın alımı tamamlayarak Tüketici, Hollanda Medeni Kanunu'nun 6:230p maddesi uyarınca anlık erişime açıkça onay vermiş ve cayma hakkını kaybettiğini kabul etmiş sayılır.</li></ol><div class="no-refund-note">⚠️ <strong>Kullanım Sonrası İade Yapılmaz:</strong> Deneme sınavlarına veya teori materyallerine erişildikten sonra iade talebinde bulunulamaz. Lütfen satın almadan önce web sitemizde mevcut ücretsiz içerikleri inceleyiniz.</div><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-11"><div class="article-label">Madde 11</div><h2>Fiyat</h2><ol><li>Fiyatlar, teklifte belirtilen geçerlilik süresi boyunca KDV değişiklikleri dışında artırılamaz.</li><li>Sözleşme kurulduktan sonraki 3 ay içindeki fiyat artışlarına yalnızca yeni mevzuattan kaynaklanıyorsa izin verilir.</li><li>3 aydan sonraki fiyat artışlarına yalnızca Tüketicinin artış başlamadan sözleşmeyi feshetme hakkı varsa izin verilir.</li><li>Tüm fiyatlar KDV dahildir.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-12"><div class="article-label">Madde 12</div><h2>Uyumluluk ve Ek Garanti</h2><ol><li>ExamTheorie, dijital içerik ve hizmetlerinin sözleşmeyle, makul kullanılabilirlik gereksinimleriyle ve yasal düzenlemelerle uyumlu olduğunu garanti eder.</li><li>ExamTheorie tarafından sunulan ek garanti, Tüketicinin yasal haklarını etkilemez.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-13"><div class="article-label">Madde 13</div><h2>Teslimat ve Uygulama</h2><ol><li>ExamTheorie, siparişleri işlerken azami özeni gösterir.</li><li>Ödemenin onaylanmasının ardından dijital içeriğe erişim derhal sağlanır. Teslimat gecikirse Tüketici bilgilendirilir ve ücretsiz cayabilir.</li><li>Cayma sonrasında ExamTheorie ödemeyi 30 gün içinde iade eder.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-14"><div class="article-label">Madde 14</div><h2>Sürekli Performans Sözleşmeleri</h2><p><i>Fesih</i></p><ol><li>Tüketici, belirsiz süreli sözleşmeleri en fazla bir aylık ihbar süresiyle her zaman feshedebilir.</li><li>Tüketici, belirli süreli sözleşmeleri süre sonunda en fazla bir aylık ihbar süresiyle feshedebilir.</li></ol><p><i>Süre</i></p><ol><li>Sözleşmenin süresi bir yıldan uzunsa Tüketici, bir yılın ardından en fazla bir aylık ihbar süresiyle feshedebilir.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-15"><div class="article-label">Madde 15</div><h2>Ödeme</h2><ol><li>Ödenecek tutarlar, düşünme süresinin bitiminden itibaren 14 gün içinde ya da düşünme süresi yoksa sözleşme kurulduktan sonraki 14 gün içinde ödenir.</li><li>Tüketici, ödeme bilgilerindeki hataları derhal bildirmekle yükümlüdür.</li><li>Geç ödeme ve 14 günlük uyarı süresi sonunda Tüketici, yasal faiz ve icra öncesi tahsilat masrafları öder (2.500 €'ya kadar maks. %15; sonraki 2.500 € için %10; sonraki 5.000 € için %5; minimum 40 €).</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-16"><div class="article-label">Madde 16</div><h2>Şikayet Prosedürü</h2><ol><li>ExamTheorie, şikayetleri belirlenen prosedürüne göre ele alır.</li><li>Şikayetler sorunun fark edilmesinden itibaren makul süre içinde açık ve eksiksiz biçimde iletilmelidir.</li><li>Şikayetler, alındığı tarihten itibaren 14 gün içinde yanıtlanır.</li><li>Şikayetler için: <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a></li><li>Şikayetler ayrıca <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener nofollow">Avrupa ODR platformu</a> üzerinden de iletilebilir.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-17"><div class="article-label">Madde 17</div><h2>Uyuşmazlıklar</h2><ol><li>ExamTheorie ile Tüketici arasındaki sözleşmelere, Tüketicinin yabancı ülkede ikamet etmesi durumunda dahi yalnızca Hollanda hukuku uygulanır.</li><li>Viyana Satım Sözleşmesi uygulanmaz.</li></ol><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="article-card" id="tr-18"><div class="article-label">Madde 18</div><h2>Ek Hükümler</h2><p>Bu koşullara ek veya aykırı hükümler Tüketicinin aleyhine olamaz ve yazılı olarak ya da Tüketicinin kalıcı bir veri taşıyıcısında saklayabileceği biçimde kayıt altına alınmalıdır.</p><a href="#" class="back-top">↑ Yukarı</a></div>
+<div class="contact-box"><h3>Bu Koşullar Hakkında Sorularınız mı Var?</h3><p>ExamTheorie · KvK 42011186<br>Voorsterallee 1, 7203 DN Zutphen, Hollanda</p><a href="mailto:examtheorie@gmail.com" class="contact-btn">✉️ examtheorie@gmail.com</a></div>
 </div><!-- /tr -->
 
 <!-- ══ NEDERLANDS ══ -->
 <div class="lang-section" id="lang-nl">
-<div class="page-header"><div class="page-badge">📄 Juridisch</div><h1 class="page-title">Privacybeleid</h1><p class="page-meta">ExamTheorie · Laatste update: januari 2026</p></div>
-<div class="intro-card">
-    <p>ExamTheorie is ingeschreven bij de Kamer van Koophandel (KvK) onder nummer <strong>42011186</strong>, gevestigd aan Voorsterallee 1, 7203 DN Zutphen, Nederland.</p>
-    <p>Dit privacybeleid is van toepassing op alle verwerking van persoonsgegevens van onze klanten en gebruikers van onze website en diensten via examtheorie.nl. Wij gaan zorgvuldig om met uw persoonsgegevens en zorgen ervoor dat alle verwerking voldoet aan de toepasselijke wet- en regelgeving, waaronder de Algemene Verordening Gegevensbescherming (AVG/GDPR).</p>
-    <p>ExamTheorie behoudt zich het recht voor dit beleid op elk moment te wijzigen. De meest actuele versie staat altijd op deze pagina. Voor privacygerelateerde vragen kunt u contact met ons opnemen via <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>.</p>
-</div>
-<div class="article-card"><div class="article-num">Artikel 1</div><h2>Privacybeleid Kennisgeving</h2>
-    <p>1.1 ExamTheorie stelt dit privacybeleid beschikbaar om u te informeren over hoe wij omgaan met persoonsgegevens en over de keuzes die u kunt maken met betrekking tot de verzameling en het gebruik van uw gegevens.</p>
-    <p>1.2 ExamTheorie respecteert en beschermt uw privacy. Wij doen redelijke inspanningen om persoonsgegevens vertrouwelijk te behandelen en te verwerken in overeenstemming met de AVG. Onze website is zo ingericht dat u in veel gevallen een bezoek kunt brengen zonder uzelf te identificeren. Voor het gebruik van onze diensten heeft u echter doorgaans een account nodig, wat de verwerking van persoonsgegevens met zich meebrengt.</p>
-    <p>1.3 Als betrokkene heeft u op grond van de AVG de volgende rechten:</p>
-    <ul><li>Recht op inzage (Art. 15 AVG)</li><li>Recht op rectificatie (Art. 16 AVG)</li><li>Recht op verwijdering (Art. 17 AVG)</li><li>Recht op beperking van de verwerking (Art. 18 AVG)</li><li>Recht op overdraagbaarheid van gegevens (Art. 20 AVG)</li><li>Recht van bezwaar (Art. 21 AVG)</li><li>Recht om een klacht in te dienen bij de Autoriteit Persoonsgegevens (Art. 77 AVG)</li></ul>
-    <p>1.4 ExamTheorie bewaart overeenkomsten en gegevens die nodig zijn voor de financiële administratie gedurende ten minste 7 jaar in overeenstemming met wettelijke verplichtingen. Overige gegevens worden niet langer bewaard dan noodzakelijk voor de doeleinden in dit beleid.</p>
-</div>
-<div class="article-card"><div class="article-num">Artikel 2</div><h2>Doel van Gegevensverzameling</h2>
-    <p>2.1 ExamTheorie verwerkt persoonsgegevens om relaties met klanten te onderhouden en onze diensten te leveren.</p>
-    <p>2.2 Wij gebruiken persoonsgegevens in het bijzonder voor:</p>
-    <ul><li>Het aanmaken en beheren van een account</li><li>Het aanbieden van de online leeromgeving en gerelateerde functionaliteiten</li><li>Het verwerken van aankopen en betalingen</li><li>Klantenondersteuning en communicatie, inclusief servicemeldingen</li><li>De beveiliging van onze systemen en het voorkomen van fraude en misbruik</li><li>Analyse en verbetering van onze website en diensten</li></ul>
-    <p>2.3 <strong>Studieresultaten en leerdata.</strong> Binnen onze leeromgeving verwerken wij gegevens over studievoortgang en resultaten, zoals voltooide oefentoetsen, antwoorden, scores en gebruiksstatistieken. Wij gebruiken deze gegevens om de leeromgeving te laten functioneren, uw voortgang te tonen en uw leerervaring te verbeteren.</p>
-    <p>2.4 <strong>Betalingsgegevens.</strong> Bankrekening- en betaalgegevens worden uitsluitend gebruikt voor het verwerken van betalingen. ExamTheorie slaat geen volledige betaalkaartgegevens op.</p>
-    <p>2.5 <strong>Rechtsgrondslag.</strong> ExamTheorie verwerkt persoonsgegevens op grond van een of meer van de volgende grondslagen:</p>
-    <ul><li>Uitvoering van een overeenkomst (bijv. het leveren van een cursus of dienst)</li><li>Wettelijke verplichting (bijv. wettelijke bewaarplichten voor belastingdoeleinden)</li><li>Gerechtvaardigd belang (bijv. beveiliging, fraudepreventie, verbetering van diensten)</li><li>Toestemming — waar wettelijk vereist (bijv. bepaalde cookies of marketing)</li></ul>
-    <p>2.6 <strong>Marketing.</strong> Indien wij u informeren over diensten en aanbiedingen, doen wij dat in overeenstemming met de wet. Waar vereist vragen wij vooraf uw toestemming en kunt u zich altijd afmelden via <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>.</p>
-</div>
-<div class="article-card"><div class="article-num">Artikel 3</div><h2>Links naar Derden en Gegevensdeling</h2>
-    <p>3.1 Links naar websites van derden worden uitsluitend weergegeven voor uw gemak. ExamTheorie beheert deze sites niet en aanvaardt geen verantwoordelijkheid voor hun inhoud of privacybeleid.</p>
-    <p>3.2 ExamTheorie verkoopt of verhuurt geen persoonsgegevens aan derden. Persoonsgegevens kunnen worden gedeeld met derden wanneer dit noodzakelijk is voor de levering van onze diensten, voor het nakomen van een wettelijke verplichting, of wanneer u daarvoor toestemming heeft gegeven.</p>
-    <p>3.3 Persoonsgegevens kunnen worden gedeeld met de volgende categorieën van dienstverleners:</p>
-    <ul><li>Hosting- en cloudproviders</li><li>Betalingsdienstverleners</li><li>IT- en beveiligingsdienstverleners</li><li>Analytische en statistische dienstverleners</li></ul>
-    <p>3.4 Waar derden als verwerkers namens ExamTheorie optreden, sluiten wij waar vereist een verwerkersovereenkomst en maken wij afspraken over beveiliging en vertrouwelijkheid.</p>
-    <p>3.5 Waar wij gebruik maken van dienstverleners die gegevens buiten de EER verwerken, zorgen wij voor passende waarborgen, zoals Standaardcontractbepalingen of andere wettelijk toegestane mechanismen.</p>
-</div>
-<div class="article-card"><div class="article-num">Artikel 4</div><h2>Beveiliging</h2>
-    <p>4.1 ExamTheorie treft passende technische en organisatorische maatregelen om persoonsgegevens te beschermen tegen verlies, misbruik, ongeoorloofde toegang, openbaarmaking en wijziging. Dergelijke maatregelen omvatten versleuteling, toegangscontrole, logging, monitoring en beveiligde verbindingen (TLS).</p>
-    <p>4.2 Bij het verzamelen of overdragen van belangrijke gegevens maken wij waar van toepassing gebruik van versleuteling en beveiligde verbindingen.</p>
-</div>
-<div class="article-card"><div class="article-num">Artikel 5</div><h2>Vermoedelijk Misbruik</h2>
-    <p>5.1 ExamTheorie behoudt zich het recht voor om proactief en correctief op te treden bij vermoedelijk misbruik. Dit kan het tijdelijk vastleggen van relevante gegevens en logs als mogelijk bewijs omvatten, voor zover noodzakelijk voor beveiliging en fraudepreventie. Bij voldoende bewijs kan ExamTheorie passende maatregelen nemen, waaronder uitsluiting van de dienst of melding bij de bevoegde autoriteiten.</p>
-</div>
-<div class="article-card"><div class="article-num">Artikel 6</div><h2>Cookies, Analyse en Bewaartermijnen</h2>
-    <p>6.1 ExamTheorie kan informatie verzamelen via cookies en vergelijkbare technologieën, evenals technische gegevens zoals IP-adres, browserinformatie, apparaatkenmerken en loggegevens. Wij doen dit om de website goed te laten functioneren, de beveiliging te waarborgen en onze diensten te verbeteren.</p>
-    <p>6.2 Cookies kunnen functioneel, analytisch en, waar van toepassing, marketingcookies zijn. Waar wettelijk vereist vragen wij vooraf toestemming. U kunt cookies ook verwijderen of blokkeren via uw browserinstellingen, maar dit kan de functionaliteit van de website beïnvloeden.</p>
-    <p>6.3 ExamTheorie hanteert de volgende bewaartermijnen:</p>
-    <ul><li>Financiële gegevens en factuurgegevens: ten minste 7 jaar (wettelijke belastingverplichtingen)</li><li>Accountgegevens: zolang het account actief is, plus tot 12 maanden na verwijdering</li><li>Studievoortgang en tentamenresultaten: zolang het account actief is, plus tot 12 maanden</li><li>Technische log- en beveiligingsgegevens: tot 6 maanden; verlengbaar bij beveiligingsincidenten</li><li>Analytische gebruiksgegevens: tot 14 maanden</li><li>Klantenservicecommunicatie: tot 24 maanden</li></ul>
-    <p>6.4 Waar gegevens volledig zijn geanonimiseerd en niet meer kunnen worden gekoppeld aan een natuurlijk persoon, mogen deze worden gebruikt voor statistische analyse en verbetering van onze diensten.</p>
-</div>
-<div class="article-card"><div class="article-num">Artikel 7</div><h2>Wijzigingen in dit Beleid</h2>
-    <p>7.1 ExamTheorie behoudt zich het recht voor dit privacybeleid te wijzigen. De meest actuele versie staat altijd op deze pagina. Bij materiële wijzigingen kunnen wij u via de website of per e-mail informeren, waar van toepassing.</p>
-</div>
-<div class="article-card"><div class="article-num">Artikel 8</div><h2>Klachten</h2>
-    <p>8.1 Als u van mening bent dat dit privacybeleid niet wordt nageleefd, of als u vragen of klachten heeft over de verwerking van persoonsgegevens, neem dan contact met ons op via <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>. U heeft ook het recht een klacht in te dienen bij de Autoriteit Persoonsgegevens.</p>
-</div>
-<div class="article-card"><div class="article-num">Artikel 9</div><h2>Overgangs- en Slotbepalingen</h2>
-    <p>9.1 Onverminderd eventuele wettelijke bepalingen is dit beleid van toepassing voor de gehele duur van de registraties en zolang wij persoonsgegevens verwerken in verband met onze diensten.</p>
-    <p>9.2 <strong>Minderjarigen.</strong> Onze diensten kunnen door minderjarigen worden gebruikt. Als u jonger bent dan 16 jaar, kan voor bepaalde verwerkingsactiviteiten toestemming van een ouder of wettelijke voogd vereist zijn. Neem in dat geval contact met ons op via <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>.</p>
-</div>
-<div class="contact-box"><h3>Vragen of Opmerkingen?</h3><p>ExamTheorie · KvK 42011186<br>Voorsterallee 1, 7203 DN Zutphen, Nederland</p><a href="mailto:examtheorie@gmail.com" class="contact-btn">✉️ examtheorie@gmail.com</a></div>
+<div class="page-header"><div class="page-badge">📋 Juridisch</div><h1 class="page-title">Algemene Voorwaarden</h1><p class="page-meta">ExamTheorie · Laatste update: januari 2026</p></div>
+<div class="intro-card"><p>Deze Algemene Voorwaarden zijn van toepassing op alle aanbiedingen van ExamTheorie en op iedere overeenkomst op afstand die ExamTheorie met de Consument sluit. Door onze diensten te kopen en te gebruiken, gaat u akkoord met deze voorwaarden. Vragen? <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a></p></div>
+<div class="contents-card"><h2>Inhoudsopgave</h2><ol class="contents-list"><li><a href="#nl-1"><span class="art-num">1</span> Definities</a></li><li><a href="#nl-2"><span class="art-num">2</span> Identiteit Ondernemer</a></li><li><a href="#nl-3"><span class="art-num">3</span> Toepasselijkheid</a></li><li><a href="#nl-4"><span class="art-num">4</span> Het Aanbod</a></li><li><a href="#nl-4a"><span class="art-num">4a</span> Doorlopende Ontwikkeling</a></li><li><a href="#nl-5"><span class="art-num">5</span> De Overeenkomst</a></li><li><a href="#nl-6"><span class="art-num">6</span> Herroepingsrecht</a></li><li><a href="#nl-7"><span class="art-num">7</span> Verplichtingen Bedenktijd</a></li><li><a href="#nl-8"><span class="art-num">8</span> Uitoefening Herroepingsrecht</a></li><li><a href="#nl-9"><span class="art-num">9</span> Verplichtingen bij Herroeping</a></li><li><a href="#nl-10"><span class="art-num">10</span> Uitsluiting Herroepingsrecht</a></li><li><a href="#nl-11"><span class="art-num">11</span> De Prijs</a></li><li><a href="#nl-12"><span class="art-num">12</span> Conformiteit en Garantie</a></li><li><a href="#nl-13"><span class="art-num">13</span> Levering en Uitvoering</a></li><li><a href="#nl-14"><span class="art-num">14</span> Duurtransacties</a></li><li><a href="#nl-15"><span class="art-num">15</span> Betaling</a></li><li><a href="#nl-16"><span class="art-num">16</span> Klachtenprocedure</a></li><li><a href="#nl-17"><span class="art-num">17</span> Geschillen</a></li><li><a href="#nl-18"><span class="art-num">18</span> Aanvullende Bepalingen</a></li></ol></div>
+<div class="article-card" id="nl-1"><div class="article-label">Artikel 1</div><h2>Definities</h2><ol><li><strong>Aanvullende overeenkomst:</strong> een overeenkomst waarbij de Consument digitale inhoud en/of diensten verwerft in verband met een overeenkomst op afstand.</li><li><strong>Bedenktijd:</strong> de termijn waarbinnen de Consument gebruik kan maken van zijn herroepingsrecht.</li><li><strong>Consument:</strong> de natuurlijke persoon die niet handelt voor commerciële of professionele doeleinden.</li><li><strong>Dag:</strong> kalenderdag.</li><li><strong>Digitale inhoud:</strong> gegevens die in digitale vorm geproduceerd en geleverd worden.</li><li><strong>Herroepingsrecht:</strong> de mogelijkheid van de Consument om binnen de bedenktijd af te zien van de overeenkomst op afstand.</li><li><strong>Ondernemer:</strong> ExamTheorie, die op afstand digitale inhoud en/of diensten aan Consumenten levert.</li><li><strong>Overeenkomst op afstand:</strong> een overeenkomst gesloten tussen ExamTheorie en de Consument met gebruik van technieken voor communicatie op afstand.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-2"><div class="article-label">Artikel 2</div><h2>Identiteit van de Ondernemer</h2><div class="identity-box"><strong>ExamTheorie</strong>Voorsterallee 1, 7203 DN Zutphen, Nederland<br>KvK: 42011186<br>E-mail: <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a></div><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-3"><div class="article-label">Artikel 3</div><h2>Toepasselijkheid</h2><ol><li>Deze Algemene Voorwaarden zijn van toepassing op elk aanbod van ExamTheorie en op elke overeenkomst op afstand tussen ExamTheorie en de Consument.</li><li>Voordat de overeenkomst wordt gesloten, stelt ExamTheorie de tekst van deze Voorwaarden kosteloos beschikbaar.</li><li>Indien sprake is van tegenstrijdige voorwaarden, kan de Consument zich beroepen op de bepaling die voor hem het meest gunstig is.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-4"><div class="article-label">Artikel 4</div><h2>Het Aanbod</h2><ol><li>Indien een aanbod een beperkte geldigheidsduur heeft of onder voorwaarden geschiedt, wordt dit nadrukkelijk vermeld.</li><li>Het aanbod bevat een volledige en nauwkeurige omschrijving van de aangeboden digitale inhoud en/of diensten. Kennelijke vergissingen binden ExamTheorie niet.</li><li>Elk aanbod bevat zodanige informatie dat voor de Consument duidelijk is welke rechten en verplichtingen aan aanvaarding zijn verbonden.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-4a"><div class="article-label">Artikel 4a</div><h2>Doorlopende Ontwikkeling</h2><ol><li>ExamTheorie kan zijn digitale inhoud en diensten doorlopend bijwerken en verbeteren, waaronder theoriemateriaal, oefentoetsen en platformfuncties.</li><li>De Consument wordt geïnformeerd over wezenlijke wijzigingen die van invloed zijn op gekochte diensten, waar mogelijk van tevoren.</li><li>Kleine verbeteringen worden niet als wezenlijke wijziging beschouwd en kunnen te allen tijde zonder voorafgaande kennisgeving worden doorgevoerd.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-5"><div class="article-label">Artikel 5</div><h2>De Overeenkomst</h2><ol><li>De overeenkomst komt tot stand op het moment van aanvaarding door de Consument van het aanbod en het voldoen aan de daarbij gestelde voorwaarden.</li><li>Indien de Consument het aanbod langs elektronische weg heeft aanvaard, bevestigt ExamTheorie onverwijld de ontvangst van de aanvaarding.</li><li>ExamTheorie treft passende technische en organisatorische maatregelen ter beveiliging van de elektronische overdracht van data.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-6"><div class="article-label">Artikel 6</div><h2>Herroepingsrecht</h2><p><i>Bij digitale inhoud die niet op een materiële drager wordt geleverd:</i></p><ol><li>De Consument kan een overeenkomst met betrekking tot digitale inhoud gedurende een bedenktijd van minimaal 14 dagen zonder opgave van redenen ontbinden. De bedenktijd gaat in op de dag na het sluiten van de overeenkomst.</li><li>Indien ExamTheorie de Consument niet heeft voorzien van de wettelijk verplichte informatie over het herroepingsrecht, loopt de bedenktijd af twaalf maanden na het einde van de oorspronkelijke bedenktijd.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-7"><div class="article-label">Artikel 7</div><h2>Verplichtingen Consument tijdens Bedenktijd</h2><ol><li>Tijdens de bedenktijd zal de Consument zorgvuldig omgaan met het product en het slechts gebruiken in de mate die nodig is om de aard en kenmerken vast te stellen.</li><li>De Consument is alleen aansprakelijk voor waardevermindering die het gevolg is van gebruik dat verder gaat dan toegestaan in lid 1.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-8"><div class="article-label">Artikel 8</div><h2>Uitoefening Herroepingsrecht</h2><ol><li>Als de Consument gebruik maakt van zijn herroepingsrecht, meldt hij dit binnen de bedenktijd ondubbelzinnig aan ExamTheorie.</li><li>Het risico en de bewijslast voor de juiste en tijdige uitoefening van het herroepingsrecht liggen bij de Consument.</li><li>Als de Consument gebruik maakt van zijn herroepingsrecht, komen alle aanvullende overeenkomsten van rechtswege tot een einde.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-9"><div class="article-label">Artikel 9</div><h2>Verplichtingen ExamTheorie bij Herroeping</h2><ol><li>ExamTheorie stuurt na melding van herroeping onverwijld een ontvangstbevestiging.</li><li>ExamTheorie vergoedt alle betalingen van de Consument binnen 14 dagen na de dag van melding.</li><li>ExamTheorie gebruikt hetzelfde betaalmiddel dat de Consument heeft gebruikt. Terugbetaling is kosteloos.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-10"><div class="article-label">Artikel 10</div><h2>Uitsluiting Herroepingsrecht</h2><p>ExamTheorie kan de volgende diensten uitsluiten van het herroepingsrecht, mits de Consument duidelijk is geïnformeerd vóór het sluiten van de overeenkomst:</p><ol><li>Dienstverleningsovereenkomsten na volledige uitvoering, als de uitvoering is begonnen met uitdrukkelijke voorafgaande instemming van de Consument en de Consument heeft verklaard zijn herroepingsrecht te verliezen.</li><li>Levering van digitale inhoud die niet op een materiële drager is geleverd, als de uitvoering is begonnen met uitdrukkelijke instemming en de Consument heeft verklaard zijn herroepingsrecht te verliezen.</li><li>Toegang tot CBR-oefentoetsen en theoriemateriaal wordt beschouwd als digitale inhoud die direct na aankoop wordt geleverd. <strong>Zodra de Consument toegang heeft gekregen tot of gebruik heeft gemaakt van enig onderdeel van de inhoud, vervalt het herroepingsrecht.</strong> Door de aankoop te voltooien, stemt de Consument uitdrukkelijk in met directe toegang en erkent hij het verlies van het herroepingsrecht overeenkomstig artikel 6:230p van het Burgerlijk Wetboek.</li></ol><div class="no-refund-note">⚠️ <strong>Geen Terugbetaling na Gebruik:</strong> Zodra u toegang heeft gehad tot de oefentoetsen of het theoriemateriaal, kan er geen terugbetaling worden verstrekt. Bekijk eerst de gratis inhoud op onze website voordat u een aankoop doet.</div><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-11"><div class="article-label">Artikel 11</div><h2>De Prijs</h2><ol><li>De prijzen worden gedurende de in het aanbod vermelde geldigheidsduur niet verhoogd, behoudens btw-wijzigingen.</li><li>Prijsverhogingen binnen 3 maanden na totstandkoming zijn alleen toegestaan indien zij het gevolg zijn van wettelijke regelingen.</li><li>Prijsverhogingen vanaf 3 maanden zijn alleen toegestaan indien de Consument de bevoegdheid heeft de overeenkomst te beëindigen vóór de ingangsdatum van de verhoging.</li><li>Alle prijzen zijn inclusief btw.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-12"><div class="article-label">Artikel 12</div><h2>Conformiteit en Extra Garantie</h2><ol><li>ExamTheorie staat ervoor in dat de digitale inhoud en diensten voldoen aan de overeenkomst, aan redelijke eisen van deugdelijkheid en bruikbaarheid, en aan de op de datum van totstandkoming bestaande wettelijke bepalingen.</li><li>Een door ExamTheorie verstrekte extra garantie beperkt nimmer de wettelijke rechten van de Consument.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-13"><div class="article-label">Artikel 13</div><h2>Levering en Uitvoering</h2><ol><li>ExamTheorie neemt de grootst mogelijke zorgvuldigheid in acht bij de uitvoering van bestellingen.</li><li>Toegang tot digitale inhoud wordt direct na bevestiging van betaling verstrekt. Bij vertraging wordt de Consument geïnformeerd en heeft hij het recht de overeenkomst kosteloos te ontbinden.</li><li>Na ontbinding vergoedt ExamTheorie het betaalde bedrag binnen 30 dagen.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-14"><div class="article-label">Artikel 14</div><h2>Duurtransacties</h2><p><i>Opzegging</i></p><ol><li>De Consument kan een voor onbepaalde tijd gesloten overeenkomst te allen tijde opzeggen met een opzegtermijn van ten hoogste één maand.</li><li>De Consument kan een voor bepaalde tijd gesloten overeenkomst aan het einde van de bepaalde tijd opzeggen met een opzegtermijn van ten hoogste één maand.</li></ol><p><i>Duur</i></p><ol><li>Als de duur meer dan één jaar is, mag de Consument na één jaar opzeggen met een opzegtermijn van ten hoogste één maand.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-15"><div class="article-label">Artikel 15</div><h2>Betaling</h2><ol><li>De verschuldigde bedragen dienen te worden voldaan binnen 14 dagen na het ingaan van de bedenktermijn, of bij het ontbreken daarvan binnen 14 dagen na het sluiten van de overeenkomst.</li><li>De Consument heeft de plicht onjuistheden in betaalgegevens onverwijld te melden.</li><li>In geval van wanbetaling is ExamTheorie na aanzegging gerechtigd wettelijke rente en buitengerechtelijke incassokosten in rekening te brengen (max. 15% over eerste €2.500; 10% over volgende €2.500; 5% over volgende €5.000; minimum €40).</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-16"><div class="article-label">Artikel 16</div><h2>Klachtenprocedure</h2><ol><li>ExamTheorie behandelt klachten overeenkomstig zijn klachtenprocedure.</li><li>Klachten moeten volledig en duidelijk omschreven worden ingediend binnen bekwame tijd na het ontdekken van het gebrek.</li><li>Klachten worden binnen 14 dagen na ontvangst beantwoord.</li><li>Klachten indienen via: <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a></li><li>Klachten kunnen ook worden ingediend via het <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener nofollow">Europees ODR-platform</a>.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-17"><div class="article-label">Artikel 17</div><h2>Geschillen</h2><ol><li>Op overeenkomsten tussen ExamTheorie en de Consument is uitsluitend Nederlands recht van toepassing, ook als de Consument in het buitenland woont.</li><li>Het Weens Koopverdrag is niet van toepassing.</li></ol><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="article-card" id="nl-18"><div class="article-label">Artikel 18</div><h2>Aanvullende of Afwijkende Bepalingen</h2><p>Aanvullende dan wel afwijkende bepalingen mogen niet ten nadele van de Consument zijn en dienen schriftelijk te worden vastgelegd dan wel op zodanige wijze dat de Consument ze op een duurzame gegevensdrager kan opslaan.</p><a href="#" class="back-top">↑ Omhoog</a></div>
+<div class="contact-box"><h3>Vragen over deze Voorwaarden?</h3><p>ExamTheorie · KvK 42011186<br>Voorsterallee 1, 7203 DN Zutphen, Nederland</p><a href="mailto:examtheorie@gmail.com" class="contact-btn">✉️ examtheorie@gmail.com</a></div>
 </div><!-- /nl -->
 
 <!-- ══ العربية ══ -->
 <div class="lang-section" id="lang-ar">
-<div class="page-header"><div class="page-badge">📄 قانوني</div><h1 class="page-title">سياسة الخصوصية</h1><p class="page-meta">ExamTheorie · آخر تحديث: يناير 2026</p></div>
-<div class="intro-card">
-    <p>ExamTheorie مسجَّلة في غرفة التجارة الهولندية (KvK) تحت رقم <strong>42011186</strong>، بعنوان Voorsterallee 1, 7203 DN Zutphen، هولندا.</p>
-    <p>تُطبَّق سياسة الخصوصية هذه على جميع عمليات معالجة البيانات الشخصية لعملائنا ومستخدمي موقعنا الإلكتروني وخدماتنا على examtheorie.nl. نتعامل مع بياناتك الشخصية بعناية ونضمن أن تكون جميع عمليات المعالجة متوافقة مع القوانين واللوائح المعمول بها، بما فيها اللائحة العامة لحماية البيانات (GDPR).</p>
-    <p>تحتفظ ExamTheorie بحق تعديل هذه السياسة في أي وقت. يُنشر الإصدار الأحدث دائماً على هذه الصفحة. للاستفسارات المتعلقة بالخصوصية، يُرجى التواصل معنا على <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>.</p>
-</div>
-<div class="article-card"><div class="article-num">المادة 1</div><h2>إشعار سياسة الخصوصية</h2>
-    <p>1.1 تُقدِّم ExamTheorie هذه السياسة لإعلامك بكيفية تعاملنا مع البيانات الشخصية وبالخيارات المتاحة لك فيما يخص جمع معلوماتك واستخدامها.</p>
-    <p>1.2 تحترم ExamTheorie خصوصيتك وتحافظ عليها. نبذل جهوداً معقولة لضمان معالجة البيانات الشخصية بسرية تامة ووفقاً للائحة GDPR. يتيح موقعنا في كثير من الأحيان التصفح دون الكشف عن هويتك، غير أن استخدام خدماتنا يستلزم عموماً إنشاء حساب، مما يستتبع معالجة بيانات شخصية.</p>
-    <p>1.3 بوصفك صاحب بيانات، تتمتع بموجب اللائحة GDPR بالحقوق التالية:</p>
-    <ul><li>حق الوصول إلى البيانات (المادة 15 GDPR)</li><li>حق التصحيح (المادة 16 GDPR)</li><li>حق الحذف (المادة 17 GDPR)</li><li>حق تقييد المعالجة (المادة 18 GDPR)</li><li>حق نقل البيانات (المادة 20 GDPR)</li><li>حق الاعتراض (المادة 21 GDPR)</li><li>حق تقديم شكوى إلى هيئة حماية البيانات الهولندية (المادة 77 GDPR)</li></ul>
-    <p>1.4 تحتفظ ExamTheorie بالعقود والبيانات اللازمة للإدارة المالية لمدة لا تقل عن 7 سنوات وفقاً للالتزامات القانونية. لا تُحتفظ بالبيانات الأخرى لفترة أطول مما هو ضروري للأغراض المنصوص عليها في هذه السياسة.</p>
-</div>
-<div class="article-card"><div class="article-num">المادة 2</div><h2>الغرض من جمع البيانات</h2>
-    <p>2.1 تعالج ExamTheorie البيانات الشخصية بهدف الحفاظ على العلاقات مع العملاء وتقديم خدماتنا.</p>
-    <p>2.2 نستخدم البيانات الشخصية تحديداً للأغراض التالية:</p>
-    <ul><li>إنشاء الحسابات وإدارتها</li><li>توفير بيئة التعلم الإلكترونية والوظائف المرتبطة بها</li><li>معالجة عمليات الشراء والمدفوعات</li><li>دعم العملاء والتواصل معهم، بما في ذلك رسائل الخدمة</li><li>تأمين أنظمتنا ومنع الاحتيال وسوء الاستخدام</li><li>تحليل موقعنا الإلكتروني وخدماتنا وتحسينها</li></ul>
-    <p>2.3 <strong>نتائج الدراسة وبيانات التعلم.</strong> داخل بيئة التعلم لدينا، نعالج بيانات تتعلق بتقدم الدراسة ونتائجها، كالاختبارات التدريبية المكتملة والإجابات والنقاط وإحصاءات الاستخدام. نستخدم هذه البيانات لضمان عمل بيئة التعلم وعرض تقدمك وتحسين تجربتك التعليمية.</p>
-    <p>2.4 <strong>بيانات الدفع.</strong> تُستخدم بيانات الحساب البنكي والدفع فقط لمعالجة المدفوعات. لا تحتفظ ExamTheorie ببيانات بطاقة الدفع الكاملة.</p>
-    <p>2.5 <strong>الأساس القانوني.</strong> تعالج ExamTheorie البيانات الشخصية استناداً إلى أحد الأسس القانونية التالية أو أكثر:</p>
-    <ul><li>تنفيذ عقد (مثل تقديم دورة أو خدمة)</li><li>التزام قانوني (مثل متطلبات الاحتفاظ الضريبي)</li><li>مصالح مشروعة (مثل الأمان ومنع الاحتيال وتحسين الخدمات)</li><li>الموافقة — حين يقتضيها القانون (مثل بعض ملفات تعريف الارتباط أو التسويق)</li></ul>
-    <p>2.6 <strong>التسويق.</strong> عند إبلاغك بالخدمات والعروض، نفعل ذلك وفقاً للقانون. نطلب موافقتك المسبقة حين يُشترط ذلك، ويمكنك إلغاء الاشتراك في أي وقت عبر <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>.</p>
-</div>
-<div class="article-card"><div class="article-num">المادة 3</div><h2>الروابط بالأطراف الثالثة ومشاركة البيانات</h2>
-    <p>3.1 تُعرَض روابط مواقع الأطراف الثالثة لراحتك فحسب. لا تدير ExamTheorie هذه المواقع ولا تتحمل أي مسؤولية عن محتواها أو سياسات الخصوصية المعتمدة فيها.</p>
-    <p>3.2 لا تبيع ExamTheorie البيانات الشخصية أو تؤجرها لأطراف ثالثة. يمكن مشاركة البيانات الشخصية مع أطراف ثالثة عند الضرورة لتقديم خدماتنا أو الامتثال لالتزام قانوني أو بموافقتك.</p>
-    <p>3.3 قد تُشارَك البيانات الشخصية مع الفئات التالية من مزودي الخدمات:</p>
-    <ul><li>مزودو الاستضافة والحوسبة السحابية</li><li>مزودو خدمات الدفع</li><li>مزودو خدمات تقنية المعلومات والأمن</li><li>مزودو خدمات التحليلات والإحصاء</li></ul>
-    <p>3.4 حين تعمل أطراف ثالثة بوصفها معالجين بيانات نيابةً عن ExamTheorie، نُبرم عند الاقتضاء اتفاقية معالجة بيانات ونُرسي ترتيبات تتعلق بالأمان والسرية.</p>
-    <p>3.5 عند استخدام مزودي خدمات يعالجون البيانات خارج المنطقة الاقتصادية الأوروبية، نضمن وجود ضمانات ملائمة كالبنود التعاقدية القياسية أو غيرها من الآليات المسموح بها قانوناً.</p>
-</div>
-<div class="article-card"><div class="article-num">المادة 4</div><h2>الأمان</h2>
-    <p>4.1 تتخذ ExamTheorie تدابير تقنية وتنظيمية مناسبة لحماية البيانات الشخصية من الفقدان وسوء الاستخدام والوصول غير المصرح به والإفصاح والتعديل. تشمل هذه التدابير التشفير وضوابط الوصول والتسجيل والمراقبة والاتصالات الآمنة (TLS).</p>
-    <p>4.2 عند جمع البيانات المهمة أو نقلها، نستخدم التشفير والاتصالات الآمنة حيثما كان ذلك مناسباً.</p>
-</div>
-<div class="article-card"><div class="article-num">المادة 5</div><h2>الاشتباه في إساءة الاستخدام</h2>
-    <p>5.1 تحتفظ ExamTheorie بحق اتخاذ إجراءات استباقية وتصحيحية عند الاشتباه في إساءة الاستخدام. قد يشمل ذلك التسجيل المؤقت للبيانات والسجلات ذات الصلة كدليل محتمل، بالقدر اللازم للأمان ومنع الاحتيال. عند توافر أدلة كافية، يجوز لـ ExamTheorie اتخاذ تدابير مناسبة، بما في ذلك الإقصاء من الخدمة أو الإبلاغ عن ذلك للسلطات المختصة.</p>
-</div>
-<div class="article-card"><div class="article-num">المادة 6</div><h2>ملفات تعريف الارتباط والتحليلات وفترات الاحتفاظ</h2>
-    <p>6.1 قد تجمع ExamTheorie معلومات عبر ملفات تعريف الارتباط والتقنيات المماثلة، فضلاً عن بيانات تقنية كعنوان IP ومعلومات المتصفح وخصائص الجهاز وبيانات السجل. نفعل ذلك لضمان أداء الموقع الصحيح والحفاظ على الأمان وتحسين خدماتنا.</p>
-    <p>6.2 قد تكون ملفات تعريف الارتباط وظيفية أو تحليلية أو تسويقية عند الاقتضاء. نطلب الموافقة المسبقة حين يشترط القانون ذلك. يمكنك حذف ملفات تعريف الارتباط أو حجبها عبر إعدادات متصفحك، غير أن ذلك قد يؤثر على وظائف الموقع.</p>
-    <p>6.3 تطبق ExamTheorie فترات الاحتفاظ التالية:</p>
-    <ul><li>البيانات المالية وبيانات الفاتورة: 7 سنوات على الأقل (الالتزامات الضريبية القانونية)</li><li>بيانات الحساب: طوال فترة نشاط الحساب، وما يصل إلى 12 شهراً بعد حذفه</li><li>تقدم الدراسة ونتائج الاختبارات: طوال فترة نشاط الحساب، وما يصل إلى 12 شهراً</li><li>بيانات السجلات التقنية والأمنية: حتى 6 أشهر؛ قابلة للتمديد عند التحقيق في حوادث أمنية</li><li>بيانات الاستخدام التحليلية: حتى 14 شهراً</li><li>مراسلات دعم العملاء: حتى 24 شهراً</li></ul>
-    <p>6.4 حين تُجهَّل البيانات تجهيلاً كاملاً ولا يمكن ربطها بأي شخص طبيعي، يجوز استخدامها للتحليل الإحصائي وتحسين خدماتنا.</p>
-</div>
-<div class="article-card"><div class="article-num">المادة 7</div><h2>التغييرات في هذه السياسة</h2>
-    <p>7.1 تحتفظ ExamTheorie بحق تعديل سياسة الخصوصية هذه. يُنشر الإصدار الأحدث دائماً على هذه الصفحة. في حالة التغييرات الجوهرية، قد نُبلِّغك عبر الموقع الإلكتروني أو البريد الإلكتروني حيثما كان ذلك مناسباً.</p>
-</div>
-<div class="article-card"><div class="article-num">المادة 8</div><h2>الشكاوى</h2>
-    <p>8.1 إذا كنت تعتقد أن سياسة الخصوصية هذه لا تُطبَّق، أو إذا كانت لديك أسئلة أو شكاوى تتعلق بمعالجة البيانات الشخصية، يُرجى التواصل معنا على <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>. يحق لك أيضاً تقديم شكوى إلى هيئة حماية البيانات الهولندية (Autoriteit Persoonsgegevens).</p>
-</div>
-<div class="article-card"><div class="article-num">المادة 9</div><h2>الأحكام الانتقالية والختامية</h2>
-    <p>9.1 مع مراعاة أي أحكام قانونية، تسري هذه السياسة طوال مدة التسجيلات وطالما نعالج بيانات شخصية فيما يتعلق بخدماتنا.</p>
-    <p>9.2 <strong>القاصرون.</strong> يجوز للقاصرين استخدام خدماتنا. إذا كنت دون السادسة عشرة من عمرك، فقد يُشترط الحصول على موافقة أحد الوالدين أو الوصي القانوني لبعض أنشطة المعالجة. في هذه الحالة، يُرجى التواصل معنا على <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a>.</p>
-</div>
-<div class="contact-box"><h3>أسئلة أو استفسارات؟</h3><p>ExamTheorie · KvK 42011186<br>Voorsterallee 1, 7203 DN Zutphen, هولندا</p><a href="mailto:examtheorie@gmail.com" class="contact-btn">✉️ examtheorie@gmail.com</a></div>
+<div class="page-header"><div class="page-badge">📋 قانوني</div><h1 class="page-title">الشروط والأحكام العامة</h1><p class="page-meta">ExamTheorie · آخر تحديث: يناير 2026</p></div>
+<div class="intro-card"><p>تُطبَّق هذه الشروط والأحكام العامة على جميع العروض المقدَّمة من ExamTheorie وعلى أي عقد عن بُعد يُبرَم بين ExamTheorie والمستهلك. بشراء خدماتنا واستخدامها، فإنك توافق على هذه الشروط. للاستفسارات: <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a></p></div>
+<div class="contents-card"><h2>المحتويات</h2><ol class="contents-list"><li><a href="#ar-1"><span class="art-num">1</span> التعريفات</a></li><li><a href="#ar-2"><span class="art-num">2</span> هوية صاحب المشروع</a></li><li><a href="#ar-3"><span class="art-num">3</span> نطاق التطبيق</a></li><li><a href="#ar-4"><span class="art-num">4</span> العرض</a></li><li><a href="#ar-4a"><span class="art-num">4أ</span> التطوير المستمر</a></li><li><a href="#ar-5"><span class="art-num">5</span> العقد</a></li><li><a href="#ar-6"><span class="art-num">6</span> حق الانسحاب</a></li><li><a href="#ar-7"><span class="art-num">7</span> التزامات مدة التفكير</a></li><li><a href="#ar-8"><span class="art-num">8</span> ممارسة حق الانسحاب</a></li><li><a href="#ar-9"><span class="art-num">9</span> التزامات عند الانسحاب</a></li><li><a href="#ar-10"><span class="art-num">10</span> استثناءات حق الانسحاب</a></li><li><a href="#ar-11"><span class="art-num">11</span> السعر</a></li><li><a href="#ar-12"><span class="art-num">12</span> الامتثال والضمان</a></li><li><a href="#ar-13"><span class="art-num">13</span> التسليم والتنفيذ</a></li><li><a href="#ar-14"><span class="art-num">14</span> عقود الأداء المستمر</a></li><li><a href="#ar-15"><span class="art-num">15</span> الدفع</a></li><li><a href="#ar-16"><span class="art-num">16</span> إجراءات الشكاوى</a></li><li><a href="#ar-17"><span class="art-num">17</span> النزاعات</a></li><li><a href="#ar-18"><span class="art-num">18</span> أحكام إضافية</a></li></ol></div>
+<div class="article-card" id="ar-1"><div class="article-label">المادة 1</div><h2>التعريفات</h2><ol><li><strong>الاتفاقية التكميلية:</strong> اتفاقية يحصل بموجبها المستهلك على محتوى رقمي و/أو خدمات في إطار عقد عن بُعد.</li><li><strong>مدة التفكير:</strong> المدة التي يحق للمستهلك خلالها استخدام حق الانسحاب.</li><li><strong>المستهلك:</strong> الشخص الطبيعي الذي لا يتصرف لأغراض تجارية أو مهنية.</li><li><strong>اليوم:</strong> يوم تقويمي.</li><li><strong>المحتوى الرقمي:</strong> بيانات يتم إنتاجها وتسليمها بصيغة رقمية.</li><li><strong>حق الانسحاب:</strong> خيار المستهلك في التراجع عن العقد عن بُعد خلال مدة التفكير.</li><li><strong>صاحب المشروع:</strong> ExamTheorie، الذي يُقدِّم محتوىً رقمياً و/أو خدمات للمستهلكين عن بُعد.</li><li><strong>العقد عن بُعد:</strong> عقد يُبرَم بين ExamTheorie والمستهلك باستخدام تقنيات الاتصال عن بُعد.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-2"><div class="article-label">المادة 2</div><h2>هوية صاحب المشروع</h2><div class="identity-box"><strong>ExamTheorie</strong>Voorsterallee 1, 7203 DN Zutphen, هولندا<br>رقم الغرفة التجارية (KvK): 42011186<br>البريد الإلكتروني: <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a></div><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-3"><div class="article-label">المادة 3</div><h2>نطاق التطبيق</h2><ol><li>تُطبَّق هذه الشروط على جميع عروض ExamTheorie وعلى كل عقد عن بُعد يُبرَم بين ExamTheorie والمستهلك.</li><li>قبل إبرام العقد، يُتيح ExamTheorie نص هذه الشروط للمستهلك مجاناً.</li><li>في حال وجود شروط متعارضة، يحق للمستهلك التمسك بالحكم الأكثر ملاءمة له.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-4"><div class="article-label">المادة 4</div><h2>العرض</h2><ol><li>إذا كان العرض محدود المدة أو مشروطاً، فيُذكر ذلك صراحةً.</li><li>يتضمن العرض وصفاً كاملاً ودقيقاً للمحتوى الرقمي و/أو الخدمات المقدَّمة. الأخطاء الواضحة لا تُلزم ExamTheorie.</li><li>تتضمن جميع العروض معلومات تُوضِّح للمستهلك الحقوق والالتزامات المترتبة على قبول العرض.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-4a"><div class="article-label">المادة 4أ</div><h2>التطوير المستمر والتغييرات في المحتوى الرقمي</h2><ol><li>يجوز لـ ExamTheorie تحديث محتواه الرقمي وخدماته وتحسينها باستمرار، بما في ذلك مواد النظرية واختبارات التدريب وميزات المنصة.</li><li>يُبلَّغ المستهلك بالتغييرات الجوهرية التي تؤثر في الخدمات المشتراة، قدر الإمكان مسبقاً.</li><li>التحسينات الطفيفة لا تُعدّ تغييرات جوهرية ويمكن إجراؤها دون إشعار مسبق.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-5"><div class="article-label">المادة 5</div><h2>العقد</h2><ol><li>يصبح العقد نافذاً عند قبول المستهلك للعرض واستيفاء الشروط المحددة.</li><li>إذا قبل المستهلك العرض إلكترونياً، أكَّد ExamTheorie استلام القبول فوراً. وحتى صدور التأكيد، يحق للمستهلك الرجوع عن العقد.</li><li>يتخذ ExamTheorie تدابير أمنية ملائمة لحماية نقل البيانات الإلكترونية.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-6"><div class="article-label">المادة 6</div><h2>حق الانسحاب</h2><p><i>للمحتوى الرقمي غير المُسلَّم على حامل مادي:</i></p><ol><li>يحق للمستهلك إنهاء العقد المتعلق بالمحتوى الرقمي دون إبداء أسباب خلال مدة تفكير لا تقل عن 14 يوماً تبدأ من اليوم التالي لإبرام العقد.</li><li>إذا لم يُزوِّد ExamTheorie المستهلكَ بالمعلومات القانونية المطلوبة، تنقضي مدة التفكير بعد اثني عشر شهراً من نهاية المدة الأصلية.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-7"><div class="article-label">المادة 7</div><h2>التزامات المستهلك خلال مدة التفكير</h2><ol><li>خلال مدة التفكير، يتعامل المستهلك مع المنتج بعناية، ولا يستخدمه إلا بالقدر اللازم لتقييم طبيعته وخصائصه.</li><li>لا يكون المستهلك مسؤولاً عن انخفاض القيمة إذا لم يُزوِّده ExamTheorie بالمعلومات القانونية قبل إبرام العقد.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-8"><div class="article-label">المادة 8</div><h2>ممارسة حق الانسحاب</h2><ol><li>عند ممارسة حق الانسحاب، يُخطر المستهلكُ ExamTheorie بشكل لا لبس فيه خلال مدة التفكير.</li><li>يقع عبء إثبات الممارسة الصحيحة وفي الوقت المحدد لحق الانسحاب على المستهلك.</li><li>عند ممارسة حق الانسحاب، تنتهي جميع الاتفاقيات التكميلية بقوة القانون.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-9"><div class="article-label">المادة 9</div><h2>التزامات ExamTheorie عند الانسحاب</h2><ol><li>يُرسل ExamTheorie إيصال استلام فور الإخطار بالانسحاب.</li><li>يُعيد ExamTheorie جميع المدفوعات في غضون 14 يوماً من تاريخ الإخطار.</li><li>يستخدم ExamTheorie وسيلة الدفع ذاتها التي استخدمها المستهلك. الاسترداد مجاني.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-10"><div class="article-label">المادة 10</div><h2>استثناءات حق الانسحاب</h2><p>يجوز لـ ExamTheorie استثناء ما يلي من حق الانسحاب، شريطة إبلاغ المستهلك بذلك بوضوح قبل إبرام العقد:</p><ol><li>عقود الخدمات بعد التنفيذ الكامل، إذا بدأ التنفيذ بموافقة صريحة مسبقة من المستهلك وأقرَّ بفقدان حق الانسحاب.</li><li>تسليم المحتوى الرقمي غير المخزَّن على حامل مادي، إذا بدأ التنفيذ بموافقة صريحة وأقرَّ المستهلك بفقدان حق الانسحاب.</li><li>يُعدّ الوصول إلى اختبارات CBR التدريبية والمواد النظرية محتوىً رقمياً يُسلَّم فور الشراء. <strong>بمجرد وصول المستهلك إلى أي جزء من المحتوى أو استخدامه، يسقط حق الانسحاب نهائياً.</strong> بإتمام عملية الشراء، يوافق المستهلك صراحةً على الوصول الفوري ويُقرّ بفقدان حق الانسحاب وفقاً للمادة 6:230p من القانون المدني الهولندي.</li></ol><div class="no-refund-note">⚠️ <strong>لا استرداد بعد الاستخدام:</strong> بمجرد الوصول إلى الاختبارات التدريبية أو المواد النظرية، لا يمكن إصدار أي استرداد للمبلغ المدفوع. يُرجى مراجعة المحتوى المجاني المتاح على موقعنا قبل الشراء.</div><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-11"><div class="article-label">المادة 11</div><h2>السعر</h2><ol><li>لا تُرفَع الأسعار خلال مدة الصلاحية المحددة في العرض، باستثناء تعديلات ضريبة القيمة المضافة.</li><li>لا يُسمح برفع الأسعار في غضون 3 أشهر من إبرام العقد إلا إذا كانت نتيجة تشريعات جديدة.</li><li>لا يُسمح برفع الأسعار بعد 3 أشهر إلا إذا كان للمستهلك الحق في إنهاء العقد قبل بدء الزيادة.</li><li>جميع الأسعار شاملة لضريبة القيمة المضافة.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-12"><div class="article-label">المادة 12</div><h2>الامتثال والضمان الإضافي</h2><ol><li>يضمن ExamTheorie أن محتواه الرقمي وخدماته تتوافق مع العقد ومتطلبات الاستخدام المعقولة والأنظمة القانونية السارية.</li><li>لا يؤثر أي ضمان إضافي يُقدِّمه ExamTheorie على الحقوق القانونية للمستهلك.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-13"><div class="article-label">المادة 13</div><h2>التسليم والتنفيذ</h2><ol><li>يبذل ExamTheorie أقصى عناية ممكنة عند تنفيذ الطلبات.</li><li>يُمنَح الوصول إلى المحتوى الرقمي فور تأكيد الدفع. في حال التأخر، يُبلَّغ المستهلك ويحق له إنهاء العقد مجاناً.</li><li>بعد الإنهاء، يُعيد ExamTheorie المبلغ المدفوع في غضون 30 يوماً.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-14"><div class="article-label">المادة 14</div><h2>عقود الأداء المستمر</h2><p><i>الإنهاء</i></p><ol><li>يحق للمستهلك إنهاء عقد غير محدد المدة في أي وقت مع مهلة إشعار لا تتجاوز شهراً.</li><li>يحق للمستهلك إنهاء عقد محدد المدة عند انتهائه مع مهلة إشعار لا تتجاوز شهراً.</li></ol><p><i>المدة</i></p><ol><li>إذا تجاوزت مدة العقد سنة، يحق للمستهلك إنهاؤه بعد مرور سنة مع مهلة إشعار لا تتجاوز شهراً.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-15"><div class="article-label">المادة 15</div><h2>الدفع</h2><ol><li>تُسدَّد المبالغ المستحقة خلال 14 يوماً من انتهاء مدة التفكير، أو خلال 14 يوماً من إبرام العقد في حال عدم وجود مدة تفكير.</li><li>يلتزم المستهلك بإبلاغ ExamTheorie فوراً عن أي أخطاء في بيانات الدفع.</li><li>في حال التأخر في السداد وبعد إشعار ومهلة 14 يوماً، يحق لـ ExamTheorie احتساب الفائدة القانونية وتكاليف التحصيل (بحد أقصى 15% على أول 2500 يورو؛ 10% على الـ 2500 التالية؛ 5% على الـ 5000 التالية؛ بحد أدنى 40 يورو).</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-16"><div class="article-label">المادة 16</div><h2>إجراءات الشكاوى</h2><ol><li>يتعامل ExamTheorie مع الشكاوى وفق إجراءاته المعتمدة.</li><li>يجب تقديم الشكاوى بشكل كامل وواضح خلال مدة معقولة من اكتشاف المشكلة.</li><li>تُجاب الشكاوى في غضون 14 يوماً من تاريخ الاستلام.</li><li>لتقديم الشكاوى: <a href="mailto:examtheorie@gmail.com">examtheorie@gmail.com</a></li><li>يمكن أيضاً تقديم الشكاوى عبر <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener nofollow">منصة ODR الأوروبية</a>.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-17"><div class="article-label">المادة 17</div><h2>النزاعات</h2><ol><li>يُطبَّق القانون الهولندي حصراً على العقود بين ExamTheorie والمستهلك، حتى لو كان المستهلك مقيماً خارج هولندا.</li><li>لا تُطبَّق اتفاقية بيع فيينا.</li></ol><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="article-card" id="ar-18"><div class="article-label">المادة 18</div><h2>أحكام إضافية أو مغايرة</h2><p>لا يجوز أن تكون الأحكام الإضافية أو المغايرة في غير مصلحة المستهلك، ويجب توثيقها كتابةً أو بطريقة يمكن للمستهلك تخزينها على وسيط دائم.</p><a href="#" class="back-top">↑ أعلى</a></div>
+<div class="contact-box"><h3>أسئلة حول هذه الشروط؟</h3><p>ExamTheorie · KvK 42011186<br>Voorsterallee 1, 7203 DN Zutphen, هولندا</p><a href="mailto:examtheorie@gmail.com" class="contact-btn">✉️ examtheorie@gmail.com</a></div>
 </div><!-- /ar -->
 
 </div><!-- /page-wrap -->
