@@ -126,7 +126,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 24px;
-            gap: 12px;
+            gap: 24px;
         }
 
         .logo {
@@ -368,12 +368,11 @@
         .hero {
             position: relative;
             z-index: 1;
-            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 130px 20px 80px;
+            padding: 150px 20px 110px;
         }
 
         .hero-inner {
@@ -466,7 +465,7 @@
         .stats-sec {
             position: relative;
             z-index: 1;
-            padding: 0 20px 80px;
+            padding: 0 20px 40px;
         }
 
         .stats-wrap {
@@ -503,7 +502,7 @@
         .feat-sec {
             position: relative;
             z-index: 1;
-            padding: 80px 20px;
+            padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -514,7 +513,7 @@
             font-weight: 900;
             text-align: center;
             color: white;
-            margin-bottom: 56px;
+            margin-bottom: 28px;
         }
 
         body.ar .sec-head {
@@ -525,7 +524,7 @@
         .feat-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            gap: 22px;
         }
 
         .feat-card {
@@ -560,7 +559,7 @@
         .how-sec {
             position: relative;
             z-index: 1;
-            padding: 80px 20px;
+            padding: 40px 20px 60px;
             max-width: 1100px;
             margin: 0 auto;
         }
@@ -1049,14 +1048,17 @@
 
         /* ══ PASSENGER CAR OVERLAY ══ */
         .pc-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            min-height: 100%;
+            height: 100lvh;
             z-index: 2000;
             display: none;
             flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Arka plan: fixed — iOS titreme önlemi */
@@ -1080,11 +1082,10 @@
             background: rgba(0, 8, 25, 0.65);
         }
 
-        /* pc-scroll: içeriği saran wrapper, scroll body'de */
+        /* pc-scroll: wrapper div */
         .pc-scroll {
             position: relative;
             z-index: 1;
-            min-height: 100%;
             width: 100%;
         }
 
@@ -1093,11 +1094,9 @@
         }
 
         .pc-close {
-            position: sticky;
-            top: 16px;
-            align-self: flex-end;
-            margin-right: 16px;
-            margin-top: 16px;
+            position: fixed;
+            top: 22px;
+            right: 26px;
             font-size: 28px;
             color: white;
             cursor: pointer;
@@ -1110,7 +1109,7 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.15);
             transition: all .3s;
-            z-index: 2001;
+            z-index: 9999;
             line-height: 1;
         }
 
@@ -1130,7 +1129,7 @@
             width: 100%;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 100px 24px 120px;
+            padding: 100px 24px 60px;
         }
 
         .pc-header {
@@ -3741,16 +3740,13 @@
         }
 
         function openPassengerCar() {
-            const ol = document.getElementById('pc-ol');
-            ol.classList.add('active');
-            // body scroll sıfırla — toolbar gizlenebilsin
-            window.scrollTo(0, 0);
-            document.body.style.overflow = '';
+            document.getElementById('pc-ol').classList.add('active');
+            document.body.style.overflow = 'hidden';
             buildTestButtons();
         }
         function closePassengerCar() {
             document.getElementById('pc-ol').classList.remove('active');
-            window.scrollTo(0, 0);
+            document.body.style.overflow = '';
         }
         function openModal(id) { if (id === 'refer') { alert('Refer Friends feature coming soon!'); return; } document.getElementById(id + '-modal').classList.add('active'); document.body.style.overflow = 'hidden'; }
         function closeModal(id) { document.getElementById(id + '-modal').classList.remove('active'); document.body.style.overflow = ''; }
