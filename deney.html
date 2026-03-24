@@ -9,24 +9,40 @@
         :root { --cyan: #00d4ff; --blue: #0066ff; --glass-blur: blur(22px) saturate(180%); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            min-height: 100vh; 
-            overflow-x: hidden; 
-            background: url('https://azerpashazadeh.github.io/sorularveresimler/2151021132.jpg') no-repeat center center fixed; 
-            background-size: cover; 
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: transparent; /* remove body background, use fixed layer instead */
             color: white;
             position: relative;
         }
-        body.ar { font-family: 'Noto Sans Arabic', 'Poppins', sans-serif; direction: rtl; }
-        body::before { 
-            content: ''; 
-            position: fixed; 
-            inset: 0; 
-            background: rgba(0,8,25,0.62); 
-            z-index: 0;
+        /* Fixed background layer - solves toolbar resize flicker */
+        .bg-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://azerpashazadeh.github.io/sorularveresimler/2151021132.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -2;
+            will-change: transform; /* GPU acceleration, prevents repaint jitter */
+            transform: translateZ(0);
             pointer-events: none;
         }
+        /* Dark overlay - separate layer for better performance */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0,8,25,0.62);
+            z-index: -1;
+            pointer-events: none;
+            backdrop-filter: blur(2px); /* subtle extra depth, optional */
+        }
+        body.ar { font-family: 'Noto Sans Arabic', 'Poppins', sans-serif; direction: rtl; }
+        
         /* Navbar - fully responsive with no overlap */
         .navbar { 
             position: fixed; 
@@ -113,7 +129,7 @@
         .nav-back:hover { color: #fff; background: rgba(255,255,255,0.15); transform: scale(0.96); }
         .page-wrap { 
             position: relative; 
-            z-index: 1; 
+            z-index: 2; 
             max-width: 860px; 
             margin: 0 auto; 
             padding: 110px 20px 70px; 
@@ -273,7 +289,7 @@
         }
         footer { 
             position: relative; 
-            z-index: 1; 
+            z-index: 2; 
             text-align: center; 
             padding: 32px 20px 28px; 
             color: rgba(255,255,255,0.4); 
@@ -311,15 +327,15 @@
             .nav-back { padding: 4px 10px; font-size: 13px; }
             .page-title { font-size: 32px; }
         }
-        /* no background flickering - ensures cover stays perfect */
-        @supports (background-attachment: fixed) {
-            body { background-attachment: fixed; }
+        /* ensure no background flickering */
+        .bg-fixed, body::before {
+            backface-visibility: hidden;
         }
-        .article-card ul li:last-child { margin-bottom: 0; }
-        .article-card p:last-child { margin-bottom: 0; }
     </style>
 </head>
 <body>
+<!-- Fixed background layer - solves mobile toolbar resize & stretch issues -->
+<div class="bg-fixed"></div>
 
 <nav class="navbar">
     <a href="https://www.examtheorie.nl" class="logo">Exam<span>Theorie</span></a>
