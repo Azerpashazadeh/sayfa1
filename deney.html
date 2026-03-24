@@ -12,35 +12,48 @@
         body {
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
+            min-height: 100dvh; /* Fix for mobile dynamic viewport */
             overflow-x: hidden;
-            background: transparent; /* remove body background, use fixed layer instead */
+            background: transparent;
             color: white;
             position: relative;
         }
-        /* Fixed background layer - solves toolbar resize flicker */
+        
+        /* Fixed background layer - prevents mobile toolbar resize flicker */
         .bg-fixed {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100vh; /* Fallback */
+            height: 100dvh; /* Dynamic viewport height - key fix */
+            height: 100lvh; /* Large viewport height - most stable */
             background: url('https://azerpashazadeh.github.io/sorularveresimler/2151021132.jpg') no-repeat center center;
             background-size: cover;
             z-index: -2;
-            will-change: transform; /* GPU acceleration, prevents repaint jitter */
+            will-change: transform;
             transform: translateZ(0);
             pointer-events: none;
+            /* Prevent any resize/reflow on scroll */
+            contain: strict;
         }
-        /* Dark overlay - separate layer for better performance */
-        body::before {
-            content: '';
+        
+        /* Dark overlay - separate layer */
+        .bg-overlay {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            height: 100lvh;
             background: rgba(0,8,25,0.62);
             z-index: -1;
             pointer-events: none;
-            backdrop-filter: blur(2px); /* subtle extra depth, optional */
+            backdrop-filter: blur(2px);
+            contain: strict;
         }
+        
         body.ar { font-family: 'Noto Sans Arabic', 'Poppins', sans-serif; direction: rtl; }
         
         /* Navbar - fully responsive with no overlap */
@@ -327,15 +340,18 @@
             .nav-back { padding: 4px 10px; font-size: 13px; }
             .page-title { font-size: 32px; }
         }
+        
         /* ensure no background flickering */
-        .bg-fixed, body::before {
+        .bg-fixed, .bg-overlay {
             backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
     </style>
 </head>
 <body>
 <!-- Fixed background layer - solves mobile toolbar resize & stretch issues -->
 <div class="bg-fixed"></div>
+<div class="bg-overlay"></div>
 
 <nav class="navbar">
     <a href="https://www.examtheorie.nl" class="logo">Exam<span>Theorie</span></a>
