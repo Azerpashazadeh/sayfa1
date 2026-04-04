@@ -3,72 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lightbox Görsel</title>
+    <title>Slider ile Öğren</title>
     <style>
-        .lightbox-card {
-            background: #1e293b;
-            color: white;
-            border-radius: 28px;
-            padding: 1.8rem;
+        .slider-container {
             max-width: 350px;
             margin: 1rem auto;
+            background: #0f172a;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+        .slider-track {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+        .slider-slide {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
             text-align: center;
-            cursor: pointer;
-            transition: transform 0.1s;
-        }
-        .lightbox-card:active {
-            transform: scale(0.97);
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .modal img {
-            max-width: 85%;
-            max-height: 70%;
-            border-radius: 24px;
-            box-shadow: 0 25px 40px black;
-        }
-        .modal .close-hint {
+            padding: 2rem 1.5rem;
             color: white;
-            margin-top: 20px;
-            font-size: 14px;
-            background: rgba(255,255,255,0.2);
-            padding: 8px 16px;
-            border-radius: 40px;
+        }
+        .slider-slide img {
+            width: 80%;
+            max-width: 200px;
+            border-radius: 24px;
+            background: white;
+            padding: 12px;
+            margin-bottom: 1rem;
+        }
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            background: #1e293b;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #64748b;
+            transition: all 0.2s;
+        }
+        .dot.active {
+            background: #fde047;
+            width: 20px;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-<div class="lightbox-card" id="lightboxCard">
-    <h3>⚠️ Kaygan Yol Uyarısı</h3>
-    <p>J2 levhası: Yağmur, buz veya ıslak yaprak nedeniyle yol kaygan olabilir. Hızınızı azaltın, ani fren ve direksiyon hareketlerinden kaçının.</p>
-    <small>📸 <strong>Dokun</strong> → görseli tam ekran gör</small>
-</div>
-
-<div class="modal" id="imageModal">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/NL-verkeersbord_J2.svg/400px-NL-verkeersbord_J2.svg.png" alt="Kaygan yol levhası">
-    <div class="close-hint">✨ Herhangi bir yere dokunarak kapatın</div>
+<div class="slider-container">
+    <div class="slider-track" id="sliderTrack">
+        <div class="slider-slide">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/NL-verkeersbord_G1.svg/400px-NL-verkeersbord_G1.svg.png" alt="G1">
+            <h3>Otoyol Başlangıcı</h3>
+            <p>G1 levhası. Asgari hız 60 km/s. Yaya, bisiklet ve traktör giremez.</p>
+        </div>
+        <div class="slider-slide">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/NL-verkeersbord_J22.svg/400px-NL-verkeersbord_J22.svg.png" alt="J22">
+            <h3>Okul Geçidi</h3>
+            <p>J22 levhası. Çocuklar olabilir, hız sınırına dikkat edin.</p>
+        </div>
+        <div class="slider-slide">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/NL-verkeersbord_J2.svg/400px-NL-verkeersbord_J2.svg.png" alt="J2">
+            <h3>Kaygan Yol</h3>
+            <p>J2 levhası. Yağmur, buz veya yaprak dökümü riski.</p>
+        </div>
+    </div>
+    <div class="dots" id="dotsContainer"></div>
 </div>
 
 <script>
-    const card = document.getElementById('lightboxCard');
-    const modal = document.getElementById('imageModal');
+    const track = document.getElementById('sliderTrack');
+    const slides = document.querySelectorAll('.slider-slide');
+    const dotsContainer = document.getElementById('dotsContainer');
     
-    card.addEventListener('click', () => {
-        modal.style.display = 'flex';
+    // Dotları oluştur
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if(index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            track.scrollTo({ left: index * track.clientWidth, behavior: 'smooth' });
+        });
+        dotsContainer.appendChild(dot);
     });
-    modal.addEventListener('click', () => {
-        modal.style.display = 'none';
+    
+    // Kaydırma olayını dinle
+    track.addEventListener('scroll', () => {
+        const index = Math.round(track.scrollLeft / track.clientWidth);
+        document.querySelectorAll('.dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
     });
 </script>
 </body>
