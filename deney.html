@@ -2,255 +2,78 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Flip Kart Örneği - Ehliyet Teorisi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaydırmalı Kart</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #f1f5f9;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
-        }
-
-        /* Flip kartın ana kabı */
-        .flip-card {
-            background-color: transparent;
-            width: 100%;
-            max-width: 360px;  /* Kart genişliği, mobilde rahat */
-            height: 420px;     /* Sabit yükseklik, dengeli görünüm */
+        .swipe-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 32px;
+            padding: 2rem;
+            max-width: 350px;
             margin: 1rem auto;
-            cursor: pointer;
-        }
-
-        /* 3D alanı oluşturan iç katman */
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
             text-align: center;
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            transform-style: preserve-3d;
-            border-radius: 28px;
-            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            touch-action: pan-y; /* Dikey kaydırmayı etkinleştir */
         }
-
-        /* Tıklanınca eklenen class ile döndürme */
-        .flip-card-inner.flipped {
-            transform: rotateY(180deg);
+        .swipe-card .content {
+            transition: all 0.3s;
         }
-
-        /* Ön ve arka yüzlerin ortak stilleri */
-        .flip-front, .flip-back {
-            position: absolute;
+        .swipe-card .image-area {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            margin-top: 0;
+        }
+        .swipe-card.expanded .image-area {
+            max-height: 250px;
+            margin-top: 1.5rem;
+        }
+        .swipe-card img {
             width: 100%;
-            height: 100%;
-            backface-visibility: hidden;  /* Arkadaki yüz dönerken görünmez */
-            border-radius: 28px;
-            padding: 1.8rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-sizing: border-box;
-        }
-
-        /* ÖN YÜZ: METİN (kural, tanım) */
-        .flip-front {
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-            border: 1px solid rgba(59,130,246,0.2);
-            color: #0f172a;
-        }
-
-        .flip-front h3 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #1e40af;
-            letter-spacing: -0.3px;
-        }
-
-        .flip-front p {
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #1e293b;
-            margin-bottom: 1.5rem;
-        }
-
-        .flip-front .hint {
-            font-size: 0.75rem;
-            color: #3b82f6;
-            background: #eef2ff;
-            padding: 0.3rem 0.8rem;
-            border-radius: 30px;
-            display: inline-block;
-        }
-
-        /* ARKA YÜZ: RESİM */
-        .flip-back {
-            background: #ffffff;
-            transform: rotateY(180deg);
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .flip-back img {
-            max-width: 100%;
-            max-height: 280px;
-            width: auto;
-            height: auto;
-            object-fit: contain;
             border-radius: 20px;
-            display: block;
-            margin-bottom: 1rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            max-width: 250px;
         }
-
-        .flip-back .img-caption {
-            font-size: 0.75rem;
-            color: #475569;
-            background: #f1f5f9;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-        }
-
-        /* Hafif dokunma geri bildirimi */
-        .flip-card:active .flip-card-inner {
-            transform: scale(0.98);
-            transition: transform 0.1s;
-        }
-        .flip-card:active .flip-card-inner.flipped {
-            transform: rotateY(180deg) scale(0.98);
-        }
-
-        /* Responsive: çok küçük ekranlarda yüksekliği biraz azalt */
-        @media (max-width: 450px) {
-            .flip-card {
-                height: 380px;
-            }
-            .flip-front, .flip-back {
-                padding: 1.2rem;
-            }
-            .flip-front h3 {
-                font-size: 1.4rem;
-            }
-        }
-
-        /* Sayfa düzeni için ekstra */
-        .demo-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .info-text {
-            text-align: center;
-            margin-bottom: 1rem;
-            color: #334155;
-            font-weight: 500;
-            width: 100%;
+        .swipe-hint {
+            font-size: 12px;
+            margin-top: 1rem;
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
-
-<div>
-    <div class="info-text">
-        📱 <strong>İnteraktif Flip Kart</strong> — Üzerine tıkla, arkadaki resmi gör. Tekrar tıkla, metne dön.
+<div class="swipe-card" id="swipeCard">
+    <div class="content">
+        <h3>🚸 Okul Geçidi</h3>
+        <p>Okul geçidi levhası (J22): Okul çağındaki çocukların bulunduğu bölgelerde sürücülerin ekstra dikkatli olması gerektiğini belirtir.</p>
+        <div class="swipe-hint">👆 <strong>Yukarı kaydır</strong> → görseli göster / aşağı kaydır → gizle</div>
     </div>
-    <div class="demo-container">
-        <!-- Flip Kart 1 - Trafik Levhası Örneği -->
-        <div class="flip-card" id="flipCard1">
-            <div class="flip-card-inner">
-                <!-- Ön yüz: metin -->
-                <div class="flip-front">
-                    <h3>⚠️ Tehlike Uyarı İşareti</h3>
-                    <p>Kırmızı üçgen içinde simge. Yaklaşan tehlikeyi haber verir. Örn: kaygan yol, yaya geçidi, viraj.</p>
-                    <div class="hint">👇 Dokun / Tıkla</div>
-                </div>
-                <!-- Arka yüz: resim (örnek bir görsel bağlantısı - placeholder) -->
-                <div class="flip-back">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/NL-verkeersbord_J2.svg/400px-NL-verkeersbord_J2.svg.png" 
-                         alt="Tehlike uyarı levhası örneği (kaygan yol)">
-                    <div class="img-caption">📌 Hollanda uyarı levhası (J2)</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Flip Kart 2 - Mavi yön levhası / Otoyol örneği -->
-        <div class="flip-card" id="flipCard2">
-            <div class="flip-card-inner">
-                <div class="flip-front">
-                    <h3>🛣️ Otoyol (Autosnelweg)</h3>
-                    <p>G1 levhası ile başlar. Asgari hız 60 km/s. Park alanları ve benzinlikler otoyolun parçası değildir.</p>
-                    <div class="hint">👇 Görsel için dokun</div>
-                </div>
-                <div class="flip-back">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/NL-verkeersbord_G1.svg/400px-NL-verkeersbord_G1.svg.png" 
-                         alt="Otoyol başlangıç levhası G1">
-                    <div class="img-caption">🛣️ G1 Otoyol levhası</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Flip Kart 3 - Yasak işareti örneği -->
-        <div class="flip-card" id="flipCard3">
-            <div class="flip-card-inner">
-                <div class="flip-front">
-                    <h3>🚫 Giriş Yasak</h3>
-                    <p>Kırmızı daire içinde beyaz yatay çizgi. Belirtilen araçlar için yol kapalıdır.</p>
-                    <div class="hint">📸 Görsel için dokun</div>
-                </div>
-                <div class="flip-back">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/No_entry_sign_Netherlands.svg/400px-No_entry_sign_Netherlands.svg.png" 
-                         alt="Giriş yasak levhası">
-                    <div class="img-caption">🚷 C1 – Giriş yasak</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="info-text" style="margin-top: 2rem;">
-        💡 İpucu: Kartlara tıkla/dokun. Mobilde yumuşak geçiş ve parmak dostu alan.
+    <div class="image-area">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/NL-verkeersbord_J22.svg/400px-NL-verkeersbord_J22.svg.png" alt="Okul geçidi levhası">
+        <p style="font-size: 12px; margin-top: 8px;">📚 J22 - Okul geçidi</p>
     </div>
 </div>
 
 <script>
-    // Tüm flip kartları seç ve her birine tıklama olayı ekle
-    const cards = document.querySelectorAll('.flip-card');
-    
-    cards.forEach(card => {
-        // İçteki dönen div'i bul
-        const innerDiv = card.querySelector('.flip-card-inner');
-        
-        // Tıklama/dokunma olayını karta ekle
-        card.addEventListener('click', (e) => {
-            // Olayın kartın kendisinden geldiğinden emin ol (çocuklara sıçramasın, ama güvenli)
-            e.stopPropagation();
-            // 'flipped' class'ını toggle et
-            innerDiv.classList.toggle('flipped');
-        });
-        
-        // Dokunmatik cihazlarda ekstra güvenlik için (touch event de aynı)
-        card.addEventListener('touchstart', (e) => {
-            // Sadece tıklama ile aynı işlevi görsün, ama çift tetiklemeyi engelleme
-            // normal click zaten çalışır, fakat touch cihazlarda da click olayı olur. 
-            // Herhangi bir ek işleme gerek yok, yine de class toggle yapmamak için sadece preventDefault gerekmez.
-        });
+    const swipeCard = document.getElementById('swipeCard');
+    let startY = 0;
+    let isExpanded = false;
+
+    swipeCard.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].clientY;
     });
-    
-    // İsteğe bağlı: Kartın arka yüzünde başka bir tıklama olayına ihtiyaç yok.
-    // Ekran okuyucular için role ve aria-label eklenebilir, ancak demo seviyesinde basit.
-    console.log("Flip kartlar hazır! Tıklayarak arka/resim görebilirsiniz.");
+    swipeCard.addEventListener('touchmove', (e) => {
+        const deltaY = e.touches[0].clientY - startY;
+        if (deltaY < -30 && !isExpanded) {
+            // Yukarı kaydırma
+            swipeCard.classList.add('expanded');
+            isExpanded = true;
+        } else if (deltaY > 30 && isExpanded) {
+            // Aşağı kaydırma
+            swipeCard.classList.remove('expanded');
+            isExpanded = false;
+        }
+    });
 </script>
 </body>
 </html>
