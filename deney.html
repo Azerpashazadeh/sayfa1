@@ -1,79 +1,74 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaydırmalı Kart</title>
+    <title>Lightbox Görsel</title>
     <style>
-        .swipe-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .lightbox-card {
+            background: #1e293b;
             color: white;
-            border-radius: 32px;
-            padding: 2rem;
+            border-radius: 28px;
+            padding: 1.8rem;
             max-width: 350px;
             margin: 1rem auto;
             text-align: center;
-            transition: all 0.3s;
-            touch-action: pan-y; /* Dikey kaydırmayı etkinleştir */
+            cursor: pointer;
+            transition: transform 0.1s;
         }
-        .swipe-card .content {
-            transition: all 0.3s;
+        .lightbox-card:active {
+            transform: scale(0.97);
         }
-        .swipe-card .image-area {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-            margin-top: 0;
-        }
-        .swipe-card.expanded .image-area {
-            max-height: 250px;
-            margin-top: 1.5rem;
-        }
-        .swipe-card img {
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-radius: 20px;
-            max-width: 250px;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
-        .swipe-hint {
-            font-size: 12px;
-            margin-top: 1rem;
-            opacity: 0.8;
+        .modal img {
+            max-width: 85%;
+            max-height: 70%;
+            border-radius: 24px;
+            box-shadow: 0 25px 40px black;
+        }
+        .modal .close-hint {
+            color: white;
+            margin-top: 20px;
+            font-size: 14px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 40px;
         }
     </style>
 </head>
 <body>
-<div class="swipe-card" id="swipeCard">
-    <div class="content">
-        <h3>🚸 Okul Geçidi</h3>
-        <p>Okul geçidi levhası (J22): Okul çağındaki çocukların bulunduğu bölgelerde sürücülerin ekstra dikkatli olması gerektiğini belirtir.</p>
-        <div class="swipe-hint">👆 <strong>Yukarı kaydır</strong> → görseli göster / aşağı kaydır → gizle</div>
-    </div>
-    <div class="image-area">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/NL-verkeersbord_J22.svg/400px-NL-verkeersbord_J22.svg.png" alt="Okul geçidi levhası">
-        <p style="font-size: 12px; margin-top: 8px;">📚 J22 - Okul geçidi</p>
-    </div>
+<div class="lightbox-card" id="lightboxCard">
+    <h3>⚠️ Kaygan Yol Uyarısı</h3>
+    <p>J2 levhası: Yağmur, buz veya ıslak yaprak nedeniyle yol kaygan olabilir. Hızınızı azaltın, ani fren ve direksiyon hareketlerinden kaçının.</p>
+    <small>📸 <strong>Dokun</strong> → görseli tam ekran gör</small>
+</div>
+
+<div class="modal" id="imageModal">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/NL-verkeersbord_J2.svg/400px-NL-verkeersbord_J2.svg.png" alt="Kaygan yol levhası">
+    <div class="close-hint">✨ Herhangi bir yere dokunarak kapatın</div>
 </div>
 
 <script>
-    const swipeCard = document.getElementById('swipeCard');
-    let startY = 0;
-    let isExpanded = false;
-
-    swipeCard.addEventListener('touchstart', (e) => {
-        startY = e.touches[0].clientY;
+    const card = document.getElementById('lightboxCard');
+    const modal = document.getElementById('imageModal');
+    
+    card.addEventListener('click', () => {
+        modal.style.display = 'flex';
     });
-    swipeCard.addEventListener('touchmove', (e) => {
-        const deltaY = e.touches[0].clientY - startY;
-        if (deltaY < -30 && !isExpanded) {
-            // Yukarı kaydırma
-            swipeCard.classList.add('expanded');
-            isExpanded = true;
-        } else if (deltaY > 30 && isExpanded) {
-            // Aşağı kaydırma
-            swipeCard.classList.remove('expanded');
-            isExpanded = false;
-        }
+    modal.addEventListener('click', () => {
+        modal.style.display = 'none';
     });
 </script>
 </body>
