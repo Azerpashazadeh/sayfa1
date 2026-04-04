@@ -1,106 +1,1418 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slider ile Öğren</title>
-    <style>
-        .slider-container {
-            max-width: 350px;
-            margin: 1rem auto;
-            background: #0f172a;
-            border-radius: 32px;
-            overflow: hidden;
-            position: relative;
-        }
-        .slider-track {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-        }
-        .slider-slide {
-            flex: 0 0 100%;
-            scroll-snap-align: start;
-            text-align: center;
-            padding: 2rem 1.5rem;
-            color: white;
-        }
-        .slider-slide img {
-            width: 80%;
-            max-width: 200px;
-            border-radius: 24px;
-            background: white;
-            padding: 12px;
-            margin-bottom: 1rem;
-        }
-        .dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px;
-            background: #1e293b;
-        }
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #64748b;
-            transition: all 0.2s;
-        }
-        .dot.active {
-            background: #fde047;
-            width: 20px;
-            border-radius: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1 — Who Is Who on the Road?</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════ */
+:root {
+  --ink:          #18120e;
+  --paper:        #faf7f2;
+  --warm-mid:     #f0ead8;
+  --card:         #ffffff;
+  --accent:       #b83228;
+  --accent-soft:  #f0dbd8;
+  --gold:         #a87424;
+  --gold-soft:    #f0e4c8;
+  --blue:         #1a4f7a;
+  --blue-soft:    #ddeaf5;
+  --green:        #1a5c34;
+  --green-soft:   #d4eddf;
+  --muted:        #6e6358;
+  --border:       #d8d0be;
+  --shadow:       rgba(24,18,14,0.07);
+  --radius:       8px;
+  --radius-sm:    4px;
+}
+
+/* ══════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: clamp(15px, 2.2vw, 18px);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ══════════════════════════════════════════
+   BOOK HEADER
+══════════════════════════════════════════ */
+.book-header {
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(40px, 8vw, 72px) clamp(20px, 5vw, 48px) clamp(36px, 7vw, 60px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.book-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent 0, transparent 38px,
+    rgba(255,255,255,0.018) 38px, rgba(255,255,255,0.018) 39px
+  );
+  pointer-events: none;
+}
+.chapter-eyebrow {
+  font-size: clamp(10px, 1.5vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.book-header h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 6vw, 58px);
+  font-weight: 700;
+  line-height: 1.1;
+  position: relative;
+}
+.book-header .lead {
+  margin-top: 18px;
+  font-size: clamp(14px, 2vw, 17px);
+  color: rgba(250,247,242,0.60);
+  font-style: italic;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.gold-rule {
+  width: 56px; height: 2px;
+  background: var(--gold);
+  margin: 24px auto 0;
+}
+
+/* ══════════════════════════════════════════
+   STICKY CHAPTER NAV (optional quick jump)
+══════════════════════════════════════════ */
+.chapter-nav {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 0 clamp(16px, 4vw, 40px);
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+.chapter-nav ul {
+  list-style: none;
+  display: inline-flex;
+  gap: 0;
+}
+.chapter-nav li a {
+  display: block;
+  padding: 14px 16px;
+  font-size: clamp(12px, 1.6vw, 14px);
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.chapter-nav li a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ══════════════════════════════════════════
+   PAGE CONTAINER
+══════════════════════════════════════════ */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: clamp(36px, 6vw, 64px) clamp(16px, 5vw, 48px) clamp(60px, 10vw, 120px);
+}
+
+/* ══════════════════════════════════════════
+   INTRO PULL QUOTE
+══════════════════════════════════════════ */
+.intro-pull {
+  border-left: 4px solid var(--gold);
+  background: var(--warm-mid);
+  padding: clamp(20px, 4vw, 30px) clamp(20px, 4vw, 32px);
+  margin-bottom: clamp(40px, 7vw, 64px);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.intro-pull p { font-size: clamp(15px, 2vw, 17px); color: #2e2218; }
+.intro-pull p + p { margin-top: 14px; }
+
+/* ══════════════════════════════════════════
+   SECTION HEADER
+══════════════════════════════════════════ */
+.section {
+  margin-bottom: clamp(40px, 7vw, 64px);
+  scroll-margin-top: 60px;
+}
+.section-head {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3.5vw, 30px);
+  font-weight: 700;
+  color: var(--ink);
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.section-head em { color: var(--accent); font-style: italic; }
+.section-sub {
+  font-size: clamp(13px, 1.8vw, 15px);
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+
+/* ══════════════════════════════════════════
+   TERM CARD  (the main content block)
+══════════════════════════════════════════ */
+.term-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(16px, 2.5vw, 22px);
+}
+
+.term-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  /* Mobile default: metin üstte, resim altta (satır bazlı) */
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.18s;
+}
+.term-card:hover { box-shadow: 0 6px 20px var(--shadow); }
+
+/* Geniş ekran: metin solda, resim sağda yan yana */
+@media (min-width: 600px) {
+  .term-card.has-image {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  /* Metin alanı esnek büyür, resim sabit kalır */
+  .term-card.has-image .term-body {
+    flex: 1;
+  }
+}
+
+.term-body {
+  padding: clamp(18px, 3vw, 26px);
+}
+
+.term-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(17px, 2.4vw, 20px);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.3;
+}
+
+.badge {
+  font-family: 'Source Serif 4', serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.badge.b   { background: var(--blue-soft);  color: var(--blue);  }
+.badge.g   { background: var(--green-soft); color: var(--green); }
+.badge.au  { background: var(--gold-soft);  color: var(--gold);  }
+
+.term-body p {
+  font-size: clamp(14px, 1.9vw, 16.5px);
+  color: #2a201a;
+  line-height: 1.78;
+}
+.term-body p + p { margin-top: 10px; }
+
+.inner-note {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: var(--warm-mid);
+  border-radius: var(--radius-sm);
+  font-size: clamp(13px, 1.7vw, 15px);
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.65;
+}
+
+/* ══════════════════════════════════════════
+   IMAGE PLACEHOLDER
+══════════════════════════════════════════ */
+.img-slot {
+  /* Sabit kare boyut — yön ne olursa olsun değişmez */
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--warm-mid);
+  text-align: center;
+  /* Masaüstü: sol border (metin sağında) */
+  border-left: 1px solid var(--border);
+}
+
+/* Mobilde kart dikey → resim altta → üst border, tam genişlik */
+@media (max-width: 599px) {
+  .img-slot {
+    width: 100%;
+    height: 120px;
+    border-left: none;
+    border-top: 1px solid var(--border);
+  }
+}
+
+/* Gerçek resim eklendiğinde slota tam oturur */
+.img-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* standalone image block (between prose) */
+.img-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--warm-mid);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(24px, 5vw, 40px) 20px;
+  margin: clamp(20px, 3vw, 30px) 0;
+  text-align: center;
+}
+.img-block.inline-right {
+  float: right;
+  margin: 0 0 16px 20px;
+  width: clamp(120px, 25%, 200px);
+  min-height: 120px;
+}
+@media (max-width: 500px) {
+  .img-block.inline-right {
+    float: none;
+    width: 100%;
+  }
+}
+
+.img-icon {
+  width: 48px; height: 48px;
+  border: 2px dashed var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 20px;
+}
+.img-label {
+  font-size: clamp(10px, 1.4vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  max-width: 130px;
+  line-height: 1.4;
+}
+
+/* grid of image placeholders */
+.img-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin: clamp(16px, 2.5vw, 24px) 0;
+}
+.img-grid .img-block {
+  margin: 0;
+  min-height: 120px;
+  padding: 20px 12px;
+}
+
+/* ══════════════════════════════════════════
+   CALLOUT BOXES
+══════════════════════════════════════════ */
+.callout {
+  padding: clamp(18px, 3vw, 26px) clamp(18px, 3vw, 28px);
+  border-radius: var(--radius);
+  margin: clamp(24px, 4vw, 36px) 0;
+}
+.callout.warn  { background: #fdf1f0; border-left: 4px solid var(--accent); }
+.callout.tip   { background: #eef7f1; border-left: 4px solid var(--green); }
+.callout.info  { background: #edf3fb; border-left: 4px solid var(--blue); }
+.callout.gold  { background: var(--gold-soft); border-left: 4px solid var(--gold); }
+.callout-ttl {
+  font-size: clamp(10px, 1.5vw, 12px);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.callout.warn .callout-ttl  { color: var(--accent); }
+.callout.tip  .callout-ttl  { color: var(--green); }
+.callout.info .callout-ttl  { color: var(--blue); }
+.callout.gold .callout-ttl  { color: var(--gold); }
+.callout p { font-size: clamp(14px, 1.9vw, 16px); line-height: 1.74; }
+.callout p + p { margin-top: 10px; }
+
+/* ══════════════════════════════════════════
+   COMPARISON TABLE
+══════════════════════════════════════════ */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: clamp(20px, 3vw, 32px) 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(13px, 1.8vw, 15.5px);
+  min-width: 520px;
+}
+.comp-table th {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 13px 16px;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  font-size: clamp(11px, 1.5vw, 13px);
+  text-transform: uppercase;
+}
+.comp-table th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+.comp-table th:last-child  { border-radius: 0 var(--radius-sm) 0 0; }
+.comp-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.65;
+}
+.comp-table tr:last-child td { border-bottom: none; }
+.comp-table tr:nth-child(even) td { background: var(--warm-mid); }
+.comp-table tr:hover td { background: var(--accent-soft); }
+.comp-table .sign-slot {
+  width: 60px;
+  text-align: center;
+  vertical-align: middle;
+}
+.mini-img {
+  width: 56px; height: 56px;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--warm-mid);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: center;
+  line-height: 1.3;
+  margin: 0 auto;
+}
+
+/* ══════════════════════════════════════════
+   KEY-DIFFERENCE SPLIT BOX
+══════════════════════════════════════════ */
+.split-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: clamp(20px, 3vw, 30px) 0;
+}
+@media (max-width: 480px) {
+  .split-box { grid-template-columns: 1fr; }
+}
+.split-side {
+  padding: clamp(18px, 3vw, 26px);
+}
+.split-side:first-child {
+  border-right: 1px solid var(--border);
+  background: var(--warm-mid);
+}
+@media (max-width: 480px) {
+  .split-side:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+.split-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(16px, 2.2vw, 19px);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.split-side p { font-size: clamp(13px, 1.8vw, 15.5px); line-height: 1.72; }
+
+/* ══════════════════════════════════════════
+   DIVIDER
+══════════════════════════════════════════ */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: clamp(36px, 5vw, 56px) 0;
+  color: var(--border);
+}
+.divider::before, .divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+.dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+
+/* ══════════════════════════════════════════
+   SPEED HIGHLIGHT BOX
+══════════════════════════════════════════ */
+.speed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  margin: clamp(16px, 2.5vw, 24px) 0;
+}
+.speed-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 12px;
+  text-align: center;
+}
+.speed-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+.speed-unit { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.speed-label { font-size: clamp(11px, 1.6vw, 13px); color: var(--ink); margin-top: 8px; line-height: 1.35; font-weight: 600; }
+
+/* ══════════════════════════════════════════
+   PAGE FOOTER
+══════════════════════════════════════════ */
+.page-foot {
+  margin-top: clamp(48px, 8vw, 80px);
+  padding-top: 24px;
+  border-top: 2px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: clamp(11px, 1.6vw, 13px);
+  color: var(--muted);
+}
+.page-foot .pg { font-family: 'Playfair Display', serif; font-size: clamp(20px, 3vw, 26px); color: var(--border); }
+
+/* ══════════════════════════════════════════
+   PROSE HELPER
+══════════════════════════════════════════ */
+.prose { margin: clamp(16px, 2.5vw, 24px) 0; }
+.prose p { margin-bottom: 18px; font-size: clamp(14px, 1.9vw, 17px); color: #24190f; line-height: 1.8; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--ink); }
+
+/* clearfix for floated images */
+.clearfix::after { content: ''; display: table; clear: both; }
+</style>
 </head>
 <body>
-<div class="slider-container">
-    <div class="slider-track" id="sliderTrack">
-        <div class="slider-slide">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/NL-verkeersbord_G1.svg/400px-NL-verkeersbord_G1.svg.png" alt="G1">
-            <h3>Otoyol Başlangıcı</h3>
-            <p>G1 levhası. Asgari hız 60 km/s. Yaya, bisiklet ve traktör giremez.</p>
-        </div>
-        <div class="slider-slide">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/NL-verkeersbord_J22.svg/400px-NL-verkeersbord_J22.svg.png" alt="J22">
-            <h3>Okul Geçidi</h3>
-            <p>J22 levhası. Çocuklar olabilir, hız sınırına dikkat edin.</p>
-        </div>
-        <div class="slider-slide">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/NL-verkeersbord_J2.svg/400px-NL-verkeersbord_J2.svg.png" alt="J2">
-            <h3>Kaygan Yol</h3>
-            <p>J2 levhası. Yağmur, buz veya yaprak dökümü riski.</p>
-        </div>
-    </div>
-    <div class="dots" id="dotsContainer"></div>
-</div>
 
-<script>
-    const track = document.getElementById('sliderTrack');
-    const slides = document.querySelectorAll('.slider-slide');
-    const dotsContainer = document.getElementById('dotsContainer');
-    
-    // Dotları oluştur
-    slides.forEach((_, index) => {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if(index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-            track.scrollTo({ left: index * track.clientWidth, behavior: 'smooth' });
-        });
-        dotsContainer.appendChild(dot);
-    });
-    
-    // Kaydırma olayını dinle
-    track.addEventListener('scroll', () => {
-        const index = Math.round(track.scrollLeft / track.clientWidth);
-        document.querySelectorAll('.dot').forEach((dot, i) => {
-            dot.classList.toggle('active', i === index);
-        });
-    });
-</script>
+<!-- ═══════════════════════ HEADER ═══════════════════════ -->
+<header class="book-header">
+  <p class="chapter-eyebrow">Chapter 1</p>
+  <h1>Who Is Who on the Road?</h1>
+  <p class="lead">Every vehicle type, every road user category, and every key term — explained clearly before the rules begin.</p>
+  <div class="gold-rule"></div>
+</header>
+
+<!-- ═══════════════════════ QUICK NAV ═══════════════════════ -->
+<nav class="chapter-nav" aria-label="Jump to section">
+  <ul>
+    <li><a href="#s-users">Road Users</a></li>
+    <li><a href="#s-vehicles">Vehicles</a></li>
+    <li><a href="#s-mopeds">Mopeds</a></li>
+    <li><a href="#s-special">Special Vehicles</a></li>
+    <li><a href="#s-roads">Road Types</a></li>
+    <li><a href="#s-markings">Road Markings</a></li>
+    <li><a href="#s-parking">Stop vs Park</a></li>
+    <li><a href="#s-other">Other Terms</a></li>
+  </ul>
+</nav>
+
+<main class="page">
+
+  <!-- INTRO -->
+  <div class="intro-pull">
+    <p>Traffic law works only because everyone agrees on what words mean. When a rule says "motor vehicle," it does not mean every motorised thing — it has a precise definition. When it says "driver," it includes cyclists. When it says "parking," it means something different from merely stopping. This chapter builds your vocabulary. Every rule in the following chapters rests on it.</p>
+    <p>All definitions here are drawn from the RVV 1990 (effective 1 January 2026) and the supporting Vehicle Regulations. No prior knowledge is assumed.</p>
+  </div>
+
+  <!-- ═══════════ SECTION 1: ROAD USERS ═══════════ -->
+  <section class="section" id="s-users">
+    <h2 class="section-head">Road Users — <em>The Full Cast</em></h2>
+    <p class="section-sub">Everyone present in traffic falls into one of these categories. Which category you belong to determines which rules apply to you.</p>
+
+    <div class="term-list">
+
+      <!-- Road users -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Road Users <span class="badge au">All of traffic</span></div>
+          <p>The widest possible grouping. Road users include <strong>pedestrians, cyclists, moped riders, drivers of disability vehicles, drivers of motor vehicles or trams, horse riders, handlers of riding or draft animals or livestock, and drivers of wagons</strong> — both horse-drawn and otherwise. Put simply: if you are present anywhere in traffic, you are a road user.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/road-users-overview.jpg" alt="Road users overview">
+        </div>
+      </div>
+
+      <!-- Drivers -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Drivers (Bestuurders) <span class="badge b">Vehicles only</span></div>
+          <p><strong>All road users except pedestrians.</strong> The moment you are in control of any vehicle — bicycle, moped, car, tram — you are a driver. This matters because separate rules for "drivers" apply to cyclists just as much as to lorry drivers.</p>
+          <div class="inner-note">A cyclist is a driver in the eyes of Dutch traffic law. The same rules of the road that apply to car drivers — such as giving way at intersections — apply to cyclists too, unless a rule explicitly says otherwise.</div>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/cyclist-as-driver.jpg" alt="Cyclist as driver">
+        </div>
+      </div>
+
+      <!-- Motor vehicle driver -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Motor Vehicle Driver</div>
+          <p>Either <strong>the person actively controlling the motor vehicle</strong>, or — in the case of a dual-control vehicle during an official government driving test — the instructor or examiner in the passenger seat. That instructor carries the legal status of driver, not passenger, during such a test.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/driving-instructor.jpg" alt="Driving instructor">
+        </div>
+      </div>
+
+    </div><!-- /term-list -->
+
+    <div class="callout info">
+      <div class="callout-ttl">Pedestrians — Two Special Cases</div>
+      <p>Someone who is <strong>walking alongside their bicycle, moped or motorcycle</strong> — pushing it by hand — is treated as a pedestrian, not a driver. Likewise, someone moving with non-vehicle objects such as roller skates, a skateboard or a walking frame is also treated as a pedestrian. The moment they mount the vehicle, they become a driver again.</p>
+    </div>
+
+    <!-- PEDESTRIAN + COLUMNS -->
+    <div class="callout gold">
+      <div class="callout-ttl">Columns, Processions and Vehicle Rules</div>
+      <p>When pedestrians form a column, procession or funeral cortège and travel along the carriageway, <strong>the vehicle rules of the road apply to them</strong> — not the pedestrian rules. This means they must obey traffic lights and road markings just like any vehicle.</p>
+    </div>
+
+  </section>
+
+  <div class="divider"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+
+  <!-- ═══════════ SECTION 2: VEHICLES ═══════════ -->
+  <section class="section" id="s-vehicles">
+    <h2 class="section-head">Vehicles — <em>The Complete Family</em></h2>
+    <p class="section-sub">In Dutch law, "vehicles" covers far more than most people assume. Here is every member of the family.</p>
+
+    <div class="prose">
+      <p>In Dutch traffic law, the word <strong>vehicles</strong> covers: bicycles, mopeds, disability vehicles, motor vehicles, trams and wagons. Pedestrians on foot are not vehicles. Bicycles, however, explicitly are — they are not simply "things people ride."</p>
+    </div>
+
+    <div class="term-list">
+
+      <!-- Motor vehicles -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Motor Vehicles <span class="badge">Motorised</span></div>
+          <p>All motorised vehicles built to travel <strong>on roads (not on rails)</strong> — except mopeds, pedal-assist bicycles and disability vehicles. This group includes cars, vans, trucks, buses, motorcycles and three-wheeled motor vehicles.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/motor-vehicle-types.jpg" alt="Motor vehicle types">
+        </div>
+      </div>
+
+      <!-- Passenger car -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Passenger Car <span class="badge g">M1 category</span></div>
+          <p>A vehicle on four or more wheels, built to carry people, with <strong>no more than eight passenger seats</strong> — the driver's seat not included. The everyday family car. In European vehicle classification it belongs to category M1.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/passenger-car.jpg" alt="Passenger car">
+        </div>
+      </div>
+
+      <!-- Van -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Van (Bestelauto) <span class="badge b">Goods ≤ 3,500 kg</span></div>
+          <p>A motor vehicle built for carrying goods, with a <strong>maximum permitted mass of no more than 3,500 kg</strong>. Delivery vans and small cargo vehicles fall here. Cross the 3,500 kg line and the vehicle becomes a truck, with different speed limits and licence requirements.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/delivery-van.jpg" alt="Delivery van">
+        </div>
+      </div>
+
+      <!-- Truck -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Truck (Vrachtauto) <span class="badge">Goods &gt; 3,500 kg</span></div>
+          <p>A motor vehicle <strong>not designed to carry people</strong>, whose maximum permitted mass <strong>exceeds 3,500 kg</strong>. The split at 3,500 kg is a boundary that appears repeatedly throughout the traffic regulations — it affects permitted speeds, driving licence categories and many other obligations.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/truck-lorry.jpg" alt="Truck / lorry">
+        </div>
+      </div>
+
+      <!-- Bus -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Bus (Autobus) <span class="badge b">9+ passengers</span></div>
+          <p>A motor vehicle built to carry <strong>more than eight passengers, not counting the driver</strong>. A minibus that seats nine passengers (plus driver) qualifies. Buses follow their own speed rules and have dedicated lanes on many roads.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/bus-autobus.jpg" alt="Bus / autobus">
+        </div>
+      </div>
+
+      <!-- Motorcycle -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Motorcycle (Motorfiets)</div>
+          <p>A <strong>two-wheeled motor vehicle</strong>, with or without a sidecar or trailer. The defining feature is two wheels. A three-wheeled variant is a separate category with its own rules.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/motorcycle.jpg" alt="Motorcycle">
+        </div>
+      </div>
+
+      <!-- 3-wheel motor vehicle -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Three-Wheeled Motor Vehicle</div>
+          <p>Defined separately under the Vehicle Regulations as a <em>driewielig motorrijtuig</em>. Motor trikes fall here. They have their own category because their handling, dimensions and risks differ meaningfully from both motorcycles and four-wheeled cars.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/motor-trike.jpg" alt="Motor trike">
+        </div>
+      </div>
+
+      <!-- Company vehicle -->
+      <div class="term-card">
+        <div class="term-body">
+          <div class="term-name">Company Vehicle (Bedrijfsauto)</div>
+          <p>The official Dutch vehicle registration category for commercial and freight vehicles, as defined in the Vehicle Regulations. The classification affects tax treatment, insurance and the rules that apply on the road.</p>
+        </div>
+      </div>
+
+      <!-- Camper van -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Camper Van (Kampeerwagen) <span class="badge au">Living space</span></div>
+          <p>A vehicle equipped with a <strong>living compartment</strong> containing at minimum a fixed table, seating, sleeping provisions, storage space and a kitchen — all permanently installed. It must be registered as a kampeerwagen. Camper vans above 3,500 kg follow the truck speed rules on many road types.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/camper-van.jpg" alt="Camper van">
+        </div>
+      </div>
+
+      <!-- Trailer -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Trailer (Aanhangwagen) <span class="badge b">Towed</span></div>
+          <p>Any vehicle that is <strong>being towed by another vehicle</strong>, or that is clearly built to be towed — including semi-trailers. Speed limits for vehicle-and-trailer combinations are consistently lower than for solo vehicles. Which trailer can be towed behind which vehicle, and at what speed, is a recurring exam topic.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/car-with-trailer.jpg" alt="Car with trailer">
+        </div>
+      </div>
+
+    </div><!-- /term-list -->
+
+    <!-- 3500kg callout -->
+    <div class="callout warn">
+      <div class="callout-ttl">The 3,500 kg Dividing Line</div>
+      <p>The figure <strong>3,500 kg</strong> (maximum permitted mass) is one of the most significant thresholds in Dutch traffic law. Below it: a van (bestelauto). Above it: a truck (vrachtauto). It affects which driving licence you need, what speed limits apply, and a range of other obligations throughout the regulations. Recognising this boundary is essential exam knowledge.</p>
+    </div>
+
+  </section>
+
+  <div class="divider"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+
+  <!-- ═══════════ SECTION 3: MOPEDS ═══════════ -->
+  <section class="section" id="s-mopeds">
+    <h2 class="section-head">Mopeds — <em>One Word, Many Vehicles</em></h2>
+    <p class="section-sub">The moped family has several distinct sub-types. Getting these right is crucial — the rules differ significantly between them.</p>
+
+    <div class="term-list">
+
+      <!-- Moped general -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Moped (Bromfiets) <span class="badge">General term</span></div>
+          <p>The umbrella term. A moped is defined either by its <strong>vehicle registration data</strong> (maximum construction speed of no more than 45 km/h, excluding speed pedelecs) or by a supplementary definition in the Road Traffic Act. Two major sub-categories are the snorfiets and the bromfiets proper — and each follows different rules.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/moped-bromfiets.jpg" alt="Moped (bromfiets)">
+        </div>
+      </div>
+
+      <!-- Snorfiets -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Snorfiets <span class="badge g">Max 25 km/h</span></div>
+          <p>A moped whose vehicle registration confirms it is <strong>built for a maximum speed of no more than 25 km/h</strong> — excluding speed pedelecs. A second type of snorfiets exists for disability transport under a separate legal definition. On most roads, snorfiets riders follow <strong>bicycle rules</strong>, not moped rules — including using bicycle paths.</p>
+          <div class="inner-note">Because a snorfiets follows bicycle rules, its rider does not need a helmet on most roads (unlike a bromfiets rider). This is a frequently tested distinction.</div>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/snorfiets.jpg" alt="Snorfiets">
+        </div>
+      </div>
+
+      <!-- Speed pedelec -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Speed Pedelec <span class="badge">Electric &gt; 25 km/h</span></div>
+          <p>An electric moped with pedal assistance that <strong>continues providing motor power beyond 25 km/h</strong>. A conventional pedal-assist bicycle cuts off at 25 km/h; the speed pedelec does not. It is legally a moped, so its rider must wear a helmet and follow moped rules — including using the moped/bicycle combination lane where one exists.</p>
+        </div>
+        <div class="img-slot">
+          <img src="https://azerpashazadeh.github.io/sorularveresimler/test1/1.jpg" alt="Speed pedelec">
+        </div>
+      </div>
+
+      <!-- Brommobiel -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Brommobiel <span class="badge b">Enclosed moped</span></div>
+          <p>A moped with <strong>more than two wheels and a closed body</strong>. Despite being technically classified as a moped, the brommobiel follows all motor vehicle rules — not moped rules. Its maximum speed is 45 km/h.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/brommobiel.jpg" alt="Brommobiel">
+        </div>
+      </div>
+
+      <!-- Cargo moped -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Cargo Moped (Brombakfiets)</div>
+          <p>A moped on <strong>three symmetrically placed wheels with two front wheels</strong>, designed for the driver and cargo — and optionally one passenger seated directly behind the driver. Used for urban deliveries.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/cargo-moped.jpg" alt="Cargo moped">
+        </div>
+      </div>
+
+    </div><!-- /term-list -->
+
+    <!-- Snorfiets vs Bromfiets split -->
+    <div class="split-box">
+      <div class="split-side">
+        <div class="split-title">🟢 Snorfiets</div>
+        <p><strong>Max speed:</strong> 25 km/h<br>
+        <strong>Path:</strong> Bicycle path<br>
+        <strong>Helmet:</strong> Generally not required<br>
+        <strong>Follows:</strong> Bicycle rules<br><br>
+        Often quieter, lighter, used in cities for short trips.</p>
+      </div>
+      <div class="split-side">
+        <div class="split-title">🔴 Bromfiets</div>
+        <p><strong>Max speed:</strong> 45 km/h<br>
+        <strong>Path:</strong> Moped/bicycle combo path or road<br>
+        <strong>Helmet:</strong> Required at all times<br>
+        <strong>Follows:</strong> Moped rules<br><br>
+        Faster, heavier, treated more like a motor vehicle.</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-ttl">Speed Pedelec — A Common Exam Trap</div>
+      <p>The speed pedelec is not treated as a bicycle, even though it has pedals. It is a moped. That means: <strong>helmet required</strong>, follow moped lane rules, and register it properly. Many riders assume pedals mean bicycle rules — that assumption is wrong and can lead to a fine.</p>
+    </div>
+
+    <!-- Moped speed comparison -->
+    <div class="speed-grid">
+      <div class="speed-card">
+        <div class="speed-num">25</div>
+        <div class="speed-unit">km/h max</div>
+        <div class="speed-label">Snorfiets<br>(bicycle rules)</div>
+      </div>
+      <div class="speed-card">
+        <div class="speed-num">45</div>
+        <div class="speed-unit">km/h max</div>
+        <div class="speed-label">Bromfiets<br>(moped rules)</div>
+      </div>
+      <div class="speed-card">
+        <div class="speed-num">45</div>
+        <div class="speed-unit">km/h max</div>
+        <div class="speed-label">Brommobiel<br>(car rules)</div>
+      </div>
+      <div class="speed-card">
+        <div class="speed-num">&gt;25</div>
+        <div class="speed-unit">km/h assist</div>
+        <div class="speed-label">Speed Pedelec<br>(moped rules)</div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="divider"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+
+  <!-- ═══════════ SECTION 4: SPECIAL VEHICLES ═══════════ -->
+  <section class="section" id="s-special">
+    <h2 class="section-head">Special Vehicles — <em>Built for a Purpose</em></h2>
+    <p class="section-sub">Some vehicles have unique definitions because they carry special rights or face special restrictions.</p>
+
+    <div class="term-list">
+
+      <!-- Disability vehicle -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Disability Vehicle (Gehandicaptenvoertuig) <span class="badge b">≤ 1.10 m wide</span></div>
+          <p>A vehicle designed to transport a person with a disability, <strong>no wider than 1.10 metres</strong>, and either unpowered or fitted with a motor whose maximum construction speed does not exceed 45 km/h — and which is not a moped. Mobility scooters are the most common example. When using a pavement or pedestrian path, the driver follows pedestrian rules.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/mobility-scooter.jpg" alt="Mobility scooter">
+        </div>
+      </div>
+
+      <!-- Priority vehicle -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Priority Vehicle (Voorrangsvoertuig) <span class="badge">🚨 Emergency</span></div>
+          <p>A motor vehicle displaying <strong>both a flashing blue light (optical signal) and a siren (audible signal)</strong> simultaneously. Ambulances, fire trucks and police vehicles become priority vehicles only when both signals are active. All other road users must make way immediately and completely.</p>
+          <div class="inner-note">If only the lights are on, or only the siren — but not both — the vehicle is not technically a priority vehicle under this definition, though common sense and care still apply.</div>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/ambulance-blue-lights-siren.jpg" alt="Ambulance with blue lights & siren">
+        </div>
+      </div>
+
+      <!-- Ambulance -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Ambulance <span class="badge">Medical transport</span></div>
+          <p>A motor vehicle <strong>specially equipped for providing care to and transporting sick or injured persons</strong>, as defined under the Ambulance Care Facilities Act. Emergency medical services include both regional ambulance organisations and other emergency services operating under their authority.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/ambulance.jpg" alt="Ambulance">
+        </div>
+      </div>
+
+      <!-- Animal ambulance -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Animal Ambulance (Dierenambulance)</div>
+          <p>A motor vehicle <strong>equipped and designated for transporting sick or injured animals</strong>. It carries specific markings and operates under its own set of traffic provisions.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/animal-ambulance.jpg" alt="Animal ambulance">
+        </div>
+      </div>
+
+      <!-- Line bus -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Line Bus (Lijnbus) <span class="badge b">Public transport</span></div>
+          <p>A motor vehicle providing <strong>scheduled public transport</strong> under the Passenger Transport Act 2000. Line buses may use dedicated bus lanes marked "BUS" or "LIJNBUS" and are always considered destination traffic, even on restricted roads.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/city-line-bus.jpg" alt="City line bus">
+        </div>
+      </div>
+
+      <!-- T100-bus -->
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">T100-Bus <span class="badge g">100 km/h capable</span></div>
+          <p>A bus whose vehicle registration, or a certificate from an approved inspection body, confirms it is <strong>constructed to be capable of 100 km/h</strong>. This certification unlocks a higher speed limit on motorways compared to ordinary buses. Buses registered in other EU member states qualify if an equivalent certificate is provided.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/t100-coach-bus.jpg" alt="T100 coach bus">
+        </div>
+      </div>
+
+    </div><!-- /term-list -->
+
+    <!-- Convoy and cortège -->
+    <div class="term-list" style="margin-top:20px">
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Military Convoy (Militaire Colonne)</div>
+          <p>A sequence of <strong>military or civil defence motor vehicles</strong> travelling in line under a single commander, displaying officially approved identification markings. Other road users may not cut through a military convoy.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/military-convoy.jpg" alt="Military convoy">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Funeral Cortège (Uitvaartstoet)</div>
+          <p>A procession of motor vehicles <strong>accompanying a body or cremated ashes</strong>, carrying the official funeral cortège identification markings. Like a military convoy, it may not be cut through by other traffic.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/funeral-cortege.jpg" alt="Funeral cortège">
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="divider"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+
+  <!-- ═══════════ SECTION 5: ROAD TYPES ═══════════ -->
+  <section class="section" id="s-roads">
+    <h2 class="section-head">Types of Road — <em>Where You Are Changes Everything</em></h2>
+    <p class="section-sub">The type of road you are on is just as important as the type of vehicle you are driving. Speed limits, permitted manoeuvres and priority rules all depend on road type.</p>
+
+    <div class="table-wrap">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Sign</th>
+            <th>Road type</th>
+            <th>How to recognise it</th>
+            <th>Key characteristics</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="sign-slot"><div class="mini-img">Image<br>G1 sign</div></td>
+            <td><strong>Motorway</strong><br><em>Autosnelweg</em></td>
+            <td>Blue sign G1 — white car silhouettes on blue background</td>
+            <td>Highest speed limit (130 km/h for cars). Emergency shoulder. No slow vehicles, no cyclists, no mopeds. Entry/exit via dedicated lanes only.</td>
+          </tr>
+          <tr>
+            <td class="sign-slot"><div class="mini-img">Image<br>G3 sign</div></td>
+            <td><strong>Expressway</strong><br><em>Autoweg</em></td>
+            <td>Blue sign G3 — similar to motorway but different rules apply</td>
+            <td>High-speed road, but not a full motorway. Car speed limit typically 100 km/h. Fewer restrictions than motorway, but still no slow vehicles.</td>
+          </tr>
+          <tr>
+            <td class="sign-slot"><div class="mini-img">Image<br>Priority road sign</div></td>
+            <td><strong>Priority Road</strong><br><em>Voorrangsweg</em></td>
+            <td>Yellow diamond sign (B1)</td>
+            <td>You have priority at all intersections on this road. No parking on the carriageway outside built-up areas.</td>
+          </tr>
+          <tr>
+            <td class="sign-slot"><div class="mini-img">Image<br>Erf sign</div></td>
+            <td><strong>Residential Zone</strong><br><em>Erf</em></td>
+            <td>White sign with house and pedestrian figure</td>
+            <td>Walking pace only. Pedestrians have priority everywhere including the road surface. Park only in marked spaces.</td>
+          </tr>
+          <tr>
+            <td class="sign-slot"><div class="mini-img">Image<br>J12 / J13 sign</div></td>
+            <td><strong>Level Crossing</strong><br><em>Overweg</em></td>
+            <td>Signs J12 (with barriers) or J13 (without barriers)</td>
+            <td>Where a road crosses a railway. You must be able to clear the crossing completely before entering. Always give way to trains.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sign image grid -->
+    <div class="img-grid">
+      <div class="img-block">
+        <img src="http://example.com/images/theory/sign-g1-motorway.jpg" alt="G1 Motorway sign">
+      </div>
+      <div class="img-block">
+        <img src="http://example.com/images/theory/sign-g3-expressway.jpg" alt="G3 Expressway sign">
+      </div>
+      <div class="img-block">
+        <img src="http://example.com/images/theory/sign-b1-priority-road.jpg" alt="Priority road B1 sign">
+      </div>
+      <div class="img-block">
+        <img src="http://example.com/images/theory/sign-erf-zone.jpg" alt="Erf zone sign">
+      </div>
+      <div class="img-block">
+        <img src="http://example.com/images/theory/sign-j12-level-crossing.jpg" alt="Level crossing J12">
+      </div>
+      <div class="img-block">
+        <img src="http://example.com/images/theory/sign-j13-level-crossing.jpg" alt="Level crossing J13">
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-ttl">Service Areas Are Not Part of the Motorway</div>
+      <p>Petrol stations, parking areas and bus stops located alongside a motorway or expressway are <strong>legally separate from the motorway</strong>. Once you leave the main carriageway and enter a service area, different rules apply. The motorway rules stop at the edge of the main road.</p>
+    </div>
+
+    <!-- Entry/exit lanes -->
+    <div class="term-list" style="margin-top:24px">
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Entry Lane (Invoegstrook) <span class="badge b">Merging</span></div>
+          <p>A section of road <strong>separated from the main carriageway by a block marking</strong>, designed for drivers who are about to join the main carriageway. Drivers on the entry lane must give way to drivers already on the main road and adjust their speed to merge smoothly.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/entry-lane-invoegstrook.jpg" alt="Entry lane (invoegstrook)">
+        </div>
+      </div>
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Exit Lane (Uitrijstrook) <span class="badge b">Leaving</span></div>
+          <p>A section of road <strong>separated from the main carriageway by a block marking</strong>, designed for drivers who are leaving the main carriageway. Move into the exit lane early — do not brake on the main carriageway itself.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/exit-lane-uitrijstrook.jpg" alt="Exit lane (uitrijstrook)">
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="divider"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+
+  <!-- ═══════════ SECTION 6: ROAD MARKINGS ═══════════ -->
+  <section class="section" id="s-markings">
+    <h2 class="section-head">Road Markings &amp; Lane Terms — <em>Reading the Road Surface</em></h2>
+    <p class="section-sub">Lines, symbols and marked zones on the road surface communicate rules just as clearly as signs do. Knowing these terms is essential.</p>
+
+    <div class="term-list">
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Carriageway (Rijbaan)</div>
+          <p>Any part of the road <strong>intended for moving vehicles — excluding bicycle paths and combined bicycle/moped paths</strong>. When a rule refers to the rijbaan, it does not include the cycle lane running alongside it.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/carriageway-layout.jpg" alt="Carriageway layout">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Lane (Rijstrook)</div>
+          <p>A portion of carriageway <strong>marked by continuous or broken lines</strong>, wide enough for motor vehicles with more than two wheels. Bicycle lanes are not rijstroken.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/road-lanes.jpg" alt="Road lanes">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Bicycle Lane (Fietsstrook)</div>
+          <p>A portion of carriageway <strong>marked with lines and bicycle symbols</strong> painted on the surface. A <strong>continuous solid line</strong> on one side means other drivers must not enter it at all. A <strong>broken line</strong> means other drivers may use it briefly if necessary.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/bicycle-lane-markings.jpg" alt="Bicycle lane markings">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Bus Lane (Busstrook)</div>
+          <p>A portion of carriageway <strong>marked with "BUS" or "LIJNBUS"</strong>, separated by continuous or broken lines from other lanes. Which other vehicles may use it (taxis, cyclists) depends on the local traffic decision and any supplementary signs.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/bus-lane-marking.jpg" alt="Bus lane marking">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Bus Road (Busbaan)</div>
+          <p>An <strong>entire lane or road</strong> on which "BUS" or "LIJNBUS" is marked — not just a lane within a wider road, but a fully dedicated bus route, often physically separated from other traffic.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/dedicated-bus-road.jpg" alt="Dedicated bus road">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Rush-Hour Lane (Spitsstrook) <span class="badge au">Peak hours only</span></div>
+          <p>The emergency shoulder that has been <strong>officially opened as a driving lane during peak hours</strong>. This is indicated by sign C23-01. Outside peak hours, the lane reverts to emergency-only use. Electronic signs above the road confirm when it is open.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/spitsstrook-sign-c23-01.jpg" alt="Spitsstrook sign C23-01">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Emergency Shoulder (Vluchtstrook / Vluchthaven)</div>
+          <p>A section of motorway or expressway <strong>separated from the main carriageway by a continuous line</strong>, reserved for genuine emergencies — except when officially opened as a rush-hour lane. Stopping here without an emergency reason is prohibited.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/emergency-shoulder.jpg" alt="Emergency shoulder">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Main Carriageway (Doorgaande Rijbaan)</div>
+          <p>The central road surface <strong>excluding the entry and exit lanes</strong>, which are separated from it by block markings. Rules about priority and lane discipline often specifically refer to the doorgaande rijbaan.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/main-carriageway.jpg" alt="Main carriageway">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Junction Point (Puntstuk)</div>
+          <p>The <strong>triangular or polygonal area painted on the road surface</strong> at places where roads, lanes or carriageways split or merge. Drivers must not drive over or stop on this area — it is there to guide traffic flow and keep the zones clearly separated.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/junction-point-puntstuk.jpg" alt="Junction point (puntstuk)">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Diversion Area (Verdrijvingsvlak)</div>
+          <p>A section of carriageway <strong>covered in diagonal stripes</strong>. Drivers must not enter this zone. It steers traffic away from an obstacle, separates opposing flows, or marks a lane reduction. Driving on it is prohibited.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/diversion-area-stripes.jpg" alt="Diversion area stripes">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Shark's Teeth (Haaientanden) <span class="badge">Give way marking</span></div>
+          <p><strong>Priority triangles painted on the road surface</strong>, with their tips pointing toward you. They tell you to give way to traffic on the road you are about to join. If you see shark's teeth, yield — even if there is no sign above. They are a road-surface version of the give-way obligation.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/sharks-teeth-haaientanden.jpg" alt="Shark's teeth (haaientanden)">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Intersection (Kruispunt)</div>
+          <p>The point where roads <strong>cross or branch</strong>. Intersections are where the majority of accidents occur and where most of the priority rules in Dutch traffic law are applied. Understanding what counts as an intersection is the foundation of understanding right-of-way.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/intersection-types.jpg" alt="Intersection types">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Parking Bay / Parking Lane (Parkeerhaven / Parkeerstrook)</div>
+          <p>A <strong>paved area alongside the carriageway</strong> specifically set aside for stationary or parked vehicles. Using a proper parking bay reduces obstruction on the main road.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/parking-bay-lane.jpg" alt="Parking bay / lane">
+        </div>
+      </div>
+
+    </div><!-- /term-list -->
+
+    <!-- Markings image strip -->
+    <div class="img-grid">
+      <div class="img-block">
+        <img src="http://example.com/images/theory/marking-solid-bicycle-lane.jpg" alt="Solid bicycle lane line">
+      </div>
+      <div class="img-block">
+        <img src="http://example.com/images/theory/marking-broken-bicycle-lane.jpg" alt="Broken bicycle lane line">
+      </div>
+      <div class="img-block">
+        <img src="http://example.com/images/theory/marking-sharks-teeth-closeup.jpg" alt="Shark's teeth close-up">
+      </div>
+      <div class="img-block">
+        <img src="http://example.com/images/theory/marking-diversion-stripes.jpg" alt="Diagonal diversion stripes">
+      </div>
+      <div class="img-block">
+        <img src="http://example.com/images/theory/marking-block-entry-lane.jpg" alt="Block markings at entry lane">
+      </div>
+    </div>
+
+  </section>
+
+  <div class="divider"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+
+  <!-- ═══════════ SECTION 7: STOP VS PARK ═══════════ -->
+  <section class="section" id="s-parking">
+    <h2 class="section-head">Stopping vs Parking — <em>Not the Same Act</em></h2>
+    <p class="section-sub">This distinction trips up many learner drivers. The rules for stopping and the rules for parking apply in different places.</p>
+
+    <div class="prose">
+      <p>One of the most commonly misunderstood points in Dutch traffic law is the difference between <strong>stopping (stilstaan)</strong> and <strong>parking (parkeren)</strong>. They are separate acts with separate rules. A location may allow stopping but prohibit parking, or prohibit both entirely.</p>
+    </div>
+
+    <div class="split-box">
+      <div class="split-side">
+        <div class="split-title">Parking (Parkeren)</div>
+        <p>Leaving a vehicle stationary for <strong>any purpose other than immediately loading or unloading goods, or immediately boarding or alighting passengers</strong>. If you leave your vehicle and walk away for any reason — even for thirty seconds — that is parking. Parking is the more restricted category: it is prohibited in many more locations than mere stopping.</p>
+      </div>
+      <div class="split-side">
+        <div class="split-title">Stopping (Stilstaan)</div>
+        <p>Any situation where a vehicle comes to a halt — whether parked, waiting at a red light, or briefly pausing to let someone in or out. <strong>All parking is stopping, but not all stopping is parking.</strong> Halting at a red traffic light is stopping; it is not parking. Dropping off a passenger and immediately driving away is stopping; it is not parking.</p>
+      </div>
+    </div>
+
+    <!-- Visual -->
+    <div class="img-block">
+      <img src="http://example.com/images/theory/stopping-vs-parking-diagram.jpg" alt="Stopping vs Parking — diagram showing the difference">
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-ttl">Why This Matters in Practice</div>
+      <p>A bus stop, for example, prohibits parking — but allows brief stopping to let passengers on or off immediately. A tunnel prohibits all stopping, including that brief halt. An intersection prohibits both stopping and parking. Knowing which act is prohibited where is essential for the exam and for safe daily driving.</p>
+    </div>
+
+  </section>
+
+  <div class="divider"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+
+  <!-- ═══════════ SECTION 8: OTHER TERMS ═══════════ -->
+  <section class="section" id="s-other">
+    <h2 class="section-head">Other Key Terms — <em>The Rest of the Vocabulary</em></h2>
+    <p class="section-sub">A final group of definitions that appear throughout the traffic rules and are essential to understand before proceeding.</p>
+
+    <div class="term-list">
+
+      <div class="term-card">
+        <div class="term-body">
+          <div class="term-name">Day (Dag)</div>
+          <p>The period <strong>between sunrise and sunset</strong>. Some lighting requirements and behavioural rules change depending on whether it is currently day or night.</p>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-body">
+          <div class="term-name">Night (Nacht)</div>
+          <p>The period <strong>between sunset and sunrise</strong>. At night, all vehicles must meet specific lighting requirements.</p>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-body">
+          <div class="term-name">Giving Way (Voorrang Verlenen)</div>
+          <p><strong>Allowing the relevant drivers to continue their journey without obstruction.</strong> Giving way is not simply slowing down — it means ensuring that the other road user does not need to adjust their speed or direction because of you. If they have to brake or steer around you, you have not given way properly.</p>
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-body">
+          <div class="term-name">Traffic (Verkeer)</div>
+          <p>Simply <strong>all road users</strong> collectively. "Traffic" in Dutch law is the collective noun for everyone in the road environment at any given moment.</p>
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Road Closed (Geslotenverklaring)</div>
+          <p>A <strong>prohibition on entering or travelling along a specific road</strong>. Both driving onto the road and using it are forbidden. Indicated by specific traffic signs. Destination traffic and line buses are often exempt.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/road-closed-sign-c1.jpg" alt="Road closed sign (C1)">
+        </div>
+      </div>
+
+      <div class="term-card">
+        <div class="term-body">
+          <div class="term-name">Destination Traffic (Bestemmingsverkeer)</div>
+          <p>Drivers whose journey ends at <strong>a specific property on or immediately near a restricted road</strong> — which can only be reached via that road — are exempt from the restriction for that road. Line bus drivers are always considered destination traffic. In everyday terms: if you live there or are delivering there, you are permitted to use the road.</p>
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Traffic Controller (Verkeersregelaar)</div>
+          <p>A person officially authorised to direct traffic. Their instructions <strong>take priority over traffic lights, road signs and the general traffic rules</strong>. In the hierarchy of traffic authority, the human controller stands at the very top.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/traffic-controller.jpg" alt="Traffic controller">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Safety Cell (Veiligheidscel)</div>
+          <p>The structural part of a moped, motorcycle or three-wheeled motor vehicle that <strong>protects the driver and passengers from head injury</strong>. A vehicle with a properly certified safety cell may exempt its occupants from wearing a helmet — but only if the safety cell meets the required protection standard.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/safety-cell-enclosed-cabin.jpg" alt="Safety cell (enclosed cabin)">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Lit Transparent (Verlicht Transparant)</div>
+          <p>A <strong>back-lit panel or display fitted to a vehicle</strong> — such as a lit taxi sign or a bus destination display — as defined in the Vehicle Regulations. These displays are governed by their own rules regarding what they may show and when.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/taxi-bus-lit-sign.jpg" alt="Taxi / bus lit sign">
+        </div>
+      </div>
+
+      <div class="term-card has-image">
+        <div class="term-body">
+          <div class="term-name">Berth (Ligplaats)</div>
+          <p>A <strong>designated space for a person to lie down</strong> inside a bus, or on a stretcher in a passenger car. Defined in the Vehicle Regulations. It is distinct from a regular passenger seat and carries its own safety requirements.</p>
+        </div>
+        <div class="img-slot">
+          <img src="http://example.com/images/theory/stretcher-in-ambulance.jpg" alt="Stretcher in ambulance">
+        </div>
+      </div>
+
+    </div><!-- /term-list -->
+
+    <!-- Brommobiel / snorfiets rule application callout -->
+    <div class="callout tip">
+      <div class="callout-ttl">Two Important Cross-Category Rules</div>
+      <p><strong>Brommobiel → follows motor vehicle rules.</strong> Although technically a moped, the brommobiel is subject to all rules that apply to motor vehicles and their drivers and passengers — not moped rules — unless a rule explicitly states otherwise.</p>
+      <p><strong>Snorfiets → follows bicycle rules.</strong> Despite being a moped, the snorfiets is subject to the rules that apply to bicycles and cyclists — not moped rules — unless stated otherwise. This is why a snorfiets uses the bicycle path.</p>
+    </div>
+
+  </section>
+
+  <!-- ─────────── CHAPTER SUMMARY ─────────── -->
+  <div class="callout gold" style="margin-top:0">
+    <div class="callout-ttl">Chapter Summary — What to Take Away</div>
+    <p>Every rule in Dutch traffic law rests on the definitions in this chapter. Before a speed limit, a priority rule or a parking restriction makes complete sense, you need to know: what kind of vehicle is involved, what kind of road user is involved, and what kind of road you are on. With this vocabulary in place, the chapters ahead will be far easier to absorb.</p>
+    <p style="margin-top:12px">Key boundaries to memorise: <strong>3,500 kg</strong> (van vs truck), <strong>8 passenger seats</strong> (car vs bus), <strong>25 km/h</strong> (snorfiets vs bromfiets), and the fact that <strong>both a blue light and a siren</strong> must be active for a vehicle to be a legal priority vehicle.</p>
+  </div>
+
+  <!-- PAGE FOOTER -->
+  <div class="page-foot">
+    <span>Dutch Driving Theory — Based on RVV 1990 (effective 1 January 2026)</span>
+    <span class="pg">1</span>
+  </div>
+
+</main>
 </body>
 </html>
