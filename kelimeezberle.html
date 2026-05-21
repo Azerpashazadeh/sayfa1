@@ -38,14 +38,73 @@ body {
   width: 100%;
   height: 100%;
   background: radial-gradient(circle at 10% 20%, rgba(245,245,240,0.6), rgba(235,232,220,0.8));
+  transition: opacity 0.3s ease;
 }
 
-/* fullscreen butonu */
+/* fullscreen modunda UI gizleme */
+body.fullscreen-mode .app-container {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+body.fullscreen-mode .fullscreen-btn-container {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* tam ekranda sadece float-screen görünür, arkaplan tamamen siyah/özel */
+body.fullscreen-mode {
+  background: #0a0a0f;
+}
+
+body.fullscreen-mode #float-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  border-radius: 0;
+  background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a15 100%);
+  border: none;
+  box-shadow: none;
+  z-index: 9999;
+  backdrop-filter: none;
+  display: block !important;
+}
+
+body.fullscreen-mode .floating-word {
+  backdrop-filter: blur(4px);
+  font-size: 16px;
+  padding: 10px 22px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: transform 0.1s ease;
+}
+
+/* normal modda float-screen normal */
+#float-screen {
+  width: 100%;
+  flex: 1;
+  min-height: 380px;
+  background: rgba(255, 255, 248, 0.75);
+  backdrop-filter: blur(1.5px);
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,240,0.8);
+  box-shadow: 0 12px 28px -8px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 18px;
+  transition: all 0.2s;
+}
+
 .fullscreen-btn-container {
   position: fixed;
   bottom: 24px;
   right: 20px;
-  z-index: 1000;
+  z-index: 10000;
+  transition: opacity 0.2s;
 }
 .fullscreen-btn {
   background: #322e5a;
@@ -68,6 +127,32 @@ body {
   transform: scale(0.92);
 }
 
+/* tam ekranda çıkış butonu olarak küçük bir ipucu (isteğe bağlı) */
+body.fullscreen-mode .exit-fullscreen-hint {
+  display: block;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 8px 18px;
+  border-radius: 40px;
+  font-size: 13px;
+  z-index: 10001;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+  font-weight: 500;
+}
+.exit-fullscreen-hint {
+  display: none;
+}
+
+.header-bar, #mode-tabs, #card-screen, #add-panel {
+  transition: opacity 0.2s;
+}
+
+/* kart modu fullscreen'de gösterilmez ama float modu zaten aktif */
 .header-bar {
   display: flex;
   justify-content: space-between;
@@ -120,20 +205,6 @@ h1 {
   color: #2d2672;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   font-weight: 600;
-}
-
-#float-screen {
-  width: 100%;
-  flex: 1;
-  min-height: 380px;
-  background: rgba(255, 255, 248, 0.75);
-  backdrop-filter: blur(1.5px);
-  border-radius: 32px;
-  border: 1px solid rgba(255,255,240,0.8);
-  box-shadow: 0 12px 28px -8px rgba(0,0,0,0.1);
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 18px;
 }
 
 .floating-word {
@@ -437,6 +508,7 @@ h1 {
 <div class="fullscreen-btn-container">
   <button class="fullscreen-btn" id="fullscreenBtn" title="Tam Ekran">⛶</button>
 </div>
+<div class="exit-fullscreen-hint">🔓 Çıkmak için yan düğme veya ESC</div>
 
 <script>
 let words = [
@@ -460,14 +532,47 @@ let cardFlipped = false;
 const floatScreen = document.getElementById('float-screen');
 const cardScreen = document.getElementById('card-screen');
 
-// TAM EKRAN FONKSİYONU
+// TAM EKRAN YÖNETİMİ (UI gizleme/gösterme)
+function enterFullscreenUI() {
+  document.body.classList.add('fullscreen-mode');
+  // fullscreen'de modu float yap (kart modu kapalı kalsın, sadece uçuşan)
+  if (mode !== 'float') {
+    // eğer kart modundaysak geçici olarak float moduna al, fakat dönüşte eski modu hatırla
+    setMode('float');
+  }
+  // Tam ekranda float screen yeniden render edilmesi için resize tetikle
+  setTimeout(() => {
+    if (mode === 'float') {
+      repositionFloatingWords();
+    }
+  }, 100);
+}
+
+function exitFullscreenUI() {
+  document.body.classList.remove('fullscreen-mode');
+  // modu geri değiştirmiyoruz, kullanıcı hangi modda kaldıysa o devam eder (float veya card)
+  // ama eğer kart modu aktifse ekran gösterilsin
+  if (mode === 'float') {
+    repositionFloatingWords();
+  } else if (mode === 'card') {
+    // kart gösterimini yenile
+    showCard();
+  }
+  // float screen boyutunu düzelt
+  if (mode === 'float') {
+    renderFloat(); // yeniden render pozisyonlar sağlıklı olsun
+  }
+}
+
 function toggleFullscreen() {
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
     // Tam ekrana geç
     const docEl = document.documentElement;
     const requestMethod = docEl.requestFullscreen || docEl.webkitRequestFullscreen || docEl.msRequestFullscreen;
     if (requestMethod) {
-      requestMethod.call(docEl).catch(err => {
+      requestMethod.call(docEl).then(() => {
+        enterFullscreenUI();
+      }).catch(err => {
         console.log("Tam ekran hatası:", err);
       });
     }
@@ -475,36 +580,41 @@ function toggleFullscreen() {
     // Tam ekrandan çık
     const exitMethod = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
     if (exitMethod) {
-      exitMethod.call(document);
+      exitMethod.call(document).then(() => {
+        exitFullscreenUI();
+      });
     }
   }
 }
 
-// Tam ekran butonuna tıklama
-document.getElementById('fullscreenBtn').addEventListener('click', toggleFullscreen);
+// fullscreen değişim olaylarını dinle (ESC veya yan düğme ile çıkışı yakala)
+function onFullscreenChange() {
+  const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+  if (isFullscreen) {
+    enterFullscreenUI();
+  } else {
+    exitFullscreenUI();
+  }
+}
 
-// Tam ekran değiştiğinde uçuşan kelimeleri yeniden konumlandır
-document.addEventListener('fullscreenchange', () => {
-  if (mode === 'float') {
-    setTimeout(() => repositionFloatingWords(), 50);
-  }
-});
-document.addEventListener('webkitfullscreenchange', () => {
-  if (mode === 'float') {
-    setTimeout(() => repositionFloatingWords(), 50);
-  }
-});
+document.addEventListener('fullscreenchange', onFullscreenChange);
+document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+
+// buton
+document.getElementById('fullscreenBtn').addEventListener('click', toggleFullscreen);
 
 function repositionFloatingWords() {
   if (mode !== 'float' || !words.length || !floatScreen) return;
   const W = floatScreen.clientWidth;
   const H = floatScreen.clientHeight;
   if (!W || !H || floatElementsData.length === 0) {
-    if (floatElementsData.length === 0 && words.length) renderFloat();
+    if (floatElementsData.length === 0 && words.length && mode === 'float') {
+      renderFloat();
+    }
     return;
   }
   floatElementsData.forEach((item) => {
-    if (!item.el) return;
+    if (!item.el || !item.el.isConnected) return;
     const w = item.el.offsetWidth || 100;
     const h = item.el.offsetHeight || 36;
     let newX = Math.min(Math.max(item.x, 5), W - w - 5);
@@ -513,7 +623,6 @@ function repositionFloatingWords() {
     item.y = newY;
     item.el.style.left = item.x + 'px';
     item.el.style.top = item.y + 'px';
-    // sınırlara yaklaşmışsa hız yönünü düzelt
     if (newX <= 5 || newX + w >= W - 5) item.dx *= -0.98;
     if (newY <= 5 || newY + h >= H - 5) item.dy *= -0.98;
   });
@@ -564,7 +673,6 @@ function renderFloat() {
     el.className = `floating-word color-${colorIdx}`;
     el.textContent = `${item.w}  /  ${item.t}`;
     
-    // Güvenli başlangıç pozisyonu
     const approxWidth = Math.min(220, (item.w.length + item.t.length) * 7 + 70);
     let x = 15 + Math.random() * Math.max(30, W - approxWidth - 20);
     let y = 15 + Math.random() * Math.max(30, H - 70);
@@ -592,9 +700,7 @@ function startDrift() {
   function driftStep() {
     if (mode !== 'float') return;
     if (!floatScreen || !floatElementsData.length) {
-      if (words.length && mode === 'float') {
-        renderFloat();
-      }
+      if (words.length && mode === 'float') renderFloat();
       return;
     }
     
@@ -614,7 +720,6 @@ function startDrift() {
       obj.x += obj.dx;
       obj.y += obj.dy;
       
-      // Çarpma ve sınır kontrolü
       if (obj.x <= 3) {
         obj.x = 3;
         obj.dx = Math.abs(obj.dx) * 0.98;
@@ -635,7 +740,6 @@ function startDrift() {
       obj.el.style.left = obj.x + 'px';
       obj.el.style.top = obj.y + 'px';
       
-      // Hız limiti
       obj.dx = Math.min(Math.max(obj.dx, -1.2), 1.2);
       obj.dy = Math.min(Math.max(obj.dy, -1.2), 1.2);
     }
